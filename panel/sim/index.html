@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Simülasyon</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--warn:#9a5a14;--warn2:#fff3e0;--bad:#8a2a2a;--bad2:#fbeaea;--ok:#1b5e3a;--ok2:#e8f5ec}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+header a{color:var(--acc);text-decoration:none;font-weight:700}header select{padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:14px;background:#fff}
+.wrap{max-width:1240px;margin:0 auto;padding:18px 20px}
+.ctrl{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.ctrl label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+.ctrl input,.ctrl select{padding:9px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:15px;font-weight:600;background:#fff}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--sur);border:1px solid var(--line);border-radius:12px;padding:14px}.kpi .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}.kpi .v{font-size:24px;font-weight:800;margin-top:4px}.kpi .s{font-size:12px;color:var(--mut)}.kpi.acc .v{color:var(--acc);font-size:30px}
+.grid{display:grid;grid-template-columns:1fr 360px;gap:16px}@media(max-width:1000px){.grid{grid-template-columns:1fr}}
+.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:16px}.card h2{margin:0 0 10px;font-size:15px;font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:8px 6px;border-bottom:1px solid var(--line);white-space:nowrap}td{padding:8px 6px;border-bottom:1px solid #eef0ee;vertical-align:middle}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.mut{color:var(--mut)}.small{font-size:12px}
+tr.off td{opacity:.45;text-decoration:line-through}
+.warn{background:var(--warn2);color:var(--warn);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:8px}.bad{background:var(--bad2);color:var(--bad)}
+.sec{background:var(--acc2);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:8px}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut)}
+.tw{overflow-x:auto}
+.login{max-width:400px;margin:14vh auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}.login input{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;font-family:inherit;margin:10px 0}
+.btn{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}.btn.acc{background:var(--acc);color:#fff;border-color:var(--acc)}
+</style>
+</head>
+<body>
+<div id="login" class="login" style="display:none"><b>Panel anahtarı</b><input id="keyInput" type="password"><button class="btn acc" onclick="localStorage.setItem('pv_anahtar',document.getElementById('keyInput').value.trim());location.reload()">Giriş</button></div>
+<div id="app" style="display:none">
+<header><a href="../">← Panel</a><b>Simülasyon</b><select id="turSel" onchange="init()"></select><span class="small mut">Hiçbir şey kaydedilmez; değişkenleri oynatın, sonucu görün.</span></header>
+<div class="wrap">
+  <div class="ctrl">
+    <label>Kişi sayısı<input id="kisi" type="number" min="1" value="45" oninput="hesapla()"></label>
+    <label>Mod<select id="mod" onchange="hesapla()"><option value="grup">Grup</option><option value="munferit">Münferit / bireysel</option></select></label>
+    <label>Free (FOC) sayısı<select id="focMod" onchange="hesapla()"><option value="kural">Kuraldan</option><option value="elle">Elle</option></select></label>
+    <label>Free adet (elle)<input id="foc" type="number" min="0" value="0" oninput="hesapla()"></label>
+    <label>Free oranı %<input id="focOran" type="number" min="0" max="100" value="100" oninput="hesapla()"></label>
+    <label>Beklenen doluluk (münferit)<input id="dol" type="number" min="1" value="40" oninput="hesapla()"></label>
+    <label>Ekstra indirim %<input id="ind" type="number" min="0" max="100" value="0" oninput="hesapla()"></label>
+    <label>Kâr tipi<select id="karTipi" onchange="hesapla()"><option value="">Kuraldan</option><option value="kisi_basi_net">Kişi başı net</option><option value="yuzde">Yüzde</option><option value="sabit_toplam">Sabit toplam</option></select></label>
+    <label>Kâr değeri<input id="karDeger" type="number" placeholder="kuraldan" oninput="hesapla()"></label>
+    <label>Ekip (rehber+kaptan)<input id="ekip" type="number" min="0" value="2" oninput="hesapla()"></label>
+  </div>
+  <div class="res" id="res"></div>
+  <div class="grid">
+    <div class="card"><h2>Kalemler <span class="small mut">— kutuyu kaldırınca bu simülasyonda hariç sayılır (kaydedilmez)</span></h2><div class="tw"><table id="tbl"></table></div></div>
+    <div>
+      <div class="card" style="margin-bottom:16px"><h2>Kişi sayısına göre fiyat</h2><div class="tw"><table id="merdiven"></table></div><div class="small mut" style="margin-top:8px" id="basabas"></div></div>
+      <div class="card"><h2>Uyarılar ve seçenekler</h2><div id="uyari"></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
+var TIP={ucak:'Uçak',tren:'Tren',otobus:'Otobüs',arac:'Araç',transfer:'Transfer',park:'Park & izin',otel:'Konaklama',yemek:'Yemek',restoran:'Yemek',yerel_rehber:'Yerel rehber',rehber:'Rehber',personel:'Ekip & malzeme',sigorta:'Sigorta',anit:'Giriş',giris:'Giriş',etkinlik:'Etkinlik',diger:'Diğer'};
+var D=null, haric={}, R=null, timer=null;
+function key(){var u=new URLSearchParams(location.search).get('anahtar');if(u){localStorage.setItem('pv_anahtar',u);history.replaceState(null,'',location.pathname);}return localStorage.getItem('pv_anahtar')||'';}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+function para(n,p){if(n==null||n==='')return '—';return Number(n).toLocaleString('tr-TR',{maximumFractionDigits:0})+' '+({EUR:'€',USD:'$',TRY:'₺',SAR:'SAR'}[p]||p||'');}
+async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify(body)});return r.json();}
+function cur(){return document.getElementById('turSel').value||null;}
+function v(id){return document.getElementById(id).value;}
+async function init(){
+  var k=key();if(!k){document.getElementById('login').style.display='block';return;}
+  D=await rpc('panel_veri',{p_anahtar:k,p_tur_id:cur()});
+  if(!D||D.hata){localStorage.removeItem('pv_anahtar');document.getElementById('login').style.display='block';return;}
+  var sel=document.getElementById('turSel');var sv=sel.value;sel.innerHTML=D.turlar.map(function(t){return '<option value="'+t.id+'">'+esc(t.kod+' · '+t.ad)+'</option>'}).join('');sel.value=sv||D.tur.id;
+  if(!sv){document.getElementById('kisi').value=D.tur.kontenjan||45;document.getElementById('dol').value=D.tur.kontenjan||40;}
+  haric={};document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';
+  await hesapla(true);
+}
+function hesapla(now){clearTimeout(timer);timer=setTimeout(run,now?0:250);}
+async function run(){
+  var p={kisi:Number(v('kisi'))||1,mod:v('mod'),foc_oran:(Number(v('focOran'))||0)/100,beklenen_doluluk:Number(v('dol'))||40,indirim_yuzde:Number(v('ind'))||0,ekip:Number(v('ekip'))||0,haric:Object.keys(haric).filter(function(k){return haric[k]}),merdiven:[3,5,10,15,20,25,30,35,40,45,50]};
+  if(v('focMod')==='elle')p.foc_sayisi=Number(v('foc'))||0;
+  if(v('karTipi'))p.kar_tipi=v('karTipi');
+  if(v('karDeger')!=='')p.kar_deger=Number(v('karDeger'));
+  R=await rpc('panel_islem',{p_anahtar:key(),p_islem:'simulasyon',p_veri:{tur_id:cur(),p:p}});
+  if(!R||R.hata){document.getElementById('res').innerHTML='<div class="warn bad">'+esc(R&&R.hata)+'</div>';return;}
+  render();
+}
+function render(){
+  var pb=R.para_birimi,T=R.toplam,G=R.girdi;
+  document.getElementById('res').innerHTML=
+   '<div class="kpi acc"><div class="k">Kişi başı fiyat</div><div class="v">'+para(T.kisi_basi_fiyat,pb)+'</div><div class="s">'+G.odeyen+' ödeyen + '+G.foc+' free ('+Math.round(G.foc_oran*100)+'% bedava) · '+(R.mod==='munferit'?'münferit':'grup')+'</div></div>'+
+   '<div class="kpi"><div class="k">Toplam maliyet</div><div class="v">'+para(T.maliyet,pb)+'</div><div class="s">kişi başı değişken '+para(T.kisi_basi_degisken,pb)+' · sabit '+para(T.sabit,pb)+'</div></div>'+
+   '<div class="kpi"><div class="k">Sabitlerin kişi başı payı</div><div class="v">'+para(T.sabit_kisi_basi_pay,pb)+'</div><div class="s">'+(R.mod==='munferit'?G.beklenen_doluluk+' doluluğa':G.odeyen+' ödeyene')+' bölündü</div></div>'+
+   '<div class="kpi"><div class="k">Kâr</div><div class="v">'+para(T.kar,pb)+'</div><div class="s">'+esc(G.kar_tipi)+' '+G.kar_deger+'</div></div>'+
+   '<div class="kpi"><div class="k">Gelir / net</div><div class="v">'+para(T.gelir,pb)+'</div><div class="s">net '+para(T.net,pb)+'</div></div>'+
+   '<div class="kpi"><div class="k">Başa baş</div><div class="v">'+(T.basabas_kisi||'—')+' kişi</div><div class="s">bu fiyatla sabitleri karşılayan sayı · en az '+G.min_kisi+'</div></div>';
+  var kal=R.kalemler||[];
+  var all=(D.parcalar||[]).filter(function(p){return p.dahil&&p.plan_birim_fiyat!=null});
+  document.getElementById('tbl').innerHTML='<tr><th></th><th>Kalem</th><th>Tip</th><th class="num">Birim</th><th class="num">Kişi başı</th><th class="num">Sabit</th><th class="num">Grup toplamı</th><th class="num">Kişi başı pay</th></tr>'+all.map(function(p){
+    var k=kal.filter(function(x){return x.id===p.parca_id})[0];var off=!!haric[p.parca_id];
+    return '<tr class="'+(off?'off':'')+'"><td><input type="checkbox" '+(off?'':'checked')+' onchange="haric[\''+p.parca_id+'\']=!this.checked;hesapla(true)"></td><td><b>'+esc(p.ad.replace('[Öneri] ',''))+'</b><div class="small mut">'+(p.gun_no?p.gun_no+'. gün · ':'')+esc(k?k.kaynak:p.fiyat_kaynagi)+'</div></td><td class="small">'+esc(TIP[p.parca_tipi]||p.parca_tipi)+'</td><td class="num">'+para(p.plan_birim_fiyat,pb)+(p.adet&&p.adet!=1?' ×'+p.adet:'')+'</td><td class="num">'+(k?para(k.kisi_basi,pb):'—')+'</td><td class="num">'+(k?para(k.sabit,pb):'—')+'</td><td class="num">'+(k?para(k.grup_toplam,pb):'—')+'</td><td class="num"><b>'+(k?para(k.kisi_basi_pay,pb):'—')+'</b></td></tr>'}).join('')+
+    '<tr><td></td><td><b>Toplam</b></td><td></td><td></td><td class="num"><b>'+para(T.kisi_basi_degisken,pb)+'</b></td><td class="num"><b>'+para(T.sabit,pb)+'</b></td><td class="num"><b>'+para(T.maliyet,pb)+'</b></td><td class="num"><b>'+para(Number(T.kisi_basi_degisken)+Number(T.sabit_kisi_basi_pay),pb)+'</b></td></tr>';
+  document.getElementById('merdiven').innerHTML='<tr><th class="num">Kişi</th><th class="num">Free</th><th class="num">Sabit payı</th><th class="num">Kişi başı</th></tr>'+(R.merdiven||[]).map(function(m){return '<tr style="'+(m.kisi==G.kisi?'background:var(--acc2);font-weight:800':'')+(m.min_alti?';color:var(--bad)':'')+'"><td class="num">'+m.kisi+(m.min_alti?' <span class="pill">min altı</span>':'')+'</td><td class="num">'+m.foc+'</td><td class="num">'+para(m.sabit_pay,pb)+'</td><td class="num">'+para(m.kisi_basi,pb)+'</td></tr>'}).join('');
+  document.getElementById('basabas').textContent='Kural: '+(G.foc_kurali||'free yok')+' · En az kişi: '+G.min_kisi;
+  document.getElementById('uyari').innerHTML=(R.uyarilar||[]).map(function(u){return '<div class="warn'+(u.indexOf('geçersiz')>=0?' bad':'')+'">'+esc(u)+'</div>'}).join('')+(R.secenekler||[]).map(function(s){return '<div class="sec"><b>'+esc(s.secenek.replace('_',' '))+':</b> '+esc(s.aciklama)+'</div>'}).join('')||'<div class="small mut">Uyarı yok</div>';
+}
+init();
+</script>
+</body>
+</html>
