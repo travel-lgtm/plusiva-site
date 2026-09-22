@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://travel-lgtm.github.io/plusiva-site/sitemap.xml

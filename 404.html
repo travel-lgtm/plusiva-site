@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plusiva Travel · Turlar</title>
+<meta name="description" content="Plusiva Travel yurt dışı kültür turları, umre ve helal turlar. Türkçe rehberli, aileye uygun programlar.">
+<link rel="canonical" href="https://travel-lgtm.github.io/plusiva-site/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#FBF8F3;--surface:#FFFFFF;--ink:#1F2A24;--ink2:#5A655E;--line:#E4DED2;--green:#1F6F5C;--green-soft:#E6F1EC;--gold:#B8892E;--gold-soft:#F7EEDB}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;font-size:16px;line-height:1.6}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;margin:0;text-wrap:balance;line-height:1.15}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding-block:18px;border-bottom:1px solid var(--line)}
+.logo{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:600;letter-spacing:.04em;color:var(--green);text-decoration:none}
+.logo small{display:block;font-family:Manrope;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2);font-weight:600}
+.top a.tel{font-weight:600;color:var(--ink);text-decoration:none;font-size:15px}
+.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:36px;align-items:center;padding-block:48px 40px}
+.hero h1{font-size:clamp(36px,5.2vw,58px);margin-top:10px}
+.hero p.lead{font-size:18px;color:var(--ink2);max-width:52ch;margin:16px 0 0}
+.route{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.route span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13.5px;font-weight:500}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px}
+.price .lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);font-weight:700}
+.price .big{font-family:"Cormorant Garamond",serif;font-size:56px;font-weight:600;color:var(--green);line-height:1;margin-top:6px}
+.price .big small{font-size:22px;color:var(--ink2);font-family:Manrope;font-weight:500}
+.price .sub{color:var(--ink2);font-size:14px;margin-top:6px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-top:18px;padding-top:18px;border-top:1px solid var(--line);font-size:14px}
+.facts b{display:block;font-weight:700;font-size:15px}
+.btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;font-weight:700;padding:14px 22px;border-radius:10px;border:0;cursor:pointer;font-size:16px;font-family:inherit}
+.btn:hover{background:#185848}
+.btn.ghost{background:transparent;color:var(--green);border:1.5px solid var(--green)}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+section{padding-block:40px}
+section h2{font-size:clamp(28px,3.6vw,38px);margin-bottom:8px}
+.sub{color:var(--ink2);max-width:64ch;margin:0 0 22px}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.why .card h3{font-size:22px;margin-bottom:6px}
+.why .card p{margin:0;color:var(--ink2);font-size:15px}
+.days{display:grid;gap:10px}
+.day{display:grid;grid-template-columns:110px 1fr;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.day .n{font-family:"Cormorant Garamond",serif;font-size:15px;color:var(--gold);font-weight:600;letter-spacing:.04em}
+.day .n b{display:block;font-family:Manrope;font-size:22px;color:var(--ink);font-weight:700;letter-spacing:0}
+.day h3{font-size:20px;margin-bottom:4px}
+.day p{margin:0;color:var(--ink2);font-size:15px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.list{margin:0;padding:0;list-style:none}
+.list li{padding:8px 0;border-bottom:1px solid var(--line);font-size:15px;display:flex;gap:10px}
+.list li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--green);margin-top:9px}
+.list.no li::before{background:var(--line)}
+.prices{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.prices .card{padding:18px}
+.prices .card .t{font-size:13px;color:var(--ink2);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.prices .card .v{font-family:"Cormorant Garamond",serif;font-size:32px;color:var(--green);font-weight:600;margin-top:4px}
+.prices .card .d{font-size:13.5px;color:var(--ink2)}
+.form-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:start}
+form{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:13px;font-weight:600;color:var(--ink2);margin:10px 0 5px}
+input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:9px;font:inherit;font-size:15px;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--green);outline-offset:1px;border-color:var(--green)}
+textarea{min-height:96px;resize:vertical}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.note{font-size:13px;color:var(--ink2);margin-top:10px}
+.ok{background:var(--green-soft);border:1px solid var(--green);color:var(--green);border-radius:10px;padding:16px;font-weight:600}
+.err{background:#FBE9E7;border:1px solid #C0392B;color:#8E2B1F;border-radius:10px;padding:12px;font-size:14px;margin-top:10px}
+.gold-box{background:var(--gold-soft);border:1px solid #E8D5A6;border-radius:12px;padding:18px 20px;font-size:15px}
+footer{border-top:1px solid var(--line);padding-block:28px;font-size:14px;color:var(--ink2)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.sticky{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:10px 16px;display:none;justify-content:space-between;align-items:center;gap:12px;z-index:10}
+/* liste görünümü */
+.tours{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;padding-block:32px}
+.tour{display:flex;flex-direction:column;gap:8px;text-decoration:none}
+.tour .eyebrow{font-size:11px}
+.tour h3{font-size:26px}
+.tour .p{font-family:"Cormorant Garamond",serif;font-size:30px;color:var(--green);font-weight:600}
+.tour .m{color:var(--ink2);font-size:14px}
+.empty{padding:60px 0;text-align:center;color:var(--ink2)}
+.loading{padding:40px 0;color:var(--ink2)}
+@media (max-width:860px){.hero,.why,.two,.form-wrap{grid-template-columns:1fr}.prices{grid-template-columns:1fr 1fr}.day{grid-template-columns:1fr}.sticky{display:flex}body{padding-bottom:70px}}
+@media (max-width:480px){.grid2{grid-template-columns:1fr}.prices{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<header class="top wrap">
+  <a class="logo" href="./">Plusiva<small>Travel · TÜRSAB üyesi</small></a>
+  <a class="tel" href="https://wa.me/905334356824" rel="noopener">WhatsApp · +90 533 435 68 24</a>
+</header>
+
+<main class="wrap" id="app"><div class="loading">Turlar yükleniyor…</div></main>
+
+<footer><div class="wrap">
+  <div><b>Plusiva Travel</b> · Xplus Turizm · TÜRSAB üyesi acente<br>Mumhane Cad. 3/1 Karaköy-Galataport, İstanbul</div>
+  <div>ops@plusiva.com · +90 533 435 68 24<br>İletişim: Cevahir Kılıç</div>
+</div></footer>
+<div class="sticky" id="sticky" hidden></div>
+
+<script>
+/* ================= PLUSIVA SİTE ŞABLONU =================
+   Sayfa içeriği bu dosyada değil, sistemde (Supabase) durur.
+   Bir tur "satışta" durumuna alındığında burada kendiliğinden görünür.
+   Bu dosya yalnız tasarım değiştiğinde güncellenir.
+*/
+const SB = "https://wlfabfpjvqfyvhsvldll.supabase.co";
+const KEY = "sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB";
+const H = { apikey: KEY, Authorization: "Bearer " + KEY };
+const q = (path) => fetch(SB + "/rest/v1/" + path, { headers: H }).then(r => r.json());
+const app = document.getElementById("app");
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const AY = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
+const gun = (d) => { const x = new Date(d); return x.getDate() + " " + AY[x.getMonth()]; };
+const tarihAralik = (a, b) => { const x = new Date(a), y = new Date(b); return (x.getMonth() === y.getMonth() ? x.getDate() + "–" + y.getDate() + " " + AY[y.getMonth()] : gun(a) + " – " + gun(b)) + " " + y.getFullYear(); };
+const para = (n, p) => Number(n).toLocaleString("tr-TR", { maximumFractionDigits: 0 }) + " " + ({EUR:"€",USD:"$",TRY:"₺",SAR:"SAR"}[p] || p);
+
+async function liste() {
+  const turlar = await q("v_site_turlar?select=*&order=baslangic.asc");
+  document.title = "Plusiva Travel · Turlar";
+  if (!turlar.length) { app.innerHTML = '<div class="empty">Şu anda satışta tur yok. WhatsApp\'tan yazın, size özel planlayalım.</div>'; return; }
+  app.innerHTML = `<section><div class="eyebrow">Satıştaki turlar</div><h1 style="font-size:clamp(32px,4.5vw,48px);margin-top:8px">Türkçe rehberli, aileye uygun yurt dışı turları</h1></section>
+  <div class="tours">${turlar.map(t => `
+    <a class="card tour" href="${window.PV_KOK||""}tur/${esc(t.kod)}/">
+      <div class="eyebrow">${esc(tarihAralik(t.baslangic, t.bitis))} · ${esc(t.kalkis_sehri||"")}</div>
+      <h3>${esc(t.ad)}</h3>
+      <div class="m">${esc(t.slogan||"")}</div>
+      <div class="p">${para(Number(t.satis_fiyati)+Number(t.zorunlu_paket_fiyati||0), t.para_birimi)} <small style="font-family:Manrope;font-size:13px;color:var(--ink2)">kişi başı</small></div>
+      <div class="m">${t.gun_sayisi} gün / ${t.gece_sayisi} gece${t.durum==="dolu"?" · <b>Kontenjan doldu</b>":""}</div>
+    </a>`).join("")}</div>`;
+}
+
+async function detay(kod) {
+  const tl = await q(`v_site_turlar?select=*&kod=eq.${encodeURIComponent(kod)}`);
+  const t = Array.isArray(tl) && tl[0];
+  if (!t) { app.innerHTML = '<div class="empty">Bu tur şu anda satışta değil. <a href="${window.PV_KOK||"./"}">Diğer turlara bakın</a>.</div>'; return; }
+  const [prog, fk] = await Promise.all([
+    q(`tur_programi?select=gun_no,tarih,sehir,baslik,aciklama,blok_tipi&order=gun_no.asc,sira.asc&tur_id=eq.${t.id}`),
+    q(`fiyat_kurallari?select=kural_tipi,aciklama,deger,deger_tipi,para_birimi&tur_id=eq.${t.id}`)
+  ]);
+  const toplam = Number(t.satis_fiyati) + Number(t.zorunlu_paket_fiyati || 0);
+  const oz = t.ozellikler || {};
+  const kural = (tip) => fk.find(k => k.kural_tipi === tip);
+  const sngl = kural("sngl_farki"), trpl = kural("trpl_indirimi"), cocuk = kural("cocuk_indirimi"), bebek = kural("bebek_fiyati");
+  const sehirler = (oz.sehirler || []);
+  document.title = `${t.ad} · ${tarihAralik(t.baslangic, t.bitis)} · Plusiva Travel`;
+  app.innerHTML = `
+  <section class="hero">
+    <div>
+      <div class="eyebrow">${esc(tarihAralik(t.baslangic, t.bitis))}${t.kalkis_sehri ? " · " + esc(t.kalkis_sehri) + " kalkışlı" : ""}</div>
+      <h1>${esc(t.slogan || t.ad)}</h1>
+      <p class="lead">${esc(t.aciklama || "")}</p>
+      ${sehirler.length ? `<div class="route">${sehirler.map(s => `<span>${esc(s)}</span>`).join("")}</div>` : ""}
+      <div class="cta-row"><a class="btn" href="#kayit">Ön kayıt yaptır</a><a class="btn ghost" href="#program">Programı incele</a></div>
+    </div>
+    <div class="card price">
+      <div class="lbl">Kişi başı · iki kişilik odada</div>
+      <div class="big">${para(t.satis_fiyati, t.para_birimi)}${Number(t.zorunlu_paket_fiyati) ? ` <small>+ ${para(t.zorunlu_paket_fiyati, t.para_birimi)} paket</small>` : ""}</div>
+      <div class="sub">Toplam ${para(toplam, t.para_birimi)} · Taksit imkânı · Ön kayıtla yer garanti</div>
+      ${(oz.kisa_bilgi||[]).length ? `<div class="facts">${oz.kisa_bilgi.map(([b,d]) => `<div><b>${esc(b)}</b>${esc(d)}</div>`).join("")}</div>` : ""}
+    </div>
+  </section>
+  ${(t.one_cikanlar||[]).length ? `<section><h2>Neden bu tur</h2><div class="why">${t.one_cikanlar.map(o => `<div class="card"><h3>${esc(o.baslik)}</h3><p>${esc(o.metin)}</p></div>`).join("")}</div></section>` : ""}
+  ${prog.length ? `<section id="program"><h2>Gün gün program</h2><div class="days">${prog.map(p => `
+    <div class="day"><div class="n">${p.tarih ? esc(gun(p.tarih)) : ""}<b>${p.gun_no}. Gün</b></div><div><h3>${esc(p.baslik || p.sehir || "")}</h3><p>${esc(p.aciklama || "")}</p></div></div>`).join("")}</div></section>` : ""}
+  <section><div class="two">
+    <div><h2>Fiyata dahil</h2><ul class="list">${(t.dahil_olanlar||[]).map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+    <div><h2>Dahil değil</h2><ul class="list no">${(t.haric_olanlar||[]).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      ${Number(t.zorunlu_paket_fiyati) ? `<div class="gold-box" style="margin-top:14px"><b>${para(t.zorunlu_paket_fiyati, t.para_birimi)} zorunlu paket:</b> ${esc(t.zorunlu_paket_aciklama || "")} ${esc(oz.anit_notu || "")}</div>` : ""}
+    </div>
+  </div></section>
+  <section><h2>Oda ve yaş seçenekleri</h2><div class="prices">
+    <div class="card"><div class="t">İki kişilik oda</div><div class="v">${para(toplam, t.para_birimi)}</div><div class="d">kişi başı${Number(t.zorunlu_paket_fiyati) ? ", paket dahil" : ""}</div></div>
+    ${sngl ? `<div class="card"><div class="t">Tek kişilik oda</div><div class="v">+${para(sngl.deger, sngl.para_birimi)}</div><div class="d">${esc(sngl.aciklama||"")}</div></div>` : ""}
+    ${trpl ? `<div class="card"><div class="t">Üç kişilik oda</div><div class="v">−${para(trpl.deger, trpl.para_birimi)}</div><div class="d">${esc(trpl.aciklama||"")}</div></div>` : ""}
+    ${cocuk ? `<div class="card"><div class="t">Çocuk 7–12 yaş</div><div class="v">−${para(cocuk.deger, cocuk.para_birimi)}</div><div class="d">iki yetişkinle aynı odada${bebek ? " · 0–2 yaş " + para(bebek.deger, bebek.para_birimi) : ""}</div></div>` : ""}
+  </div></section>
+  <section id="kayit"><div class="form-wrap">
+    <div><h2>Ön kayıt</h2><p class="sub">Formu doldurun, aynı gün Cevahir Kılıç sizi arasın ya da WhatsApp'tan yazsın. Ön kayıt ücretsizdir, yer ayırtmak için depozito daha sonra istenir.</p>
+      ${oz.kayit_notu ? `<div class="gold-box">${esc(oz.kayit_notu)}</div>` : ""}</div>
+    <form id="f" novalidate>
+      <div class="grid2"><div><label for="ad">Ad</label><input id="ad" name="ad" required autocomplete="given-name"></div><div><label for="soyad">Soyad</label><input id="soyad" name="soyad" autocomplete="family-name"></div></div>
+      <div class="grid2"><div><label for="telefon">Telefon (WhatsApp)</label><input id="telefon" name="telefon" type="tel" required placeholder="05xx xxx xx xx" autocomplete="tel"></div><div><label for="eposta">E-posta</label><input id="eposta" name="eposta" type="email" autocomplete="email"></div></div>
+      <div class="grid2"><div><label for="kisi">Kişi sayısı</label><select id="kisi" name="kisi_sayisi"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>8</option><option>10</option><option value="15">10+</option></select></div>
+      <div><label for="oda">Oda tercihi</label><select id="oda" name="oda_tercihi"><option value="DBL">İki kişilik</option><option value="SNGL">Tek kişilik</option><option value="TRPL">Üç kişilik</option><option value="AILE">Aile (çocuklu)</option></select></div></div>
+      <label for="mesaj">Not (isteğe bağlı)</label><textarea id="mesaj" name="mesaj" placeholder="Vize durumu, özel istek, grup bilgisi..."></textarea>
+      <div class="hp" aria-hidden="true"><label for="web_site">Web siteniz</label><input id="web_site" name="web_site" tabindex="-1" autocomplete="off"></div>
+      <input type="hidden" name="tur_kodu" value="${esc(t.kod)}"><input type="hidden" name="kaynak" value="site">
+      <div style="margin-top:16px"><button class="btn" type="submit" id="gonder">Ön kaydı gönder</button></div>
+      <p class="note">Bilgileriniz yalnızca bu tur için kullanılır, üçüncü kişiyle paylaşılmaz.</p>
+      <div id="sonuc" hidden></div>
+    </form>
+  </div></section>`;
+  const st = document.getElementById("sticky");
+  st.hidden = false; st.innerHTML = `<div><b>${para(toplam, t.para_birimi)}</b> <span style="color:var(--ink2);font-size:13px">kişi başı</span></div><a class="btn" href="#kayit">Ön kayıt</a>`;
+  formBagla();
+}
+
+function formBagla() {
+  const f = document.getElementById("f"), btn = document.getElementById("gonder"), out = document.getElementById("sonuc");
+  f.addEventListener("submit", async (e) => {
+    e.preventDefault(); out.hidden = true; out.className = "";
+    const d = Object.fromEntries(new FormData(f).entries());
+    if (!d.ad.trim() || !d.telefon.trim()) { out.className = "err"; out.textContent = "Ad ve telefon zorunlu."; out.hidden = false; return; }
+    btn.disabled = true; btn.textContent = "Gönderiliyor…";
+    try {
+      const r = await fetch(SB + "/functions/v1/rezervasyon-talebi", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d) });
+      const j = await r.json();
+      if (r.ok && j.tamam) { out.className = "ok"; out.innerHTML = "Ön kaydınız alındı. Dosya numaranız <b>" + esc(j.dosya_no || "") + "</b>. En kısa sürede size dönüyoruz."; f.reset(); }
+      else { out.className = "err"; out.textContent = j.hata || "Gönderilemedi, lütfen WhatsApp'tan yazın."; }
+    } catch { out.className = "err"; out.textContent = "Bağlantı kurulamadı. Lütfen WhatsApp'tan yazın: +90 533 435 68 24"; }
+    out.hidden = false; btn.disabled = false; btn.textContent = "Ön kaydı gönder";
+  });
+}
+
+const kod = window.PV_KOD || new URLSearchParams(location.search).get("tur");
+(kod ? detay(kod) : liste()).catch(() => { app.innerHTML = '<div class="empty">Sayfa yüklenemedi. Lütfen WhatsApp\'tan yazın: +90 533 435 68 24</div>'; });
+</script>
+</body>
+</html>
