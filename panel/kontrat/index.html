@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Kontratlar & adaylar</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--warn:#9a5a14;--warn2:#fff3e0;--ok:#1b5e3a;--ok2:#e8f5ec;--bad:#8a2a2a;--bad2:#fbeaea}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+header a{color:var(--acc);text-decoration:none;font-weight:700}header select{padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:14px;background:#fff}
+.wrap{max-width:1200px;margin:0 auto;padding:18px 20px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-bottom:16px}.seg button{border:0;background:#fff;padding:8px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--mut)}.seg button.on{background:var(--acc);color:#fff}
+.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}.card h2{margin:0 0 10px;font-size:15px;font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:8px 6px;border-bottom:1px solid var(--line);white-space:nowrap}td{padding:8px 6px;border-bottom:1px solid #eef0ee;vertical-align:top}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.mut{color:var(--mut)}.small{font-size:12px}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut)}
+.pill.kontrat{background:var(--ok2);color:var(--ok)}.pill.spot{background:var(--warn2);color:var(--warn)}.pill.liste{background:#e8eef8;color:#1e3a5f}.pill.ortalama{background:#eeeeea;color:var(--mut)}.pill.isimli{background:var(--bad2);color:var(--bad)}.pill.kategori{background:var(--acc2);color:var(--acc)}
+tr.grp td{background:#fafaf7;font-weight:800;border-top:2px solid var(--line)}
+.aday{display:flex;flex-wrap:wrap;gap:6px}.aday span{border:1px solid var(--line);border-radius:8px;padding:4px 8px;background:#fff;font-size:12.5px}.aday span.v{border-color:var(--acc);background:var(--acc2)}.aday span.a{border-color:var(--ok);background:var(--ok2)}
+.empty{color:var(--mut);font-size:13px;padding:10px 0}
+.login{max-width:400px;margin:14vh auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}.login input{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;font-family:inherit;margin:10px 0}
+.btn{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}.btn.acc{background:var(--acc);color:#fff;border-color:var(--acc)}
+</style>
+</head>
+<body>
+<div id="login" class="login" style="display:none"><b>Panel anahtarı</b><input id="keyInput" type="password"><button class="btn acc" onclick="localStorage.setItem('pv_anahtar',document.getElementById('keyInput').value.trim());location.reload()">Giriş</button></div>
+<div id="app" style="display:none">
+<header><a href="../">← Panel</a><b>Kontratlar & adaylar</b><select id="turSel" onchange="load()"></select><span class="small mut">1. adım: kontrat ve fiyat kartı katmanı</span></header>
+<div class="wrap">
+  <div class="seg"><button id="tA" class="on" onclick="mod='aday';render()">Turun satırları ve adaylar</button><button id="tK" onclick="mod='kontrat';render()">Kontratlar</button><button id="tF" onclick="mod='fiyat';render()">Fiyat kartı</button></div>
+  <div id="out"></div>
+</div>
+</div>
+<script>
+var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
+var D=null, K=[], F=[], A=[], mod='aday';
+var TIP={ucak:'Uçak',tren:'Tren',otobus:'Otobüs',arac:'Araç',transfer:'Transfer',park:'Park & izin',otel:'Konaklama',yemek:'Yemek',restoran:'Yemek',yerel_rehber:'Yerel rehber',rehber:'Rehber',personel:'Ekip & malzeme',sigorta:'Sigorta',anit:'Giriş',giris:'Giriş',etkinlik:'Etkinlik',diger:'Diğer'};
+var DURUM={taslak:'taslak',teklif_istendi:'teklif istendi',teklif_geldi:'teklif geldi',pazarlik:'pazarlık',kontrol:'kontrol',onay_bekliyor:'onay bekliyor',imzalandi:'imzalandı',bitti:'bitti',iptal:'iptal'};
+function key(){var u=new URLSearchParams(location.search).get('anahtar');if(u){localStorage.setItem('pv_anahtar',u);history.replaceState(null,'',location.pathname);}return localStorage.getItem('pv_anahtar')||'';}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+function para(n,p){if(n==null||n==='')return '—';return Number(n).toLocaleString('tr-TR',{maximumFractionDigits:0})+' '+({EUR:'€',USD:'$',TRY:'₺',SAR:'SAR'}[p]||p||'');}
+function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('tr-TR',{day:'2-digit',month:'short',year:'numeric'})}catch(e){return d}}
+async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify(body)});return r.json();}
+function cur(){return document.getElementById('turSel').value||null;}
+async function islem(ad,veri){return rpc('panel_islem',{p_anahtar:key(),p_islem:ad,p_veri:veri||{}});}
+async function load(){
+  var k=key();if(!k){document.getElementById('login').style.display='block';return;}
+  D=await rpc('panel_veri',{p_anahtar:k,p_tur_id:cur()});
+  if(!D||D.hata){localStorage.removeItem('pv_anahtar');document.getElementById('login').style.display='block';return;}
+  var sel=document.getElementById('turSel');var sv=sel.value;sel.innerHTML=D.turlar.map(function(t){return '<option value="'+t.id+'">'+esc(t.kod+' · '+t.ad)+'</option>'}).join('');sel.value=sv||D.tur.id;
+  var r=await Promise.all([islem('kontratlar'),islem('fiyat_karti'),islem('tur_adaylar',{tur_id:D.tur.id})]);
+  K=r[0]||[];F=r[1]||[];A=r[2]||[];
+  document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';render();
+}
+function render(){
+  document.getElementById('tA').className=mod==='aday'?'on':'';document.getElementById('tK').className=mod==='kontrat'?'on':'';document.getElementById('tF').className=mod==='fiyat'?'on':'';
+  var pb=D.tur.para_birimi,h='';
+  if(mod==='aday'){
+    var b={};A.forEach(function(p){var bk=p.baslik_kod||'diger';(b[bk]=b[bk]||[]).push(p)});
+    var order=['ulasim','konaklama','yemek','giris','etkinlik','rehberlik','sigorta','malzeme','diger'];
+    var adl={ulasim:'Ulaşım',konaklama:'Konaklama',yemek:'Yemek',giris:'Müze & girişler',etkinlik:'Etkinlikler',rehberlik:'Rehberlik',sigorta:'Sigorta & vize',malzeme:'Malzeme & diğer',diger:'Diğer'};
+    h+='<div class="card"><h2>Her satır için masadaki adaylar <span class="small mut">— yeşil çerçeve: atanan · koyu çerçeve: varsayılan · rozet: kaynak</span></h2><table><tr><th>Satır</th><th>Satış şekli</th><th>Karar tarihi</th><th class="num">Ortalama</th><th>Adaylar</th></tr>';
+    order.forEach(function(bk){if(!b[bk])return;h+='<tr class="grp"><td colspan="5">'+adl[bk]+'</td></tr>';
+      b[bk].forEach(function(p){
+        var gec=p.karar_tarihi&&new Date(p.karar_tarihi)<new Date();
+        var ad=(p.adaylar||[]).filter(function(a){return a.tip!=='ortalama'});
+        h+='<tr><td><b>'+esc(p.ad)+'</b><div class="small mut">'+(p.alt_baslik?esc(p.alt_baslik)+' · ':'')+esc(TIP[p.parca_tipi]||p.parca_tipi)+(p.gun_no?' · '+p.gun_no+'. gün':'')+'</div></td>'
+          +'<td><span class="pill '+esc(p.satis_sekli||'kategori')+'">'+(p.satis_sekli==='isimli'?'isimli':'kategori')+'</span></td>'
+          +'<td style="'+(gec?'color:var(--bad)':'')+'">'+tarih(p.karar_tarihi)+'</td>'
+          +'<td class="num">'+para(p.plan_birim_fiyat,pb)+(p.kisi_bazli?'<div class="small mut">kişi başı</div>':'<div class="small mut">sabit</div>')+'</td>'
+          +'<td>'+(ad.length?'<div class="aday">'+ad.map(function(a){return '<span class="'+(a.atanan?'a':(a.varsayilan?'v':''))+'">'+esc(a.ad.replace('[Örnek] ',''))+' · <b>'+para(a.birim_fiyat,a.para_birimi)+'</b> <span class="pill '+esc(a.tip)+'">'+esc(a.tip)+'</span>'+(a.puan?' <span class="small mut">puan '+a.puan+'</span>':'')+(a.gecerlilik?' <span class="small mut">→ '+tarih(a.gecerlilik)+'</span>':'')+'</span>'}).join('')+'</div>':'<span class="small mut">henüz aday yok — kontrat ya da teklif gelince burada görünür</span>')+'</td></tr>';
+      });
+    });
+    h+='</table></div>';
+  } else if(mod==='kontrat'){
+    h+='<div class="card"><h2>Kontratlar</h2>'+(K.length?'<table><tr><th>Cari</th><th>Hizmet</th><th>Şehir</th><th>Kapsam</th><th>Dönem</th><th>Durum</th><th class="num">Release</th><th>Allotment</th><th>Ödeme</th><th class="num">Fiyat satırı</th></tr>'+K.map(function(k){return '<tr><td><b>'+esc(k.tedarikci)+'</b><div class="small mut">'+esc(k.baslik||'')+'</div></td><td>'+esc(TIP[k.hizmet_tipi]||k.hizmet_tipi||'')+'</td><td>'+esc(k.sehir||'')+'</td><td>'+esc(k.kapsam||'')+'</td><td class="small">'+tarih(k.baslangic)+' – '+tarih(k.bitis)+'</td><td><span class="pill '+(k.durum==='imzalandi'?'kontrat':'')+'">'+esc(DURUM[k.durum]||k.durum)+'</span></td><td class="num">'+(k.release_gun!=null?k.release_gun+' gün':'—')+'</td><td class="small">'+esc(JSON.stringify(k.allotment||{}).replace(/[{}"]/g,''))+'</td><td class="small">'+esc(JSON.stringify(k.odeme_kosulu||{}).replace(/[{}"]/g,''))+'</td><td class="num">'+k.fiyat_sayisi+'</td></tr>'}).join('')+'</table>':'<div class="empty">Henüz kontrat yok. Sezon başında tedarikçilere fiyat talebi gönderildikçe (şablon: sezon fiyat talebi, imza Cevahir Kılıç, gönderim öncesi onay) burada taslak → teklif istendi → teklif geldi → pazarlık → imzalandı olarak ilerler.</div>')+'</div>';
+  } else {
+    var g={};F.forEach(function(f){(g[f.tedarikci]=g[f.tedarikci]||[]).push(f)});
+    h+='<div class="card"><h2>Fiyat kartı <span class="small mut">— cari bazında; kaynak: kontrat / spot / liste / teklif / tahmin</span></h2>'+(F.length?'<table><tr><th>Hizmet</th><th>Şehir</th><th>Tanım</th><th class="num">Fiyat</th><th>Birim</th><th>Kaynak</th><th>Grup tipi</th><th>Geçerlilik</th></tr>'+Object.keys(g).sort().map(function(t){return '<tr class="grp"><td colspan="8">'+esc(t)+'</td></tr>'+g[t].map(function(f){return '<tr><td>'+esc(TIP[f.hizmet_tipi]||f.hizmet_tipi)+'</td><td>'+esc(f.sehir||'')+'</td><td>'+esc(f.ad||'')+(f.oda_tipi?' <span class="small mut">'+esc(f.oda_tipi)+(f.pansiyon?' · '+esc(f.pansiyon):'')+'</span>':'')+'</td><td class="num"><b>'+para(f.birim_fiyat,f.para_birimi)+'</b></td><td class="small">'+esc(f.birim||'')+'</td><td><span class="pill '+esc(f.kontrat_durum==='imzalandi'?'kontrat':(f.kaynak==='spot'?'spot':'liste'))+'">'+esc(f.kaynak||'')+'</span></td><td class="small">'+esc(f.grup_tipi||'')+'</td><td class="small">'+(f.gecerli_baslangic||f.gecerli_bitis?tarih(f.gecerli_baslangic)+' – '+tarih(f.gecerli_bitis):'—')+(f.teklif_gecerlilik?'<div class="mut">teklif → '+tarih(f.teklif_gecerlilik)+'</div>':'')+'</td></tr>'}).join('')}).join('')+'</table>':'<div class="empty">Fiyat kartı boş.</div>')+'</div>';
+  }
+  document.getElementById('out').innerHTML=h;
+}
+load();
+</script>
+</body>
+</html>
