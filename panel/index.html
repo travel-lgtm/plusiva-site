@@ -57,7 +57,7 @@ code{background:#eef0ee;padding:2px 6px;border-radius:6px;font-size:12px}
 </header>
 <nav id="nav">
   <button data-v="ozet" class="on">Özet</button>
-  <button data-v="tur">Tur · 3 aşama</button>
+  <button data-v="paket">Ön paketler</button><button data-v="tur">Tur · 3 aşama</button>
   <button data-v="alt">Alternatifler</button>
   <button data-v="fiyat">Fiyat konfigüratörü</button>
   <button data-v="dosya">Dosyalar & istisnalar</button>
@@ -78,6 +78,7 @@ code{background:#eef0ee;padding:2px 6px;border-radius:6px;font-size:12px}
     <div class="card"><h2>Son yayınlar</h2><div class="row" style="margin-bottom:8px"><button class="btn acc" onclick="islem('yayinla',{})">Siteyi yayınla</button><span class="mut small">GitHub Pages'e tek commit; sonuç yayınlar tablosuna düşer.</span></div><div class="tw"><table id="yayinTbl"></table></div></div>
   </section>
 
+  <section class="view" id="v-paket"><div class="card"><h2>Ön paketler (tur şablonları)</h2><p class="desc">Siz paketi tanımlarsınız; yeni tur paketten kurulur, parçalar paketten gelir, tedarikçiler fiyat listesinden atanır. İlk paket END-2027-03'ten türetildi; END-2027-11 bu paketten kuruldu.</p><div id="paketler"></div></div></section>
   <section class="view" id="v-tur">
     <div class="card">
       <h2 id="turBaslik">Tur</h2>
@@ -154,7 +155,7 @@ async function load(){
   var k=anahtar();if(!k){document.getElementById('login').style.display='block';return;}
   var d=await rpc('panel_veri',{p_anahtar:k,p_tur_id:cur()});
   if(!d||d.hata){document.getElementById('login').style.display='block';document.getElementById('app').style.display='none';var e=document.getElementById('loginErr');e.style.display='block';e.textContent='Anahtar kabul edilmedi.';localStorage.removeItem('pv_anahtar');return;}
-  D=d;document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';render();
+  D=d;try{D.paketler=await rpc('panel_paketler',{p_anahtar:k});}catch(e){D.paketler=[];}document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';render();
 }
 async function islem(ad,veri){var r=await rpc('panel_islem',{p_anahtar:anahtar(),p_islem:ad,p_veri:veri||{}});if(r&&r.hata){toast('Hata: '+r.hata);return r;}toast(ad+' tamam');await load();return r;}
 function pill(t,c){return '<span class="pill '+(c||'p-mut')+'">'+esc(t)+'</span>';}
@@ -180,6 +181,7 @@ function render(){
   document.getElementById('cariTbl').innerHTML='<tr><th>Tedarikçi</th><th>Tur</th><th class="num">Borç</th><th class="num">Ödenen</th><th class="num">Kalan</th><th class="num">Fatura</th></tr>'+D.cari.map(function(c){return '<tr><td>'+esc(c.tedarikci||'(tedarikçi atanmamış)')+'</td><td class="small">'+esc(c.tur_kodu)+'</td><td class="num">'+para(c.borc,c.para_birimi)+'</td><td class="num">'+para(c.odenen,c.para_birimi)+'</td><td class="num"><b>'+para(c.kalan,c.para_birimi)+'</b></td><td class="num">'+(c.fatura_sayisi||0)+'</td></tr>'}).join('')||'<tr><td class="mut">Cari kaydı yok</td></tr>';
   document.getElementById('olayTbl').innerHTML='<tr><th>Zaman</th><th>Kanal</th><th>Yön</th><th>Tip</th><th>Başlık</th><th>Taraf</th></tr>'+D.olaylar.map(function(o){return '<tr><td class="small mut">'+zaman(o.zaman)+'</td><td>'+pill(o.kanal,'p-acc')+'</td><td class="small">'+esc(o.yon||'')+'</td><td class="small">'+esc(o.tip||'')+'</td><td>'+esc(o.baslik||'')+'</td><td class="small">'+esc(o.taraf||'')+'</td></tr>'}).join('');
   document.getElementById('kurTbl').innerHTML='<tr><th>Madde</th><th>Alan</th><th>Sorumlu</th><th>Durum</th></tr>'+D.kurulum.map(function(k){return '<tr><td>'+esc(k.baslik)+(k.not?'<div class="small mut">'+esc(k.not)+'</div>':'')+'</td><td class="small">'+esc(k.alan)+'</td><td class="small">'+esc(k.sorumlu)+'</td><td>'+durumPill(k.durum)+'</td></tr>'}).join('');
+  document.getElementById('paketler').innerHTML=(D.paketler||[]).map(function(p){return '<div class="card"><h2>'+esc(p.kod+' · '+p.ad)+' <span class="pill p-acc">'+(p.tur_sayisi||0)+' tur</span></h2><div class="small mut" style="margin-bottom:8px">Varsayılanlar: '+esc(JSON.stringify(p.varsayilanlar))+'</div><div class="tw"><table><tr><th>Gün</th><th>Tip</th><th>Parça</th><th>Kişi/sabit</th><th class="num">Adet</th><th>Zorunlu</th><th>Seçim kriteri</th><th class="num">Varsayılan fiyat</th></tr>'+(p.parcalar||[]).map(function(x){return '<tr><td>'+(x.gun_no||'')+'</td><td class="small mut">'+esc(x.parca_tipi)+'</td><td><b>'+esc(x.ad)+'</b></td><td class="small">'+(x.kisi_bazli?'kişi başı':'sabit')+'</td><td class="num">'+(x.adet||1)+'</td><td>'+(x.zorunlu?pill('zorunlu','p-ok'):pill('opsiyonel','p-mut'))+'</td><td class="small mut">'+esc(Object.keys(x.secim_kriteri||{}).filter(function(k){return k!=='hizmet_tipi'}).map(function(k){return k+': '+x.secim_kriteri[k]}).join(', '))+'</td><td class="num">'+(x.varsayilan_fiyat!=null?para(x.varsayilan_fiyat,x.para_birimi):'<span class="small mut">listeden</span>')+'</td></tr>'}).join('')+'</table></div></div>'}).join('')||'<div class="mut">Paket yok</div>';
   document.getElementById('yetTbl').innerHTML='<tr><th>Yetenek</th><th>Departman</th><th>Durum</th></tr>'+D.yetenekler.map(function(y){return '<tr><td>'+esc(y.ad)+'</td><td class="small">'+esc(y.departman||'')+'</td><td>'+durumPill(y.durum)+'</td></tr>'}).join('');
 }
 async function hesapla(){
