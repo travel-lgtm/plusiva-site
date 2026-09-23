@@ -85,6 +85,7 @@
 
   function benRozet(){
     if(!PV.ben || !PV.ben.eposta) return;
+    if(window.self !== window.top || /[?&]embed=/.test(location.search)) return; // gömülü sayfada rozet yok (ana kabuk gösterir)
     var d=document.createElement('div'); d.id='pvBen';
     d.innerHTML = '<b>'+(PV.ben.ad||PV.ben.eposta)+'</b> · '+PV.ben.rol+'<a id="pvCikisA">çıkış</a>';
     document.body.appendChild(d); el('pvCikisA').onclick=PV.cikis;
