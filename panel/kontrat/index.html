@@ -34,16 +34,17 @@ tr.grp td{background:#fafaf7;font-weight:800;border-top:2px solid var(--line)}
   <div id="out"></div>
 </div>
 </div>
+<script src="../oturum.js"></script>
 <script>
 var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
 var D=null, K=[], F=[], A=[], mod='aday';
 var TIP={ucak:'Uçak',tren:'Tren',otobus:'Otobüs',arac:'Araç',transfer:'Transfer',park:'Park & izin',otel:'Konaklama',yemek:'Yemek',restoran:'Yemek',yerel_rehber:'Yerel rehber',rehber:'Rehber',personel:'Ekip & malzeme',sigorta:'Sigorta',anit:'Giriş',giris:'Giriş',etkinlik:'Etkinlik',diger:'Diğer'};
 var DURUM={taslak:'taslak',teklif_istendi:'teklif istendi',teklif_geldi:'teklif geldi',pazarlik:'pazarlık',kontrol:'kontrol',onay_bekliyor:'onay bekliyor',imzalandi:'imzalandı',bitti:'bitti',iptal:'iptal'};
-function key(){var u=new URLSearchParams(location.search).get('anahtar');if(u){localStorage.setItem('pv_anahtar',u);history.replaceState(null,'',location.pathname);}return localStorage.getItem('pv_anahtar')||'';}
+function key(){var u=new URLSearchParams(location.search).get('anahtar');if(u){localStorage.setItem('pv_anahtar',u);history.replaceState(null,'',location.pathname);}return (window.PV&&PV.token)?'oturum':(localStorage.getItem('pv_anahtar')||'');}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
 function para(n,p){if(n==null||n==='')return '—';return Number(n).toLocaleString('tr-TR',{maximumFractionDigits:0})+' '+({EUR:'€',USD:'$',TRY:'₺',SAR:'SAR'}[p]||p||'');}
 function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('tr-TR',{day:'2-digit',month:'short',year:'numeric'})}catch(e){return d}}
-async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify(body)});return r.json();}
+async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body)});return r.json();}
 function cur(){return document.getElementById('turSel').value||null;}
 async function islem(ad,veri){return rpc('panel_islem',{p_anahtar:key(),p_islem:ad,p_veri:veri||{}});}
 async function load(){
@@ -83,7 +84,7 @@ function render(){
   }
   document.getElementById('out').innerHTML=h;
 }
-load();
+PV.hazir.then(load);
 </script>
 </body>
 </html>

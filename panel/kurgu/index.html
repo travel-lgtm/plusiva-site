@@ -72,6 +72,7 @@ header select{padding:8px 10px;border:1px solid var(--line);border-radius:8px;fo
 </div>
 </div>
 <div class="toast" id="toast"></div>
+<script src="../oturum.js"></script>
 <script>
 var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
 var TIP={ucak:'Uçak',tren:'Tren',otobus:'Otobüs',arac:'Araç',transfer:'Transfer',park:'Park & izin',otel:'Konaklama',yemek:'Yemek',restoran:'Yemek',yerel_rehber:'Yerel rehber',rehber:'Rehber',personel:'Ekip & malzeme',sigorta:'Sigorta',anit:'Giriş',giris:'Giriş',etkinlik:'Etkinlik',aktivite:'Aktivite',diger:'Diğer'};
@@ -79,12 +80,12 @@ var KAYNAK=['tahmin','liste','teklif','kontrat'];
 var D=null, kapali={}, mod='baslik';
 var ROL={rehber:'rehber',kaptan:'kaptan',yedek_kaptan:'yedek kaptan',apranti:'aprantı',sofor:'şoför'};
 var PANS={OB:'oda-kahvaltı',HB:'yarım pansiyon',FB:'tam pansiyon',AI:'her şey dahil'};
-function key(){var u=new URLSearchParams(location.search).get('anahtar');if(u){localStorage.setItem('pv_anahtar',u);history.replaceState(null,'',location.pathname);}return localStorage.getItem('pv_anahtar')||'';}
+function key(){var u=new URLSearchParams(location.search).get('anahtar');if(u){localStorage.setItem('pv_anahtar',u);history.replaceState(null,'',location.pathname);}return (window.PV&&PV.token)?'oturum':(localStorage.getItem('pv_anahtar')||'');}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
 function para(n,p){if(n==null||n==='')return '—';return Number(n).toLocaleString('tr-TR',{maximumFractionDigits:0})+' '+({EUR:'€',USD:'$',TRY:'₺',SAR:'SAR'}[p]||p||'');}
 function tarih(d){if(!d)return '';try{return new Date(d).toLocaleDateString('tr-TR',{day:'2-digit',month:'long'})}catch(e){return d}}
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show')},2000);}
-async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify(body)});return r.json();}
+async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body)});return r.json();}
 function cur(){return document.getElementById('turSel').value||null;}
 async function islem(ad,veri){var r=await rpc('panel_islem',{p_anahtar:key(),p_islem:ad,p_veri:veri||{}});if(r&&r.hata){toast('Hata: '+r.hata);return r;}await load();return r;}
 async function load(){
@@ -139,7 +140,7 @@ async function pansiyon(id,k){var L=['OB','HB','FB','AI'];var n=L[(L.indexOf(k)+
 async function kaynak(id,k,f){var i=KAYNAK.indexOf(k);var n=KAYNAK[(i+1)%KAYNAK.length];await islem('parca_fiyat',{id:id,birim_fiyat:f,kaynak:n});}
 function tumunuAc(){var any=Object.keys(kapali).some(function(k){return kapali[k]});Object.keys(kapali).forEach(function(k){delete kapali[k]});if(!any){(D.parcalar||[]).forEach(function(p){kapali[mod==='gun'?('g'+(p.gun_no==null?'genel':String(p.gun_no))):(p.baslik_kod||'diger')]=true});}render();}
 async function ekle(){var ad=prompt('Satır adı (örn. Granada 4★ merkez otel, 2 gece):');if(!ad)return;var gun=prompt('Gün numarası (boş = tüm tur):','');var tip=prompt('Tip: otel / arac / yerel_rehber / anit / etkinlik / yemek / transfer / ucak / sigorta / diger','diger');var kb=confirm('Kişi başı mı? (İptal = grup başına)');var f=prompt('Birim fiyat:','0');var alt=prompt('Alt başlık (şehir / otel / "Ekip odaları"; boş bırakılabilir):','');var rol=(tip==='otel'||tip==='personel')?prompt('Ekip rolü (rehber / kaptan / yedek_kaptan / apranti / sofor; boş = yolcu):',''):'';await islem('parca_ekle',{tur_id:cur(),ad:ad,gun_no:gun||null,tip:tip||'diger',kisi_bazli:kb,birim_fiyat:Number(f||0),dahil:true,alt_baslik:alt||null,ekip_rolu:rol||null});}
-load();
+PV.hazir.then(load);
 </script>
 </body>
 </html>

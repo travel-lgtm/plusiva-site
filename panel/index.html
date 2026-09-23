@@ -53,11 +53,11 @@ code{background:#eef0ee;padding:2px 6px;border-radius:6px;font-size:12px}
   <div><h1>Plusiva Sistem</h1><div class="sub" id="stamp">yükleniyor…</div></div>
   <select id="turSel" onchange="load()"></select>
   <button class="btn" onclick="load()">Yenile</button>
-  <button class="btn" onclick="localStorage.removeItem('pv_anahtar');location.reload()">Çıkış</button>
+  <button class="btn" onclick="PV.cikis()">Çıkış</button>
 </header>
 <nav id="nav">
   <button data-v="ozet" class="on">Özet</button>
-  <button data-v="paket">Ön paketler</button><button onclick="location.href='kurgu/'">Tur kurgusu ↗</button><button onclick="location.href='sim/'">Simülasyon ↗</button><button onclick="location.href='kontrat/'">Kontratlar & adaylar ↗</button><button data-v="tur">Operasyon · 3 aşama</button>
+  <button data-v="paket">Ön paketler</button><button onclick="location.href='kurgu/'">Tur kurgusu ↗</button><button onclick="location.href='sim/'">Simülasyon ↗</button><button onclick="location.href='kontrat/'">Kontratlar & adaylar ↗</button><button onclick="location.href='kullanicilar/'">Kullanıcılar ↗</button><button data-v="tur">Operasyon · 3 aşama</button>
   <button data-v="alt">Alternatifler</button>
   <button data-v="fiyat">Fiyat konfigüratörü</button>
   <button data-v="dosya">Dosyalar & istisnalar</button>
@@ -139,10 +139,11 @@ code{background:#eef0ee;padding:2px 6px;border-radius:6px;font-size:12px}
 </div>
 <div class="toast" id="toast"></div>
 
+<script src="oturum.js"></script>
 <script>
 var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
 var D=null;
-function anahtar(){var u=new URLSearchParams(location.search).get('anahtar');if(u){localStorage.setItem('pv_anahtar',u);history.replaceState(null,'',location.pathname);}return localStorage.getItem('pv_anahtar')||'';}
+function anahtar(){var u=new URLSearchParams(location.search).get('anahtar');if(u){localStorage.setItem('pv_anahtar',u);history.replaceState(null,'',location.pathname);}return (window.PV&&PV.token)?'oturum':(localStorage.getItem('pv_anahtar')||'');}
 function saveKey(){localStorage.setItem('pv_anahtar',document.getElementById('keyInput').value.trim());location.reload();}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
 function para(n,p){if(n==null||n==='')return '—';return Number(n).toLocaleString('tr-TR',{maximumFractionDigits:0})+' '+({EUR:'€',USD:'$',TRY:'₺',SAR:'SAR'}[p]||p||'');}
@@ -150,7 +151,7 @@ function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('
 function zaman(d){if(!d)return '—';try{return new Date(d).toLocaleString('tr-TR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}catch(e){return d}}
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show')},2600);}
 function cur(){return document.getElementById('turSel').value||null;}
-async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify(body)});return r.json();}
+async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body)});return r.json();}
 async function load(){
   var k=anahtar();if(!k){document.getElementById('login').style.display='block';return;}
   var d=await rpc('panel_veri',{p_anahtar:k,p_tur_id:cur()});
@@ -220,7 +221,7 @@ async function parcaEkle(){var ad=prompt('Parça adı (örn. Granada 4★ merkez
 async function ata(id,fiyat){var f=prompt('Atanan birim fiyat (boş = planlanan aynen):',fiyat);if(f===null)return;var ref=prompt('Referans (rezervasyon no / PNR / plaka / kişi):','')||'';await islem('parca_ata',{id:id,birim_fiyat:f===''?null:Number(f),referans:ref});}
 async function gercek(id){var t=prompt('Gerçekleşen toplam tutar:');if(t===null||t==='')return;var n=prompt('Not (fiş no vb.):','')||'';await islem('parca_gercek',{id:id,tutar:Number(t),not:n});}
 document.getElementById('nav').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;document.querySelectorAll('#nav button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on')});document.getElementById('v-'+b.dataset.v).classList.add('on');});
-load();
+PV.hazir.then(load);
 </script>
 </body>
 </html>

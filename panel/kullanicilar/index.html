@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Kullanıcılar</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--ok:#1b5e3a;--ok2:#e8f5ec;--warn:#9a5a14;--warn2:#fff3e0}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:12px}header a{color:var(--acc);text-decoration:none;font-weight:700}
+.wrap{max-width:900px;margin:0 auto;padding:18px 20px}.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:16px}
+table{width:100%;border-collapse:collapse}th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:8px 6px;border-bottom:1px solid var(--line)}td{padding:9px 6px;border-bottom:1px solid #eef0ee}
+select{padding:7px 9px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13px;background:#fff}.small{font-size:12px;color:var(--mut)}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut)}.pill.on{background:var(--ok2);color:var(--ok)}.pill.b{background:var(--warn2);color:var(--warn)}
+</style>
+</head>
+<body>
+<header><a href="../">← Panel</a><b>Kullanıcılar ve roller</b></header>
+<div class="wrap"><div class="card">
+<p class="small">Yeni kayıt olan hesaplar "bekliyor" durumunda gelir; rol verince panel açılır. Roller: yönetici (her şey, kullanıcı yönetimi) · operasyon / satış / muhasebe / editör (düzenleme) · izleyici (yalnız görüntüleme) · pasif (kapalı).</p>
+<table id="tbl"></table>
+</div></div>
+<script src="../oturum.js"></script>
+<script>
+var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
+var ROL=['yonetici','operasyon','satis','muhasebe','editor','izleyici','bekliyor','pasif'];
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleString('tr-TR',{dateStyle:'short',timeStyle:'short'})}catch(e){return d}}
+async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body||{})});return r.json();}
+async function load(){
+  var L=await rpc('panel_kullanicilar',{p_islem:'liste',p_veri:{}});
+  if(!Array.isArray(L)){document.getElementById('tbl').innerHTML='<tr><td>'+esc((L&&L.hata)||'Yetki yok — bu sayfa yalnız yöneticiye açık.')+'</td></tr>';return;}
+  document.getElementById('tbl').innerHTML='<tr><th>Ad</th><th>E-posta</th><th>Rol</th><th>Durum</th><th>Son giriş</th><th>Kayıt</th></tr>'+L.map(function(k){return '<tr><td><b>'+esc(k.ad||'')+'</b></td><td>'+esc(k.eposta)+'</td><td><select onchange="rol(\''+k.id+'\',this.value)">'+ROL.map(function(r){return '<option value="'+r+'" '+(r===k.rol?'selected':'')+'>'+r+'</option>'}).join('')+'</select></td><td><span class="pill '+(k.aktif?'on':(k.rol==='bekliyor'?'b':''))+'">'+(k.aktif?'aktif':k.rol)+'</span></td><td class="small">'+tarih(k.son_giris)+'</td><td class="small">'+tarih(k.olusturuldu)+'</td></tr>'}).join('');
+}
+async function rol(id,r){var x=await rpc('panel_kullanicilar',{p_islem:'rol',p_veri:{id:id,rol:r}});if(x&&x.hata)alert(x.hata);load();}
+PV.hazir.then(load);
+</script>
+</body>
+</html>
