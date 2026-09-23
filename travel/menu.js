@@ -1,26 +1,25 @@
 var MENU=[
  {grp:'Genel bakış',items:[{id:'home',ad:'Genel bakış',tip:'home'}]},
  {grp:'Satış',items:[
-  {id:'talepler',ad:'Talepler (tek kuyruk)',d:'Site, WhatsApp, mail, telefon, sosyal medya, B2B — tek kuyruk. Durum: yeni → yanıtlandı → teklif → opsiyon → rezervasyon → kaybedildi. Satış YZ okur, müşteriyi eşler, ilk yanıtı taslak yazar, takip planlar.'},
-  {id:'teklifler',ad:'Teklifler',d:'Teklif kartı, sürümler, müşteri linki, kabul → dosya. Bireysel/grup anlık fiyat; okul/kurum/private/MICE simülasyonla, onaya düşer.'},
+  {id:'talepler',ad:'Talepler (tek kuyruk)',d:'Site, WhatsApp, mail, telefon, sosyal medya, B2B — tek kuyruk. Durum: yeni → yanıtlandı → teklif → opsiyon → rezervasyon → kaybedildi. Satış YZ okur, misafiri eşler, ilk yanıtı taslak yazar, takip planlar.'},
+  {id:'teklifler',ad:'Teklifler',d:'Teklif kartı, sürümler, misafir linki, kabul → dosya. Bireysel/grup anlık fiyat; okul/kurum/private/MICE simülasyonla, onaya düşer.'},
   {id:'grupteklif',ad:'Grup & kurumsal teklifler',d:'Okul (öğretmen free, veli formu), kurum/dernek, private program tasarımı, MICE, senaryo karşılaştırma (3/4/5 yıldız, otobüs/uçak).'},
   {id:'dosya',ad:'Rezervasyonlar / dosyalar',src:'../panel/islem/?embed=1&v=dosya',d:'Dosya kartı: yolcular, odalar, istisnalar, ödeme planı, belgeler, zaman çizelgesi; opsiyon → kapora → kesin; değişiklik ve iptal-iade.'},
-  {id:'musteriler',ad:'Müşteriler (CRM)',d:'Kişi/kurum kartı, zaman çizelgesi, segmentler, KVKK rıza; YZ mükerrer birleştirme ve eksik tamamlama.'},
-  {id:'b2b',ad:'B2B acenteler',d:'Acente kartı, komisyon/net fiyat, acente paneli (fiyat listesi, rezervasyon, ekstre), hakediş.'},
+  {id:'misafirler',ad:'Misafirler (misafir kartları)',d:'Kişi/kurum misafir kartı, zaman çizelgesi, segmentler, KVKK rıza; YZ mükerrer birleştirme ve eksik tamamlama.'},
+  {id:'b2b',ad:'B2B acenteler (Faz 1: MVP)',d:'Faz 1: acente net/komisyonlu fiyatı görür, talep ve isim listesi atar. Faz 2: cari ve hakediş. Acente kartı, komisyon/net fiyat, acente paneli (fiyat listesi, rezervasyon, ekstre), hakediş.'},
   {id:'b2e',ad:'B2E kurumsal programlar',d:'Kurum anlaşması, çalışanlara özel fiyat/kod, kapalı vitrin.'},
   {id:'kampanya',ad:'Kampanyalar, kuponlar, sadakat',d:'Kampanya (dönem, kapsam, indirim), kupon kodları, sadakat puanı kuralları.'}]},
  {grp:'Ürünler',items:[
   {id:'turlar',ad:'Turlar (katalog & seferler)',src:'../panel/islem/?embed=1&v=paket',d:'Ürün kartı, program (TR/EN/AR), ön paket, seferler, varyantlar (bireysel/grup/okul/kurum/private, muhafazakâr, seviye), kategoriler, yayın.'},
-  {id:'umre',ad:'Umre & helal turlar',d:'Umre programları, helal tatil, Nusuk/vize, din görevlisi, marka kararı.'},
+  {id:'umre',ad:'Umre & helal turlar',d:'Ayrı marka ve site (umre.plusiva.com, geçici). Umre programları, helal tatil, Nusuk/vize, din görevlisi, marka kararı.'},
   {id:'oteller',ad:'Oteller',d:'Otel kartları, tekil otel satış sayfaları, fiyat listeleri (sezon/oda/pansiyon/çocuk).'},
   {id:'transfer',ad:'Transferler',d:'Araç tipleri, güzergâh fiyatları, havalimanı karşılama, tek başına satış.'},
   {id:'ucak',ad:'Uçak & biletleme',d:'Grup bilet talebi, PNR, bilet kesme, iade/değişiklik; bireysel bilet kanalı.'},
   {id:'vize',ad:'Vize hizmetleri',d:'Ülke bazlı evrak listeleri, randevu takibi, dosya durumu, ücretler, evrak hatırlatma.'},
   {id:'cruise',ad:'Cruise',d:'Gemi/kabin, liman programı, ön ödeme/iptal kuralları, gemi + kara paketleri.'},
   {id:'okulturu',ad:'Doğa & okul turları',d:'Programlar, öğretmen free, veli formu, otobüs planı, güvenlik kuralları.'},
-  {id:'incoming',ad:'Incoming (DMC)',d:'MENA/Avrupa pazarı; EN/AR programlar ve fiyat listeleri; yabancı acente kontratları; private MENA.'},
+  {id:'incoming',ad:'Incoming (DMC)',d:'Faz 1 MENA (Arap) pazarı, Avrupa Faz 2; EN/AR programlar ve fiyat listeleri; yabancı acente kontratları; private MENA.'},
   {id:'mice',ad:'MICE & özel gruplar',d:'Toplantı/kongre/teşvik; salon, ekipman, gala, transfer, konaklama blokları; plusiva.org.tr işleri.'},
-  {id:'saglik',ad:'Sağlık turizmi (Faz 3)',d:'Hastane/klinik kartları, tedavi paketleri, tıbbi belge akışı.'},
   {id:'fiyatkural',ad:'Fiyatlandırma kuralları',src:'../panel/islem/?embed=1&v=fiyat',d:'Kâr/free/kademe/kur/çocuk/kanal/segment kuralları; fiyat motoru.'},
   {id:'sezon',ad:'Fiyat listeleri & sezonlar',d:'Sezon tanımları, dönem farkları, geçerlilik, toplu güncelleme.'}]},
  {grp:'Operasyon',items:[
@@ -33,8 +32,8 @@ var MENU=[
   {id:'alt',ad:'Tur maliyeti · alternatifler',src:'../panel/islem/?embed=1&v=alt'},
   {id:'teyit',ad:'Tedarikçi rezervasyonları & teyitler',d:'Rezervasyon talebi (şablon, YZ), teyit takibi, teyit yoksa uyarı, değişiklik/iptal bildirimi.'},
   {id:'ekip',ad:'Rehber & ekip planlama',d:'Havuz, uygunluk, atama önerisi, yevmiye/harcırah/avans, brifing dosyası.'},
-  {id:'biletsigorta',ad:'Biletleme & sigorta',d:'Yolcu listesinden bilet kesimi, PNR, seyahat/iptal sigortası poliçesi; belgeler müşteri paneline.'},
-  {id:'voucher',ad:'Vouchers & belgeler',d:'Voucher (link+token), müşteri/tedarikçi belgeleri, PDF şablonları (marka, dil).'},
+  {id:'biletsigorta',ad:'Biletleme & sigorta',d:'Yolcu listesinden bilet kesimi, PNR, seyahat/iptal sigortası poliçesi; belgeler misafir paneline.'},
+  {id:'voucher',ad:'Vouchers & belgeler',d:'Voucher (link+token), misafir/tedarikçi belgeleri, PDF şablonları (marka, dil).'},
   {id:'saha',ad:'Saha (tur sırasında)',d:'Ek gider (fiş fotoğrafı), olay bildirimi, şikayet, tur kapama ve harcama raporu.'},
   {id:'kriz',ad:'Kriz & acil durum',d:'Protokoller (hastalık, kayıp, kaza, iptal, afet), acil iletişim, kriz kaydı.'}]},
  {grp:'Tedarik & kontratlar',items:[
@@ -64,16 +63,16 @@ var MENU=[
   {id:'yayin',ad:'Yayın & alan adları',d:'Yayın kuyruğu, alan adı yönlendirmeleri, DNS/SSL, robots, sürüm geri alma.'}]},
  {grp:'İletişim',items:[
   {id:'gelenkutusu',ad:'Gelen kutusu (tek akış)',src:'../panel/islem/?embed=1&v=olay',d:'Mail + WhatsApp + form + DM + telefon; konuya bağlama, sınıflandırma, çıkarım, yanıt taslağı; dilinde yanıt.'},
-  {id:'sablonlar',ad:'Şablonlar',d:'Müşteri, tedarikçi, B2B, incoming şablonları; TR/EN/AR.'},
+  {id:'sablonlar',ad:'Şablonlar',d:'Misafir, tedarikçi, B2B, incoming şablonları; TR/EN/AR.'},
   {id:'bildirim',ad:'Otomatik bildirimler',d:'Tetikleyiciler (rezervasyon, ödeme, vade, T-3, uçuş, anket, doğum günü); WhatsApp/SMS/mail; günlük.'},
   {id:'telefon',ad:'Telefon & görüşme notları',d:'Arama kaydı, not, aksiyon; sesli not → metin.'},
   {id:'cikarim',ad:'Yapay zekâ çıkarımları',d:'Mesajdan çıkan veri, doğrulama, bulguyla ilişki, düzeltme.'}]},
- {grp:'Müşteri hizmetleri',items:[
-  {id:'musteripanel',ad:'Müşteri paneli',d:'Giriş (link/token/Google), dosyalarım, belgeler, ödeme, program, dil.'},
+ {grp:'Misafir ilişkileri',items:[
+  {id:'misafirpanel',ad:'Misafir paneli',d:'Giriş (link/token/Google), dosyalarım, belgeler, ödeme, program, dil.'},
   {id:'sikayet',ad:'Şikayet & talep takibi',d:'Kayıt, öncelik, çözüm süresi, tazmin/iade onayı, kök neden.'},
   {id:'anket',ad:'Anketler & yorumlar',d:'Dönüş anketi, puanlar, yorum yayın onayı, tedarikçi puanına akış.'},
-  {id:'sadakat',ad:'Sadakat',d:'Puan, kullanım, tekrar müşteri kampanyaları.'},
-  {id:'sss',ad:'SSS & bilgi bankası',d:'Yapay zekâ yanıt kaynağı; müşteri sorularının cevap havuzu.'}]},
+  {id:'sadakat',ad:'Sadakat',d:'Puan, kullanım, tekrar misafir kampanyaları.'},
+  {id:'sss',ad:'SSS & bilgi bankası',d:'Yapay zekâ yanıt kaynağı; misafir sorularının cevap havuzu.'}]},
  {grp:'İnsan kaynağı',items:[
   {id:'kadro',ad:'Kadro & rehberler',d:'Ofis, rehberler, kaptanlar, yerel rehberler, serbest; belgeler, tarife, banka, uygunluk.'},
   {id:'iktakvim',ad:'Takvim, görev, izin',d:'Uygunluk takvimi, tur atamaları, izinler.'},
@@ -90,7 +89,7 @@ var MENU=[
   {id:'kalite',ad:'Kalite puanları',d:'Sefer, tedarikçi, rehber, memnuniyet.'},
   {id:'olaygunlugu',ad:'Olay günlüğü',d:'Her değişiklik, kim/ne zaman; denetleyici kuralları ve eşikleri.'}]},
  {grp:'Yapay zekâ ekibi',items:[
-  {id:'kadroyz',ad:'Kadro kartları',d:'Satış, Rezervasyon, Operasyon, Tedarik, Muhasebe, Pazarlama, İletişim, Müşteri hizmetleri, İK, Hukuk, Denetleyici, AR-GE, Raporlama, Güvenlik, Yapıcı: görev listesi, yetki, onay sınırı.'},
+  {id:'kadroyz',ad:'Kadro kartları',d:'Satış, Rezervasyon, Operasyon, Tedarik, Muhasebe, Pazarlama, İletişim, Misafir ilişkileri, İK, Hukuk, Denetleyici, AR-GE, Raporlama, Güvenlik, Yapıcı: görev listesi, yetki, onay sınırı.'},
   {id:'gorevkuyrugu',ad:'Görev kuyruğu & onaylar',src:'../panel/islem/?embed=1&v=onay'},
   {id:'yetenekler',ad:'Yetenekler × sektör',src:'../panel/islem/?embed=1&v=kurulum'},
   {id:'tetik',ad:'Tetikleyiciler & onay kuralları',d:'Olay → görev kuralları, eşikler.'},
@@ -105,7 +104,7 @@ var MENU=[
   {id:'rsatis',ad:'Satış & doluluk',d:'Ciro, dosya, kişi; ürün/kanal/pazar/marka/segment; doluluk ve iptal.'},
   {id:'rkar',ad:'Kârlılık',d:'Sefer/ürün/sezon; plan-atanan-gerçek.'},
   {id:'rkanal',ad:'Kanal & tedarikçi performansı',d:'Kanal dönüşümü, tedarikçi fiyat/teyit/sorun.'},
-  {id:'rmusteri',ad:'Müşteri & pazarlama',d:'Tekrar oranı, memnuniyet, şikayet; trafik, dönüşüm, reklam maliyeti.'},
+  {id:'rmusteri',ad:'Misafir & pazarlama',d:'Tekrar oranı, memnuniyet, şikayet; trafik, dönüşüm, reklam maliyeti.'},
   {id:'rabonelik',ad:'Rapor abonelikleri',d:'Günlük/haftalık mail, dışa aktarım.'}]},
  {grp:'Güvenlik & veri',items:[
   {id:'yedek',ad:'Yedekler',d:'Günlük yedek, geri yükleme testi.'},
