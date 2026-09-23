@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /panel/
+Disallow: /travel/
 Sitemap: https://travel-lgtm.github.io/plusiva-site/sitemap.xml
