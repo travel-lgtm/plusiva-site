@@ -23,6 +23,7 @@ tr.grp td{background:#fafaf7;font-weight:800;border-top:2px solid var(--line)}
 .empty{color:var(--mut);font-size:13px;padding:10px 0}
 .login{max-width:400px;margin:14vh auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}.login input{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;font-family:inherit;margin:10px 0}
 .btn{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}.btn.acc{background:var(--acc);color:#fff;border-color:var(--acc)}
+body.embed header{display:none}body.embed{background:#fff}
 </style>
 </head>
 <body>
@@ -84,6 +85,7 @@ function render(){
   }
   document.getElementById('out').innerHTML=h;
 }
+if(new URLSearchParams(location.search).get('embed'))document.body.classList.add('embed');
 PV.hazir.then(load);
 </script>
 </body>

@@ -14,6 +14,7 @@ header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 20
 table{width:100%;border-collapse:collapse}th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:8px 6px;border-bottom:1px solid var(--line)}td{padding:9px 6px;border-bottom:1px solid #eef0ee}
 select{padding:7px 9px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13px;background:#fff}.small{font-size:12px;color:var(--mut)}
 .pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut)}.pill.on{background:var(--ok2);color:var(--ok)}.pill.b{background:var(--warn2);color:var(--warn)}
+body.embed header{display:none}body.embed{background:#fff}
 </style>
 </head>
 <body>
@@ -35,6 +36,7 @@ async function load(){
   document.getElementById('tbl').innerHTML='<tr><th>Ad</th><th>E-posta</th><th>Rol</th><th>Durum</th><th>Son giriş</th><th>Kayıt</th></tr>'+L.map(function(k){return '<tr><td><b>'+esc(k.ad||'')+'</b></td><td>'+esc(k.eposta)+'</td><td><select onchange="rol(\''+k.id+'\',this.value)">'+ROL.map(function(r){return '<option value="'+r+'" '+(r===k.rol?'selected':'')+'>'+r+'</option>'}).join('')+'</select></td><td><span class="pill '+(k.aktif?'on':(k.rol==='bekliyor'?'b':''))+'">'+(k.aktif?'aktif':k.rol)+'</span></td><td class="small">'+tarih(k.son_giris)+'</td><td class="small">'+tarih(k.olusturuldu)+'</td></tr>'}).join('');
 }
 async function rol(id,r){var x=await rpc('panel_kullanicilar',{p_islem:'rol',p_veri:{id:id,rol:r}});if(x&&x.hata)alert(x.hata);load();}
+if(new URLSearchParams(location.search).get('embed'))document.body.classList.add('embed');
 PV.hazir.then(load);
 </script>
 </body>

@@ -33,6 +33,7 @@ td.ind{padding-left:18px}
 .opt{margin-bottom:10px}.opt .l{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}.opt select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13.5px;font-weight:600;background:#fff}.opt .e{font-size:12px;color:var(--mut);margin-top:3px}
 .login{max-width:400px;margin:14vh auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}.login input{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;font-family:inherit;margin:10px 0}
 .btn{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}.btn.acc{background:var(--acc);color:#fff;border-color:var(--acc)}
+body.embed header{display:none}body.embed{background:#fff}
 </style>
 </head>
 <body>
@@ -145,6 +146,7 @@ function render(){
   document.getElementById('basabas').textContent='Kural: '+(G.foc_kurali||'free yok')+' · En az kişi: '+G.min_kisi;
   document.getElementById('uyari').innerHTML=(R.uyarilar||[]).map(function(u){return '<div class="warn'+(u.indexOf('geçersiz')>=0?' bad':'')+'">'+esc(u)+'</div>'}).join('')+(R.secenekler||[]).map(function(s){return '<div class="sec"><b>'+esc(s.secenek.replace('_',' '))+':</b> '+esc(s.aciklama)+'</div>'}).join('')||'<div class="small mut">Uyarı yok</div>';
 }
+if(new URLSearchParams(location.search).get('embed'))document.body.classList.add('embed');
 PV.hazir.then(init);
 </script>
 </body>

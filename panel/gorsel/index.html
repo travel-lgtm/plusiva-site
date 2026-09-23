@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Görsel kataloğu</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--warn:#9a5a14;--warn2:#fff3e0;--ok:#1b5e3a;--ok2:#e8f5ec;--bad:#8a2a2a;--bad2:#fbeaea}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}header a{color:var(--acc);text-decoration:none;font-weight:700}
+body.embed header{display:none}body.embed{background:#fff}
+.wrap{max-width:1240px;margin:0 auto;padding:18px 20px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--sur);border:1px solid var(--line);border-radius:12px;padding:14px}.kpi .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}.kpi .v{font-size:24px;font-weight:800;margin-top:4px}.kpi.w .v{color:var(--warn)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-bottom:14px}.seg button{border:0;background:#fff;padding:8px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--mut)}.seg button.on{background:var(--acc);color:#fff}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.bar select,.bar input{padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13.5px;background:#fff}.bar input{flex:1;min-width:180px}
+.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}.card h2{margin:0 0 10px;font-size:15px;font-weight:800}
+.yer{border-top:1px solid var(--line);padding:12px 0}.yer:first-child{border-top:0}.yer .b{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}.yer .b b{font-size:14.5px}.yer .m{font-size:12px;color:var(--mut)}
+.th{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.th img{width:150px;height:96px;object-fit:cover;border-radius:8px;border:1px solid var(--line);cursor:zoom-in;background:#eee}.th .bos{width:150px;height:96px;border:1px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--mut);font-size:12px}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut)}.pill.manuel{background:var(--ok2);color:var(--ok)}.pill.uretilmis{background:var(--warn2);color:var(--warn)}.pill.eksik{background:var(--bad2);color:var(--bad)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:8px 6px;border-bottom:1px solid var(--line)}td{padding:8px 6px;border-bottom:1px solid #eef0ee;vertical-align:top}.num{text-align:right}
+.small{font-size:12px}.mut{color:var(--mut)}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:999;cursor:zoom-out}#lb img{max-width:92vw;max-height:88vh;border-radius:10px}
+.login{max-width:400px;margin:14vh auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}.login input{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;font-family:inherit;margin:10px 0}
+.btn{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}.btn.acc{background:var(--acc);color:#fff;border-color:var(--acc)}
+</style>
+</head>
+<body>
+<div id="login" class="login" style="display:none"><b>Panel anahtarı</b><input id="keyInput" type="password"><button class="btn acc" onclick="localStorage.setItem('pv_anahtar',document.getElementById('keyInput').value.trim());location.reload()">Giriş</button></div>
+<div id="app" style="display:none">
+<header><a href="../">← Panel</a><b>Görsel kataloğu</b><span class="small mut">ImageKit CDN · yer bazlı · veritabanında</span></header>
+<div class="wrap">
+  <div class="kpis" id="kpis"></div>
+  <div class="seg"><button id="tY" class="on" onclick="mod='yer';render()">Yerler ve görseller</button><button id="tE" onclick="mod='eksik';render()">Eksikler</button><button id="tT" onclick="mod='tur';render()">Turlar</button></div>
+  <div id="out"></div>
+</div>
+</div>
+<div id="lb" onclick="this.style.display='none'"><img id="lbi"></div>
+<script src="../oturum.js"></script>
+<script>
+var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
+var O=null, Y=[], E=[], T=[], mod='yer', filtre={ulke:'',sehir:'',ara:'',sadece_eksik:false};
+function key(){var u=new URLSearchParams(location.search).get('anahtar');if(u){localStorage.setItem('pv_anahtar',u);history.replaceState(null,'',location.pathname);}return (window.PV&&PV.token)?'oturum':(localStorage.getItem('pv_anahtar')||'');}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('tr-TR',{day:'2-digit',month:'short',year:'numeric'})}catch(e){return d}}
+async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body||{})});return r.json();}
+async function islem(ad,veri){return rpc('panel_islem',{p_anahtar:key(),p_islem:ad,p_veri:veri||{}});}
+function buyut(u){document.getElementById('lbi').src=u;document.getElementById('lb').style.display='flex';}
+function img(yol,w,h){return O.cdn+yol+'?tr=w-'+w+',h-'+h+',fo-auto';}
+async function load(){
+  var k=key();if(!k){document.getElementById('login').style.display='block';return;}
+  O=await islem('gorsel_ozet');if(!O||O.hata){localStorage.removeItem('pv_anahtar');document.getElementById('login').style.display='block';return;}
+  var r=await Promise.all([islem('gorsel_yerler',{limit:400}),islem('gorsel_eksikler'),islem('gorsel_turlar')]);Y=r[0]||[];E=r[1]||[];T=r[2]||[];
+  document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';render();
+}
+async function yerYukle(){Y=await islem('gorsel_yerler',{ulke:filtre.ulke,sehir:filtre.sehir,ara:filtre.ara,sadece_eksik:filtre.sadece_eksik,limit:400})||[];render();}
+function render(){
+  document.getElementById('tY').className=mod==='yer'?'on':'';document.getElementById('tE').className=mod==='eksik'?'on':'';document.getElementById('tT').className=mod==='tur'?'on':'';
+  document.getElementById('kpis').innerHTML='<div class="kpi"><div class="k">Yer</div><div class="v">'+O.yer+'</div><div class="small mut">'+O.benzersiz_yer+' benzersiz</div></div><div class="kpi"><div class="k">Görsel</div><div class="v">'+O.gorsel+'</div></div><div class="kpi w"><div class="k">Eksik</div><div class="v">'+O.eksik+'</div></div><div class="kpi"><div class="k">Tur</div><div class="v">'+O.tur+'</div></div><div class="kpi"><div class="k">Ev stili</div><div class="small" style="margin-top:6px">'+esc(O.stil)+'</div></div>';
+  var h='';
+  if(mod==='yer'){
+    var ulkeler=(O.ulkeler||[]).map(function(u){return u.ulke});
+    var sehirler=[];Y.forEach(function(y){if(y.sehir&&sehirler.indexOf(y.sehir)<0)sehirler.push(y.sehir)});sehirler.sort(function(a,b){return a.localeCompare(b,'tr')});
+    h+='<div class="bar"><select onchange="filtre.ulke=this.value;filtre.sehir=\'\';yerYukle()"><option value="">Tüm ülkeler</option>'+ulkeler.map(function(u){return '<option '+(u===filtre.ulke?'selected':'')+'>'+esc(u)+'</option>'}).join('')+'</select><select onchange="filtre.sehir=this.value;yerYukle()"><option value="">Tüm şehirler</option>'+sehirler.map(function(s){return '<option '+(s===filtre.sehir?'selected':'')+'>'+esc(s)+'</option>'}).join('')+'</select><input placeholder="ara: elhamra, madrid…" value="'+esc(filtre.ara)+'" onchange="filtre.ara=this.value;yerYukle()"><label class="small" style="display:flex;align-items:center;gap:6px"><input type="checkbox" '+(filtre.sadece_eksik?'checked':'')+' onchange="filtre.sadece_eksik=this.checked;yerYukle()" style="width:auto;flex:none">yalnız görselsiz</label></div>';
+    h+='<div class="card"><div class="small mut" style="margin-bottom:6px">'+Y.length+' yer</div>'+Y.map(function(y){
+      var g=y.gorseller||[];
+      return '<div class="yer"><div class="b"><div><b>'+esc(y.ad||y.baslik||y.anahtar)+'</b> <span class="pill">'+esc(y.tip)+'</span>'+(y.video?' <span class="pill">🎬 video</span>':'')+'<div class="m">'+esc([y.ulke,y.sehir].filter(Boolean).join(' · '))+(y.baslik&&y.baslik!==y.ad?' · '+esc(y.baslik):'')+' · <span class="mut">'+esc(y.anahtar)+'</span></div></div><div class="small mut">'+g.length+' görsel</div></div><div class="th">'+(g.length?g.map(function(x){return '<div><img loading="lazy" src="'+img(x.yol,150,96)+'" onclick="buyut(\''+O.cdn+x.yol+'?tr=w-1600\')" title="'+esc(x.yol)+'"><div class="small"><span class="pill '+esc(x.kaynak)+'">'+esc(x.kaynak)+'</span></div></div>'}).join(''):'<div class="bos">görsel yok</div>')+'</div></div>'}).join('')+'</div>';
+  } else if(mod==='eksik'){
+    h+='<div class="card"><h2>Eksik görseller <span class="small mut">— sayfalar ziyaret edildikçe bildirilen + havuzda görseli olmayan yerler</span></h2>'+(E.length?'<table><tr><th>Yer</th><th>Anahtar</th><th class="num">Bildirim</th><th>Turlar</th><th>Durum</th><th>Son</th></tr>'+E.map(function(e){return '<tr><td><b>'+esc(e.baslik||'')+'</b>'+(e.ornek_url?'<div class="small"><a href="'+esc(e.ornek_url)+'" target="_blank" class="mut">sayfa ↗</a></div>':'')+'</td><td class="small mut">'+esc(e.anahtar)+'</td><td class="num">'+e.sayi+'</td><td class="small">'+esc((e.turlar||[]).join(', '))+'</td><td><span class="pill '+(e.durum==='bekliyor'?'eksik':'')+'">'+esc(e.durum)+'</span></td><td class="small mut">'+tarih(e.son)+'</td></tr>'}).join('')+'</table>':'<div class="small mut">Eksik yok.</div>')+'<p class="small mut" style="margin:12px 0 0">Sıradaki adım: bu liste yapay zekâ görev kuyruğuna bağlanacak (kaynak bul → ev stiliyle düzenle → ImageKit\'e yükle → onay ızgarası).</p></div>';
+  } else {
+    h+='<div class="card"><h2>Turlar ve görsel seçimleri <span class="small mut">— eski sistemden taşınan tur bağlantıları</span></h2><table><tr><th>Tur</th><th>Tarih</th><th class="num">Yer</th><th class="num">Görselsiz yer</th><th>Vitrin</th><th>Sayfa</th></tr>'+T.map(function(t){return '<tr><td><b>'+esc(t.ad)+'</b><div class="small mut">'+esc(t.anahtar)+'</div></td><td class="small">'+esc(t.tarih||'—')+'</td><td class="num">'+t.yer_sayisi+'</td><td class="num" style="'+(t.eksik>0?'color:var(--bad)':'')+'">'+t.eksik+'</td><td class="small mut">'+esc(t.vitrin||'—')+'</td><td class="small">'+(t.url&&t.url.indexOf('http')===0?'<a href="'+esc(t.url)+'" target="_blank">aç ↗</a>':'—')+'</td></tr>'}).join('')+'</table></div>';
+  }
+  document.getElementById('out').innerHTML=h;
+}
+if(new URLSearchParams(location.search).get('embed'))document.body.classList.add('embed');
+PV.hazir.then(load);
+</script>
+</body>
+</html>

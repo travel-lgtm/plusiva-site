@@ -4,223 +4,118 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Plusiva Sistem · Yönetim</title>
+<title>Plusiva Sistem</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f5f2;--sur:#fff;--ink:#17201d;--mut:#66736e;--line:#dfe3df;--acc:#0f5c5a;--acc2:#e3ecea;--warn:#9a3c14;--warn2:#fbe9e0;--ok:#1b5e3a;--ok2:#e6f6ec;--bad:#8a2a2a;--bad2:#fbeaea;--info:#1e3a5f;--info2:#e8eef8}
-*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
-header{position:sticky;top:0;z-index:5;background:var(--sur);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:10px 20px;flex-wrap:wrap}
-header h1{margin:0;font-size:17px;font-weight:800;color:var(--acc)}header .sub{color:var(--mut);font-size:12px}
-header select{margin-left:auto;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13px;background:#fff}
-nav{display:flex;gap:4px;padding:8px 20px 0;overflow-x:auto;background:var(--sur);border-bottom:1px solid var(--line)}
-nav button{border:0;background:transparent;padding:10px 12px;font-family:inherit;font-weight:700;color:var(--mut);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
-nav button.on{color:var(--acc);border-color:var(--acc)}
-main{padding:18px 20px 60px;max-width:1400px;margin:0 auto}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px}
-.kpi{background:var(--sur);border:1px solid var(--line);border-radius:12px;padding:14px}.kpi .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}.kpi .v{font-size:26px;font-weight:800;margin-top:4px}.kpi .s{font-size:12px;color:var(--mut)}
-.card{background:var(--sur);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
-.card h2{margin:0 0 10px;font-size:15px;font-weight:800}.card p.desc{margin:0 0 12px;color:var(--mut);font-size:13px}
-table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:8px 8px;border-bottom:1px solid var(--line);white-space:nowrap}td{padding:9px 8px;border-bottom:1px solid #eef0ee;vertical-align:middle}tr:hover td{background:#fafbf9}
-.tw{overflow-x:auto}.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.pill{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap}
-.p-acc{background:var(--acc2);color:var(--acc)}.p-warn{background:var(--warn2);color:var(--warn)}.p-ok{background:var(--ok2);color:var(--ok)}.p-bad{background:var(--bad2);color:var(--bad)}.p-info{background:var(--info2);color:var(--info)}.p-mut{background:#eceeec;color:var(--mut)}
-.btn{border:1px solid var(--line);background:#fff;padding:7px 11px;border-radius:8px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;color:var(--ink)}
-.btn.acc{background:var(--acc);color:#fff;border-color:var(--acc)}.btn.ok{color:var(--ok);border-color:var(--ok)}.btn.bad{color:var(--bad);border-color:var(--bad)}.btn.sm{padding:4px 8px;font-size:12px}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:900px){.grid2{grid-template-columns:1fr}}
-label.f{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mut);font-weight:700}label.f input,label.f select{padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13px;min-width:120px}
-.chk{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600}
-.big{font-size:32px;font-weight:800;color:var(--acc)}.mut{color:var(--mut)}.small{font-size:12px}
-.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;opacity:0;transition:.2s;pointer-events:none;z-index:9}.toast.show{opacity:1}
-.login{max-width:420px;margin:12vh auto;background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:28px}
-.login input{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:14px;margin:10px 0}
-.view{display:none}.view.on{display:block}
-.warnbox{background:var(--warn2);color:var(--warn);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:10px}
-.okbox{background:var(--ok2);color:var(--ok);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:10px}
-code{background:#eef0ee;padding:2px 6px;border-radius:6px;font-size:12px}
+:root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--warn:#9a5a14;--warn2:#fff3e0;--ok:#1b5e3a;--ok2:#e8f5ec;--bad:#8a2a2a;--bad2:#fbeaea;--side:#111816}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;display:flex}
+aside{width:248px;flex:none;background:var(--side);color:#cfd6d3;display:flex;flex-direction:column;height:100vh;position:sticky;top:0}
+.logo{padding:18px 18px 12px;color:#fff;font-weight:800;font-size:17px;letter-spacing:.02em}.logo span{color:#8fd3c8}
+.menu{overflow:auto;flex:1;padding:4px 10px 16px}
+.grp{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#7d8985;padding:14px 10px 6px}
+.it{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:8px;cursor:pointer;color:#d7ddda;font-weight:600;font-size:13.5px}
+.it:hover{background:#1d2622}.it.on{background:var(--acc);color:#fff}.it.soon{color:#6f7975;cursor:default}.it.soon:hover{background:none}
+.it .tag{font-size:10px;font-weight:800;padding:2px 6px;border-radius:999px;background:#26312d;color:#9aa8a3}.it.on .tag{background:rgba(255,255,255,.2);color:#fff}
+.side-foot{padding:12px 18px;border-top:1px solid #23302b;font-size:12px;color:#7d8985}
+main{flex:1;min-width:0;display:flex;flex-direction:column;height:100vh}
+.top{background:var(--sur);border-bottom:1px solid var(--line);padding:10px 20px;display:flex;align-items:center;gap:12px;min-height:52px}
+.top h1{margin:0;font-size:16px;font-weight:800}.top .crumb{color:var(--mut);font-size:13px}.top .sp{flex:1}
+.top select{padding:7px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13px;background:#fff}
+.btn{border:1px solid var(--line);background:#fff;padding:7px 11px;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.content{flex:1;min-height:0;position:relative}
+iframe{width:100%;height:100%;border:0;background:#fff;display:none}iframe.on{display:block}
+#home{position:absolute;inset:0;overflow:auto;padding:20px;display:none}#home.on{display:block}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--sur);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer}.kpi:hover{border-color:var(--acc)}.kpi .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}.kpi .v{font-size:26px;font-weight:800;margin-top:4px}.kpi .s{font-size:12px;color:var(--mut)}.kpi.w .v{color:var(--warn)}.kpi.b .v{color:var(--bad)}.kpi.acc .v{color:var(--acc)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:1000px){.grid{grid-template-columns:1fr}aside{width:200px}}
+.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:16px}.card h2{margin:0 0 10px;font-size:15px;font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:8px 6px;border-bottom:1px solid var(--line)}td{padding:8px 6px;border-bottom:1px solid #eef0ee}.num{text-align:right;white-space:nowrap}
+.small{font-size:12px}.mut{color:var(--mut)}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut)}.pill.ok{background:var(--ok2);color:var(--ok)}.pill.w{background:var(--warn2);color:var(--warn)}.pill.b{background:var(--bad2);color:var(--bad)}
+.prog{height:8px;background:#eeeeea;border-radius:999px;overflow:hidden;margin-top:8px}.prog i{display:block;height:100%;background:var(--acc)}
+.soonbox{padding:40px;text-align:center;color:var(--mut)}
+.login{max-width:400px;margin:14vh auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}.login input{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;font-family:inherit;margin:10px 0}
 </style>
 </head>
 <body>
-<div id="login" class="login" style="display:none">
-  <h1 style="margin:0 0 4px;color:var(--acc);font-size:20px">Plusiva Sistem · Yönetim</h1>
-  <div class="mut small">Panel anahtarınızı girin (Yapıcı verdi; ayarlar.panel_anahtari)</div>
-  <input id="keyInput" type="password" placeholder="anahtar">
-  <button class="btn acc" onclick="saveKey()">Giriş</button>
-  <div id="loginErr" class="warnbox" style="display:none;margin-top:10px"></div>
-</div>
-
-<div id="app" style="display:none">
-<header>
-  <div><h1>Plusiva Sistem</h1><div class="sub" id="stamp">yükleniyor…</div></div>
-  <select id="turSel" onchange="load()"></select>
-  <button class="btn" onclick="load()">Yenile</button>
-  <button class="btn" onclick="PV.cikis()">Çıkış</button>
-</header>
-<nav id="nav">
-  <button data-v="ozet" class="on">Özet</button>
-  <button data-v="paket">Ön paketler</button><button onclick="location.href='kurgu/'">Tur kurgusu ↗</button><button onclick="location.href='sim/'">Simülasyon ↗</button><button onclick="location.href='kontrat/'">Kontratlar & adaylar ↗</button><button onclick="location.href='kullanicilar/'">Kullanıcılar ↗</button><button data-v="tur">Operasyon · 3 aşama</button>
-  <button data-v="alt">Alternatifler</button>
-  <button data-v="fiyat">Fiyat konfigüratörü</button>
-  <button data-v="dosya">Dosyalar & istisnalar</button>
-  <button data-v="onay">Onay kuyruğu</button>
-  <button data-v="bulgu">Bulgular</button>
-  <button data-v="cari">Cari</button>
-  <button data-v="olay">Olaylar</button>
-  <button data-v="kurulum">Kurulum & yetenekler</button>
-</nav>
+<aside>
+  <div class="logo">PLUSIVA <span>Sistem</span></div>
+  <nav class="menu" id="menu"></nav>
+  <div class="side-foot" id="foot">Yapıcı ile kurulan sistem · Cevahir Kılıç</div>
+</aside>
 <main>
-  <div class="kpis" id="kpis"></div>
-
-  <section class="view on" id="v-ozet">
-    <div class="grid2">
-      <div class="card"><h2>Vitrinler</h2><p class="desc">Tur tek kayıt, vitrin çok. Etiketler eşleşince tur o vitrinde çıkar.</p><div class="tw"><table id="vitrinTbl"></table></div></div>
-      <div class="card"><h2>Hedef vs gerçekleşen</h2><p class="desc">Planlanan → atanan → gerçekleşen. Tur bitmeden de çalışır.</p><div id="hg"></div></div>
-    </div>
-    <div class="card"><h2>Son yayınlar</h2><div class="row" style="margin-bottom:8px"><button class="btn acc" onclick="islem('yayinla',{})">Siteyi yayınla</button><span class="mut small">GitHub Pages'e tek commit; sonuç yayınlar tablosuna düşer.</span></div><div class="tw"><table id="yayinTbl"></table></div></div>
-  </section>
-
-  <section class="view" id="v-paket"><div class="card"><h2>Ön paketler (tur şablonları)</h2><p class="desc">Siz paketi tanımlarsınız; yeni tur paketten kurulur, parçalar paketten gelir, tedarikçiler fiyat listesinden atanır. İlk paket END-2027-03'ten türetildi; END-2027-11 bu paketten kuruldu.</p><div id="paketler"></div></div></section>
-  <section class="view" id="v-tur">
-    <div class="card">
-      <h2 id="turBaslik">Tur</h2>
-      <p class="desc">Her parça üç aşamada: planlanan (fiyat listesinden varsayılan), atanan (operasyon öncesi gerçek tedarikçi), gerçekleşen (tur dönüşü fiş). Uyumsuzluk kendiliğinden etiketlenir.</p>
-      
-      <div id="kurguOzet" style="margin-bottom:14px"></div><div id="parcaGrup"></div>
-    </div>
-  </section>
-
-  <section class="view" id="v-alt">
-    <div class="card"><h2>Alternatif karşılaştırma</h2><p class="desc">Skor = fiyat avantajı × ağırlık + memnuniyet puanı × (1−ağırlık). Ağırlık vitrine göre değişir (sessiz lüks: puan ağır basar).</p><div class="tw"><table id="altTbl"></table></div></div>
-  </section>
-
-  <section class="view" id="v-fiyat">
-    <div class="card">
-      <h2>Grup fiyat konfigüratörü</h2><p class="desc">"Bu turu grubuma özel yap" — sitede misafirin göreceği motorun aynısı. Sonuç bağlayıcı değildir; teklif olarak kaydedilir ve sizin onayınızla kesinleşir.</p>
-      <div class="row">
-        <label class="f">Kişi<input id="fKisi" type="number" value="30" min="1"></label>
-        <label class="f">Grup tipi<select id="fGrup"><option value="genel">Genel</option><option value="okul">Okul</option><option value="universite">Üniversite</option><option value="kurumsal">Kurumsal</option><option value="private">Private</option><option value="dernek">Dernek</option></select></label>
-        <label class="chk"><input id="fUcak" type="checkbox" checked> Uçak dahil</label>
-        <label class="chk"><input id="fYemek" type="checkbox" checked> Yemekler</label>
-        <label class="chk"><input id="fEtk" type="checkbox" checked> Etkinlik</label>
-        <label class="chk"><input id="fAnit" type="checkbox" checked> Anıt paketi</label>
-        <button class="btn acc" onclick="hesapla()">Hesapla</button>
-      </div>
-      <div id="fSonuc" style="margin-top:14px"></div>
-    </div>
-  </section>
-
-  <section class="view" id="v-dosya">
-    <div class="card"><h2>Dosyalar</h2><div class="tw"><table id="dosyaTbl"></table></div><div id="dosyaFiyat" style="margin-top:10px"></div></div>
-    <div class="card"><h2>Yolcu bazlı istisnalar</h2><p class="desc">Müze kartı, kendi uçağı, tek kişi oda gibi durumlar kuraldan otomatik doğar; para etkisi olduğu için onayınıza düşer.</p><div class="tw"><table id="istTbl"></table></div></div>
-  </section>
-
-  <section class="view" id="v-onay">
-    <div class="card"><h2>Görev ve onay kuyruğu</h2><p class="desc">Yapay zekâ ve denetleyici görev açar; para geçen olanlar onay ister.</p><div class="tw"><table id="gorevTbl"></table></div></div>
-  </section>
-
-  <section class="view" id="v-bulgu">
-    <div class="card"><h2>Açık uyumsuzluk bulguları</h2><p class="desc">Tedarikçi mesajlarından çıkan fiyat/tarih/kişi bilgileri planla karşılaştırılır; tutmayan her şey burada.</p><div class="tw"><table id="bulguTbl"></table></div></div>
-  </section>
-
-  <section class="view" id="v-cari">
-    <div class="card"><h2>Tedarikçi cari</h2><p class="desc">Borç = parçalar (gerçekleşen › atanan › planlanan); ödenen = hakedişten; kalan; gelen fatura.</p><div class="tw"><table id="cariTbl"></table></div></div>
-  </section>
-
-  <section class="view" id="v-olay">
-    <div class="card"><h2>Olay akışı (son 30)</h2><p class="desc">Mail, WhatsApp, site formu, panel işlemi — hepsi tek akış.</p><div class="tw"><table id="olayTbl"></table></div></div>
-  </section>
-
-  <section class="view" id="v-kurulum">
-    <div class="grid2">
-      <div class="card"><h2>Kurulum listesi</h2><div class="tw"><table id="kurTbl"></table></div></div>
-      <div class="card"><h2>Yetenekler (yapay zekâ ekibi)</h2><div class="tw"><table id="yetTbl"></table></div></div>
-    </div>
-  </section>
+  <div class="top"><h1 id="baslik">Genel bakış</h1><span class="crumb" id="crumb"></span><span class="sp"></span><select id="turSel" onchange="turDegisti()"></select><button class="btn" onclick="yenile()">Yenile</button><button class="btn" onclick="PV.cikis()">Çıkış</button></div>
+  <div class="content">
+    <div id="home" class="on"></div>
+    <iframe id="fr" name="fr"></iframe>
+  </div>
 </main>
-</div>
-<div class="toast" id="toast"></div>
-
 <script src="oturum.js"></script>
 <script>
 var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
-var D=null;
-function anahtar(){var u=new URLSearchParams(location.search).get('anahtar');if(u){localStorage.setItem('pv_anahtar',u);history.replaceState(null,'',location.pathname);}return (window.PV&&PV.token)?'oturum':(localStorage.getItem('pv_anahtar')||'');}
-function saveKey(){localStorage.setItem('pv_anahtar',document.getElementById('keyInput').value.trim());location.reload();}
+var D=null, G=null, K=[], cur='home';
+var MENU=[
+ {grp:'Genel', items:[{id:'home',ad:'Genel bakış'}]},
+ {grp:'Satış & rezervasyon', items:[{id:'dosya',ad:'Dosyalar & istisnalar',src:'islem/?embed=1&v=dosya'},{id:'onay',ad:'Onay kuyruğu',src:'islem/?embed=1&v=onay'},{id:'teklif',ad:'Teklifler',soon:1},{id:'musteri',ad:'Müşteriler',soon:1}]},
+ {grp:'Ürünler & turlar', items:[{id:'paket',ad:'Ön paketler (ürünler)',src:'islem/?embed=1&v=paket'},{id:'fiyat',ad:'Fiyat konfigüratörü',src:'islem/?embed=1&v=fiyat'},{id:'vitrin',ad:'Vitrinler & site',soon:1}]},
+ {grp:'Operasyon', items:[{id:'kurgu',ad:'Tur kurgusu',src:'kurgu/?embed=1'},{id:'tur',ad:'3 aşama · plan / atanan / gerçek',src:'islem/?embed=1&v=tur'},{id:'alt',ad:'Alternatifler',src:'islem/?embed=1&v=alt'},{id:'sim',ad:'Simülasyon',src:'sim/?embed=1'},{id:'kontrat',ad:'Kontratlar & adaylar',src:'kontrat/?embed=1'}]},
+ {grp:'Görseller & içerik', items:[{id:'gorsel',ad:'Görsel kataloğu',src:'gorsel/?embed=1'},{id:'icerik',ad:'Tur sayfaları & yayın',soon:1}]},
+ {grp:'Muhasebe & finans', items:[{id:'cari',ad:'Cari',src:'islem/?embed=1&v=cari'},{id:'odeme',ad:'Ödemeler & faturalar',soon:1},{id:'rapor',ad:'Kâr-zarar raporu',soon:1}]},
+ {grp:'İletişim', items:[{id:'olay',ad:'Olaylar (mail / WhatsApp)',src:'islem/?embed=1&v=olay'},{id:'yazisma',ad:'Tedarikçi yazışmaları',soon:1}]},
+ {grp:'Denetim', items:[{id:'bulgu',ad:'Bulgular',src:'islem/?embed=1&v=bulgu'}]},
+ {grp:'Yönetim', items:[{id:'kullanicilar',ad:'Kullanıcılar & roller',src:'kullanicilar/?embed=1'},{id:'kurulum',ad:'Kurulum & yetenekler',src:'islem/?embed=1&v=kurulum'},{id:'ayar',ad:'Ayarlar',soon:1}]}
+];
+function key(){return (window.PV&&PV.token)?'oturum':(localStorage.getItem('pv_anahtar')||'');}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
-function para(n,p){if(n==null||n==='')return '—';return Number(n).toLocaleString('tr-TR',{maximumFractionDigits:0})+' '+({EUR:'€',USD:'$',TRY:'₺',SAR:'SAR'}[p]||p||'');}
-function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('tr-TR')}catch(e){return d}}
-function zaman(d){if(!d)return '—';try{return new Date(d).toLocaleString('tr-TR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}catch(e){return d}}
-function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show')},2600);}
-function cur(){return document.getElementById('turSel').value||null;}
-async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body)});return r.json();}
+function para(n,p){if(n==null||n==='')return '—';return Number(n).toLocaleString('tr-TR',{maximumFractionDigits:0})+' '+({EUR:'€',USD:'$',TRY:'₺'}[p]||p||'');}
+function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('tr-TR',{day:'2-digit',month:'short'})}catch(e){return d}}
+async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body||{})});return r.json();}
+async function islem(ad,veri){return rpc('panel_islem',{p_anahtar:key(),p_islem:ad,p_veri:veri||{}});}
+function cur_tur(){return document.getElementById('turSel').value||null;}
+function menuCiz(){
+  document.getElementById('menu').innerHTML=MENU.map(function(g){return '<div class="grp">'+esc(g.grp)+'</div>'+g.items.map(function(i){return '<div class="it'+(i.id===cur?' on':'')+(i.soon?' soon':'')+'" '+(i.soon?'':'onclick="git(\''+i.id+'\')"')+'><span>'+esc(i.ad)+'</span>'+(i.soon?'<span class="tag">yakında</span>':'')+'</div>'}).join('')}).join('');
+}
+function bul(id){for(var g of MENU){for(var i of g.items){if(i.id===id)return i;}}return null;}
+function git(id){
+  var i=bul(id);if(!i||i.soon)return;cur=id;menuCiz();
+  document.getElementById('baslik').textContent=i.ad;
+  var fr=document.getElementById('fr'),home=document.getElementById('home');
+  if(id==='home'){fr.classList.remove('on');home.classList.add('on');homeCiz();}
+  else{home.classList.remove('on');fr.classList.add('on');var src=i.src+(cur_tur()?'&tur='+cur_tur():'');if(fr.getAttribute('data-src')!==src){fr.src=src;fr.setAttribute('data-src',src);}}
+  try{history.replaceState(null,'','#'+id);}catch(e){}
+}
+function turDegisti(){var fr=document.getElementById('fr');fr.removeAttribute('data-src');if(cur!=='home')git(cur);else homeCiz();}
+async function yenile(){D=await rpc('panel_veri',{p_anahtar:key(),p_tur_id:cur_tur()});G=await islem('gorsel_ozet');K=await islem('kontratlar');if(cur==='home')homeCiz();else{var fr=document.getElementById('fr');fr.removeAttribute('data-src');git(cur);}}
 async function load(){
-  var k=anahtar();if(!k){document.getElementById('login').style.display='block';return;}
-  var d=await rpc('panel_veri',{p_anahtar:k,p_tur_id:cur()});
-  if(!d||d.hata){document.getElementById('login').style.display='block';document.getElementById('app').style.display='none';var e=document.getElementById('loginErr');e.style.display='block';e.textContent='Anahtar kabul edilmedi.';localStorage.removeItem('pv_anahtar');return;}
-  D=d;try{D.paketler=await rpc('panel_paketler',{p_anahtar:k});}catch(e){D.paketler=[];}try{D.kurgu=await rpc('panel_islem',{p_anahtar:k,p_islem:'kurgu_ozeti',p_veri:{tur_id:(D.tur||{}).id,kisi:(document.getElementById('kKisi')||{}).value||null}});}catch(e){D.kurgu={};}document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';render();
+  D=await rpc('panel_veri',{p_anahtar:key(),p_tur_id:null});
+  if(!D||D.hata){document.body.innerHTML='<div class="login"><b>Giriş gerekli</b><p class="small mut">Bu hesap panele yetkili değil ya da oturum yok.</p><button class="btn" onclick="PV.cikis()">Çıkış</button></div>';return;}
+  var sel=document.getElementById('turSel');sel.innerHTML=(D.turlar||[]).map(function(t){return '<option value="'+t.id+'">'+esc(t.kod+' · '+t.ad)+'</option>'}).join('');if(D.tur)sel.value=D.tur.id;
+  G=await islem('gorsel_ozet');K=await islem('kontratlar');
+  document.getElementById('foot').innerHTML=(PV.ben&&PV.ben.eposta?'<b style="color:#cfd6d3">'+esc(PV.ben.ad||PV.ben.eposta)+'</b> · '+esc(PV.ben.rol)+'<br>':'')+'Yapıcı ile kurulan sistem · Cevahir Kılıç';
+  var h=(location.hash||'#home').slice(1);menuCiz();git(bul(h)&&!bul(h).soon?h:'home');
 }
-async function islem(ad,veri){var r=await rpc('panel_islem',{p_anahtar:anahtar(),p_islem:ad,p_veri:veri||{}});if(r&&r.hata){toast('Hata: '+r.hata);return r;}toast(ad+' tamam');await load();return r;}
-function pill(t,c){return '<span class="pill '+(c||'p-mut')+'">'+esc(t)+'</span>';}
-function durumPill(d){var m={satista:'p-ok',taslak:'p-mut',talep:'p-info',teklif:'p-info',opsiyon:'p-warn',kesin:'p-ok',bekliyor:'p-warn',yapiliyor:'p-info',bitti:'p-ok',onaylandi:'p-ok',reddedildi:'p-bad',planlandi:'p-mut',atandi:'p-info',teyitli:'p-ok',gerceklesti:'p-acc',onay_bekliyor:'p-warn',kritik:'p-bad',yuksek:'p-warn',orta:'p-info',dusuk:'p-mut',aktif:'p-ok',planli:'p-mut',kuruluyor:'p-info'};return pill(d,m[d]||'p-mut');}
-var TIP={ucak:'Uçak',tren:'Tren',otobus:'Otobüs / araç',arac:'Araç',transfer:'Transfer',park:'Park & izinler',otel:'Konaklama',yemek:'Yemek',restoran:'Restoran',yerel_rehber:'Yerel rehber',rehber:'Rehber',personel:'Personel & ekip',sigorta:'Sigorta',anit:'Müze & anıt girişleri',giris:'Girişler',etkinlik:'Etkinlik',aktivite:'Aktivite',diger:'Diğer'};
-var TIPSIRA=['ucak','tren','otobus','arac','transfer','park','otel','yemek','restoran','yerel_rehber','rehber','personel','sigorta','anit','giris','etkinlik','aktivite','diger'];
-function gunluGrup(items,program,rowFn,head){
-  var g={};(items||[]).forEach(function(p){var k=p.gun_no==null?'genel':String(p.gun_no);(g[k]=g[k]||[]).push(p)});
-  var keys=Object.keys(g).sort(function(a,b){return (a==='genel'?0:Number(a))-(b==='genel'?0:Number(b))});
-  return keys.map(function(k){
-    var baslik, alt='';
-    if(k==='genel'){baslik='Tüm tur · genel giderler';alt='uçak, otobüs, ekip, sigorta gibi güne bağlı olmayan kalemler';}
-    else{var pr=(program||[]).filter(function(x){return String(x.gun_no)===k})[0];baslik=k+'. Gün'+(pr?' · '+tarih(pr.tarih)+' · '+esc(pr.baslik||pr.sehir||''):'');alt=pr&&pr.sehir?esc(pr.sehir):'';}
-    var byTip={};g[k].forEach(function(p){(byTip[p.parca_tipi]=byTip[p.parca_tipi]||[]).push(p)});
-    var tips=Object.keys(byTip).sort(function(a,b){return (TIPSIRA.indexOf(a)<0?99:TIPSIRA.indexOf(a))-(TIPSIRA.indexOf(b)<0?99:TIPSIRA.indexOf(b))});
-    return '<div class="card" style="margin-bottom:12px"><h2 style="margin-bottom:2px">'+baslik+'</h2><div class="small mut" style="margin-bottom:10px">'+alt+' · '+g[k].length+' parça</div>'+tips.map(function(t){return '<div style="margin:10px 0 4px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--acc)">'+esc(TIP[t]||t)+'</div><div class="tw"><table>'+head+byTip[t].map(rowFn).join('')+'</table></div>'}).join('')+'</div>';
-  }).join('')||'<div class="mut">Parça yok</div>';
+function homeCiz(){
+  var o=D.ozet||{},t=D.tur||{},pb=t.para_birimi||'EUR';
+  var gorev=(D.gorevler||[]).slice(0,8),dosyalar=(D.dosyalar||[]).slice(0,8),bulgular=(D.bulgular||[]).slice(0,6),yayin=(D.yayinlar||[])[0];
+  var kur=(D.kurulum||[]);var kurBitti=o.kurulum_bitti||0,kurTop=o.kurulum_toplam||1;
+  var soon=[];MENU.forEach(function(g){g.items.forEach(function(i){if(i.soon)soon.push(g.grp+' → '+i.ad)})});
+  var h='<div class="kpis">'
+   +'<div class="kpi acc" onclick="git(\'paket\')"><div class="k">Turlar</div><div class="v">'+(o.tur_sayisi||0)+'</div><div class="s">'+(o.satistaki_tur||0)+' satışta</div></div>'
+   +'<div class="kpi" onclick="git(\'dosya\')"><div class="k">Açık dosya</div><div class="v">'+(o.acik_dosya||0)+'</div><div class="s">rezervasyon dosyası</div></div>'
+   +'<div class="kpi w" onclick="git(\'onay\')"><div class="k">Onay bekleyen</div><div class="v">'+((o.onay_bekleyen_gorev||0)+(o.onay_bekleyen_istisna||0))+'</div><div class="s">'+(o.onay_bekleyen_gorev||0)+' görev · '+(o.onay_bekleyen_istisna||0)+' istisna</div></div>'
+   +'<div class="kpi b" onclick="git(\'bulgu\')"><div class="k">Açık bulgu</div><div class="v">'+(o.acik_bulgu||0)+'</div><div class="s">denetleyici</div></div>'
+   +'<div class="kpi" onclick="git(\'cari\')"><div class="k">Tedarikçi borcu</div><div class="v">'+para((o.tedarikci_borc||{}).EUR,'EUR')+'</div><div class="s">planlanan maliyet toplamı</div></div>'
+   +'<div class="kpi w" onclick="git(\'gorsel\')"><div class="k">Eksik görsel</div><div class="v">'+(G&&G.eksik!=null?G.eksik:'—')+'</div><div class="s">'+(G?G.gorsel+' görsel · '+G.yer+' yer':'')+'</div></div>'
+   +'<div class="kpi" onclick="git(\'kontrat\')"><div class="k">Kontrat</div><div class="v">'+(Array.isArray(K)?K.length:0)+'</div><div class="s">sezon / spot</div></div>'
+   +'<div class="kpi" onclick="git(\'kurulum\')"><div class="k">Kurulum</div><div class="v">'+Math.round(kurBitti/kurTop*100)+'%</div><div class="prog"><i style="width:'+Math.round(kurBitti/kurTop*100)+'%"></i></div><div class="s">'+kurBitti+' / '+kurTop+' madde</div></div>'
+   +'</div><div class="grid">'
+   +'<div class="card"><h2>Onay bekleyenler</h2>'+(gorev.length?'<table>'+gorev.map(function(g){return '<tr><td><b>'+esc(g.baslik||g.gorev_tipi)+'</b><div class="small mut">'+esc(g.gorev_tipi)+'</div></td><td><span class="pill w">'+esc(g.durum)+'</span></td></tr>'}).join('')+'</table>':'<div class="small mut">Bekleyen görev yok.</div>')+'</div>'
+   +'<div class="card"><h2>Açık dosyalar</h2>'+(dosyalar.length?'<table><tr><th>Dosya</th><th>Müşteri</th><th class="num">Kişi</th><th class="num">Kalan</th><th>Durum</th></tr>'+dosyalar.map(function(d){return '<tr><td><b>'+esc(d.dosya_no)+'</b><div class="small mut">'+esc(d.tur)+'</div></td><td>'+esc(d.musteri)+'</td><td class="num">'+d.kisi+'</td><td class="num">'+para(d.kalan,d.para)+'</td><td><span class="pill">'+esc(d.durum)+'</span></td></tr>'}).join('')+'</table>':'<div class="small mut">Açık dosya yok.</div>')+'</div>'
+   +'<div class="card"><h2>Seçili tur · '+esc(t.kod||'')+'</h2><div class="small mut">'+esc(t.ad||'')+'</div><table><tr><td>Tarih</td><td class="num">'+tarih(t.baslangic)+' – '+tarih(t.bitis)+'</td></tr><tr><td>Kontenjan / en az</td><td class="num">'+(t.kontenjan||'—')+' / '+(t.min_kisi||'—')+'</td></tr><tr><td>Satış fiyatı</td><td class="num">'+para(t.satis_fiyati,pb)+'</td></tr><tr><td>Durum</td><td class="num"><span class="pill">'+esc(t.durum||'')+'</span></td></tr><tr><td>Son yayın</td><td class="num small">'+(yayin?esc(yayin.sonuc)+' · '+tarih(yayin.zaman):'—')+'</td></tr></table></div>'
+   +'<div class="card"><h2>Henüz kurulmayanlar <span class="small mut">— soldaki "yakında" etiketli bölümler</span></h2><ul class="small" style="margin:0;padding-left:18px;line-height:1.8">'+soon.map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ul></div>'
+   +'</div>';
+  document.getElementById('home').innerHTML=h;
 }
-function render(){
-  var s=D.ozet;document.getElementById('stamp').textContent='Veri: Supabase canlı · '+zaman(D.zaman);
-  var sel=document.getElementById('turSel');var v=sel.value;sel.innerHTML=D.turlar.map(function(t){return '<option value="'+t.id+'">'+esc(t.kod+' · '+t.ad)+'</option>'}).join('');if(v)sel.value=v;else if(D.tur)sel.value=D.tur.id;
-  var borc=Object.keys(s.tedarikci_borc||{}).map(function(k){return para(s.tedarikci_borc[k],k)}).join(' + ')||'0';
-  document.getElementById('kpis').innerHTML=[
-    ['Satıştaki tur',s.satistaki_tur,s.tur_sayisi+' tur kayıtlı'],['Açık dosya',s.acik_dosya,'rezervasyon/talep'],['Onay bekleyen görev',s.onay_bekleyen_gorev,s.bekleyen_gorev+' toplam görev'],['Açık bulgu',s.acik_bulgu,'denetleyici'],['Onay bekleyen istisna',s.onay_bekleyen_istisna,'yolcu bazlı'],['Tedarikçi kalan borç',borc,'cari'],['Kurulum',s.kurulum_bitti+' / '+s.kurulum_toplam,'madde bitti']
-  ].map(function(k){return '<div class="kpi"><div class="k">'+k[0]+'</div><div class="v">'+k[1]+'</div><div class="s">'+k[2]+'</div></div>'}).join('');
-  document.getElementById('vitrinTbl').innerHTML='<tr><th>Vitrin</th><th>Satış tipi</th><th class="num">Tur</th></tr>'+D.vitrinler.map(function(v){return '<tr><td>'+esc(v.ad)+'</td><td>'+pill(v.satis_tipi,'p-acc')+'</td><td class="num">'+v.tur_sayisi+'</td></tr>'}).join('');
-  var h=D.hedef_gerceklesen||{};document.getElementById('hg').innerHTML='<div class="row"><div class="kpi" style="flex:1"><div class="k">Planlanan</div><div class="v">'+para(h.planlanan_toplam,D.tur&&D.tur.para_birimi)+'</div></div><div class="kpi" style="flex:1"><div class="k">Atanan</div><div class="v">'+para(h.atanan_toplam,D.tur&&D.tur.para_birimi)+'</div></div><div class="kpi" style="flex:1"><div class="k">Gerçekleşen</div><div class="v">'+para(h.gerceklesen_toplam,D.tur&&D.tur.para_birimi)+'</div><div class="s">'+(h.gerceklesen_girilen_parca||0)+' / '+(h.parca_sayisi||0)+' parça girildi</div></div></div>'+((h.uyumsuzluklar||[]).length?'<div class="warnbox" style="margin-top:10px">'+h.uyumsuzluklar.length+' uyumsuzluk: '+h.uyumsuzluklar.map(function(u){return esc(u.parca+' — '+u.uyumsuzluk)}).join(' · ')+'</div>':'<div class="okbox" style="margin-top:10px">Uyumsuzluk yok</div>');
-  document.getElementById('yayinTbl').innerHTML='<tr><th>Zaman</th><th>Sonuç</th><th class="num">Dosya</th><th>Hata</th></tr>'+D.yayinlar.map(function(y){return '<tr><td>'+zaman(y.zaman)+'</td><td>'+durumPill(y.sonuc=='tamam'?'bitti':'reddedildi')+'</td><td class="num">'+(y.dosya_sayisi||'')+'</td><td class="small mut">'+esc(y.hata||'')+'</td></tr>'}).join('');
-  var t=D.tur||{};document.getElementById('turBaslik').textContent=(t.kod||'')+' · '+(t.ad||'')+' · '+tarih(t.baslangic)+' – '+tarih(t.bitis)+' · kontenjan '+(t.kontenjan||'—');
-  var K=D.kurgu||{};var pb=D.tur&&D.tur.para_birimi;
-  document.getElementById('kurguOzet').innerHTML='<div class="row" style="align-items:stretch"><div class="kpi" style="flex:1"><div class="k">Kişi başı (dahil olanlarla)</div><div class="big">'+para(K.kisi_basi_fiyat,pb)+'</div><div class="s">'+(K.kisi||'')+' kişi · maliyet '+para(K.maliyet_toplam,pb)+' · kâr '+para(K.kar,pb)+'</div></div><div class="kpi" style="flex:1"><div class="k">Dahil</div><div class="v">'+((K.dahil||[]).length)+'</div><div class="s">parça fiyata dahil</div></div><div class="kpi" style="flex:1"><div class="k">Hariç</div><div class="v">'+((K.haric||[]).length)+'</div><div class="s">'+esc((K.haric||[]).slice(0,4).join(', '))+'</div></div><div class="kpi" style="flex:1"><div class="k">Öneri (seçilmedi)</div><div class="v">'+((K.oneriler||[]).length)+'</div><div class="s">tıklayarak dahil edin</div></div></div><div class="warnbox" style="margin-top:10px">Fiyat kaynağı: '+esc(Object.keys(K.kaynak_dagilimi||{}).map(function(k){return K.kaynak_dagilimi[k]+' '+k}).join(', '))+' · '+esc(K.tahmin_uyari||'')+'. Rakamlar teklif içindir; kontrat yüklenince "kontrat" olur.</div><div class="row" style="margin-top:10px"><label class="f">Kişi<input id="kKisi" type="number" value="'+(K.kisi||45)+'" style="min-width:90px"></label><button class="btn acc" onclick="kurguHesapla()">Yeniden hesapla</button><button class="btn" onclick="parcaEkle()">+ Parça ekle</button><button class="btn" onclick="islem(\'varsayilan_ata\',{tur_id:cur()})">Fiyat listesinden tedarikçi ata</button><button class="btn" onclick="islem(\'denetim\',{tur_id:cur()})">Denetleyici</button></div>';
-  document.getElementById('parcaGrup').innerHTML=gunluGrup(D.parcalar,D.program,function(p){
-    return '<tr'+(p.oneri&&!p.dahil?' style="background:#fbf7ec"':(p.dahil?'':' style="opacity:.6"'))+'><td><label class="chk"><input type="checkbox" '+(p.dahil?'checked':'')+' onchange="dahil(\''+p.parca_id+'\',this.checked)"> <b>'+esc(p.ad)+'</b></label>'+(p.oneri&&!p.dahil?' '+pill('öneri','p-warn'):'')+(p.alternatif_grubu?' '+pill('seçenek: '+p.alternatif_grubu,'p-info'):'')+(p.zorunlu?' '+pill('temel','p-mut'):'')+'<div class="small mut">'+(p.kisi_bazli?'kişi başı':'sabit')+(p.adet&&p.adet!=1?' × '+p.adet:'')+(p.not_?' · '+esc(p.not_):'')+'</div></td><td class="num"><input type="number" step="0.01" value="'+(p.plan_birim_fiyat!=null?p.plan_birim_fiyat:'')+'" style="width:90px;padding:5px 6px;border:1px solid var(--line);border-radius:6px;font-family:inherit;text-align:right" onchange="fiyat(\''+p.parca_id+'\',this.value)"> <span class="small mut">'+esc(p.plan_para_birimi||pb||'')+'</span></td><td>'+kaynakSel(p)+'</td><td class="small">'+esc(p.plan_tedarikci||'—')+'</td><td class="small">'+esc(p.atanan_tedarikci||'—')+(p.atanan_referans?' <code>'+esc(p.atanan_referans)+'</code>':'')+(p.atanan_birim_fiyat!=null?' '+para(p.atanan_birim_fiyat,p.atanan_para_birimi):'')+'</td><td class="num">'+(p.gercek_toplam!=null?para(p.gercek_toplam,p.gercek_para_birimi):'—')+'</td><td>'+durumPill(p.durum)+(p.uyumsuzluk?' '+pill(p.uyumsuzluk,'p-warn'):'')+'</td><td class="row" style="flex-wrap:nowrap"><button class="btn sm" onclick="ata(\''+p.parca_id+'\','+(p.plan_birim_fiyat||0)+')">Ata</button><button class="btn sm" onclick="gercek(\''+p.parca_id+'\')">Gerçek</button>'+(p.zorunlu?'':'<button class="btn sm bad" onclick="if(confirm(\'Parça silinsin mi?\'))islem(\'parca_sil\',{id:\''+p.parca_id+'\'})">Sil</button>')+'</td></tr>'},
-    '<tr><th>Dahil · parça</th><th class="num">Birim fiyat</th><th>Kaynak</th><th>Planlanan tedarikçi</th><th>Atanan</th><th class="num">Gerçekleşen</th><th>Durum</th><th></th></tr>');
-  var alts=D.alternatifler||[];document.getElementById('altTbl').innerHTML=alts.length?'<tr><th>Parça</th><th>Tedarikçi</th><th class="num">Fiyat</th><th class="num">Puan</th><th class="num">Skor</th><th>Gerekçe</th><th></th></tr>'+alts.map(function(a){return '<tr'+(a.secildi?' style="background:var(--ok2)"':'')+'><td>'+esc(a.parca)+'</td><td>'+esc(a.tedarikci)+'</td><td class="num">'+para(a.fiyat,a.para)+'</td><td class="num">'+(a.puan||'—')+'</td><td class="num"><b>'+(a.skor||'')+'</b></td><td class="small mut">'+esc(a.gerekce||'')+'</td><td>'+(a.secildi?pill('planlanan','p-ok'):'<button class="btn sm" onclick="islem(\'alternatif_sec\',{id:\''+a.id+'\'})">Planlanan yap</button>')+'</td></tr>'}).join(''):'<tr><td class="mut">Bu tur için alternatif üretilmedi. "Varsayılan atama çalıştır" ile fiyat listelerinden aday getirilir.</td></tr>';
-  document.getElementById('dosyaTbl').innerHTML='<tr><th>Dosya</th><th>Müşteri</th><th>Tur</th><th class="num">Kişi</th><th class="num">Toplam</th><th class="num">Ödenen</th><th class="num">Kalan</th><th>Durum</th><th></th></tr>'+D.dosyalar.map(function(d){return '<tr><td><b>'+esc(d.dosya_no)+'</b></td><td>'+esc(d.musteri||'')+'</td><td class="small">'+esc(d.tur||'')+'</td><td class="num">'+(d.kisi||'')+'</td><td class="num">'+para(d.toplam,d.para)+'</td><td class="num">'+para(d.odenen,d.para)+'</td><td class="num">'+para(d.kalan,d.para)+'</td><td>'+durumPill(d.durum)+'</td><td><button class="btn sm" onclick="dosyaFiyat(\''+d.id+'\')">Kişi kişi fiyat</button></td></tr>'}).join('')||'<tr><td class="mut">Dosya yok</td></tr>';
-  document.getElementById('istTbl').innerHTML='<tr><th>Dosya</th><th>Yolcu</th><th>Parça</th><th>İşlem</th><th>Sebep</th><th class="num">Fark</th><th>Kaynak</th><th>Onay</th><th></th></tr>'+D.istisnalar.map(function(i){return '<tr><td>'+esc(i.dosya)+'</td><td>'+esc(i.yolcu||'tüm dosya')+'</td><td>'+esc(i.parca||i.yeni_ad||'')+'</td><td>'+pill(i.islem,'p-info')+'</td><td class="small">'+esc(i.sebep||'')+'</td><td class="num">'+(i.fark!=null?(i.fark>0?'+':'')+Number(i.fark).toFixed(2):'—')+'</td><td class="small mut">'+esc(i.kaynak)+'</td><td>'+durumPill(i.onay)+'</td><td>'+(i.onay=='onay_bekliyor'?'<button class="btn sm ok" onclick="islem(\'istisna_karar\',{id:\''+i.id+'\',karar:\'onay\'})">Onayla</button> <button class="btn sm bad" onclick="islem(\'istisna_karar\',{id:\''+i.id+'\',karar:\'red\'})">Red</button>':'')+'</td></tr>'}).join('')||'<tr><td class="mut">İstisna yok</td></tr>';
-  document.getElementById('gorevTbl').innerHTML='<tr><th>Öncelik</th><th>Görev</th><th>Tip</th><th>Tur</th><th>Taraf</th><th>Açan</th><th>Durum</th><th></th></tr>'+D.gorevler.map(function(g){return '<tr><td>'+(g.oncelik||'')+'</td><td><b>'+esc(g.baslik)+'</b>'+(g.girdi&&g.girdi.alinti?'<div class="small mut">"'+esc(g.girdi.alinti)+'"</div>':'')+'</td><td class="small">'+esc(g.tip)+'</td><td class="small">'+esc(g.tur||'')+'</td><td class="small">'+esc(g.taraf||'')+'</td><td class="small mut">'+esc(g.olusturan||'')+'</td><td>'+durumPill(g.durum)+(g.onay_gerekli?' '+pill('onay','p-warn'):'')+'</td><td>'+(g.durum=='bekliyor'?'<button class="btn sm ok" onclick="islem(\'gorev_karar\',{id:\''+g.id+'\',karar:\'onay\'})">Onayla</button> <button class="btn sm bad" onclick="islem(\'gorev_karar\',{id:\''+g.id+'\',karar:\'red\'})">Red</button>':'')+'</td></tr>'}).join('')||'<tr><td class="mut">Bekleyen görev yok</td></tr>';
-  document.getElementById('bulguTbl').innerHTML='<tr><th>Önem</th><th>Bulgu</th><th>Beklenen</th><th>Bulunan</th><th>Tedarikçi</th><th>Zaman</th><th></th></tr>'+D.bulgular.map(function(b){return '<tr><td>'+durumPill(b.onem)+'</td><td><b>'+esc(b.baslik)+'</b></td><td class="small">'+esc(b.beklenen||'')+'</td><td class="small">'+esc(b.bulunan||'')+'</td><td class="small">'+esc(b.tedarikci||'')+'</td><td class="small mut">'+zaman(b.olusturuldu)+'</td><td><button class="btn sm" onclick="islem(\'bulgu_kapat\',{id:\''+b.id+'\',karar:\'cozuldu\'})">Çözüldü</button> <button class="btn sm" onclick="islem(\'bulgu_kapat\',{id:\''+b.id+'\',karar:\'yok_sayildi\'})">Yok say</button></td></tr>'}).join('')||'<tr><td class="mut">Açık bulgu yok</td></tr>';
-  document.getElementById('cariTbl').innerHTML='<tr><th>Tedarikçi</th><th>Tur</th><th class="num">Borç</th><th class="num">Ödenen</th><th class="num">Kalan</th><th class="num">Fatura</th></tr>'+D.cari.map(function(c){return '<tr><td>'+esc(c.tedarikci||'(tedarikçi atanmamış)')+'</td><td class="small">'+esc(c.tur_kodu)+'</td><td class="num">'+para(c.borc,c.para_birimi)+'</td><td class="num">'+para(c.odenen,c.para_birimi)+'</td><td class="num"><b>'+para(c.kalan,c.para_birimi)+'</b></td><td class="num">'+(c.fatura_sayisi||0)+'</td></tr>'}).join('')||'<tr><td class="mut">Cari kaydı yok</td></tr>';
-  document.getElementById('olayTbl').innerHTML='<tr><th>Zaman</th><th>Kanal</th><th>Yön</th><th>Tip</th><th>Başlık</th><th>Taraf</th></tr>'+D.olaylar.map(function(o){return '<tr><td class="small mut">'+zaman(o.zaman)+'</td><td>'+pill(o.kanal,'p-acc')+'</td><td class="small">'+esc(o.yon||'')+'</td><td class="small">'+esc(o.tip||'')+'</td><td>'+esc(o.baslik||'')+'</td><td class="small">'+esc(o.taraf||'')+'</td></tr>'}).join('');
-  document.getElementById('kurTbl').innerHTML='<tr><th>Madde</th><th>Alan</th><th>Sorumlu</th><th>Durum</th></tr>'+D.kurulum.map(function(k){return '<tr><td>'+esc(k.baslik)+(k.not?'<div class="small mut">'+esc(k.not)+'</div>':'')+'</td><td class="small">'+esc(k.alan)+'</td><td class="small">'+esc(k.sorumlu)+'</td><td>'+durumPill(k.durum)+'</td></tr>'}).join('');
-  document.getElementById('paketler').innerHTML=(D.paketler||[]).map(function(p){var v=p.varsayilanlar||{};return '<div class="card"><h2>'+esc(p.kod+' · '+p.ad)+' <span class="pill p-acc">'+(p.tur_sayisi||0)+' tur bu paketten</span></h2><div class="row small mut" style="margin-bottom:10px"><span>Gün: <b>'+(p.gun_sayisi||'—')+'</b></span><span>FOC: <b>'+esc(v.foc_kurali||'—')+'</b></span><span>En az kişi: <b>'+(v.min_kisi||'—')+'</b></span><span>Kontenjan: <b>'+(v.kontenjan||'—')+'</b></span><span>Ekip: <b>'+esc(v.ekip?Object.keys(v.ekip).map(function(k){return v.ekip[k]+' '+k}).join(', '):'—')+'</b></span><span>Pazar/grup: <b>'+esc((v.pazar||'')+' / '+(v.grup_tipi||''))+'</b></span><span>Fiyat ağırlığı: <b>'+(v.fiyat_agirlik!=null?Math.round(v.fiyat_agirlik*100)+'% fiyat / '+Math.round((1-v.fiyat_agirlik)*100)+'% puan':'—')+'</b></span></div>'+gunluGrup(p.parcalar,D.program,function(x){return '<tr><td><b>'+esc(x.ad)+'</b></td><td class="small">'+(x.kisi_bazli?'kişi başı':'sabit')+'</td><td class="num">'+(x.adet||1)+'</td><td>'+(x.zorunlu?pill('zorunlu','p-ok'):pill('opsiyonel','p-mut'))+'</td><td class="small mut">'+esc(Object.keys(x.secim_kriteri||{}).filter(function(k){return k!=='hizmet_tipi'}).map(function(k){return k+': '+x.secim_kriteri[k]}).join(', '))+'</td><td class="num">'+(x.varsayilan_fiyat!=null?para(x.varsayilan_fiyat,x.para_birimi):'<span class="small mut">listeden</span>')+'</td></tr>'},'<tr><th>Parça</th><th>Kişi/sabit</th><th class="num">Adet</th><th>Zorunlu</th><th>Seçim kriteri</th><th class="num">Varsayılan fiyat</th></tr>')+'</div>'}).join('')||'<div class="mut">Paket yok</div>';
-  document.getElementById('yetTbl').innerHTML='<tr><th>Yetenek</th><th>Departman</th><th>Durum</th></tr>'+D.yetenekler.map(function(y){return '<tr><td>'+esc(y.ad)+'</td><td class="small">'+esc(y.departman||'')+'</td><td>'+durumPill(y.durum)+'</td></tr>'}).join('');
-}
-async function hesapla(){
-  var r=await rpc('panel_islem',{p_anahtar:anahtar(),p_islem:'fiyat_hesapla',p_veri:{tur_id:cur(),kisi:Number(document.getElementById('fKisi').value),grup_tipi:document.getElementById('fGrup').value,secimler:{ucak:document.getElementById('fUcak').checked,yemek:document.getElementById('fYemek').checked,etkinlik:document.getElementById('fEtk').checked,anit:document.getElementById('fAnit').checked}}});
-  if(!r||r.hata){toast('Hata: '+(r&&r.hata));return;}
-  document.getElementById('fSonuc').innerHTML='<div class="row"><div class="kpi" style="flex:1"><div class="k">Kişi başı</div><div class="big">'+para(r.kisi_basi_fiyat,r.para_birimi)+'</div><div class="s">'+r.odeyen+' ödeyen + '+r.foc+' FOC</div></div><div class="kpi" style="flex:1"><div class="k">Toplam</div><div class="v">'+para(r.toplam,r.para_birimi)+'</div></div><div class="kpi" style="flex:1"><div class="k">Maliyet</div><div class="v">'+para(r.maliyet_toplam,r.para_birimi)+'</div><div class="s">sabit '+para(r.sabit_maliyet,r.para_birimi)+' + kişi başı '+para(r.kisi_basi_degisken,r.para_birimi)+'</div></div><div class="kpi" style="flex:1"><div class="k">Kâr</div><div class="v">'+para(r.kar,r.para_birimi)+'</div><div class="s">'+(r.kar_kurali?esc(r.kar_kurali.tip+' '+r.kar_kurali.deger):'')+'</div></div></div>'+
-   '<div style="margin-top:10px"><b>Fiyatı en çok etkileyen kalemler:</b> '+(r.etkileyen_kalemler||[]).map(function(k){return esc(k.kalem)+' ('+Number(k.kisi_basi_etki).toFixed(0)+')'}).join(' · ')+'</div>'+
-   ((r.uyarilar||[]).length?'<div class="warnbox" style="margin-top:10px">'+r.uyarilar.map(esc).join('<br>')+'</div>':'')+'<div class="small mut">Bağlayıcı değil · '+zaman(r.hesap_zamani)+'</div>';
-}
-async function dosyaFiyat(id){var r=await rpc('panel_islem',{p_anahtar:anahtar(),p_islem:'dosya_fiyat',p_veri:{id:id}});if(!r||r.hata){toast('Hata');return;}
-  document.getElementById('dosyaFiyat').innerHTML='<div class="card" style="margin:0"><h2>'+esc(r.dosya_no)+' · kişi kişi fiyat</h2><div class="small mut">Taban kişi başı '+para(r.taban_kisi_basi,r.para_birimi)+' · marj %'+r.marj_yuzde+' · '+(r.baglayici?'<b style="color:var(--ok)">bağlayıcı</b>':'<b style="color:var(--warn)">'+r.onay_bekleyen_istisna+' istisna onay bekliyor</b>')+'</div><table style="margin-top:8px"><tr><th>Yolcu</th><th>Oda</th><th>İstisnalar</th><th class="num">Fiyat</th></tr>'+(r.yolcular||[]).map(function(y){return '<tr><td>'+esc(y.ad)+'</td><td>'+esc(y.oda||'')+'</td><td class="small">'+(y.istisnalar||[]).map(function(i){return esc(i.islem+' '+(i.sebep||''))+' ('+(i.fark>0?'+':'')+Number(i.fark||0).toFixed(0)+')'}).join(', ')+'</td><td class="num"><b>'+para(y.fiyat,r.para_birimi)+'</b></td></tr>'}).join('')+'<tr><td colspan="3"><b>Toplam</b></td><td class="num"><b>'+para(r.toplam,r.para_birimi)+'</b></td></tr></table></div>';await load();}
-var KAYNAK=['tahmin','liste','teklif','kontrat','gercek'];
-function kaynakSel(p){return '<select onchange="kaynak(\''+p.parca_id+'\',this.value)" style="padding:5px 6px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:12px">'+KAYNAK.map(function(k){return '<option value="'+k+'"'+(p.fiyat_kaynagi===k?' selected':'')+'>'+k+'</option>'}).join('')+'</select>';}
-async function dahil(id,v){await islem('parca_dahil',{id:id,dahil:v});}
-async function fiyat(id,v){if(v==='')return;await islem('parca_fiyat',{id:id,birim_fiyat:Number(v)});}
-async function kaynak(id,v){var p=(D.parcalar||[]).filter(function(x){return x.parca_id===id})[0];await islem('parca_fiyat',{id:id,birim_fiyat:p?p.plan_birim_fiyat:0,kaynak:v});}
-async function kurguHesapla(){await load();document.querySelector('#nav button[data-v=tur]').click();}
-async function parcaEkle(){var ad=prompt('Parça adı (örn. Granada 4★ merkez otel, 2 gece):');if(!ad)return;var gun=prompt('Gün numarası (boş = tüm tur):','');var tip=prompt('Tip (otel, arac, yerel_rehber, anit, etkinlik, yemek, transfer, ucak, sigorta, diger):','diger');var kb=confirm('Kişi başı mı? (İptal = grup başına sabit)');var f=prompt('Birim fiyat:','0');await islem('parca_ekle',{tur_id:cur(),ad:ad,gun_no:gun||null,tip:tip||'diger',kisi_bazli:kb,birim_fiyat:Number(f||0),dahil:true});}
-async function ata(id,fiyat){var f=prompt('Atanan birim fiyat (boş = planlanan aynen):',fiyat);if(f===null)return;var ref=prompt('Referans (rezervasyon no / PNR / plaka / kişi):','')||'';await islem('parca_ata',{id:id,birim_fiyat:f===''?null:Number(f),referans:ref});}
-async function gercek(id){var t=prompt('Gerçekleşen toplam tutar:');if(t===null||t==='')return;var n=prompt('Not (fiş no vb.):','')||'';await islem('parca_gercek',{id:id,tutar:Number(t),not:n});}
-document.getElementById('nav').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;document.querySelectorAll('#nav button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on')});document.getElementById('v-'+b.dataset.v).classList.add('on');});
 PV.hazir.then(load);
 </script>
 </body>
