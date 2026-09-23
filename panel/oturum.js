@@ -1,7 +1,7 @@
 /* Plusiva panel oturumu — Supabase Auth (e-posta/şifre, Google, doğrulama, şifre sıfırlama) */
 (function(){
   var SB_URL='https://wlfabfpjvqfyvhsvldll.supabase.co', SB_KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
-  var PANEL_KOK = location.origin + location.pathname.replace(/panel\/.*$/, 'panel/');
+  var PANEL_KOK = location.origin + location.pathname.replace(/(panel|travel)\/.*$/, '$1/');
   var PV = window.PV = { token:null, ben:null, sb:null, hazir:null };
   var resolveHazir; PV.hazir = new Promise(function(r){ resolveHazir = r; });
 
