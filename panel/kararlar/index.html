@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Kararlarım & fikirler</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--warn:#9a5a14;--warn2:#fff3e0;--ok:#1b5e3a;--ok2:#e8f5ec;--bad:#8a2a2a;--bad2:#fbeaea;--star:#b8860b}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}header a{color:var(--acc);text-decoration:none;font-weight:700}
+body.embed header{display:none}body.embed{background:#fff}
+.wrap{max-width:1180px;margin:0 auto;padding:16px 20px 60px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--sur);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}.kpi .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}.kpi .v{font-size:22px;font-weight:800;margin-top:2px}.kpi.w .v{color:var(--warn)}.kpi.b .v{color:var(--bad)}.kpi.s .v{color:var(--star)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff;margin-bottom:12px}.seg button{border:0;background:#fff;padding:8px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--mut)}.seg button.on{background:var(--acc);color:#fff}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}.bar select,.bar input{padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13.5px;background:#fff}.bar input[type=search]{flex:1;min-width:180px}.bar .sp{flex:1}
+.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}.card h2{margin:0 0 8px;font-size:15px;font-weight:800}
+.it{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:#fff}.it.sart{border-left:4px solid var(--star)}.it.bekliyor{}.it.cevaplandi{border-left:4px solid var(--ok)}.it.uygulandi{opacity:.75;border-left:4px solid var(--acc)}.it.beklemede{border-left:4px solid var(--warn)}
+.it .b{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}.it .kod{font-size:12px;font-weight:800;color:var(--acc);letter-spacing:.04em}.it .soru{font-size:14.5px;font-weight:700;margin-top:3px;white-space:pre-wrap}
+.it .m{font-size:12px;color:var(--mut);margin-top:4px}.it .oneri{margin-top:8px;font-size:13px;background:var(--acc2);border-radius:8px;padding:8px 10px;white-space:pre-wrap}.it .oneri b{color:var(--acc)}
+.it .cevap{margin-top:8px;font-size:13px;background:var(--ok2);border-radius:8px;padding:8px 10px;white-space:pre-wrap}.it .cevap b{color:var(--ok)}.it .not{margin-top:6px;font-size:12.5px;color:var(--mut);white-space:pre-wrap}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut)}.pill.bekliyor{background:var(--warn2);color:var(--warn)}.pill.cevaplandi,.pill.karar,.pill.gorus_alindi{background:var(--ok2);color:var(--ok)}.pill.uygulandi{background:var(--acc2);color:var(--acc)}.pill.beklemede,.pill.gorus_bekleniyor{background:var(--warn2);color:var(--warn)}.pill.iptal,.pill.ret{background:var(--bad2);color:var(--bad)}.pill.star{background:#fff6dd;color:var(--star)}.pill.et{background:var(--acc2);color:var(--acc)}
+.btn{border:1px solid var(--line);background:#fff;padding:7px 11px;border-radius:9px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap}.btn.acc{background:var(--acc);color:#fff;border-color:var(--acc)}.btn.b{color:var(--bad)}.btn.sm{padding:4px 8px;font-size:12px}.btn:disabled{opacity:.5;cursor:default}
+textarea.cv{width:100%;min-height:70px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13.5px;margin-top:8px}
+.f{display:grid;grid-template-columns:120px 1fr;gap:8px 10px;align-items:start;margin-top:10px}.f input,.f select,.f textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13.5px}.f textarea{min-height:70px}.f label{font-size:12.5px;color:var(--mut);padding-top:9px}
+.gor{border-top:1px dashed var(--line);margin-top:8px;padding-top:8px;font-size:13px}.gor .d{font-weight:800;color:var(--acc)}.gor .t{color:var(--mut);font-size:11.5px;margin-left:6px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:8px 6px;border-bottom:1px solid var(--line)}td{padding:8px 6px;border-bottom:1px solid #eef0ee;vertical-align:top}.num{text-align:right}
+.small{font-size:12px}.mut{color:var(--mut)}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:900}#modal .box{background:#fff;border-radius:14px;padding:20px;width:min(860px,94vw);max-height:90vh;overflow:auto}
+#modal pre{white-space:pre-wrap;font-family:inherit;font-size:13.5px;line-height:1.5}
+#msg{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1a1f1d;color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;display:none;z-index:950;max-width:90vw}
+.login{max-width:400px;margin:14vh auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}
+.ipucu{font-size:12.5px;color:var(--mut);background:#fbfbf9;border:1px dashed var(--line);border-radius:10px;padding:10px 12px;margin-bottom:12px;line-height:1.5}
+</style>
+</head>
+<body>
+<header><a href="../../travel/">← Panel</a><b>Kararlarım & fikirler</b></header>
+<div class="wrap">
+<div id="app" style="display:none">
+  <div class="kpis" id="kpis"></div>
+  <div class="seg" id="seg">
+    <button data-m="kararlar" class="on">Kararlarım</button>
+    <button data-m="celiskiler">Çelişkiler</button>
+    <button data-m="fikirler">Fikirler</button>
+    <button data-m="dokumanlar">Dokümanlar</button>
+  </div>
+  <div id="icerik"></div>
+</div>
+</div>
+<div id="modal" onclick="if(event.target===this)modalKapat()"><div class="box" id="mbox"></div></div>
+<div id="msg"></div>
+<script src="../oturum.js"></script>
+<script>
+var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
+var O=null, K=[], F=[], D=[], mod='kararlar', fl={bolum:'',durum:'bekliyor',ara:''}, ffl={durum:'',ara:''};
+var BOLUM={A:'A · Dilim 1 için ŞART ★',B:'B · Para / politika varsayılanları',C:'C · Yapı ve sahiplik',D:'D · Entegrasyon, hesap, kimlik (senden alınacak)',E:'E · Sonraki fazlar',F:'F · Çelişkiler'};
+var DURUM={bekliyor:'bekliyor',cevaplandi:'cevaplandı',beklemede:'beklesin',uygulandi:'uygulandı',iptal:'iptal',tartisiliyor:'tartışılıyor',gorus_bekleniyor:'görüş bekleniyor',gorus_alindi:'görüş alındı',karar:'karar verildi',ret:'ret'};
+var DEPT=['D00 Genel bakış','D01 Satış','D02 Ürünler','D03 Operasyon','D04 Tedarik','D05 Muhasebe','D06 Pazarlama','D07 İletişim','D08 Misafir','D09 İK','D10 Hukuk','D11 Denetim','D12 YZ ekibi','D13 Ar-Ge','D14 Raporlar','D16 Güvenlik','D17 Geçiş','D18 Yönetim'];
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]});}
+function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('tr-TR',{day:'2-digit',month:'short',year:'numeric'})}catch(e){return d}}
+function msg(t,sure){var m=document.getElementById('msg');m.textContent=t;m.style.display='block';clearTimeout(m._t);m._t=setTimeout(function(){m.style.display='none'},sure||2500);}
+async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body||{})});return r.json();}
+async function ki(islem,veri){var r=await rpc('karar_islem',{p_islem:islem,p_veri:veri||{},p_anahtar:(window.PV&&PV.token)?null:(localStorage.getItem('pv_anahtar')||null)});if(r&&r.hata)msg('Hata: '+r.hata,4000);return r;}
+function pill(d){return '<span class="pill '+esc(d)+'">'+esc(DURUM[d]||d)+'</span>';}
+function modalKapat(){document.getElementById('modal').style.display='none';}
+function modalAc(html){document.getElementById('mbox').innerHTML=html;document.getElementById('modal').style.display='flex';}
+
+async function load(){
+  O=await ki('ozet');if(!O||O.hata){document.getElementById('app').innerHTML='<div class="login"><b>Giriş gerekli</b><p class="small mut">Bu hesap bu sayfaya yetkili değil ya da oturum yok.</p></div>';document.getElementById('app').style.display='block';return;}
+  document.getElementById('app').style.display='block';
+  document.querySelectorAll('#seg button').forEach(function(b){b.onclick=function(){mod=b.dataset.m;document.querySelectorAll('#seg button').forEach(function(x){x.classList.toggle('on',x===b)});ciz();}});
+  kpi();await ciz();
+}
+async function ozetYenile(){O=await ki('ozet');kpi();}
+function kpi(){
+  document.getElementById('kpis').innerHTML=
+   '<div class="kpi s" onclick="git(\'kararlar\',{bolum:\'A\',durum:\'bekliyor\'})"><div class="k">★ Dilim 1 için şart</div><div class="v">'+O.bekleyen_sart+'</div></div>'
+  +'<div class="kpi w" onclick="git(\'kararlar\',{bolum:\'\',durum:\'bekliyor\'})"><div class="k">Bekleyen karar</div><div class="v">'+O.bekleyen+'</div></div>'
+  +'<div class="kpi" onclick="git(\'kararlar\',{bolum:\'\',durum:\'cevaplandi\'})"><div class="k">Cevaplanan</div><div class="v">'+O.cevaplanan+'</div></div>'
+  +'<div class="kpi b" onclick="git(\'celiskiler\')"><div class="k">Açık çelişki</div><div class="v">'+O.celiski_acik+'</div></div>'
+  +'<div class="kpi" onclick="git(\'fikirler\')"><div class="k">Fikir</div><div class="v">'+O.fikir+'</div></div>'
+  +'<div class="kpi" onclick="git(\'dokumanlar\')"><div class="k">Doküman</div><div class="v">'+O.dokuman+'</div></div>';
+}
+function git(m,f){mod=m;if(f){fl.bolum=f.bolum;fl.durum=f.durum;}document.querySelectorAll('#seg button').forEach(function(x){x.classList.toggle('on',x.dataset.m===m)});ciz();}
+async function ciz(){
+  var el=document.getElementById('icerik');el.innerHTML='<div class="mut small">Yükleniyor…</div>';
+  if(mod==='kararlar'||mod==='celiskiler'){K=(await ki('kararlar',{tur:mod==='kararlar'?'karar':'celiski'}))||[];if(K.hata)K=[];cizKararlar();}
+  else if(mod==='fikirler'){F=(await ki('fikirler'))||[];if(F.hata)F=[];cizFikirler();}
+  else{D=(await ki('dokumanlar'))||[];if(D.hata)D=[];cizDokumanlar();}
+}
+/* ---------- kararlar / çelişkiler ---------- */
+function cizKararlar(){
+  var celiski=mod==='celiskiler';
+  var h='';
+  if(!celiski) h+='<div class="ipucu">Her satırda soru, kimin sorduğu ve Yapıcı\'nın önerisi var. <b>Öneri gibi</b> → öneri aynen karar olur. <b>Şöyle:</b> → kendi cevabını yazarsın. <b>Beklesin</b> → sonraya kalır. Cevaplar Supabase\'e yazılır; Yapıcı uygulayınca "uygulandı" olur ve altına not düşer.</div>';
+  else h+='<div class="ipucu">Dokümanlar arasındaki çelişkiler. Yapıcı karara bağlar ve dokümanları düzeltir; sen isterse yön verirsin ("Şöyle:").</div>';
+  h+='<div class="bar">';
+  if(!celiski){h+='<select id="fB" onchange="fl.bolum=this.value;cizKararlar()"><option value="">Tüm bölümler</option>';['A','B','C','D','E'].forEach(function(b){h+='<option value="'+b+'"'+(fl.bolum===b?' selected':'')+'>'+esc(BOLUM[b])+'</option>'});h+='</select>';}
+  h+='<select id="fD" onchange="fl.durum=this.value;cizKararlar()"><option value=""'+(fl.durum===''?' selected':'')+'>Tüm durumlar</option>';['bekliyor','cevaplandi','beklemede','uygulandi','iptal'].forEach(function(d){h+='<option value="'+d+'"'+(fl.durum===d?' selected':'')+'>'+esc(DURUM[d])+'</option>'});h+='</select>';
+  h+='<input type="search" placeholder="ara (kod, soru, öneri)" value="'+esc(fl.ara)+'" oninput="fl.ara=this.value;cizKararlar()"></div>';
+  var q=fl.ara.toLowerCase(), say=0, sonB='';
+  K.forEach(function(k){
+    if(!celiski&&fl.bolum&&k.bolum!==fl.bolum)return; if(fl.durum&&k.durum!==fl.durum)return;
+    if(q&&!((k.kod+' '+k.soru+' '+(k.oneri||'')+' '+(k.cevap||'')+' '+(k.kim_sordu||'')).toLowerCase().indexOf(q)>=0))return;
+    say++;
+    if(!celiski&&k.bolum!==sonB){sonB=k.bolum;h+='<h3 style="margin:14px 0 8px;font-size:13px;color:var(--mut);letter-spacing:.04em;text-transform:uppercase">'+esc(BOLUM[k.bolum]||k.bolum)+'</h3>';}
+    h+='<div class="it '+esc(k.durum)+(k.dilim1_sart?' sart':'')+'" id="k_'+esc(k.kod)+'"><div class="b"><div><span class="kod">'+esc(k.kod)+'</span> '+(k.dilim1_sart?'<span class="pill star">★ Dilim 1</span> ':'')+pill(k.durum)
+      +'<div class="soru">'+esc(k.soru)+'</div><div class="m">Soran: '+esc(k.kim_sordu||'—')+(k.cevap_tarihi?' · cevap: '+tarih(k.cevap_tarihi):'')+'</div></div></div>';
+    if(k.oneri) h+='<div class="oneri"><b>'+(celiski?'Yapıcı notu':'Öneri')+':</b> '+esc(k.oneri)+'</div>';
+    if(k.cevap) h+='<div class="cevap"><b>'+(celiski?'Karar':'Cevabın')+':</b> '+esc(k.cevap)+'</div>';
+    if(k.uygulama_notu) h+='<div class="not">Uygulama: '+esc(k.uygulama_notu)+'</div>';
+    if(O.yazabilir){
+      h+='<div class="acts" id="a_'+esc(k.kod)+'">';
+      if(k.durum==='bekliyor'||k.durum==='beklemede'){
+        if(k.oneri&&!/^öneri yok/i.test(k.oneri)&&!celiski) h+='<button class="btn acc sm" onclick="cevapla(\''+esc(k.kod)+'\',\'oneri\')">Öneri gibi</button>';
+        h+='<button class="btn sm" onclick="cevapAc(\''+esc(k.kod)+'\')">Şöyle: …</button>';
+        if(k.durum==='bekliyor') h+='<button class="btn sm" onclick="cevapla(\''+esc(k.kod)+'\',\'bekle\')">Beklesin</button>';
+      } else if(k.durum==='cevaplandi'){ h+='<button class="btn sm" onclick="cevapAc(\''+esc(k.kod)+'\')">Cevabı değiştir</button>'; }
+      h+='</div>';
+    }
+    h+='</div>';
+  });
+  if(!say) h+='<div class="mut small" style="padding:20px 0">Bu süzgeçte kayıt yok.</div>';
+  document.getElementById('icerik').innerHTML=h;
+}
+function kBul(kod){for(var i=0;i<K.length;i++)if(K[i].kod===kod)return K[i];return null;}
+function cevapAc(kod){var k=kBul(kod);var a=document.getElementById('a_'+kod);
+  a.innerHTML='<div style="width:100%"><textarea class="cv" id="cv_'+esc(kod)+'" placeholder="Cevabını yaz…">'+esc(k.cevap||'')+'</textarea><div class="acts"><button class="btn acc sm" onclick="cevapla(\''+esc(kod)+'\',\'metin\')">Kaydet</button><button class="btn sm" onclick="cizKararlar()">Vazgeç</button></div></div>';
+  document.getElementById('cv_'+kod).focus();}
+async function cevapla(kod,nasil){
+  var k=kBul(kod),veri={kod:kod};
+  if(nasil==='oneri'){veri.cevap=k.oneri;veri.durum='cevaplandi';}
+  else if(nasil==='bekle'){veri.cevap=k.cevap||null;veri.durum='beklemede';}
+  else{var t=document.getElementById('cv_'+kod).value.trim();if(!t){msg('Cevap boş');return;}veri.cevap=t;veri.durum='cevaplandi';}
+  var r=await ki('cevapla',veri);if(r&&r.tamam){msg(nasil==='bekle'?'Beklemeye alındı':'Kaydedildi');await ozetYenile();await ciz();}
+}
+/* ---------- fikirler ---------- */
+function cizFikirler(){
+  var h='<div class="ipucu">Fikir ekle, ilgili danışmanları <b>@D05</b> gibi etiketle. Etiketli fikirler Yapıcı\'nın "etiketlileri çalıştır" turunda danışmanlara gider; görüşler buraya işlenir; sen karar verirsin.</div>';
+  h+='<div class="bar"><select onchange="ffl.durum=this.value;cizFikirler()"><option value="">Tüm durumlar</option>';['tartisiliyor','gorus_bekleniyor','gorus_alindi','karar','beklemede','ret','uygulandi'].forEach(function(d){h+='<option value="'+d+'"'+(ffl.durum===d?' selected':'')+'>'+esc(DURUM[d])+'</option>'});
+  h+='</select><input type="search" placeholder="ara" value="'+esc(ffl.ara)+'" oninput="ffl.ara=this.value;cizFikirler()"><div class="sp"></div>'+(O.yazabilir?'<button class="btn acc" onclick="fikirForm()">+ Yeni fikir</button>':'')+'</div>';
+  var q=ffl.ara.toLowerCase(),say=0;
+  F.forEach(function(f){
+    if(ffl.durum&&f.durum!==ffl.durum)return; if(q&&(f.kod+' '+f.baslik+' '+(f.ne||'')+' '+(f.neden||'')).toLowerCase().indexOf(q)<0)return; say++;
+    h+='<div class="it '+(f.durum==='karar'?'cevaplandi':f.durum==='uygulandi'?'uygulandi':'')+'"><div class="b"><div><span class="kod">'+esc(f.kod)+'</span> '+pill(f.durum)+' '+(f.etiketler||[]).map(function(e){return '<span class="pill et">@'+esc(e)+'</span>'}).join(' ')
+      +'<div class="soru">'+esc(f.baslik)+'</div><div class="m">'+tarih(f.olusturuldu)+' · kaynak: '+esc(f.kaynak||'—')+'</div></div></div>';
+    if(f.ne) h+='<div class="not" style="color:var(--ink)"><b>Ne:</b> '+esc(f.ne)+'</div>';
+    if(f.neden) h+='<div class="not"><b>Neden:</b> '+esc(f.neden)+'</div>';
+    (f.gorusler||[]).forEach(function(g){h+='<div class="gor"><span class="d">'+esc(g.d)+'</span><span class="t">'+tarih(g.tarih)+'</span><div style="white-space:pre-wrap;margin-top:3px">'+esc(g.metin)+'</div></div>';});
+    if(f.karar) h+='<div class="cevap"><b>Karar:</b> '+esc(f.karar)+(f.karar_tarihi?' <span class="mut small">('+tarih(f.karar_tarihi)+')</span>':'')+'</div>';
+    if(O.yazabilir){h+='<div class="acts" id="fa_'+esc(f.kod)+'">';
+      if(f.durum!=='uygulandi'&&f.durum!=='ret'){h+='<button class="btn sm" onclick="kararAc(\''+esc(f.kod)+'\')">Karar ver</button><button class="btn sm" onclick="gorusAc(\''+esc(f.kod)+'\')">Görüş ekle</button>';
+        if(f.durum!=='beklemede')h+='<button class="btn sm" onclick="fikirDurum(\''+esc(f.kod)+'\',\'beklemede\')">Beklesin</button>';
+        h+='<button class="btn sm b" onclick="fikirDurum(\''+esc(f.kod)+'\',\'ret\')">Vazgeç</button>';}
+      if(f.durum==='karar')h+='<button class="btn sm" onclick="fikirDurum(\''+esc(f.kod)+'\',\'uygulandi\')">Uygulandı</button>';
+      h+='<button class="btn sm" onclick="fikirForm(\''+esc(f.kod)+'\')">Düzenle</button></div>';}
+    h+='</div>';
+  });
+  if(!say) h+='<div class="mut small" style="padding:20px 0">Henüz fikir yok. Sağ üstten ekleyebilirsin.</div>';
+  document.getElementById('icerik').innerHTML=h;
+}
+function fBul(kod){for(var i=0;i<F.length;i++)if(F[i].kod===kod)return F[i];return null;}
+function fikirForm(kod){var f=kod?fBul(kod):{etiketler:[]};
+  var h='<h2 style="margin:0 0 6px">'+(kod?'Fikri düzenle · '+esc(kod):'Yeni fikir')+'</h2><div class="f">'
+   +'<label>Başlık</label><input id="fBaslik" value="'+esc(f.baslik||'')+'" placeholder="kısa başlık">'
+   +'<label>Ne?</label><textarea id="fN" placeholder="ne yapılsın">'+esc(f.ne||'')+'</textarea>'
+   +'<label>Neden?</label><textarea id="fY" placeholder="neden iyi olur / hangi sorunu çözer">'+esc(f.neden||'')+'</textarea>'
+   +'<label>Etiketler</label><div>'+DEPT.map(function(d){var k=d.split(' ')[0];return '<label style="display:inline-flex;gap:4px;align-items:center;margin:2px 8px 2px 0;padding:0;font-size:12.5px;color:var(--ink)"><input type="checkbox" class="et" value="'+k+'"'+((f.etiketler||[]).indexOf(k)>=0?' checked':'')+' style="width:auto">'+esc(d)+'</label>'}).join('')+'</div>'
+   +'</div><div class="acts"><button class="btn acc" onclick="fikirKaydet(\''+esc(kod||'')+'\')">Kaydet</button><button class="btn" onclick="modalKapat()">Vazgeç</button></div>';
+  modalAc(h);}
+async function fikirKaydet(kod){var g=function(i){return document.getElementById(i).value.trim()};var et=[].slice.call(document.querySelectorAll('#mbox .et:checked')).map(function(x){return x.value});
+  if(!g('fBaslik')){msg('Başlık gerekli');return;}var veri={baslik:g('fBaslik'),ne:g('fN'),neden:g('fY'),etiketler:et};
+  var r;if(kod){veri.kod=kod;r=await ki('fikir_guncelle',veri);}else{r=await ki('fikir_ekle',veri);}
+  if(r&&r.tamam){modalKapat();msg(kod?'Güncellendi':'Fikir eklendi: '+r.kod);await ozetYenile();await ciz();}}
+function kararAc(kod){var f=fBul(kod);var a=document.getElementById('fa_'+kod);a.innerHTML='<div style="width:100%"><textarea class="cv" id="fk_'+esc(kod)+'" placeholder="Kararın…">'+esc(f.karar||'')+'</textarea><div class="acts"><button class="btn acc sm" onclick="fikirKarar(\''+esc(kod)+'\')">Karar olarak kaydet</button><button class="btn sm" onclick="cizFikirler()">Vazgeç</button></div></div>';document.getElementById('fk_'+kod).focus();}
+async function fikirKarar(kod){var t=document.getElementById('fk_'+kod).value.trim();if(!t){msg('Karar boş');return;}var r=await ki('fikir_guncelle',{kod:kod,karar:t,durum:'karar'});if(r&&r.tamam){msg('Karar kaydedildi');await ozetYenile();await ciz();}}
+async function fikirDurum(kod,d){var r=await ki('fikir_guncelle',{kod:kod,durum:d});if(r&&r.tamam){msg('Durum: '+DURUM[d]);await ozetYenile();await ciz();}}
+function gorusAc(kod){var a=document.getElementById('fa_'+kod);a.innerHTML='<div style="width:100%"><div class="acts" style="margin-top:0"><select id="gd_'+esc(kod)+'" style="padding:7px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit"><option value="ben">Ben</option>'+DEPT.map(function(d){return '<option value="'+d.split(' ')[0]+'">'+esc(d)+'</option>'}).join('')+'</select></div><textarea class="cv" id="gm_'+esc(kod)+'" placeholder="Görüş metni (danışmanın cevabını buraya yapıştırabilirsin)"></textarea><div class="acts"><button class="btn acc sm" onclick="gorusKaydet(\''+esc(kod)+'\')">Görüşü ekle</button><button class="btn sm" onclick="cizFikirler()">Vazgeç</button></div></div>';document.getElementById('gm_'+kod).focus();}
+async function gorusKaydet(kod){var t=document.getElementById('gm_'+kod).value.trim();if(!t){msg('Görüş boş');return;}var r=await ki('gorus_ekle',{kod:kod,d:document.getElementById('gd_'+kod).value,metin:t});if(r&&r.tamam){msg('Görüş eklendi');await ozetYenile();await ciz();}}
+/* ---------- dokümanlar ---------- */
+function cizDokumanlar(){
+  var h='<div class="ipucu">Tek kaynak burasıdır: Yapıcı dokümanları buraya yazar, her değişiklikte eski sürüm saklanır; GitHub yedeği ve projedeki kopyalar buradan türetilir.</div>';
+  h+='<div class="card"><table><thead><tr><th>Yol</th><th>Başlık</th><th class="num">Sürüm</th><th>Kaynak</th><th>Güncellendi</th><th class="num">Boyut</th><th></th></tr></thead><tbody>';
+  D.forEach(function(d){h+='<tr><td><b>'+esc(d.yol)+'</b></td><td>'+esc(d.baslik||'—')+'</td><td class="num">'+esc(d.surum)+'</td><td>'+esc(d.kaynak||'')+'</td><td>'+tarih(d.guncellendi)+'</td><td class="num">'+Math.round((d.boyut||0)/1024)+' KB</td><td><button class="btn sm" onclick="dokumanAc(\''+esc(d.yol)+'\')">Aç</button></td></tr>';});
+  if(!D.length) h+='<tr><td colspan="7" class="mut small">Henüz doküman yüklenmedi.</td></tr>';
+  h+='</tbody></table></div>';document.getElementById('icerik').innerHTML=h;
+}
+async function dokumanAc(yol){var d=await ki('dokuman',{yol:yol});if(!d||d.hata)return;modalAc('<div class="b" style="display:flex;justify-content:space-between;gap:10px;align-items:center"><h2 style="margin:0">'+esc(d.baslik||d.yol)+'</h2><div class="acts" style="margin:0"><button class="btn sm" onclick="kopyala()">Kopyala</button><button class="btn sm" onclick="modalKapat()">Kapat</button></div></div><div class="mut small" style="margin:4px 0 10px">'+esc(d.yol)+' · sürüm '+esc(d.surum)+' · '+tarih(d.guncellendi)+'</div><pre id="dokPre">'+esc(d.icerik)+'</pre>');}
+function kopyala(){navigator.clipboard.writeText(document.getElementById('dokPre').textContent).then(function(){msg('Kopyalandı')});}
+if(new URLSearchParams(location.search).get('embed'))document.body.classList.add('embed');
+PV.hazir.then(load);
+</script>
+</body>
+</html>

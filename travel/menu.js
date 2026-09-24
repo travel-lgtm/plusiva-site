@@ -120,5 +120,6 @@ var MENU=[
   {id:'sirket',ad:'Şirket bilgileri',d:'Unvan, vergi, adres, TÜRSAB, banka, POS.'},
   {id:'entegrasyon',ad:'Entegrasyonlar',d:'WhatsApp, mail, POS, e-fatura, ImageKit, YouTube, Google giriş, TCMB, Paximum, Mikro, Google Ads/Meta.'},
   {id:'ayarlar',ad:'Ayarlar & boyutlar',tip:'ayarlar'},
-  {id:'kurulum',ad:'Kurulum durumu',src:'../panel/islem/?embed=1&v=kurulum'}]}
+  {id:'kurulum',ad:'Kurulum durumu',src:'../panel/islem/?embed=1&v=kurulum'},
+  {id:'kararlar',ad:'Kararlarım & fikirler',src:'../panel/kararlar/?embed=1',d:'Bekleyen kararlar (A–E), çelişkiler, fikir havuzu (@Dxx etiketli), dokümanların tek kaynağı. Yapıcı buradan okur ve uygular.'}]}
 ];
