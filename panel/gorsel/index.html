@@ -50,6 +50,7 @@ table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;fo
   <div class="ust">
     <div class="seg"><button id="tH" onclick="modDegis('havuz')">Havuz</button><button id="tT" onclick="modDegis('tur')">Tur görünümü</button><button id="tE" onclick="modDegis('eksik')">Eksikler</button><button id="tP" onclick="modDegis('pasif')">Kaldırılanlar</button></div>
     <span class="sp"></span>
+    <label class="small" style="display:flex;align-items:center;gap:6px">Figür: <select id="figurSec" onchange="localStorage.setItem('pv_figur',this.value)"></select></label>
     <button class="btn" onclick="yerForm()">＋ Yer ekle</button>
     <button class="btn acc" id="yayinBtn" onclick="yayinla()" title="Görsel haritasını ve sayfaları siteye yansıtır (~1 dk)">Siteye yansıt</button>
   </div>
@@ -77,15 +78,18 @@ function yerBul(k){for(var i=0;i<Y.length;i++)if(Y[i].anahtar===k)return Y[i];re
 
 async function load(){
   O=await gi('ozet');if(!O||O.hata){document.getElementById('app').innerHTML='<div class="login"><b>Giriş gerekli</b><p class="small mut">Bu hesap görsel paneline yetkili değil ya da oturum yok.</p></div>';document.getElementById('app').style.display='block';return;}
+  try{var A=await islem('ayarlar');O.figurler=(A&&A.gorsel&&A.gorsel.deger&&A.gorsel.deger.figurler)||{yok:'insan yok'};}catch(e){O.figurler={yok:'insan yok'};}
   var q=new URLSearchParams(location.search);if(q.get('yer')){filtre.ara=q.get('yer');}
   await yerYukle(false);
-  document.getElementById('app').style.display='block';
+  document.getElementById('app').style.display='block';figurCiz();
   if(O.turlar&&O.turlar.length){var t=O.turlar.filter(function(t){return t.kod});turSec=(t[0]||O.turlar[0]).anahtar;}
   render();
 }
 async function yerYukle(ciz){Y=await gi('yerler',{ulke:filtre.ulke,ara:filtre.ara,sadece_eksik:filtre.sadece_eksik,limit:500});if(!Array.isArray(Y))Y=[];if(ciz!==false)render();}
 async function ozetYenile(){O=await gi('ozet');kpiCiz();}
 function modDegis(m){mod=m;render();}
+function figur(){var s=document.getElementById('figurSec');return (s&&s.value)||'yok';}
+function figurCiz(){var s=document.getElementById('figurSec');var f=O.figurler||{yok:'insan yok'};var k=localStorage.getItem('pv_figur')||'yok';s.innerHTML=Object.keys(f).map(function(x){return '<option value="'+esc(x)+'" '+(x===k?'selected':'')+'>'+esc(x==='yok'?'insan yok':x+' — '+f[x])+'</option>'}).join('');}
 function kpiCiz(){
   document.getElementById('kpis').innerHTML='<div class="kpi"><div class="k">Yer</div><div class="v">'+O.yer+'</div></div><div class="kpi"><div class="k">Görsel</div><div class="v">'+O.gorsel+'</div></div><div class="kpi w"><div class="k">Görselsiz yer</div><div class="v">'+O.gorselsiz+'</div></div><div class="kpi b"><div class="k">Eksik bildirimi</div><div class="v">'+O.eksik+'</div></div><div class="kpi"><div class="k">Standart talimat</div><div class="small" style="margin-top:6px">'+esc(O.stil)+' <span class="mut">(Ayarlar → gorsel)</span></div></div>';
 }
@@ -137,7 +141,7 @@ function sec(k){if(secili===k)return;var e=document.getElementById('yer-'+CSS.es
 function yereGit(k){mod='havuz';filtre.ara=k;filtre.ulke='';filtre.sadece_eksik=false;secili=k;yerYukle();}
 async function talimatKopyala(anahtarlar){
   if(!anahtarlar||!anahtarlar.length){msg('Kopyalanacak yer yok');return;}
-  var r=await gi('talimatlar',{anahtarlar:anahtarlar});if(!Array.isArray(r))return;
+  var r=await rpc('gorsel_talimatlar',{p_anahtarlar:anahtarlar,p_figur:figur(),p_anahtar:(window.PV&&PV.token)?null:(localStorage.getItem('pv_anahtar')||null)});if(!Array.isArray(r)){msg('Hata: '+((r&&r.hata)||'?'),4000);return;}
   var metin=r.map(function(t){return (r.length>1?'### '+t.ad+'\n':'')+t.metin}).join('\n\n');
   try{await navigator.clipboard.writeText(metin);msg(r.length+' talimat kopyalandı → Gemini uygulamasına yapıştırın');}
   catch(e){var ta=document.createElement('textarea');ta.value=metin;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');msg(r.length+' talimat kopyalandı');}catch(e2){modalAc('<h2>Talimat</h2><textarea style="width:100%;min-height:200px">'+esc(metin)+'</textarea><div style="margin-top:8px"><button class="btn" onclick="modalKapat()">Kapat</button></div>');}document.body.removeChild(ta);}
