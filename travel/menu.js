@@ -6,7 +6,7 @@ var MENU=[
   {id:'grupteklif',ad:'Grup & kurumsal teklifler',d:'Okul (öğretmen free, veli formu), kurum/dernek, private program tasarımı, MICE, senaryo karşılaştırma (3/4/5 yıldız, otobüs/uçak).'},
   {id:'dosya',ad:'Rezervasyonlar / dosyalar',src:'../panel/islem/?embed=1&v=dosya',d:'Dosya kartı: yolcular, odalar, istisnalar, ödeme planı, belgeler, zaman çizelgesi; opsiyon → kapora → kesin; değişiklik ve iptal-iade.'},
   {id:'misafirler',ad:'Misafirler (misafir kartları)',d:'Kişi/kurum misafir kartı, zaman çizelgesi, segmentler, KVKK rıza; YZ mükerrer birleştirme ve eksik tamamlama.'},
-  {id:'b2b',ad:'B2B acenteler (Faz 1: MVP)',d:'Faz 1: acente net/komisyonlu fiyatı görür, talep ve isim listesi atar. Faz 2: cari ve hakediş. Acente kartı, komisyon/net fiyat, acente paneli (fiyat listesi, rezervasyon, ekstre), hakediş.'},
+  {id:'b2b',ad:'B2B acenteler (Faz 2: MVP)',d:'Faz 2 (F-07): acente net/komisyonlu fiyatı görür, talep ve isim listesi atar; cari ve hakediş sonrası. Acente kartı, komisyon/net fiyat, acente paneli (fiyat listesi, rezervasyon, ekstre), hakediş.'},
   {id:'b2e',ad:'B2E kurumsal programlar',d:'Kurum anlaşması, çalışanlara özel fiyat/kod, kapalı vitrin.'},
   {id:'kampanya',ad:'Kampanyalar, kuponlar, sadakat',d:'Kampanya (dönem, kapsam, indirim), kupon kodları, sadakat puanı kuralları.'}]},
  {grp:'Ürünler',items:[
