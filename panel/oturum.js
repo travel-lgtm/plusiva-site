@@ -43,7 +43,7 @@
        +'<input id="pvYP" type="password" placeholder="yeni şifre" autocomplete="new-password"><input id="pvYP2" type="password" placeholder="yeni şifre (tekrar)"><button class="acc" id="pvYeniBtn">Kaydet</button></div>'
      +'<div id="pv_onay" style="display:none"><h1>Onay bekleniyor</h1><div class="m">Hesabınız oluşturuldu; bir yönetici rolünüzü tanımlayınca panel açılır.</div><button id="pvCikis2">Çıkış</button></div>'
      +'<div class="err" id="pvErr"></div><div class="ok" id="pvOk"></div>'
-     +'<div class="kucuk">İletişim: Cevahir Kılıç · Plusiva</div>'
+     +'<div class="kucuk">Plusiva Travel</div>'
      +'</div>';
     document.body.appendChild(d);
     el('pvKayitL').onclick=function(){hata('');goster('kayit')}; el('pvUnutL').onclick=function(){hata('');goster('unut')};

@@ -116,7 +116,7 @@ var MENU=[
   {id:'yonlendirme',ad:'Alan adı yönlendirmeleri',d:'Eski adres → yeni adres; eski anahtarların kapatılması.'}]},
  {grp:'Yönetim',items:[
   {id:'kullanicilar',ad:'Kullanıcılar & roller',src:'../panel/kullanicilar/?embed=1'},
-  {id:'markalar',ad:'Markalar & kurumsal yapı',d:'Plusiva Travel, Artı Tatil, Kültür Turları, umre markası; logo, renk, iletişim, imza (Cevahir Kılıç); çatı marka.'},
+  {id:'markalar',ad:'Markalar & kurumsal yapı',d:'Plusiva Travel, Artı Tatil, Kültür Turları, umre markası; logo, renk, iletişim, imza (marka adı); çatı marka.'},
   {id:'sirket',ad:'Şirket bilgileri',d:'Unvan, vergi, adres, TÜRSAB, banka, POS.'},
   {id:'entegrasyon',ad:'Entegrasyonlar',d:'WhatsApp, mail, POS, e-fatura, ImageKit, YouTube, Google giriş, TCMB, Paximum, Mikro, Google Ads/Meta.'},
   {id:'ayarlar',ad:'Ayarlar & boyutlar',tip:'ayarlar'},

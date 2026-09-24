@@ -99,7 +99,7 @@ async function load(){
   var sel=document.getElementById('turSel');sel.innerHTML=(D.turlar||[]).map(function(t){return '<option value="'+t.id+'">'+esc(t.kod+' · '+t.ad)+'</option>'}).join('');if(D.tur)sel.value=D.tur.id;
   var r=await Promise.all([islem('gorsel_ozet'),islem('kontratlar'),islem('ayarlar')]);G=r[0];K=r[1];A=r[2];
   var o=D.ozet||{};var on=(o.onay_bekleyen_gorev||0)+(o.onay_bekleyen_istisna||0);var b=document.getElementById('onaySay');if(on>0){b.style.display='inline';b.textContent=on+' onay bekliyor';b.onclick=function(){git('gorevkuyrugu')};}
-  document.getElementById('foot').innerHTML=(PV.ben&&PV.ben.eposta?'<b style="color:#cfd6d3">'+esc(PV.ben.ad||PV.ben.eposta)+'</b> · '+esc(PV.ben.rol)+'<br>':'')+'İletişim adı: Cevahir Kılıç · <a onclick="git(\'yapici\')">Yapıcı</a>';
+  document.getElementById('foot').innerHTML=(PV.ben&&PV.ben.eposta?'<b style="color:#cfd6d3">'+esc(PV.ben.ad||PV.ben.eposta)+'</b> · '+esc(PV.ben.rol)+'<br>':'')+'İmza: Plusiva Travel · <a onclick="git(\'yapici\')">Yapıcı</a>';
   var h=(location.hash||'#home').slice(1);menuCiz();git(bul(h)?h:'home');
 }
 function homeCiz(){
