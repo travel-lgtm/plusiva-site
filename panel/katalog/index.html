@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Katalog · Sözlükler</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--ok:#1b5e3a;--ok2:#e8f5ec;--warn:#9a5a14;--warn2:#fff3e0;--bad:#8a2a2a;--bad2:#fbeaea}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:12px}header a{color:var(--acc);text-decoration:none;font-weight:700}
+body.embed header{display:none}body.embed{background:#fff}
+.wrap{max-width:1180px;margin:0 auto;padding:16px 20px 40px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;font-size:13px;cursor:pointer;color:var(--mut)}.tab.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}.card h2{margin:0 0 6px;font-size:16px;font-weight:800}.card h3{margin:14px 0 6px;font-size:12px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+.intro{color:var(--mut);font-size:13px;line-height:1.55;margin:0 0 12px;max-width:860px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:8px 6px;border-bottom:1px solid var(--line);white-space:nowrap}td{padding:8px 6px;border-bottom:1px solid #eef0ee;vertical-align:top}
+.tblwrap{overflow-x:auto}
+.small{font-size:12px}.mut{color:var(--mut)}.num{text-align:right;white-space:nowrap}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut);white-space:nowrap}.pill.ok{background:var(--ok2);color:var(--ok)}.pill.w{background:var(--warn2);color:var(--warn)}.pill.b{background:var(--bad2);color:var(--bad)}.pill.acc{background:var(--acc2);color:var(--acc)}
+.chip{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:11.5px;margin:1px 3px 1px 0;background:#fff}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+input,select,textarea{padding:7px 9px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13px;background:#fff;color:var(--ink)}textarea{width:100%;min-height:70px;font-size:12.5px}
+.btn{border:1px solid var(--line);background:#fff;padding:7px 12px;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}.btn.acc{background:var(--acc);color:#fff;border-color:var(--acc)}.btn.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.btn.bad{color:var(--bad);border-color:#e7c9c9}
+.btn:disabled{opacity:.5;cursor:default}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:10px 0}.form label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;color:var(--mut)}.form label.ch{flex-direction:row;align-items:center;gap:6px;color:var(--ink);font-weight:600}
+.kv{width:100%}.kv td:first-child{width:220px;color:var(--mut);font-weight:700;font-size:12.5px}
+.set{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;cursor:pointer;background:#fff}.set:hover{border-color:var(--acc)}.set .h{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.set b{font-size:14px}
+.tree .u{font-weight:800;margin-top:10px}.tree .b{margin-left:18px;font-weight:700;margin-top:6px}.tree .s{margin-left:38px;color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:800px){.grid2{grid-template-columns:1fr}.kv td:first-child{width:120px}}
+.msg{font-size:12.5px;color:var(--ok);font-weight:700}.msg.b{color:var(--bad)}
+.agir{display:inline-block;margin:2px 6px 2px 0;font-size:12px}.agir i{font-style:normal;color:var(--acc);font-weight:800}
+.empty{color:var(--mut);font-size:13px;padding:10px 0}
+</style>
+</head>
+<body>
+<header><a href="../../travel/">← Panel</a><b>Katalog · sözlükler ve kurallar</b></header>
+<div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div id="icerik"><div class="empty">Yükleniyor…</div></div>
+</div>
+<script src="../oturum.js"></script>
+<script>
+var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
+var SEK=[['ozellik','Özellik sözlüğü'],['kural','Kural setleri'],['bolge','Yerler & bölgeler'],['takvim','Sezonlar & özel günler'],['pazar','Pazar profilleri'],['tipler','Ürün tipleri'],['vergi','Vergi kuralları'],['marka','Markalar & kanallar']];
+var TIP_AD={iptal:'İptal ve iade',odeme:'Ödeme',opsiyon:'Opsiyon',cocuk:'Çocuk',oda:'Oda',katilim:'Katılım',degisiklik:'Değişiklik',kisit:'Kısıt'};
+var DURUM={yururlukte:['yürürlükte','ok'],onay_bekliyor:['onay bekliyor','w'],taslak:['taslak',''],eski:['eski','']};
+var NESNE_TIP=['otel','oda_tipi','arac_tipi','aktivite','restoran','gemi','kabin'];
+var cur='ozellik', OZ=null, S={};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('tr-TR',{day:'2-digit',month:'short',year:'numeric'})}catch(e){return d}}
+function anahtar(){return (window.PV&&PV.token)?null:(localStorage.getItem('pv_anahtar')||null);}
+async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body||{})});return r.json();}
+async function ki(islem,veri){return rpc('katalog_islem',{p_islem:islem,p_veri:veri||{},p_anahtar:anahtar()});}
+function el(id){return document.getElementById(id);}
+function tabCiz(){el('tabs').innerHTML=SEK.map(function(s){return '<span class="tab'+(s[0]===cur?' on':'')+'" onclick="ac(\''+s[0]+'\')">'+esc(s[1])+'</span>'}).join('');}
+function ac(v){cur=v;tabCiz();try{var u=new URL(location.href);u.searchParams.set('v',v);history.replaceState(null,'',u)}catch(e){}CIZ[v]();}
+function hata(r){return (r&&r.hata)?'<div class="card"><b>'+esc(r.hata)+'</b><div class="small mut">Giriş yapın ya da yetkinizi kontrol edin.</div></div>':'';}
+function deger(x){if(x==null)return '<span class="mut">—</span>';if(typeof x==='string')return esc(x);if(typeof x==='number'||typeof x==='boolean')return esc(String(x));
+  if(Array.isArray(x)){if(x.every(function(e){return typeof e!=='object'}))return x.map(function(e){return '<span class="chip">'+esc(e)+'</span>'}).join('');return x.map(function(e){return '<div style="margin-bottom:4px">'+deger(e)+'</div>'}).join('');}
+  return '<table class="kv">'+Object.keys(x).map(function(k){return '<tr><td>'+esc(k.replace(/_/g,' '))+'</td><td>'+deger(x[k])+'</td></tr>'}).join('')+'</table>';}
+
+var CIZ={};
+/* ---------- Özellik sözlüğü ---------- */
+CIZ.ozellik=async function(){
+  var r=await ki('ozellikler');if(r.hata){el('icerik').innerHTML=hata(r);return;}S.oz=r;
+  var h='<div class="card"><h2>Özellik sözlüğü</h2><p class="intro">Otel, oda, araç, aktivite, restoran ve gemi özellikleri tek listede. Her kayıtta işaretlenebilir alan olur; boş alan “yok” sayılır. <b>★</b> rakiplerin filtrelemediği ayırt edici özellik, <b>belge</b> kanıt ister, <b>anlaşma</b> otelle anlaşma yoksa filtrede hiç görünmez.</p>'
+   +'<div class="bar"><input id="ozAra" placeholder="ara…" oninput="ozListe()"><select id="ozGrup" onchange="ozListe()"><option value="">tüm gruplar</option>'+r.gruplar.map(function(g){return '<option value="'+g.kod+'">'+esc(g.ad)+'</option>'}).join('')+'</select><select id="ozTip" onchange="ozListe()"><option value="">tüm kayıt tipleri</option>'+NESNE_TIP.map(function(t){return '<option>'+t+'</option>'}).join('')+'</select><span class="sp" style="flex:1"></span>'+(r.yazabilir?'<button class="btn acc" onclick="ozForm()">+ Yeni özellik</button>':'')+'</div><div id="ozForm"></div><div class="tblwrap" id="ozTbl"></div></div>';
+  el('icerik').innerHTML=h;ozListe();
+};
+function ozListe(){var r=S.oz,q=(el('ozAra').value||'').toLowerCase(),g=el('ozGrup').value,t=el('ozTip').value;
+  var gad={};r.gruplar.forEach(function(x){gad[x.kod]=x.ad});
+  var L=r.ozellikler.filter(function(o){return (!q||(o.ad+' '+o.kod+' '+(o.aciklama||'')).toLowerCase().indexOf(q)>=0)&&(!g||o.grup===g)&&(!t||(o.uygulanan_tipler||[]).indexOf(t)>=0)});
+  el('ozTbl').innerHTML='<div class="small mut" style="margin-bottom:6px">'+L.length+' / '+r.ozellikler.length+' özellik</div><table><tr><th>Özellik</th><th>Grup</th><th>Veri</th><th>Hangi kayıtlarda</th><th>İşaret</th><th class="num">Kullanım</th>'+(r.yazabilir?'<th></th>':'')+'</tr>'+L.map(function(o){
+    return '<tr'+(o.aktif?'':' style="opacity:.5"')+'><td><b>'+esc(o.ad)+'</b>'+(o.ayirt_edici?' <span title="ayırt edici" style="color:var(--warn)">★</span>':'')+'<div class="small mut">'+esc(o.kod)+(o.aciklama?' · '+esc(o.aciklama):'')+'</div></td><td class="small">'+esc(gad[o.grup]||o.grup)+'</td><td class="small">'+esc(o.veri_tipi.replace('_',' / '))+(o.birim?' ('+esc(o.birim)+')':'')+'</td><td>'+(o.uygulanan_tipler||[]).map(function(x){return '<span class="chip">'+esc(x)+'</span>'}).join('')+'</td><td>'+(o.filtrelenebilir?'<span class="pill acc">filtre</span> ':'')+(o.belge_gerekir?'<span class="pill w">belge</span> ':'')+(o.anlasma_gerekir?'<span class="pill w">anlaşma</span>':'')+'</td><td class="num">'+o.kullanim+'</td>'+(r.yazabilir?'<td><button class="btn" onclick="ozForm(\''+o.kod+'\')">Düzenle</button></td>':'')+'</tr>'}).join('')+'</table>';}
+function ozForm(kod){var r=S.oz,o=kod?r.ozellikler.find(function(x){return x.kod===kod}):{grup:el('ozGrup').value||'konum_erisim',veri_tipi:'evet_hayir',uygulanan_tipler:['otel'],filtrelenebilir:true,aktif:true,sira:99};
+  el('ozForm').innerHTML='<div class="card" style="background:var(--acc2)"><b>'+(kod?'Özelliği düzenle':'Yeni özellik')+'</b><div class="form">'
+   +'<label>Ad<input id="f_ad" value="'+esc(o.ad||'')+'"></label>'
+   +'<label>Kod'+(kod?'':' (boş bırakılırsa addan üretilir)')+'<input id="f_kod" value="'+esc(o.kod||'')+'" '+(kod?'disabled':'')+'></label>'
+   +'<label>Grup<select id="f_grup">'+r.gruplar.map(function(g){return '<option value="'+g.kod+'"'+(g.kod===o.grup?' selected':'')+'>'+esc(g.ad)+'</option>'}).join('')+'</select></label>'
+   +'<label>Veri tipi<select id="f_vt">'+['evet_hayir','sayi','metin','liste','mesafe','sure'].map(function(v){return '<option'+(v===o.veri_tipi?' selected':'')+'>'+v+'</option>'}).join('')+'</select></label>'
+   +'<label>Birim<input id="f_birim" value="'+esc(o.birim||'')+'" placeholder="m, dk, kişi…"></label>'
+   +'<label>Sıra<input id="f_sira" type="number" value="'+(o.sira||99)+'"></label>'
+   +'</div><div class="small mut" style="font-weight:700;margin-bottom:4px">Hangi kayıtlarda</div><div class="bar">'+NESNE_TIP.map(function(t){return '<label class="small"><input type="checkbox" class="f_tip" value="'+t+'"'+((o.uygulanan_tipler||[]).indexOf(t)>=0?' checked':'')+'> '+t+'</label>'}).join('')+'</div>'
+   +'<div class="bar"><label class="small"><input type="checkbox" id="f_fil"'+(o.filtrelenebilir?' checked':'')+'> filtrede çıkar</label><label class="small"><input type="checkbox" id="f_ayr"'+(o.ayirt_edici?' checked':'')+'> ayırt edici ★</label><label class="small"><input type="checkbox" id="f_bel"'+(o.belge_gerekir?' checked':'')+'> belge gerekir</label><label class="small"><input type="checkbox" id="f_anl"'+(o.anlasma_gerekir?' checked':'')+'> anlaşma gerekir</label><label class="small"><input type="checkbox" id="f_akt"'+(o.aktif!==false?' checked':'')+'> aktif</label></div>'
+   +'<label class="small mut" style="font-weight:700">Açıklama</label><textarea id="f_aci">'+esc(o.aciklama||'')+'</textarea>'
+   +'<div class="bar" style="margin-top:8px"><button class="btn acc" onclick="ozKaydet(\''+(kod||'')+'\')">Kaydet</button><button class="btn" onclick="el(\'ozForm\').innerHTML=\'\'">Vazgeç</button><span class="msg" id="f_msg"></span></div></div>';}
+async function ozKaydet(kod){var tip=[].slice.call(document.querySelectorAll('.f_tip:checked')).map(function(x){return x.value});
+  var r=await ki('ozellik_kaydet',{kod:kod||el('f_kod').value,ad:el('f_ad').value,grup:el('f_grup').value,veri_tipi:el('f_vt').value,birim:el('f_birim').value,sira:el('f_sira').value,uygulanan_tipler:tip,filtrelenebilir:el('f_fil').checked,ayirt_edici:el('f_ayr').checked,belge_gerekir:el('f_bel').checked,anlasma_gerekir:el('f_anl').checked,aktif:el('f_akt').checked,aciklama:el('f_aci').value});
+  if(r.hata){el('f_msg').className='msg b';el('f_msg').textContent=r.hata;return;}CIZ.ozellik();}
+
+/* ---------- Kural setleri ---------- */
+CIZ.kural=async function(sec){
+  var r=await ki('kural_setleri');if(r.hata){el('icerik').innerHTML=hata(r);return;}S.ks=r;
+  var tipler=Object.keys(TIP_AD);var bek=r.setler.filter(function(s){return s.durum==='onay_bekliyor'}).length;
+  var h='<div class="card"><h2>Kural setleri</h2><p class="intro">İptal, ödeme, opsiyon, çocuk, oda, katılım, değişiklik ve kısıt kuralları adlı ve sürümlü setlerdir. Ürüne ya da sefere bağlı set yoksa <b>genel (varsayılan)</b> set geçerlidir. Değişiklik yeni sürüm açar; para ve iadeye dokunduğu için <b>yürürlüğe girmesi yönetici onayıyla</b> olur.'+(bek?' <span class="pill w">'+bek+' set onayınızı bekliyor</span>':'')+'</p>'
+   +tipler.map(function(t){var L=r.setler.filter(function(s){return s.tip===t&&s.durum!=='eski'});var eski=r.setler.filter(function(s){return s.tip===t&&s.durum==='eski'}).length;
+     return '<h3>'+esc(TIP_AD[t])+'</h3>'+(L.length?L.map(function(s){var d=DURUM[s.durum]||[s.durum,''];return '<div class="set" onclick="ksDetay(\''+s.kod+'\')"><div class="h"><b>'+esc(s.ad)+'</b><span class="small mut">'+esc(s.kod)+' · v'+s.surum+'</span><span class="pill '+d[1]+'">'+d[0]+'</span>'+(s.varsayilan?'<span class="pill acc">genel</span>':'')+(s.bag_sayisi?'<span class="pill">'+s.bag_sayisi+' bağ</span>':'')+'</div><div class="small mut" style="margin-top:4px">'+esc(s.aciklama||'')+(s.kaynak_karar?' · Kaynak: '+esc(s.kaynak_karar):'')+'</div></div>'}).join(''):'<div class="empty">Set yok.</div>')+(eski?'<div class="small mut">'+eski+' eski sürüm</div>':'');}).join('')
+   +'</div>';
+  el('icerik').innerHTML=h;if(sec)ksDetay(sec);
+};
+async function ksDetay(kod){
+  var r=await ki('kural_seti',{kod:kod});S.kd=r;var s=r.surumler[0];if(!s)return;var yaz=S.ks.yazabilir,tam=S.ks.tam;
+  var h='<div class="card"><div class="bar"><button class="btn" onclick="CIZ.kural()">← Tüm setler</button></div><h2>'+esc(s.ad)+' <span class="small mut">'+esc(s.kod)+'</span></h2>'
+   +r.surumler.map(function(v,i){var d=DURUM[v.durum]||[v.durum,''];
+     return '<div class="card" style="'+(i?'opacity:.8':'')+'"><div class="bar"><b>Sürüm '+v.surum+'</b><span class="pill '+d[1]+'">'+d[0]+'</span>'+(v.varsayilan?'<span class="pill acc">genel</span>':'')+'<span class="small mut">'+(v.onaylayan?'Onaylayan: '+esc(v.onaylayan)+' · '+tarih(v.yururluk_tarihi):'Hazırlayan: '+esc(v.hazirlayan||'—')+' · '+tarih(v.olusturuldu))+'</span></div>'
+       +(v.aciklama?'<p class="small mut" style="margin:0 0 8px">'+esc(v.aciklama)+'</p>':'')+deger(v.icerik)
+       +(v.durum==='onay_bekliyor'&&tam?'<div class="bar" style="margin-top:10px"><button class="btn ok" onclick="ksOnay(\''+v.kod+'\','+v.surum+')">Onayla, yürürlüğe al</button><button class="btn bad" onclick="ksRed(\''+v.kod+'\','+v.surum+')">Reddet</button></div>':'')
+       +(v.durum==='onay_bekliyor'&&!tam?'<div class="small mut" style="margin-top:8px">Onay yöneticide.</div>':'')+'</div>'}).join('')
+   +'<h3>Nereye bağlı</h3>'+(r.baglar.length?'<table>'+r.baglar.map(function(b){return '<tr><td>'+esc(b.nesne_tipi)+'</td><td>'+esc(b.ad)+'</td>'+(yaz?'<td class="num"><button class="btn bad" onclick="ksBagKaldir('+b.id+',\''+kod+'\')">Kaldır</button></td>':'')+'</tr>'}).join('')+'</table>':'<div class="empty">'+(s.varsayilan?'Genel set: bağ gerekmez, bağı olmayan her ürün ve seferde geçerli.':'Hiçbir yere bağlı değil.')+'</div>')
+   +(yaz?'<div class="bar"><select id="bagSefer"><option value="">sefer seç…</option>'+r.seferler.map(function(x){return '<option value="'+x.id+'">'+esc(x.ad)+'</option>'}).join('')+'</select><button class="btn" onclick="ksBagla(\''+kod+'\')">Sefere bağla</button></div>':'')
+   +(yaz?'<h3>Yeni sürüm hazırla</h3><p class="small mut">Değiştirmek istediğiniz satırı düzeltin; kaydedince yeni sürüm “onay bekliyor” olur, yürürlükteki sürüm onaylanana kadar geçerli kalır.</p><div id="ksForm">'+ksFormHtml(s.icerik)+'</div><div class="bar"><button class="btn acc" onclick="ksTaslak(\''+kod+'\')">Yeni sürümü onaya gönder</button><span class="msg" id="ks_msg"></span></div>':'')
+   +'</div>';
+  el('icerik').innerHTML=h;window.scrollTo(0,0);
+}
+function ksFormHtml(ic){return '<table class="kv">'+Object.keys(ic||{}).map(function(k){var v=ic[k];var t=typeof v==='string'?v:JSON.stringify(v,null,1);return '<tr><td>'+esc(k.replace(/_/g,' '))+'</td><td><textarea class="ks_alan" data-k="'+esc(k)+'" data-json="'+(typeof v==='string'?'0':'1')+'" style="min-height:'+(t.length>120?110:44)+'px">'+esc(t)+'</textarea></td></tr>'}).join('')+'</table>';}
+async function ksTaslak(kod){var ic={},hataVar=null;[].slice.call(document.querySelectorAll('.ks_alan')).forEach(function(a){var k=a.getAttribute('data-k');if(a.getAttribute('data-json')==='1'){try{ic[k]=JSON.parse(a.value)}catch(e){hataVar=k}}else ic[k]=a.value;});
+  if(hataVar){el('ks_msg').className='msg b';el('ks_msg').textContent='“'+hataVar+'” satırının biçimi bozuk; köşeli/süslü parantezleri koruyun.';return;}
+  var r=await ki('kural_seti_taslak',{kod:kod,icerik:ic});if(r.hata){el('ks_msg').className='msg b';el('ks_msg').textContent=r.hata;return;}await CIZ.kural(kod);}
+async function ksOnay(kod,s){if(!confirm(kod+' sürüm '+s+' yürürlüğe girsin mi? Önceki sürüm “eski” olur.'))return;var r=await ki('kural_seti_onayla',{kod:kod,surum:s});if(r.hata){alert(r.hata);return;}await CIZ.kural(kod);}
+async function ksRed(kod,s){var n=prompt('Reddetme nedeni (kısa):','');if(n===null)return;var r=await ki('kural_seti_reddet',{kod:kod,surum:s,neden:n});if(r.hata){alert(r.hata);return;}await CIZ.kural(kod);}
+async function ksBagla(kod){var id=el('bagSefer').value;if(!id)return;var r=await ki('kural_bagla',{kod:kod,nesne_tipi:'sefer',nesne_id:id});if(r.hata){alert(r.hata);return;}ksDetay(kod);}
+async function ksBagKaldir(id,kod){if(!confirm('Bağ kaldırılsın mı? O sefer genel sete döner.'))return;await ki('kural_bag_kaldir',{id:id});ksDetay(kod);}
+
+/* ---------- Yerler & bölgeler ---------- */
+CIZ.bolge=async function(){
+  var r=await ki('bolgeler');if(r.hata){el('icerik').innerHTML=hata(r);return;}S.bo=r;var B=r.bolgeler,cocuk=function(k){return B.filter(function(b){return b.ust_kod===k}).sort(function(a,b){return (a.sira-b.sira)||a.ad.localeCompare(b.ad,'tr')})};
+  var sat=function(b,cls){return '<div class="'+cls+'">'+esc(b.ad)+(b.ad_yerel&&b.ad_yerel!==b.ad?' <span class="small mut">'+esc(b.ad_yerel)+'</span>':'')+' <span class="small mut">'+esc(b.kod)+'</span>'+(b.gorsel_yer?' <span class="pill acc">'+b.gorsel_yer+' görsel yeri</span>':'')+(b.aktif?'':' <span class="pill">pasif</span>')+'</div>'};
+  var h='<div class="card"><h2>Yerler & bölgeler</h2><p class="intro">Ülke → bölge/il → şehir/ilçe → semt. Otel, müze, restoran ve tedarikçi kayıtları bu ağaca bağlanır; filtreler ve haritalar buradan çalışır. Başlangıç: görsel kataloğundaki 6 ülke ve 28 şehir, ayrıca İstanbul ve Ankara. Semtler otel dilimiyle (Dilim C) eklenecek.</p><div class="tree">'
+   +cocuk(null).map(function(u){return sat(u,'u')+cocuk(u.kod).map(function(b){return sat(b,'b')+cocuk(b.kod).map(function(s){return sat(s,'s')+cocuk(s.kod).map(function(m){return sat(m,'s" style="margin-left:58px')}).join('')}).join('')}).join('')}).join('')+'</div></div>'
+   +(r.yazabilir?'<div class="card"><h2>Yer ekle / düzenle</h2><div class="form"><label>Kod (ör. tr-34-nisantasi)<input id="b_kod"></label><label>Üst kayıt<select id="b_ust"><option value="">— (ülke)</option>'+B.filter(function(b){return b.seviye!=='semt'}).map(function(b){return '<option value="'+b.kod+'">'+esc(b.ad)+' ('+b.kod+')</option>'}).join('')+'</select></label><label>Seviye<select id="b_sev"><option>ulke</option><option>bolge</option><option selected>sehir</option><option>semt</option></select></label><label>Ad<input id="b_ad"></label><label>Yerel ad<input id="b_yerel"></label><label>Enlem<input id="b_en"></label><label>Boylam<input id="b_boy"></label></div><div class="bar"><button class="btn acc" onclick="boKaydet()">Kaydet</button><span class="msg" id="b_msg"></span></div></div>':'');
+  el('icerik').innerHTML=h;
+};
+async function boKaydet(){var r=await ki('bolge_kaydet',{kod:el('b_kod').value,ust_kod:el('b_ust').value,seviye:el('b_sev').value,ad:el('b_ad').value,ad_yerel:el('b_yerel').value,enlem:el('b_en').value,boylam:el('b_boy').value});if(r.hata){el('b_msg').className='msg b';el('b_msg').textContent=r.hata;return;}CIZ.bolge();}
+
+/* ---------- Sezonlar & özel günler ---------- */
+CIZ.takvim=async function(){
+  var r=await ki('takvim');if(r.hata){el('icerik').innerHTML=hata(r);return;}
+  var h='<div class="grid2"><div class="card"><h2>Sezonlar</h2><p class="intro">K-32: iki sezon. Otel kontratlarındaki ara dönemler kontratın içinde ayrıca tutulur.</p><table><tr><th>Sezon</th><th>Başlangıç</th><th>Bitiş</th><th>Pazar</th></tr>'+r.sezonlar.map(function(s){return '<tr><td><b>'+esc(s.ad)+'</b><div class="small mut">'+esc(s.kod)+'</div></td><td>'+tarih(s.baslangic)+'</td><td>'+tarih(s.bitis)+'</td><td>'+esc(s.pazar||'tümü')+'</td></tr>'}).join('')+'</table>'
+   +(r.yazabilir?'<h3>Sezon ekle</h3><div class="form"><label>Kod<input id="s_kod" placeholder="KIS-2728"></label><label>Ad<input id="s_ad"></label><label>Başlangıç<input id="s_bas" type="date"></label><label>Bitiş<input id="s_bit" type="date"></label></div><div class="bar"><button class="btn acc" onclick="szKaydet()">Kaydet</button><span class="msg" id="s_msg"></span></div>':'')+'</div>'
+   +'<div class="card"><h2>Özel günler</h2><p class="intro">Bayram ve resmî tatiller fiyat satırında gün tipi olarak kullanılır. Dini bayramlar Diyanet takviminden, ulusal günler 2429 sayılı Kanun’dan.</p><table><tr><th>Tarih</th><th>Gün</th><th>Tip</th></tr>'+r.ozel_gunler.map(function(o){return '<tr><td class="small">'+tarih(o.tarih)+'</td><td>'+esc(o.ad)+(o.yarim_gun?' <span class="pill">yarım gün</span>':'')+'</td><td><span class="pill '+(o.gun_tipi==='bayram'?'w':'')+'">'+esc(o.gun_tipi_ad||o.gun_tipi)+'</span></td></tr>'}).join('')+'</table>'
+   +(r.yazabilir?'<h3>Özel gün ekle</h3><div class="form"><label>Tarih<input id="o_tar" type="date"></label><label>Ad<input id="o_ad"></label><label>Tip<select id="o_tip">'+r.gun_tipleri.map(function(g){return '<option value="'+g.kod+'">'+esc(g.ad)+'</option>'}).join('')+'</select></label><label>Kaynak<input id="o_kay"></label></div><div class="bar"><button class="btn acc" onclick="ogKaydet()">Kaydet</button><span class="msg" id="o_msg"></span></div>':'')+'</div></div>';
+  el('icerik').innerHTML=h;
+};
+async function szKaydet(){var r=await ki('sezon_kaydet',{kod:el('s_kod').value,ad:el('s_ad').value,baslangic:el('s_bas').value,bitis:el('s_bit').value});if(r.hata){el('s_msg').className='msg b';el('s_msg').textContent=r.hata;return;}CIZ.takvim();}
+async function ogKaydet(){var r=await ki('ozel_gun_kaydet',{tarih:el('o_tar').value,ad:el('o_ad').value,gun_tipi:el('o_tip').value,kaynak:el('o_kay').value});if(r.hata){el('o_msg').className='msg b';el('o_msg').textContent=r.hata;return;}CIZ.takvim();}
+
+/* ---------- Pazar profilleri ---------- */
+CIZ.pazar=async function(){
+  var r=await ki('pazarlar');if(r.hata){el('icerik').innerHTML=hata(r);return;}var A=r.ozellik_adlari||{};
+  var ag=function(o){var k=Object.keys(o||{});return k.length?k.sort(function(a,b){return o[b]-o[a]}).map(function(x){return '<span class="agir">'+esc(A[x]||x)+' <i>'+'●'.repeat(o[x])+'</i></span>'}).join(''):'<span class="mut small">henüz yok</span>'};
+  el('icerik').innerHTML='<div class="card"><h2>Pazar profilleri</h2><p class="intro">Her pazar için hangi özelliklerin ağır bastığı (● hafif · ●● önemli · ●●● belirleyici). Bunlar <b>başlangıç varsayımıdır, yasak değil eğilimdir</b>; rezervasyon ve anket verisi geldikçe Ürün & Fiyatlandırma YZ üç ayda bir düzeltme önerir, siz onaylarsınız. Metinler her pazar için ayrı yazılır (K-73).</p></div>'
+   +r.pazarlar.map(function(p){return '<div class="card"'+(p.aktif?'':' style="opacity:.6"')+'><h2>'+esc(p.ad)+' <span class="small mut">'+esc(p.kod)+' · '+esc((p.diller||[]).join(', '))+' · '+esc(p.para||'')+'</span>'+(p.aktif?'':' <span class="pill">pasif</span>')+'</h2>'
+     +(p.ne_ister?'<div class="small" style="margin-bottom:6px"><b>Ne ister:</b> '+esc(p.ne_ister)+'</div>':'')+(p.kanal_aliskanligi?'<div class="small mut" style="margin-bottom:6px">Kanal: '+esc(p.kanal_aliskanligi)+'</div>':'')
+     +'<div>'+ag(p.ozellik_agirliklari)+'</div>'+(p.alt_pazarlar||[]).map(function(a){return '<h3>'+esc(a.ad)+'</h3><div>'+ag(a.agirliklar)+'</div>'}).join('')
+     +(p.notlar?'<div class="small mut" style="margin-top:8px">'+esc(p.notlar)+'</div>':'')+'</div>'}).join('');
+};
+
+/* ---------- Ürün tipleri ---------- */
+CIZ.tipler=async function(){
+  var r=await ki('tipler');if(r.hata){el('icerik').innerHTML=hata(r);return;}var T=r.tipler.filter(function(t){return t.sektor==='turizm'}),D=r.tipler.filter(function(t){return t.sektor!=='turizm'});
+  var tb=function(L){return '<table><tr><th>Tip</th><th>Stok birimi</th><th>Fiyat hesabı</th><th>Satış şekli</th><th>Faz</th><th class="num">Kart</th></tr>'+L.map(function(t){return '<tr'+(t.gorunur?'':' style="opacity:.55"')+'><td><b>'+esc(t.ad)+'</b><div class="small mut">'+esc(t.tip)+(t.aciklama?' · '+esc(t.aciklama):'')+'</div></td><td class="small">'+esc(t.stok_birimi||'—')+'</td><td class="small">'+esc(t.fiyat_hesabi||'—')+'</td><td class="small">'+esc(t.satis_sekli||'—')+'</td><td><span class="pill">'+esc(t.faz||'—')+'</span></td><td class="num">'+t.kart+'</td></tr>'}).join('')+'</table>'};
+  el('icerik').innerHTML='<div class="card"><h2>Ürün tipleri — turizm ('+T.length+')</h2><p class="intro">K-67 ile onaylandı. Okul, incoming ve private tip değil eksendir (segment, pazar, hizmet seviyesi). Tip; stoğun, fiyatın ve satışın nasıl işlediğini belirler. Yeni tip = yeni satır, kod değişmez.</p><div class="tblwrap">'+tb(T)+'</div></div><div class="card"><h2>Diğer iş kolları</h2><div class="tblwrap">'+tb(D)+'</div></div>';
+};
+
+/* ---------- Vergi ---------- */
+CIZ.vergi=async function(){
+  var r=await ki('vergi');if(r.hata){el('icerik').innerHTML=hata(r);return;}
+  var ifa={yurt_ici:'Yurt içi',yurt_disi:'Yurt dışı',uluslararasi:'Uluslararası'};
+  el('icerik').innerHTML='<div class="card"><h2>Vergi kuralları</h2><p class="intro">Fatura ve fiyat satırı kalem tipine göre vergiyi buradan okur. Tümü muhasebe danışmanı görüşünden (D05) girildi; <b>mali müşavir teyidi gelene kadar uygulamada “bekliyor” etiketiyle</b> kullanılır.</p><div class="tblwrap"><table><tr><th>Kalem</th><th>İfa yeri</th><th>Vergi</th><th class="num">Oran</th><th>Durum</th></tr>'+r.kurallar.map(function(k){return '<tr><td><b>'+esc(k.kalem_tipi.replace(/_/g,' '))+'</b><div class="small mut">'+esc(k.aciklama||'')+'</div></td><td>'+esc(ifa[k.ifa_yeri]||k.ifa_yeri)+'</td><td>'+esc(k.vergi_tipi.replace('_',' '))+'</td><td class="num">'+(k.oran!=null?'%'+k.oran:'—')+'</td><td><span class="pill '+(k.teyit_durumu==='teyitli'?'ok':'w')+'">'+(k.teyit_durumu==='teyitli'?'teyitli':'mali müşavir bekliyor')+'</span></td></tr>'}).join('')+'</table></div></div>';
+};
+
+/* ---------- Markalar & kanallar ---------- */
+CIZ.marka=async function(){
+  var r=await ki('markalar');if(r.hata){el('icerik').innerHTML=hata(r);return;}S.mk=r;
+  var h='<div class="card"><h2>Markalar</h2><p class="intro">Her kanal kendi markasıyla çalışır (B2B ve B2E ayrı marka). Belgeler, e-posta imzası ve sayfa görünümü markanın kitinden gelir; künye tüzel kişiden. Dışa giden iletişimde kişi adı yoktur, imza marka adıdır.</p><div class="tblwrap"><table><tr><th>Marka</th><th>Kanal</th><th>Alan adı</th><th>İmza adı</th><th>Kit</th><th>Durum</th>'+(r.tam?'<th></th>':'')+'</tr>'
+   +r.markalar.map(function(m){var kit=m.kit||{},rk=kit.renkler||{};return '<tr><td><b>'+esc(m.ad)+'</b><div class="small mut">'+esc(m.kod)+(m.tuzel?' · '+esc(m.tuzel):'')+'</div></td><td>'+(m.kanal_rolu||[]).map(function(k){return '<span class="chip">'+esc(k.toUpperCase())+'</span>'}).join('')+'</td><td class="small">'+esc(m.alan_adi||'—')+'</td><td class="small">'+esc(m.iletisim_adi||'—')+'</td><td>'+Object.keys(rk).slice(0,4).map(function(k){return '<span title="'+esc(k)+'" style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--line);background:'+esc(rk[k])+'"></span>'}).join(' ')+(kit.yazi_tipleri?'<div class="small mut">'+esc(Object.values(kit.yazi_tipleri).join(' · '))+'</div>':'')+'</td><td>'+(m.isim_bekliyor?'<span class="pill w">isim bekliyor</span>':(m.aktif?'<span class="pill ok">aktif</span>':'<span class="pill">pasif</span>'))+'</td>'+(r.tam?'<td><button class="btn" onclick="mkForm(\''+m.kod+'\')">Düzenle</button></td>':'')+'</tr>'}).join('')+'</table></div><div id="mkForm"></div></div>'
+   +'<div class="card"><h2>Kanallar</h2><div class="tblwrap"><table><tr><th>Kanal</th><th>Varsayılan marka</th><th>Fiyat</th><th>Not</th></tr>'+r.kanallar.map(function(k){return '<tr'+(k.aktif?'':' style="opacity:.6"')+'><td><b>'+esc(k.ad)+'</b><div class="small mut">'+esc(k.kod)+(k.aktif?'':' · pasif')+'</div></td><td>'+esc(k.marka||'—')+'</td><td class="small">'+esc({anlik:'anlık',teklif:'teklif',gizli:'gizli',net_liste:'net liste'}[k.fiyat_modu]||'—')+'</td><td class="small mut">'+esc(k.aciklama||'')+'</td></tr>'}).join('')+'</table></div></div>'
+   +r.tuzel_kisiler.map(function(t){return '<div class="card"><h2>Tüzel kişi</h2>'+deger({unvan:t.unvan,vergi:t.vergi_dairesi+' VD · '+t.vergi_no,mersis:t.mersis,ticaret_sicil:t.ticaret_sicil,adres:t.adres,tursab:t.tursab,kep:t.kep||'yok (ertelendi)',dds:t.dds_kodu||'alınmadı (site yayını öncesi şart)',not:t.notlar})+'</div>'}).join('');
+  el('icerik').innerHTML=h;
+};
+function mkForm(kod){var m=S.mk.markalar.find(function(x){return x.kod===kod});
+  el('mkForm').innerHTML='<div class="card" style="background:var(--acc2);margin-top:12px"><b>'+esc(m.ad)+'</b><div class="form"><label>Marka adı<input id="m_ad" value="'+esc(m.isim_bekliyor?'':m.ad)+'" placeholder="'+(m.isim_bekliyor?'isim bulununca yazın':'')+'"></label><label>Alan adı<input id="m_alan" value="'+esc(m.alan_adi||'')+'"></label><label>İmza adı (dışa giden iletişim)<input id="m_imza" value="'+esc(m.iletisim_adi||'')+'"></label></div><div class="bar"><button class="btn acc" onclick="mkKaydet(\''+kod+'\')">Kaydet</button><button class="btn" onclick="el(\'mkForm\').innerHTML=\'\'">Vazgeç</button><span class="msg" id="m_msg"></span></div><div class="small mut">İsim girildiğinde “isim bekliyor” işareti kalkar. Kanal markası aktifleşmesi ayrıca sorulur.</div></div>';}
+async function mkKaydet(kod){var m=S.mk.markalar.find(function(x){return x.kod===kod}),ad=el('m_ad').value.trim();var v={kod:kod,alan_adi:el('m_alan').value,iletisim_adi:el('m_imza').value};if(ad){v.ad=ad;if(m.isim_bekliyor)v.isim_bekliyor=false;}
+  var r=await ki('marka_kaydet',v);if(r.hata||!r.tamam){el('m_msg').className='msg b';el('m_msg').textContent=r.hata||'kaydedilemedi';return;}CIZ.marka();}
+
+if(new URLSearchParams(location.search).get('embed'))document.body.classList.add('embed');
+(function(){var v=new URLSearchParams(location.search).get('v');if(v&&CIZ[v])cur=v;})();
+PV.hazir.then(function(){tabCiz();CIZ[cur]();});
+</script>
+</body>
+</html>

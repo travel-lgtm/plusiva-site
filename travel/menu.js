@@ -25,7 +25,20 @@ var MENU=[
   {id:'incoming',ad:'Incoming (DMC)',d:'Faz 1 MENA (Arap) pazarı, Avrupa Faz 2; EN/AR programlar ve fiyat listeleri; yabancı acente kontratları; private MENA.'},
   {id:'mice',ad:'MICE & özel gruplar',d:'Toplantı/kongre/teşvik; salon, ekipman, gala, transfer, konaklama blokları; plusiva.org.tr işleri.'},
   {id:'fiyatkural',ad:'Fiyatlandırma kuralları',src:'../panel/islem/?embed=1&v=fiyat',d:'Kâr/free/kademe/kur/çocuk/kanal/segment kuralları; fiyat motoru.'},
-  {id:'sezon',ad:'Fiyat listeleri & sezonlar',d:'Sezon tanımları, dönem farkları, geçerlilik, toplu güncelleme.'}]},
+  {id:'sezon',ad:'Fiyat listeleri & sezonlar',src:'../panel/katalog/?embed=1&v=takvim',d:'Sezon tanımları, dönem farkları, geçerlilik, toplu güncelleme.'}]},
+ {grp:'Katalog',items:[
+  {id:'ozellik',ad:'Özellik sözlüğü',src:'../panel/katalog/?embed=1&v=ozellik',d:'Otel, oda, araç, aktivite, restoran, gemi özellikleri; filtre ve ayırt edici işaretleri.'},
+  {id:'kuralset',ad:'Kural setleri',src:'../panel/katalog/?embed=1&v=kural',d:'İptal, ödeme, opsiyon, çocuk, oda, katılım, değişiklik, kısıt — sürümlü, onaylı.'},
+  {id:'bolge',ad:'Yerler & bölgeler',src:'../panel/katalog/?embed=1&v=bolge',d:'Ülke → bölge → şehir → semt ağacı.'},
+  {id:'takvimsoz',ad:'Sezonlar & özel günler',src:'../panel/katalog/?embed=1&v=takvim',d:'İki sezon (K-32), bayram ve resmî tatiller.'},
+  {id:'pazarprofil',ad:'Pazar profilleri',src:'../panel/katalog/?embed=1&v=pazar',d:'Pazar başına özellik ağırlıkları (başlangıç varsayımı).'},
+  {id:'uruntip',ad:'Ürün tipleri',src:'../panel/katalog/?embed=1&v=tipler',d:'18 turizm tipi (K-67) ve diğer iş kolları.'},
+  {id:'vergikural',ad:'Vergi kuralları',src:'../panel/katalog/?embed=1&v=vergi',d:'Kalem × ifa yeri × KDV; mali müşavir teyidi bekliyor.'},
+  {id:'katotel',ad:'Oteller (katalog kartı)',d:'Dilim C: otel kartı, odalar, pansiyon, salon, görsel izni, pazar metinleri, dört yüz önizlemesi.'},
+  {id:'kataraç',ad:'Araç tipleri & koltuk planı',d:'Dilim D: araç tipleri, koltuk planı düzenleyici, transfer bölgeleri.'},
+  {id:'katakt',ad:'Aktiviteler & seanslar',d:'Dilim D: müze, giriş, balon, tekne, etkinlik; seans ve kota.'},
+  {id:'katrest',ad:'Restoranlar & menüler',d:'Dilim D: set menüler, helal yazılı teyit alanı.'},
+  {id:'katek',ad:'Ek ürünler',d:'Dilim B: koltuk, bagaj, oda yükseltme, sigorta yükseltme, özel transfer…'}]},
  {grp:'Operasyon',items:[
   {id:'takvim',ad:'Sefer takvimi',d:'Aylık/haftalık: kalkış/dönüş, karar tarihleri, ekip ve araç atamaları, çakışma uyarıları.'},
   {id:'seferdosya',ad:'Sefer dosyaları',d:'Yolcu/rooming/uçuş listeleri, atamalar, tedarikçi listeleri, program kitapçığı, kontrol listeleri (T-30/14/7/1).'},
@@ -85,7 +98,7 @@ var MENU=[
  {grp:'Hukuk & uyum',items:[
   {id:'sozlesme',ad:'Sözleşmeler & yasal metinler',d:'Paket tur, mesafeli satış, ön bilgilendirme, KVKK, çerez, B2B, tedarikçi, incoming; e-onay kayıtları.'},
   {id:'tursab',ad:'TÜRSAB & sigorta',d:'Belge, DDS, bildirimler, seyahat güvence; zorunlu ve seyahat sigortaları.'},
-  {id:'iptalkural',ad:'İptal-iade kuralları',d:'Ürün bazlı kurallar, yasal süreler, tüketici şikayeti dosyaları.'},
+  {id:'iptalkural',ad:'İptal-iade kuralları',src:'../panel/katalog/?embed=1&v=kural',d:'Ürün bazlı kurallar, yasal süreler, tüketici şikayeti dosyaları.'},
   {id:'mevzuat',ad:'Mevzuat & yurt dışı gereklilikler',d:'Vergi/fatura, Schengen, Suudi, ETIAS; YZ mevzuat takibi.'}]},
  {grp:'Denetim & kalite',items:[
   {id:'bulgular',ad:'Bulgular',src:'../panel/islem/?embed=1&v=bulgu'},
@@ -120,8 +133,8 @@ var MENU=[
   {id:'yonlendirme',ad:'Alan adı yönlendirmeleri',d:'Eski adres → yeni adres; eski anahtarların kapatılması.'}]},
  {grp:'Yönetim',items:[
   {id:'kullanicilar',ad:'Kullanıcılar & roller',src:'../panel/kullanicilar/?embed=1'},
-  {id:'markalar',ad:'Markalar & kurumsal yapı',d:'Plusiva Travel, Artı Tatil, Kültür Turları, umre markası; logo, renk, iletişim, imza (marka adı); çatı marka.'},
-  {id:'sirket',ad:'Şirket bilgileri',d:'Unvan, vergi, adres, TÜRSAB, banka, POS.'},
+  {id:'markalar',ad:'Markalar & kurumsal yapı',src:'../panel/katalog/?embed=1&v=marka',d:'Plusiva Travel, Artı Tatil, Kültür Turları, umre markası; logo, renk, iletişim, imza (marka adı); çatı marka.'},
+  {id:'sirket',ad:'Şirket bilgileri',src:'../panel/katalog/?embed=1&v=marka',d:'Unvan, vergi, adres, TÜRSAB, banka, POS.'},
   {id:'entegrasyon',ad:'Entegrasyonlar',d:'WhatsApp, mail, POS, e-fatura, ImageKit, YouTube, Google giriş, TCMB, Paximum, Mikro, Google Ads/Meta.'},
   {id:'ayarlar',ad:'Ayarlar & boyutlar',tip:'ayarlar'},
   {id:'kurulum',ad:'Kurulum durumu',src:'../panel/islem/?embed=1&v=kurulum'},

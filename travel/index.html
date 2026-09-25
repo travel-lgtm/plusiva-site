@@ -41,6 +41,9 @@ table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;fo
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}.chip{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:12.5px;background:#fff}.chip.off{opacity:.45;text-decoration:line-through}
 textarea.json{width:100%;min-height:120px;font-family:ui-monospace,monospace;font-size:12px;border:1px solid var(--line);border-radius:8px;padding:8px}
 .login{max-width:400px;margin:14vh auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}
+.gara{position:relative}.gara input{padding:7px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13px;width:280px;max-width:32vw}
+.gsonuc{position:absolute;top:38px;left:0;width:400px;max-width:90vw;max-height:60vh;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:30;display:none}.gsonuc.on{display:block}
+.gs{padding:8px 12px;border-bottom:1px solid #eef0ee;cursor:pointer}.gs:hover{background:var(--acc2)}.gs b{font-size:13px}.gs .t{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
 </style>
 </head>
 <body>
@@ -52,7 +55,7 @@ textarea.json{width:100%;min-height:120px;font-family:ui-monospace,monospace;fon
   <div class="side-foot" id="foot"></div>
 </aside>
 <main>
-  <div class="top"><h1 id="baslik">Genel bakış</h1><span class="crumb" id="crumb"></span><span class="sp"></span><span class="badge" id="onaySay" style="display:none"></span><select id="turSel" onchange="turDegisti()"></select><button class="btn" onclick="yenile()">Yenile</button><button class="btn" onclick="PV.cikis()">Çıkış</button></div>
+  <div class="top"><h1 id="baslik">Genel bakış</h1><span class="crumb" id="crumb"></span><div class="gara"><input id="gAra" placeholder="Ara: dosya no, yolcu, telefon, PNR, tedarikçi…" oninput="gAraGecikme()" onfocus="gAraGecikme()" autocomplete="off"><div class="gsonuc" id="gSonuc"></div></div><span class="sp"></span><span class="badge" id="onaySay" style="display:none"></span><select id="turSel" onchange="turDegisti()"></select><button class="btn" onclick="yenile()">Yenile</button><button class="btn" onclick="PV.cikis()">Çıkış</button></div>
   <div class="content">
     <div id="home" class="pane on"></div>
     <div id="plan" class="pane"></div>
@@ -150,6 +153,14 @@ function ayarCiz(){
 }
 function ayarDoldur(){var k=document.getElementById('ayarSec').value;document.getElementById('ayarMetin').value=JSON.stringify(A[k].deger,null,2);}
 async function ayarKaydet(){var k=document.getElementById('ayarSec').value;var v;try{v=JSON.parse(document.getElementById('ayarMetin').value)}catch(e){document.getElementById('ayarMsg').textContent='JSON hatalı';return;}var r=await islem('ayar_yaz',{anahtar:k,deger:v});document.getElementById('ayarMsg').textContent=r&&r.tamam?'kaydedildi':(r&&r.hata)||'hata';A=await islem('ayarlar');ayarCiz();}
+var gT=null;function gAraGecikme(){clearTimeout(gT);gT=setTimeout(gAra,250);}
+async function gAra(){var q=document.getElementById('gAra').value.trim(),bx=document.getElementById('gSonuc');if(q.length<2){bx.classList.remove('on');return;}
+  var r=await rpc('katalog_islem',{p_islem:'ara',p_veri:{q:q},p_anahtar:(window.PV&&PV.token)?null:(localStorage.getItem('pv_anahtar')||null)});
+  var L=(r&&r.sonuc)||[];window._gs=L;
+  bx.innerHTML=L.length?L.map(function(s,i){return '<div class="gs" onclick="gGit('+i+')"><div class="t">'+esc(s.tip)+(s.sinif&&s.sinif!=='gercek'?' · '+esc(s.sinif):'')+'</div><b>'+esc(s.baslik)+'</b> <span class="small mut">'+esc(s.alt||'')+'</span></div>'}).join(''):'<div class="gs small mut">Sonuç yok.</div>';
+  bx.classList.add('on');}
+function gGit(i){var s=(window._gs||[])[i];if(!s)return;document.getElementById('gSonuc').classList.remove('on');if(s.tur_id){var sel=document.getElementById('turSel');sel.value=s.tur_id;document.getElementById('fr').removeAttribute('data-src');}git(s.menu);}
+document.addEventListener('click',function(e){if(!e.target.closest||!e.target.closest('.gara')){var g=document.getElementById('gSonuc');if(g)g.classList.remove('on');}});
 PV.hazir.then(load);
 </script>
 </body>
