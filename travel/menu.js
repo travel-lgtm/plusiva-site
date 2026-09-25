@@ -14,6 +14,7 @@ var MENU=[
   {id:'b2e',ad:'B2E kurumsal programlar',d:'Kurum anlaşması, çalışanlara özel fiyat/kod, kapalı vitrin.'},
   {id:'kampanya',ad:'Kampanyalar, kuponlar, sadakat',d:'Kampanya (dönem, kapsam, indirim), kupon kodları, sadakat puanı kuralları.'}]},
  {grp:'Ürünler',items:[
+  {id:'urunkarti',ad:'Ürün kartı (bileşenler & maddeler)',src:'../panel/katalog/?embed=1&v=urun',d:'Ürün → sefer → hizmet satırları, dahil/hariç maddeleri, kanal ve kural bağları, tutarlılık denetimi.'},
   {id:'turlar',ad:'Turlar (katalog & seferler)',src:'../panel/islem/?embed=1&v=paket',d:'Ürün kartı, program (TR/EN/AR), ön paket, seferler, varyantlar (bireysel/grup/okul/kurum/private, muhafazakâr, seviye), kategoriler, yayın.'},
   {id:'umre',ad:'Umre & helal turlar',d:'Ayrı marka ve site (umre.plusiva.com, geçici). Umre programları, helal tatil, Nusuk/vize, din görevlisi, marka kararı.'},
   {id:'oteller',ad:'Oteller',d:'Otel kartları, tekil otel satış sayfaları, fiyat listeleri (sezon/oda/pansiyon/çocuk).'},
@@ -36,9 +37,9 @@ var MENU=[
   {id:'vergikural',ad:'Vergi kuralları',src:'../panel/katalog/?embed=1&v=vergi',d:'Kalem × ifa yeri × KDV; mali müşavir teyidi bekliyor.'},
   {id:'katotel',ad:'Oteller (katalog kartı)',d:'Dilim C: otel kartı, odalar, pansiyon, salon, görsel izni, pazar metinleri, dört yüz önizlemesi.'},
   {id:'kataraç',ad:'Araç tipleri & koltuk planı',d:'Dilim D: araç tipleri, koltuk planı düzenleyici, transfer bölgeleri.'},
-  {id:'katakt',ad:'Aktiviteler & seanslar',d:'Dilim D: müze, giriş, balon, tekne, etkinlik; seans ve kota.'},
+  {id:'katakt',ad:'Aktiviteler, girişler & ulaşım',src:'../panel/katalog/?embed=1&v=aktivite',d:'Anıt/müze/gösteri kayıtları, resmî ücretler (kaynak linkli), hatlar, araç, sigorta, genel kalemler. Seans ve kota Dilim D.'},
   {id:'katrest',ad:'Restoranlar & menüler',d:'Dilim D: set menüler, helal yazılı teyit alanı.'},
-  {id:'katek',ad:'Ek ürünler',d:'Dilim B: koltuk, bagaj, oda yükseltme, sigorta yükseltme, özel transfer…'}]},
+  {id:'katek',ad:'Ek ürünler',src:'../panel/katalog/?embed=1&v=ekurun',d:'Tek başına satılmayan ekstralar; kaynaksız fiyatla satışa açılmaz.'}]},
  {grp:'Operasyon',items:[
   {id:'takvim',ad:'Sefer takvimi',d:'Aylık/haftalık: kalkış/dönüş, karar tarihleri, ekip ve araç atamaları, çakışma uyarıları.'},
   {id:'seferdosya',ad:'Sefer dosyaları',d:'Yolcu/rooming/uçuş listeleri, atamalar, tedarikçi listeleri, program kitapçığı, kontrol listeleri (T-30/14/7/1).'},
@@ -54,7 +55,7 @@ var MENU=[
   {id:'saha',ad:'Saha (tur sırasında)',d:'Ek gider (fiş fotoğrafı), olay bildirimi, şikayet, tur kapama ve harcama raporu.'},
   {id:'kriz',ad:'Kriz & acil durum',d:'Protokoller (hastalık, kayıp, kaza, iptal, afet), acil iletişim, kriz kaydı.'}]},
  {grp:'Tedarik & kontratlar',items:[
-  {id:'tedarikci',ad:'Tedarikçi kartları & bölge ağacı',d:'Ülke → bölge → şehir → hizmet tipi; kart, durum (aday → yazışıldı → teklif → kontratlı), toplu araştırma görevi.'},
+  {id:'tedarikci',ad:'Tedarikçi kartları & bölge ağacı',src:'../panel/katalog/?embed=1&v=tedarik',d:'Ülke → bölge → şehir → hizmet tipi; kart, durum (aday → yazışıldı → teklif → kontratlı), toplu araştırma görevi.'},
   {id:'kontratlar',ad:'Kontratlar & fiyat kartları',src:'../panel/kontrat/?embed=1'},
   {id:'yazisma',ad:'Tedarikçi yazışmaları',d:'Şablonlar (TR/EN/AR): sezon fiyat talebi, spot, rezervasyon, teyit, değişiklik, iptal; gönderim onayı.'},
   {id:'tedpuan',ad:'Tedarikçi puanları',d:'Tur sonrası değerlendirme, sorun kayıtları, teyit süresi, fiyat tutarlılığı.'}]},
