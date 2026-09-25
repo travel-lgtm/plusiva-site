@@ -71,6 +71,8 @@
   var sirala = document.getElementById('sirala');
   var trk = function (s) { return String(s || '').toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ı/g, 'i'); };
   var hepsi = [].slice.call(liste.querySelectorAll('.kart'));
+  var kutu = document.querySelector('.suzgec-kutu');
+  if (kutu && window.matchMedia && window.matchMedia('(max-width:900px)').matches && !location.search) kutu.removeAttribute('open');
 
   function secili(ad) { return [].map.call(form.querySelectorAll('input[name=' + ad + ']:checked'), function (i) { return i.value; }); }
 
