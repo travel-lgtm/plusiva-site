@@ -1,10 +1,14 @@
 var MENU=[
  {grp:'Genel bakış',items:[{id:'home',ad:'Genel bakış',tip:'home'}]},
  {grp:'Satış',items:[
-  {id:'talepler',ad:'Talepler (tek kuyruk)',d:'Site, WhatsApp, mail, telefon, sosyal medya, B2B — tek kuyruk. Durum: yeni → yanıtlandı → teklif → opsiyon → rezervasyon → kaybedildi. Satış YZ okur, misafiri eşler, ilk yanıtı taslak yazar, takip planlar.'},
+  {id:'talepler',ad:'Talepler (tek kuyruk)',src:'../panel/satis/?embed=1&v=talepler',d:'Site, WhatsApp, mail, telefon, sosyal medya, B2B — tek kuyruk. Durum: yeni → yanıtlandı → teklif → opsiyon → rezervasyon → kaybedildi. Satış YZ okur, misafiri eşler, ilk yanıtı taslak yazar, takip planlar.'},
   {id:'teklifler',ad:'Teklifler',d:'Teklif kartı, sürümler, misafir linki, kabul → dosya. Bireysel/grup anlık fiyat; okul/kurum/private/MICE simülasyonla, onaya düşer.'},
   {id:'grupteklif',ad:'Grup & kurumsal teklifler',d:'Okul (öğretmen free, veli formu), kurum/dernek, private program tasarımı, MICE, senaryo karşılaştırma (3/4/5 yıldız, otobüs/uçak).'},
-  {id:'dosya',ad:'Rezervasyonlar / dosyalar',src:'../panel/islem/?embed=1&v=dosya',d:'Dosya kartı: yolcular, odalar, istisnalar, ödeme planı, belgeler, zaman çizelgesi; opsiyon → kapora → kesin; değişiklik ve iptal-iade.'},
+  {id:'dosya',ad:'Rezervasyonlar / dosyalar',src:'../panel/satis/?embed=1&v=dosyalar',d:'Dosya kartı: ödeme planı, ödemeler ve onay, makbuz, takip bağlantısı, onaylar, yolcular, zaman çizelgesi; opsiyon → kapora → ödeme tamam; opsiyon uzatma.'},
+  {id:'mesajlar',ad:'Misafire mesajlar',src:'../panel/satis/?embed=1&v=mesajlar',d:'Opsiyon, hatırlatma, ödeme mesajları hazır metin; WhatsApp bağlantısı gelene kadar tek tıkla kendi WhatsApp\'ınızdan gönderin.'},
+  {id:'yenitalep',ad:'Yeni talep (telefon/elden)',src:'../panel/satis/?embed=1&v=yeni',d:'Telefonla gelen talebi aynı kurallarla kaydet.'},
+  {id:'havale',ad:'Havale bilgisi',src:'../panel/satis/?embed=1&v=havale',d:'Misafirin takip sayfasında görünen banka / IBAN — yalnız yönetici girer.'},
+  {id:'dosyaeski',ad:'Eski dosya ekranı (istisnalar)',src:'../panel/islem/?embed=1&v=dosya',d:'Yolcu bazlı istisnalar (eski model).'},
   {id:'misafirler',ad:'Misafirler (misafir kartları)',d:'Kişi/kurum misafir kartı, zaman çizelgesi, segmentler, KVKK rıza; YZ mükerrer birleştirme ve eksik tamamlama.'},
   {id:'b2b',ad:'B2B acenteler (Faz 2: MVP)',d:'Faz 2 (F-07): acente net/komisyonlu fiyatı görür, talep ve isim listesi atar; cari ve hakediş sonrası. Acente kartı, komisyon/net fiyat, acente paneli (fiyat listesi, rezervasyon, ekstre), hakediş.'},
   {id:'b2e',ad:'B2E kurumsal programlar',d:'Kurum anlaşması, çalışanlara özel fiyat/kod, kapalı vitrin.'},

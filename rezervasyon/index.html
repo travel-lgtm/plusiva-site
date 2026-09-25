@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Rezervasyonum — Plusiva Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0d1b2e;--bronz:#c5a059;--krem:#faf7f0;--ink:#1d2433;--mut:#5f5a4e;--line:#e5e0d4;--ok:#1f5a3a;--ok2:#e6f1eb;--warn:#7a4a00;--warn2:#fff4de;--bad:#8a2a2a;--bad2:#fdecea}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--krem);color:var(--ink);font-size:17px;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+header .m{font-family:'Playfair Display',serif;font-size:24px;font-weight:700}header a{color:#fff;background:#1f7a4d;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px}
+.wrap{max-width:980px;margin:0 auto;padding:20px 16px 60px}
+h1{font-family:'Playfair Display',serif;color:var(--navy);font-size:30px;margin:6px 0}
+.ust{font-size:13px;font-weight:800;letter-spacing:2px;color:#8a6a2f}
+.adim{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}.adim span{flex:1 1 120px;padding:10px;border-radius:10px;background:#e9e4d8;color:var(--mut);font-size:14px;font-weight:700;text-align:center}.adim span.g{background:var(--ok);color:#fff}.adim span.a{background:var(--navy);color:#fff;outline:3px solid var(--bronz)}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}.card h2{margin:0 0 12px;font-size:20px;color:var(--navy)}
+table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:10px 6px;border-bottom:1px solid #eee7d8;text-align:left}th{font-size:13px;color:var(--mut)}.num{text-align:right;white-space:nowrap}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:700;background:#eee;color:var(--mut)}.pill.odendi,.pill.alindi{background:var(--ok2);color:var(--ok)}.pill.bekliyor{background:#e8eef8;color:#1e3a5f}.pill.gecikti{background:var(--bad2);color:var(--bad)}
+.note{padding:14px 16px;border-radius:12px;background:var(--warn2);color:var(--warn);font-size:15px;margin-bottom:12px}.okn{background:var(--ok2);color:var(--ok)}
+.btn{display:inline-block;border:0;background:var(--bronz);color:var(--navy);padding:14px 18px;border-radius:12px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;text-decoration:none;min-height:48px}.btn.ghost{background:#fff;border:2px solid var(--navy)}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cfc7b4;border-radius:10px;font-family:inherit;font-size:16px;background:#fff}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700;color:var(--mut)}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.yolcu{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px}
+.cb{flex-direction:row;align-items:flex-start;gap:10px;font-weight:600;color:var(--ink);font-size:16px}.cb input{width:22px;height:22px;margin-top:2px}
+.sayac{font-size:28px;font-weight:800;color:var(--navy)}
+.test{background:#f1e8ff;color:#5b2a86;padding:8px 12px;border-radius:10px;font-weight:700;margin-bottom:12px}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
+</style>
+</head>
+<body>
+<header><span class="m">Plusiva Travel</span><a id="wa" href="#" target="_blank" rel="noopener">WhatsApp'tan yaz</a></header>
+<div class="wrap" id="app"><p>Yükleniyor…</p></div>
+<footer>Plusiva Travel · TÜRSAB A Grubu Belge No 7378</footer>
+<script>
+var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
+var T=new URLSearchParams(location.search).get('t')||'', V=null;
+var AD={opsiyon:'Opsiyon',kapora:'Kapora alındı · yer kesin',kesin:'Ödeme tamam',belgeler_tamam:'Belgeler hazır',turda:'Turda',tamamlandi:'Tamamlandı'};
+var SIRA=['opsiyon','kapora','kesin','belgeler_tamam','turda','tamamlandi'];
+var PD={odendi:'Ödendi',bekliyor:'Bekliyor',kismi:'Kısmen ödendi',gecikti:'Gecikti',alindi:'Alındı'};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+function para(n,p){if(n==null)return '—';return Number(n).toLocaleString('tr-TR',{maximumFractionDigits:2})+' '+({EUR:'€',USD:'$',TRY:'TL'}[p]||p||'');}
+function tarih(d,s){if(!d)return '—';return new Date(d).toLocaleString('tr-TR',s?{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}:{day:'2-digit',month:'long',year:'numeric'});}
+async function rpc(fn,b){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify(b)});return r.json();}
+async function islem(ad,veri){return rpc('takip_islem',{p_token:T,p_islem:ad,p_veri:Object.assign({tarayici:navigator.userAgent},veri||{})});}
+async function yukle(){
+  V=await rpc('takip_veri',{p_token:T});var a=document.getElementById('app');
+  if(!V||V.hata){a.innerHTML='<div class="card"><h2>Rezervasyon bulunamadı</h2><p>Bağlantı eksik ya da geçersiz olabilir. WhatsApp\'tan yazın, yardımcı olalım.</p></div>';return;}
+  if(V.whatsapp)document.getElementById('wa').href='https://wa.me/'+V.whatsapp+'?text='+encodeURIComponent(V.dosya_no+' numaralı rezervasyonum hakkında');
+  var pb=V.para_birimi,h='';
+  if(V.test)h+='<div class="test">Bu bir TEST kaydıdır.</div>';
+  h+='<div class="ust">REZERVASYONUNUZ · '+esc(V.dosya_no)+'</div><h1>'+esc(V.tur.ad)+'</h1><div>'+tarih(V.tur.baslangic)+' – '+tarih(V.tur.bitis)+' · '+V.kisi+' kişi · Toplam <b>'+para(V.toplam,pb)+'</b></div>';
+  var ix=SIRA.indexOf(V.durum);
+  if(V.durum==='opsiyon_dustu'||V.durum==='iptal'){h+='<div class="note" style="margin-top:14px">'+(V.durum==='iptal'?'Bu rezervasyon iptal edildi.':'Opsiyon süresi doldu ve yer serbest bırakıldı. Hâlâ ilgileniyorsanız WhatsApp\'tan yazın.')+'</div>';}
+  else h+='<div class="adim">'+SIRA.map(function(s,i){return '<span class="'+(i<ix?'g':(i===ix?'a':''))+'">'+AD[s]+'</span>'}).join('')+'</div>';
+  if(V.opsiyon_bitis){h+='<div class="card"><h2>Yeriniz opsiyonda</h2><div>Opsiyonun bitişine kalan süre:</div><div class="sayac" id="sayac"></div><p>Yerinizi kesinleştirmek için <b>'+para(V.kapora,pb)+'</b> kapora yeterli. Bu adıma kadar hiçbir ücret alınmadı.</p></div>';}
+  h+='<div class="card"><h2>Ödeme planı</h2><table><tr><th>Kalem</th><th>Son gün</th><th class="num">Tutar</th><th>Durum</th></tr>'+V.plan.map(function(p){return '<tr><td>'+(p.tip==='kapora'?'Kapora':p.no+'. taksit')+'</td><td>'+tarih(p.vade)+'</td><td class="num">'+para(p.tutar,pb)+'</td><td><span class="pill '+esc(p.durum)+'">'+esc(PD[p.durum]||p.durum)+'</span></td></tr>'}).join('')+'</table><p style="font-size:15px;color:var(--mut)">Ödenen '+para(V.odenen,pb)+' · Kalan <b>'+para(V.kalan,pb)+'</b>. TL ile ödemede ödeme günündeki kur uygulanır. Vade farkı yoktur, kredi kartı gerekmez.</p>'
+    +(V.odemeler.length?'<h2 style="margin-top:14px">Ödemeleriniz</h2><table>'+V.odemeler.map(function(o){return '<tr><td>'+tarih(o.tarih,1)+'</td><td class="num">'+para(o.tutar,o.para_birimi)+'</td><td>'+(o.durum==='alindi'?'<span class="pill alindi">Alındı · '+esc(o.makbuz_no||'')+'</span>':'<span class="pill bekliyor">Kontrol ediliyor</span>')+'</td></tr>'}).join('')+'</table>':'')+'</div>';
+  h+='<div class="card"><h2>Havale / EFT</h2>'+(V.havale?'<table><tr><td>Banka</td><td><b>'+esc(V.havale.banka||'')+'</b></td></tr><tr><td>Alıcı</td><td><b>'+esc(V.havale.alici||'')+'</b></td></tr>'+(V.havale.iban_eur?'<tr><td>EUR IBAN</td><td><b>'+esc(V.havale.iban_eur)+'</b></td></tr>':'')+(V.havale.iban_try?'<tr><td>TL IBAN</td><td><b>'+esc(V.havale.iban_try)+'</b></td></tr>':'')+'<tr><td>Açıklama</td><td><b>'+esc(V.dosya_no)+'</b> '+esc(V.havale.aciklama||'')+'</td></tr></table>':'<div class="note">Havale bilgisi WhatsApp\'tan iletilecek.</div>')
+    +'<h2 style="margin-top:16px">Ödeme yaptım</h2><div class="g4"><label>Tutar<input id="d_tutar" type="number" step="0.01" inputmode="decimal"></label><label>Para birimi<select id="d_pb"><option>'+esc(pb)+'</option><option>TRY</option></select></label><label>Dekont / açıklama<input id="d_ref"></label></div><p><button class="btn" onclick="dekont()">Bildir</button></p><div id="d_sonuc"></div></div>';
+  if(V.sozlesme.gerekli||V.sozlesme.onaylandi){h+='<div class="card"><h2>Paket tur sözleşmesi</h2>'+(V.sozlesme.onaylandi?'<div class="note okn">Sözleşmeyi onayladınız. Teşekkür ederiz.</div>':(V.sozlesme.hazir?'<label class="cb"><input type="checkbox" id="s_cb"> Paket tur sözleşmesini okudum ve onaylıyorum. Onay tarihi ve sözleşme sürümü kaydedilir.</label><p><button class="btn" onclick="sozlesme()">Onayla</button></p>':'<div class="note">Sözleşme metni hazırlanıyor; hazır olunca size bildireceğiz.</div>'))+'</div>';}
+  if(ix>=1){h+='<div class="card"><h2>Yolcu bilgileri</h2><p style="font-size:15px;color:var(--mut)">Adları pasaporttaki gibi yazın. Pasaport, dönüş tarihinden sonra en az 6 ay geçerli olmalı.</p><div id="yl"></div><p><button class="btn ghost" onclick="yolcuEkle()">+ Yolcu</button> <button class="btn" onclick="yolcuKaydet()">Kaydet</button></p><div id="y_sonuc"></div>'+(V.yolcu_sayisi?'<p style="font-size:14px;color:var(--ok)">Kayıtlı yolcu: '+V.yolcu_sayisi+'</p>':'')+'</div>';}
+  h+='<div class="card"><h2>İptal etmek isterseniz</h2><p style="font-size:15px">'+(V.iptal.kesinti_oran===0?'Bugün iptal ederseniz kalkışa '+V.iptal.kalkisa_gun+' gün olduğu için <b>tam iade</b> yapılır.':'Bugün iptalde kesinti oranı %'+Math.round(V.iptal.kesinti_oran*100)+'; iade tahmini '+para(V.iptal.iade,pb)+'.')+' Kesin tutar size ayrıca bildirilir.</p><label>İptal nedeni (isteğe bağlı)<textarea id="i_neden" rows="2"></textarea></label><p><button class="btn ghost" onclick="iptal()">İptal talebi gönder</button></p><div id="i_sonuc"></div></div>';
+  a.innerHTML=h;
+  if(ix>=1){yolcuEkle();}
+  if(V.opsiyon_bitis){sayac();setInterval(sayac,1000);}
+}
+function sayac(){var e=document.getElementById('sayac');if(!e)return;var ms=new Date(V.opsiyon_bitis)-new Date();if(ms<=0){e.textContent='Süre doldu';return;}var s=Math.floor(ms/1000),g=Math.floor(s/86400),sa=Math.floor(s%86400/3600),dk=Math.floor(s%3600/60);e.textContent=(g?g+' gün ':'')+sa+' sa '+dk+' dk';}
+function yolcuEkle(){var l=document.getElementById('yl');if(!l)return;if(l.children.length>=V.kisi)return;var d=document.createElement('div');d.className='yolcu';d.innerHTML='<div class="g4"><label>Ad<input class="y_ad"></label><label>Soyad<input class="y_soyad"></label><label>Doğum tarihi<input class="y_dt" type="date"></label><label>Cinsiyet<select class="y_c"><option value="">—</option><option value="K">Kadın</option><option value="E">Erkek</option></select></label><label>Pasaport no<input class="y_pno"></label><label>Pasaport geçerlilik<input class="y_pb" type="date"></label></div>';l.appendChild(d);}
+async function yolcuKaydet(){var y=[].map.call(document.querySelectorAll('.yolcu'),function(d){function v(c){return d.querySelector(c).value}return {ad:v('.y_ad'),soyad:v('.y_soyad'),dogum_tarihi:v('.y_dt'),cinsiyet:v('.y_c'),pasaport_no:v('.y_pno'),pasaport_bitis:v('.y_pb')}});var r=await islem('yolcu_kaydet',{yolcular:y});document.getElementById('y_sonuc').innerHTML='<div class="note '+(r.hata?'':'okn')+'">'+esc(r.hata||('Kaydedildi: '+r.kaydedilen+' yolcu'))+'</div>';}
+async function dekont(){var t=document.getElementById('d_tutar').value;if(!t)return;var r=await islem('dekont_bildir',{tutar:t,para_birimi:document.getElementById('d_pb').value,referans:document.getElementById('d_ref').value});document.getElementById('d_sonuc').innerHTML='<div class="note '+(r.hata?'':'okn')+'">'+esc(r.hata||'Bildiriminiz alındı; ödemeniz kontrol edildikten sonra makbuzunuz burada görünecek.')+'</div>';}
+async function sozlesme(){if(!document.getElementById('s_cb').checked)return;var r=await islem('sozlesme_onay');if(r.hata){alertBox(r.hata);return;}yukle();}
+function alertBox(t){var d=document.createElement('div');d.className='note';d.textContent=t;document.getElementById('app').prepend(d);}
+async function iptal(){var r=await islem('iptal_talebi',{neden:document.getElementById('i_neden').value});document.getElementById('i_sonuc').innerHTML='<div class="note '+(r.hata?'':'okn')+'">'+esc(r.hata||'İptal talebiniz alındı; size en kısa sürede dönülecek.')+'</div>';}
+yukle();
+</script>
+</body>
+</html>
