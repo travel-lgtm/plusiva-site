@@ -1,0 +1,25 @@
+# Plusiva dış canlılık kontrolü (GUV-DISCANLILIK) — Yapıcı yazdı.
+# Sistem 30 dakikada bir dışarıdan yoklanır. Sağlıksızsa iş akışı başarısız olur;
+# GitHub depo sahibine (travel@plusiva.com) "workflow failed" maili gönderir.
+name: Dis canlilik
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+permissions: {}
+jobs:
+  kontrol:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Saglik kontrolu
+        run: |
+          for i in 1 2 3; do
+            kod=$(curl -s -o yanit.json -w '%{http_code}' -H 'x-kaynak: github-actions' --max-time 30 https://wlfabfpjvqfyvhsvldll.supabase.co/functions/v1/saglik || echo 000)
+            cat yanit.json 2>/dev/null || true
+            echo " HTTP $kod"
+            if [ "$kod" = "200" ]; then exit 0; fi
+            sleep 20
+          done
+          echo "Plusiva sistemi SAGLIKSIZ ya da erisilemiyor"
+          exit 1
