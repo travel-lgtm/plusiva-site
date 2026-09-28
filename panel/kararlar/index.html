@@ -58,7 +58,7 @@ var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqk
 var O=null, K=[], F=[], D=[], mod='kararlar', fl={bolum:'',durum:'bekliyor',ara:''}, ffl={durum:'',ara:''};
 var BOLUM={A:'A · Dilim 1 için ŞART ★',B:'B · Para / politika varsayılanları',C:'C · Yapı ve sahiplik',D:'D · Entegrasyon, hesap, kimlik (senden alınacak)',E:'E · Sonraki fazlar',F:'F · Çelişkiler'};
 var DURUM={bekliyor:'bekliyor',cevaplandi:'cevaplandı',beklemede:'beklesin',uygulandi:'uygulandı',iptal:'iptal',tartisiliyor:'tartışılıyor',gorus_bekleniyor:'görüş bekleniyor',gorus_alindi:'görüş alındı',karar:'karar verildi',ret:'ret'};
-var DEPT=['D00 Genel bakış','D01 Satış','D02 Ürünler','D03 Operasyon','D04 Tedarik','D05 Muhasebe','D06 Pazarlama','D07 İletişim','D08 Misafir','D09 İK','D10 Hukuk','D11 Denetim','D12 YZ ekibi','D13 Ar-Ge','D14 Raporlar','D16 Güvenlik','D17 Geçiş','D18 Yönetim'];
+var DEPT=['D00 Genel bakış','D01 Satış','D02 Ürünler','D03 Operasyon','D04 Tedarik','D05 Muhasebe','D06 Pazarlama','D07 İletişim','D08 Misafir','D09 İK','D10 Hukuk','D11 Denetim','D12 YZ kadrosu yönetimi','D13 Ar-Ge','D14 Raporlar','D16 Güvenlik','D17 Geçiş','D18 Yönetim'];
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]});}
 function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('tr-TR',{day:'2-digit',month:'short',year:'numeric'})}catch(e){return d}}
 function msg(t,sure){var m=document.getElementById('msg');m.textContent=t;m.style.display='block';clearTimeout(m._t);m._t=setTimeout(function(){m.style.display='none'},sure||2500);}

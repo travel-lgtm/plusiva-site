@@ -106,7 +106,7 @@ var MENU=[
   {id:'kontrollistesi',ad:'Kontrol listeleri',d:'Sefer öncesi/sonrası, dosya kapama, ay sonu muhasebe.'},
   {id:'kalite',ad:'Kalite puanları',d:'Sefer, tedarikçi, rehber, memnuniyet.'},
   {id:'olaygunlugu',ad:'Olay günlüğü',d:'Her değişiklik, kim/ne zaman; denetleyici kuralları ve eşikleri.'}]},
- {grp:'Yapay zekâ ekibi',items:[
+ {grp:'YZ kadrosu yönetimi',items:[
   {id:'kadroyz',ad:'Kadro kartları',d:'Satış, Rezervasyon, Operasyon, Tedarik, Muhasebe, Pazarlama, İletişim, Misafir ilişkileri, İK, Hukuk, Denetleyici, AR-GE, Raporlama, Güvenlik, Yapıcı: görev listesi, yetki, onay sınırı.'},
   {id:'gorevkuyrugu',ad:'Görev kuyruğu & onaylar',src:'../panel/islem/?embed=1&v=onay'},
   {id:'yetenekler',ad:'Yetenekler × sektör',src:'../panel/islem/?embed=1&v=kurulum'},
