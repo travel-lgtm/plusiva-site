@@ -139,7 +139,7 @@
       fetch(SB_URL+'/rest/v1/rpc/panel_giris_damgala',{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+PV.token},body:'{}'}).catch(function(){});
       kapat(); benRozet(); resolveHazir(); return;
     }
-    if(localStorage.getItem('pv_anahtar') || new URLSearchParams(location.search).get('anahtar')){ resolveHazir(); return; }
+    try{ localStorage.removeItem('pv_anahtar'); }catch(e){} /* GUV-MFA 28.09.2026: eski anahtarla giriş kapalı */
     overlay(); goster('giris');
     PV.sb.auth.onAuthStateChange(function(ev, ses){ if(ses && ses.access_token){ location.reload(); } });
   }
