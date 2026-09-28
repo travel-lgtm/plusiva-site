@@ -19,7 +19,7 @@
   var st=document.createElement('style'); st.textContent=css; document.head.appendChild(st);
 
   function el(id){ return document.getElementById(id); }
-  function goster(hangi){ ['giris','kayit','unut','yeni','onay'].forEach(function(k){ var e=el('pv_'+k); if(e) e.style.display = (k===hangi?'block':'none'); }); }
+  function goster(hangi){ ['giris','kayit','unut','yeni','onay','mfa'].forEach(function(k){ var e=el('pv_'+k); if(e) e.style.display = (k===hangi?'block':'none'); }); }
   function hata(m){ var e=el('pvErr'); e.textContent=m||''; e.style.display=m?'block':'none'; var o=el('pvOk'); o.style.display='none'; }
   function tamam(m){ var e=el('pvOk'); e.textContent=m||''; e.style.display=m?'block':'none'; var o=el('pvErr'); o.style.display='none'; }
   function guclu(p){ return p.length>=10 && /[a-z]/.test(p) && /[A-Z]/.test(p) && /[0-9]/.test(p); }
@@ -42,6 +42,9 @@
      +'<div id="pv_yeni" style="display:none"><h1>Yeni şifre</h1><div class="m">Yeni şifrenizi belirleyin.</div>'
        +'<input id="pvYP" type="password" placeholder="yeni şifre" autocomplete="new-password"><input id="pvYP2" type="password" placeholder="yeni şifre (tekrar)"><button class="acc" id="pvYeniBtn">Kaydet</button></div>'
      +'<div id="pv_onay" style="display:none"><h1>Onay bekleniyor</h1><div class="m">Hesabınız oluşturuldu; bir yönetici rolünüzü tanımlayınca panel açılır.</div><button id="pvCikis2">Çıkış</button></div>'
+     +'<div id="pv_mfa" style="display:none"><h1 id="pvMfaBaslik">İki adımlı doğrulama</h1><div class="m" id="pvMfaAc">Telefonundaki doğrulama uygulamasının (Google Authenticator vb.) gösterdiği 6 haneli kodu yaz.</div>'
+       +'<img id="pvQr" alt="QR kod" style="display:none;width:200px;height:200px;margin:6px auto;background:#fff">'
+       +'<input id="pvMfaKod" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6 haneli kod"><button class="acc" id="pvMfaBtn">Doğrula</button><span class="l" id="pvCikis3">Çıkış</span></div>'
      +'<div class="err" id="pvErr"></div><div class="ok" id="pvOk"></div>'
      +'<div class="kucuk">Plusiva Travel</div>'
      +'</div>';
@@ -51,6 +54,7 @@
     el('pvGirisBtn').onclick=giris; el('pvP').onkeydown=function(e){if(e.key==='Enter')giris()};
     el('pvGoogle').onclick=function(){ PV.sb.auth.signInWithOAuth({provider:'google', options:{redirectTo: location.href.split('#')[0]}}).then(function(r){ if(r.error) hata(r.error.message); }); };
     el('pvKayitBtn').onclick=kayit; el('pvUnutBtn').onclick=unut; el('pvYeniBtn').onclick=yeniSifre; el('pvCikis2').onclick=function(){PV.cikis()};
+    el('pvMfaBtn').onclick=mfaDogrula; el('pvMfaKod').onkeydown=function(e){if(e.key==='Enter')mfaDogrula()}; el('pvCikis3').onclick=function(){PV.cikis()};
   }
   function kapat(){ var e=el('pvAuth'); if(e) e.remove(); }
 
@@ -81,6 +85,36 @@
     if(r.error){ hata(r.error.message); return; }
     tamam('Şifre güncellendi.'); setTimeout(function(){ location.href = PANEL_KOK; }, 900);
   }
+  /* İki adımlı doğrulama (TOTP) — GUV-MFA, 28.09.2026 */
+  var MFA_ID=null;
+  async function mfaKontrol(){
+    try{
+      var a = await PV.sb.auth.mfa.getAuthenticatorAssuranceLevel();
+      if(a.error || !a.data) return true;
+      if(a.data.currentLevel==='aal2') return true;
+      overlay(); goster('mfa');
+      if(a.data.nextLevel==='aal2'){ el('pvMfaBaslik').textContent='Doğrulama kodu'; return false; }
+      el('pvMfaBaslik').textContent='İki adımlı doğrulamayı kur';
+      var l = await PV.sb.auth.mfa.listFactors();
+      var eski = ((l.data&&l.data.all)||[]).filter(function(f){ return f.factor_type==='totp' && f.status!=='verified'; });
+      for(var i=0;i<eski.length;i++){ try{ await PV.sb.auth.mfa.unenroll({factorId:eski[i].id}); }catch(e){} }
+      var r = await PV.sb.auth.mfa.enroll({factorType:'totp', friendlyName:'Plusiva panel'});
+      if(r.error){ hata(r.error.message); return false; }
+      MFA_ID = r.data.id;
+      el('pvQr').src = r.data.totp.qr_code; el('pvQr').style.display='block';
+      el('pvMfaAc').textContent='Telefonundaki doğrulama uygulamasıyla (Google Authenticator vb.) QR kodu okut, uygulamanın gösterdiği 6 haneli kodu yaz. Bundan sonra her girişte bu kod sorulur.';
+      return false;
+    }catch(e){ return true; }
+  }
+  async function mfaDogrula(){
+    hata('');
+    var kod = el('pvMfaKod').value.replace(/\s/g,'');
+    if(!/^\d{6}$/.test(kod)){ hata('6 haneli kodu yaz.'); return; }
+    if(!MFA_ID){ var l = await PV.sb.auth.mfa.listFactors(); var f = ((l.data&&l.data.totp)||[])[0]; if(!f){ hata('Doğrulama cihazı bulunamadı; sayfayı yenile.'); return; } MFA_ID = f.id; }
+    var r = await PV.sb.auth.mfa.challengeAndVerify({factorId:MFA_ID, code:kod});
+    if(r.error){ hata('Kod hatalı ya da süresi geçti; yeniden dene.'); return; }
+    location.reload();
+  }
   PV.cikis = async function(){ try{ await PV.sb.auth.signOut(); }catch(e){} localStorage.removeItem('pv_anahtar'); location.href = PANEL_KOK; };
 
   function benRozet(){
@@ -101,6 +135,7 @@
       PV.token = session.access_token;
       try{ var b = await fetch(SB_URL+'/rest/v1/rpc/panel_ben',{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+PV.token},body:'{}'}).then(function(x){return x.json()}); PV.ben=b||{}; }catch(e){ PV.ben={}; }
       if(!PV.ben || !PV.ben.aktif){ overlay(); goster('onay'); return; }
+      if(!(await mfaKontrol())) return;
       fetch(SB_URL+'/rest/v1/rpc/panel_giris_damgala',{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+PV.token},body:'{}'}).catch(function(){});
       kapat(); benRozet(); resolveHazir(); return;
     }

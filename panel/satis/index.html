@@ -94,12 +94,23 @@ async function ciz(){
       +'<div class="row" style="margin-top:12px"><button class="btn acc" onclick="yeniTalep()">Kaydet</button></div><div id="y_sonuc" class="msg" style="display:none"></div></div>';
   } else if(mod==='havale'){
     var H=await S('havale_oku');
-    out.innerHTML='<div class="card"><h2>Havale bilgisi (misafirin takip sayfasında görünür)</h2><div class="note">Bu bilgiyi yalnız siz girersiniz; yapay zekâ banka/IBAN yazmaz. Boşken takip sayfasında "havale bilgisi WhatsApp\'tan iletilecek" yazar.</div><div class="grid2">'
-      +'<label class="f">Banka<input id="h_banka" value="'+esc(H.banka||'')+'"></label><label class="f">Alıcı (hesap sahibi unvanı)<input id="h_alici" value="'+esc(H.alici||'')+'"></label>'
-      +'<label class="f">EUR IBAN<input id="h_eur" value="'+esc(H.iban_eur||'')+'"></label><label class="f">TL IBAN<input id="h_try" value="'+esc(H.iban_try||'')+'"></label>'
-      +'<label class="f">Açıklama notu<input id="h_not" value="'+esc(H.aciklama||'Açıklamaya dosya numaranızı yazın')+'"></label></div>'
-      +(O.tam?'<div class="row" style="margin-top:12px"><button class="btn acc" onclick="havaleYaz()">Kaydet</button></div>':'<p class="small mut">Kaydetmek için yönetici yetkisi gerekir.</p>')+'</div>';
+    HES=(H.hesaplar&&H.hesaplar.length)?H.hesaplar.slice():((H.iban_eur||H.iban_try)?[{banka:H.banka,alici:H.alici,iban_eur:H.iban_eur,iban_try:H.iban_try}]:[{}]);
+    HNOT=H.aciklama||'Açıklamaya dosya numaranızı yazın';
+    havaleCiz();
   }
+}
+var HES=[{}],HNOT='';
+function havaleTopla(){HES=HES.map(function(x,i){return {banka:(document.getElementById('h_banka'+i)||{}).value||'',alici:(document.getElementById('h_alici'+i)||{}).value||'',iban_eur:(document.getElementById('h_eur'+i)||{}).value||'',iban_try:(document.getElementById('h_try'+i)||{}).value||''}});var n=document.getElementById('h_not');if(n)HNOT=n.value;}
+function havaleEkle(){havaleTopla();if(HES.length>=10){toast('En çok 10 hesap');return;}HES.push({});havaleCiz();}
+function havaleSil(i){havaleTopla();HES.splice(i,1);if(!HES.length)HES=[{}];havaleCiz();}
+function havaleCiz(){
+  var out=document.getElementById('out');
+  out.innerHTML='<div class="card"><h2>Havale bilgisi (misafirin takip sayfasında görünür)</h2><div class="note">Bu bilgiyi yalnız siz girersiniz; yapay zekâ banka/IBAN yazmaz. Birden fazla banka ekleyebilirsiniz; misafir hepsini görür. Boşken takip sayfasında "havale bilgisi WhatsApp\'tan iletilecek" yazar.</div>'
+    +HES.map(function(x,i){return '<div class="card" style="margin-top:10px"><div class="row" style="justify-content:space-between"><b>'+(i+1)+'. hesap</b>'+(O.tam&&HES.length>1?'<button class="btn" onclick="havaleSil('+i+')">Kaldır</button>':'')+'</div><div class="grid2">'
+      +'<label class="f">Banka<input id="h_banka'+i+'" value="'+esc(x.banka||'')+'"></label><label class="f">Alıcı (hesap sahibi unvanı)<input id="h_alici'+i+'" value="'+esc(x.alici||'')+'"></label>'
+      +'<label class="f">EUR IBAN<input id="h_eur'+i+'" value="'+esc(x.iban_eur||'')+'"></label><label class="f">TL IBAN<input id="h_try'+i+'" value="'+esc(x.iban_try||'')+'"></label></div></div>'}).join('')
+    +'<div class="grid2" style="margin-top:10px"><label class="f">Açıklama notu<input id="h_not" value="'+esc(HNOT)+'"></label></div>'
+    +(O.tam?'<div class="row" style="margin-top:12px"><button class="btn" onclick="havaleEkle()">+ Banka ekle</button><button class="btn acc" onclick="havaleYaz()">Kaydet</button></div>':'<p class="small mut">Kaydetmek için yönetici yetkisi gerekir.</p>')+'</div>';
 }
 function dosyaAc(no){mod='dosyalar';secili=no;ciz();}
 async function dosyaCiz(no){
@@ -124,7 +135,7 @@ function confirmOnay(){return true;}
 async function uzat(no,s){var r=await S('opsiyon_uzat',{dosya_no:no,saat:s});toast(r.hata||'Opsiyon uzatıldı');dosyaCiz(no);}
 function kopyala(id){navigator.clipboard.writeText(document.getElementById(id).textContent);toast('Kopyalandı');}
 async function gonderildi(id){var r=await S('mesaj_gonderildi',{id:id,kanal:'whatsapp'});toast(r.hata||'İşaretlendi');yukle();}
-async function havaleYaz(){var r=await S('havale_yaz',{banka:document.getElementById('h_banka').value,alici:document.getElementById('h_alici').value,iban_eur:document.getElementById('h_eur').value,iban_try:document.getElementById('h_try').value,aciklama:document.getElementById('h_not').value});toast(r.hata||'Kaydedildi');}
+async function havaleYaz(){havaleTopla();var r=await S('havale_yaz',{hesaplar:HES,aciklama:HNOT});toast(r.hata||'Kaydedildi');}
 async function yeniTalep(){
   var odalar=document.getElementById('y_oda').value.split('\n').map(function(s){return s.trim()}).filter(Boolean).map(function(s){var p=s.split(/[ ,;]+/).map(function(x){return parseInt(x)}).filter(function(x){return !isNaN(x)});return {yetiskin:p[0]||0,cocuk_yaslari:p.slice(1)}});
   var ad=document.getElementById('y_ad').value.trim().split(' ');
