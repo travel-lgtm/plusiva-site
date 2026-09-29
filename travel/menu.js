@@ -80,7 +80,8 @@ var MENU=[
   {id:'analitik',ad:'Analitik & SEO merkezi',d:'Tüm sitelerin trafik, dönüşüm, sıralama, teknik hata görünümü.'},
   {id:'yayin',ad:'Yayın & alan adları',d:'Yayın kuyruğu, alan adı yönlendirmeleri, DNS/SSL, robots, sürüm geri alma.'}]},
  {grp:'İletişim',items:[
-  {id:'gelenkutusu',ad:'Gelen kutusu (tek akış)',src:'../panel/islem/?embed=1&v=olay',d:'Mail + WhatsApp + form + DM + telefon; konuya bağlama, sınıflandırma, çıkarım, yanıt taslağı; dilinde yanıt.'},
+  {id:'gelenkutusu',ad:'Gelen kutusu (tek akış)',src:'../panel/iletisim/?embed=1',d:'Mail konuşmaları: otomatik eşleme, eşleşmeyenler, tek tıkla bağlama, yanıt taslağı ve onay. WhatsApp/DM/telefon kurulunca aynı akışa girer.'},
+  {id:'olayakisi',ad:'Ham olay akışı',src:'../panel/islem/?embed=1&v=olay',d:'Tüm kanalların ham kaydı (mail, site, sistem).'},
   {id:'sablonlar',ad:'Şablonlar',d:'Misafir, tedarikçi, B2B, incoming şablonları; TR/EN/AR.'},
   {id:'bildirim',ad:'Otomatik bildirimler',d:'Tetikleyiciler (rezervasyon, ödeme, vade, T-3, uçuş, anket, doğum günü); WhatsApp/SMS/mail; günlük.'},
   {id:'telefon',ad:'Telefon & görüşme notları',d:'Arama kaydı, not, aksiyon; sesli not → metin.'},
