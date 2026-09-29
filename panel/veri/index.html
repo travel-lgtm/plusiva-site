@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Veri ajanları</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--ok:#1b5e3a;--ok2:#e8f5ec;--warn:#9a5a14;--warn2:#fff3e0;--bad:#8a1c1c;--bad2:#fbe9e9}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:12px}header a{color:var(--acc);text-decoration:none;font-weight:700}
+body.embed header{display:none}body.embed{background:#fff}
+.wrap{max-width:1180px;margin:0 auto;padding:14px 16px}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:12px}
+.tab{padding:9px 12px;font-weight:700;cursor:pointer;border-bottom:3px solid transparent;color:var(--mut);font-size:13.5px}.tab.on{color:var(--acc);border-color:var(--acc)}
+.tab b{display:inline-block;min-width:18px;padding:0 6px;margin-left:4px;border-radius:999px;background:#eeeeea;color:var(--ink);font-size:11px;text-align:center}.tab b.hot{background:var(--warn2);color:var(--warn)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer;font-size:13px}.chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}.chip b{font-weight:800;margin-left:4px}
+.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.motor{display:flex;flex-wrap:wrap;gap:14px;align-items:center}.motor .k{font-size:12px;color:var(--mut)}.motor .v{font-weight:800}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.kart{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer}.kart:hover{border-color:var(--acc)}
+.kart h4{margin:0 0 4px;font-size:14px;display:flex;justify-content:space-between;gap:8px}.kart .alan{font-size:12px;color:var(--mut);min-height:34px}
+.kart .say{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut);white-space:nowrap}
+.pill.ok{background:var(--ok2);color:var(--ok)}.pill.warn{background:var(--warn2);color:var(--warn)}.pill.bad{background:var(--bad2);color:var(--bad)}.pill.acc{background:var(--acc2);color:var(--acc)}
+label{font-size:12px;color:var(--mut);display:block;margin:8px 0 4px}
+select,input,textarea,button{font-family:inherit;font-size:13px}select,input,textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}textarea{min-height:90px}
+button{padding:8px 14px;border:0;border-radius:8px;background:var(--acc);color:#fff;font-weight:700;cursor:pointer}button.sec{background:#eeeeea;color:var(--ink)}button.bad{background:var(--bad)}button:disabled{opacity:.5;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.row>div{flex:1;min-width:160px}
+.small{font-size:12px;color:var(--mut)}.empty{padding:24px;text-align:center;color:var(--mut)}
+h3{margin:0 0 8px;font-size:15px}details{margin-top:10px}summary{cursor:pointer;font-weight:700;color:var(--acc)}
+.note{background:var(--warn2);color:var(--warn);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:12px}.note.ok{background:var(--ok2);color:var(--ok)}.note.bad{background:var(--bad2);color:var(--bad)}
+table{width:100%;border-collapse:collapse}td,th{padding:7px 6px;border-bottom:1px solid #eef0ee;text-align:left;font-size:13px;vertical-align:top}th{color:var(--mut);font-size:12px}
+pre{white-space:pre-wrap;font-family:inherit;margin:6px 0 0;font-size:13px;background:#fbfbf9;border:1px solid var(--line);border-radius:10px;padding:10px}
+.sec-blok{display:none}.sec-blok.on{display:block}
+.grid2{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:14px}@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+.item{padding:10px 8px;border-bottom:1px solid #eef0ee;cursor:pointer;border-radius:8px}.item:hover{background:#f8f9f7}.item.sel{background:var(--acc2)}
+.item .k{font-weight:700;display:flex;justify-content:space-between;gap:8px}.item .s{font-size:12px;color:var(--mut);margin-top:2px}
+.olgu{border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:6px 0;background:#fff;font-size:13px}.olgu .q{color:var(--mut);font-style:italic;margin-top:3px}
+</style>
+</head>
+<body>
+<header><a href="../">← Panel</a><b>Veri ajanları</b><span class="small">Kartlar · ajan sayfası · bekleme alanı · işler · alarmlar</span></header>
+<div class="wrap">
+  <div class="card motor" id="motor"><span class="small">Yükleniyor…</span></div>
+  <div class="tabs" id="tabs"></div>
+
+  <div class="sec-blok on" id="s_kart"><div id="kartlar"><div class="empty">Yükleniyor…</div></div></div>
+  <div class="sec-blok" id="s_ajan"><div id="ajanIc"><div class="empty">Kartlar sekmesinden bir ajan seçin.</div></div></div>
+  <div class="sec-blok" id="s_aday">
+    <div class="bar" id="adayBar"></div>
+    <div class="grid2"><div class="card" id="adayListe"><div class="empty">Yükleniyor…</div></div><div class="card" id="adayDetay"><div class="empty">Soldan bir aday seçin.</div></div></div>
+  </div>
+  <div class="sec-blok" id="s_is"><div id="isIc"><div class="empty">Yükleniyor…</div></div></div>
+  <div class="sec-blok" id="s_alarm"><div id="alarmIc"><div class="empty">Yükleniyor…</div></div></div>
+</div>
+<script src="../oturum.js"></script>
+<script>
+var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
+var O=null, SEKME='kart', AJAN=null, ADAY_F='aday', ADAY_SEL=null, ADAYLAR=[], YETKI={};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleString('tr-TR',{dateStyle:'short',timeStyle:'short'})}catch(e){return d}}
+function usd(n){return n==null?'—':(Number(n).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})+' $')}
+function el(id){return document.getElementById(id);}
+function js(o){return esc(JSON.stringify(o||{},null,0).replace(/[{}"]/g,'').replace(/,/g,' · ').replace(/:/g,': '));}
+async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body||{})});return r.json();}
+function va(islem,veri){return rpc('panel_veri_ajanlari',{p_islem:islem,p_veri:veri||{}});}
+var DURUM={acik:['Açık','ok'],uyuyor:['Uyuyor',''],durduruldu:['Durduruldu','bad'],baglanti_bekliyor:['Bağlantı bekliyor','warn']};
+var ADURUM={aday:['Bekliyor','warn'],dogrulandi:['Doğrulandı','ok'],kataloga_alindi:['Kataloğa alındı','ok'],reddedildi:['Reddedildi','bad'],mukerrer:['Mükerrer','']};
+var IDURUM={bekliyor:['Bekliyor','warn'],kilitli:['Çalışılıyor','acc'],bitti:['Bitti','ok'],hata:['Hata','bad'],iptal:['İptal','']};
+var TIP={otel:'Otel',restoran:'Restoran',muze_aktivite:'Müze / aktivite',arac:'Araç',ucus:'Uçuş',rehber:'Rehber',yerel_acente:'Yerel acente',pazar_sinyali:'Pazar sinyali',diger:'Diğer'};
+
+var SEKMELER=[['kart','Kartlar'],['ajan','Ajan sayfası'],['aday','Bekleme alanı'],['is','İşler'],['alarm','Alarmlar']];
+function sekmeCiz(){var s=(O&&O.sayac)||{};var say={aday:s.aday_bekleyen,is:s.is_bekleyen,alarm:s.alarm};
+  el('tabs').innerHTML=SEKMELER.map(function(t){var n=say[t[0]];return '<span class="tab '+(SEKME===t[0]?'on':'')+'" onclick="sekme(\''+t[0]+'\')">'+t[1]+(t[0]==='ajan'&&AJAN?' · '+esc(AJAN):'')+(n?'<b class="'+(t[0]==='alarm'?'hot':'')+'">'+n+'</b>':'')+'</span>'}).join('');}
+function sekme(k){SEKME=k;SEKMELER.forEach(function(t){el('s_'+t[0]).classList.toggle('on',t[0]===k)});sekmeCiz();
+  if(k==='kart')ozet();else if(k==='ajan'&&AJAN)ajanAc(AJAN);else if(k==='aday')adayYukle();else if(k==='is')isYukle();else if(k==='alarm')alarmYukle();}
+
+// ---------- özet / motor / kartlar ----------
+async function ozet(){
+  O=await va('ozet');
+  if(!O||O.hata){el('kartlar').innerHTML='<div class="empty">'+esc((O&&O.hata)||'Yetki yok')+'</div>';el('motor').innerHTML='';return;}
+  YETKI=O.yetki||{};sekmeCiz();
+  var m=O.motor||{},h=m.harcama||{},t=m.tavanlar||{};
+  el('motor').innerHTML='<div><div class="k">YZ motoru</div><div class="v"><span class="pill '+(m.acik?'ok':'bad')+'">'+(m.acik?'AÇIK':'KAPALI')+'</span>'+(m.durdurma_nedeni?' <span class="small">'+esc(m.durdurma_nedeni)+'</span>':'')+'</div></div>'
+    +'<div><div class="k">Model</div><div class="v">'+esc(m.model||'—')+'</div></div>'
+    +'<div><div class="k">Bugün / bu ay</div><div class="v">'+usd(h.bugun_usd)+' / '+usd(h.ay_usd)+'</div></div>'
+    +'<div><div class="k">Tavan (oturum / gün / ay)</div><div class="v">'+usd(t.oturum_usd)+' / '+usd(t.gunluk_usd)+' / '+usd(t.aylik_usd)+'</div></div>'
+    +'<div><div class="k">Bekçi</div><div class="v"><span class="pill '+(m.bekci_canli?'ok':'bad')+'">'+(m.bekci_canli?'canlı':'sessiz')+'</span> <span class="small">son tik '+tarih(m.son_tick)+'</span></div></div>'
+    +'<div><div class="k">Anahtar</div><div class="v"><span class="pill '+(m.anthropic_anahtari_var?'ok':'bad')+'">'+(m.anthropic_anahtari_var?'kasada':'yok')+'</span></div></div>'
+    +'<div><div class="k">Etkin oturum</div><div class="v">'+((m.etkin_oturumlar||[]).length)+'</div></div>'
+    +(YETKI.tam?'<div style="margin-left:auto"><button class="bad" '+(m.acik?'':'disabled')+' onclick="motorDurdur()">Motoru durdur</button></div>':'');
+  var K=O.kartlar||[];
+  el('kartlar').innerHTML=(K.every(function(k){return k.durum!=='acik'})?'<div class="note">Tüm ajanlar uyuyor. Pilot başlangıcı: oturum tavanı kararı (N-020) ve Yapıcı\'nın kart anahtarlarını üretmesi. Motor açılmadan hiçbir ajan çalışmaz; hiçbir ajan dışarıya yazmaz, yalnız bekleme alanına aday yazar.</div>':'')
+    +'<div class="kgrid">'+K.map(function(k){var d=DURUM[k.durum]||[k.durum,''];var sc=k.son_calisma;
+      return '<div class="kart" onclick="ajanAc(\''+esc(k.kod)+'\')"><h4><span>'+esc(k.kod)+'</span><span class="pill '+d[1]+'">'+d[0]+'</span></h4><div class="alan">'+esc(k.alan||'')+'</div>'
+      +'<div class="say"><span class="pill acc">'+esc(k.motor)+'</span>'+(k.pilot?'<span class="pill">pilot '+esc(k.pilot)+'</span>':'')+(k.talimat_var?'<span class="pill ok">talimat v'+k.talimat_surum+'</span>':'<span class="pill bad">talimat yok</span>')+(k.anahtar_var?'<span class="pill ok">anahtar</span>':'<span class="pill">anahtar yok</span>')+'</div>'
+      +'<div class="say"><span class="pill '+(k.is_bekleyen>0?'warn':'')+'">'+k.is_bekleyen+' iş</span><span class="pill '+(k.aday_bekleyen>0?'warn':'')+'">'+k.aday_bekleyen+' aday bekliyor</span><span class="pill ok">'+k.aday_dogrulanan+' doğru</span>'+(k.aday_red?'<span class="pill bad">'+k.aday_red+' red</span>':'')+(k.acik_alarm?'<span class="pill bad">'+k.acik_alarm+' alarm</span>':'')+(k.is_hata?'<span class="pill bad">'+k.is_hata+' hatalı iş</span>':'')+'</div>'
+      +'<div class="small" style="margin-top:8px">'+(k.ritim?esc(k.ritim)+' · ':'')+(sc?'son çalışma '+tarih(sc.basladi)+' ('+esc(sc.durum)+')':'hiç çalışmadı')+(k.bugun_usd>0?' · bugün '+usd(k.bugun_usd):'')+'</div>'
+      +(k.fren_nedeni?'<div class="small" style="color:var(--bad);margin-top:4px">'+esc(k.fren_nedeni)+'</div>':'')+'</div>'}).join('')+'</div>';
+}
+async function motorDurdur(){var n=prompt('Motor durdurma nedeni (isteğe bağlı):');if(n===null)return;var r=await va('motor_durdur',{neden:n});if(r&&r.hata){alert(r.hata);return;}ozet();}
+
+// ---------- ajan sayfası ----------
+async function ajanAc(kod){
+  AJAN=kod;SEKME='ajan';SEKMELER.forEach(function(t){el('s_'+t[0]).classList.toggle('on',t[0]==='ajan')});sekmeCiz();
+  el('ajanIc').innerHTML='<div class="empty">Yükleniyor…</div>';
+  var X=await va('ajan',{kod:kod});if(!X||X.hata){el('ajanIc').innerHTML='<div class="empty">'+esc((X&&X.hata)||'hata')+'</div>';return;}
+  var k=X.kart,d=DURUM[k.durum]||[k.durum,''],s=X.aday_sayac||{},hc=X.harcama||{};
+  var h='<div class="card"><h3>'+esc(k.kod)+' <span class="pill '+d[1]+'">'+d[0]+'</span> <span class="pill acc">'+esc(k.motor)+'</span> <span class="pill">'+esc(k.departman||'')+'</span></h3><div>'+esc(k.alan||'')+'</div>'
+    +'<div class="small" style="margin-top:6px">'+esc(k.motor_aciklama||'')+' · ritim: '+esc(k.ritim||'—')+' · günlük aday sınırı: '+(k.gunluk_aday_siniri||'—')+' · denetçi: '+esc(k.denetci_kod||'—')+' · görev tipleri: '+esc((k.gorev_tipleri||[]).join(', '))+'</div>'
+    +'<div class="small">onay noktaları: '+esc(k.onay_noktalari||'—')+' · anahtar: '+(k.anahtar_var?'var':'yok')+' · bugün '+usd(hc.kart_bugun_usd)+'</div>'
+    +(k.fren_nedeni?'<div class="note bad">Fren: '+esc(k.fren_nedeni)+' ('+tarih(k.fren_zamani)+')</div>':'')
+    +'<div class="row" style="margin-top:10px">'+(YETKI.tam?(k.durum==='acik'?'<div><button class="bad" onclick="kartDurdur(\''+esc(k.kod)+'\')">Ajanı durdur</button></div>':'<div><button onclick="kartBaslat(\''+esc(k.kod)+'\')">Ajanı aç</button></div>'):'')+'<div><button class="sec" onclick="sekme(\'kart\')">← Kartlar</button></div></div>'
+    +'<details><summary>Talimat (sürüm '+k.talimat_surum+')</summary><pre>'+esc(k.talimat||'(talimat yok)')+'</pre></details></div>';
+  h+='<div class="card"><h3>Adaylar</h3><div class="say" style="display:flex;gap:6px;flex-wrap:wrap"><span class="pill warn">'+(s.aday||0)+' bekliyor</span><span class="pill ok">'+(s.dogrulandi||0)+' doğrulandı</span><span class="pill ok">'+(s.kataloga_alindi||0)+' kataloğa alındı</span><span class="pill bad">'+(s.reddedildi||0)+' reddedildi</span><span class="pill">'+(s.mukerrer||0)+' mükerrer</span> <button class="sec" onclick="ADAY_F=\'aday\';adayAjan=\''+esc(k.kod)+'\';sekme(\'aday\')">Bekleme alanında gör</button></div></div>';
+  var I=X.isler||[];
+  h+='<div class="card"><h3>İş kuyruğu <span class="small">('+I.length+' son kayıt)</span></h3>'+(I.length?'<table><tr><th>#</th><th>Tip</th><th>Kapsam</th><th>Öncelik</th><th>Durum</th><th>Sonuç</th><th>Açan</th><th></th></tr>'+I.map(function(i){var dd=IDURUM[i.durum]||[i.durum,''];return '<tr><td>'+i.id+'</td><td>'+esc(i.tip)+'</td><td>'+js(i.kapsam)+'</td><td>'+i.oncelik+'</td><td><span class="pill '+dd[1]+'">'+dd[0]+'</span>'+(i.deneme?'<div class="small">'+i.deneme+'. deneme</div>':'')+'</td><td class="small">'+(i.sonuc?js(i.sonuc):'')+'</td><td class="small">'+esc(i.olusturan||'')+'<br>'+tarih(i.olusturuldu)+'</td><td>'+(YETKI.duzenleme&&(i.durum==='bekliyor'||i.durum==='hata')?'<button class="sec" onclick="isIptal('+i.id+',\''+esc(k.kod)+'\')">İptal</button>':'')+'</td></tr>'}).join('')+'</table>':'<div class="empty">İş yok.</div>')
+    +(YETKI.duzenleme?'<details><summary>Yeni iş aç</summary><div class="row"><div><label>Tip</label><select id="yi_tip"><option value="kesif">keşif</option><option value="bakim">bakım</option><option value="dogrulama">doğrulama</option><option value="ucus_kontrol">uçuş kontrol</option><option value="diger">diğer</option></select></div><div><label>Ülke</label><input id="yi_ulke"></div><div><label>Şehir / bölge</label><input id="yi_sehir"></div><div><label>Öncelik (1–5)</label><input id="yi_onc" type="number" min="1" max="5" value="3"></div></div><label>İhtiyaç / not</label><textarea id="yi_not"></textarea><div style="margin-top:8px"><button onclick="isAc(\''+esc(k.kod)+'\')">İşi kuyruğa ekle</button></div></details>':'')+'</div>';
+  var C=X.calismalar||[];
+  h+='<div class="card"><h3>Çalışmalar</h3>'+(C.length?'<table><tr><th>#</th><th>Başladı</th><th>Bitti</th><th>Durum</th><th>Yeni</th><th>Günc.</th><th>Red</th><th>Hata</th><th>Not</th></tr>'+C.map(function(c){return '<tr><td>'+c.id+'</td><td>'+tarih(c.basladi)+'</td><td>'+tarih(c.bitti)+'</td><td>'+esc(c.durum)+'</td><td>'+(c.yeni||0)+'</td><td>'+(c.guncelleme||0)+'</td><td>'+(c.red||0)+'</td><td>'+(c.hata||0)+'</td><td class="small">'+esc(c.notlar||'')+'</td></tr>'}).join('')+'</table>':'<div class="empty">Henüz çalışma yok.</div>')+'</div>';
+  var S=X.oturumlar||[];
+  h+='<div class="card"><h3>Motor oturumları</h3>'+(S.length?'<table><tr><th>#</th><th>Durum</th><th>Adım</th><th>Çağrı</th><th>Arama</th><th>Sayfa</th><th>Maliyet</th><th>Hata</th><th>Zaman</th></tr>'+S.map(function(o){return '<tr><td>'+o.id+'</td><td>'+esc(o.durum)+'</td><td>'+(o.adim||0)+'</td><td>'+(o.cagri||0)+'</td><td>'+(o.arama||0)+'</td><td>'+(o.fetch||0)+'</td><td>'+usd(o.maliyet_usd)+'</td><td class="small">'+esc(o.hata||'')+'</td><td class="small">'+tarih(o.olusturuldu)+(o.bitti?' → '+tarih(o.bitti):'')+'</td></tr>'}).join('')+'</table>':'<div class="empty">Oturum yok.</div>')+'</div>';
+  var A=X.alarmlar||[];
+  h+='<div class="card"><h3>Alarmlar</h3>'+(A.length?A.map(alarmSatir).join(''):'<div class="empty">Alarm yok.</div>')+'</div>';
+  el('ajanIc').innerHTML=h;
+}
+async function kartDurdur(kod){var n=prompt('Durdurma nedeni:');if(n===null)return;var r=await va('kart_durdur',{kod:kod,neden:n});if(r&&r.hata){alert(r.hata);return;}ajanAc(kod);}
+async function kartBaslat(kod){if(!confirm(kod+' açılsın mı? Motor kapalıysa kart açık kalır ama çalışmaz.'))return;var r=await va('kart_baslat',{kod:kod});if(r&&r.hata){alert(r.hata);return;}if(r.not)alert(r.not);ajanAc(kod);}
+async function isIptal(id,kod){var n=prompt('İptal notu:');if(n===null)return;var r=await va('is_iptal',{id:id,not:n});if(r&&r.hata){alert(r.hata);return;}if(kod)ajanAc(kod);else isYukle();}
+async function isAc(kod){var kap={};var u=el('yi_ulke').value.trim(),s=el('yi_sehir').value.trim(),n=el('yi_not').value.trim();if(u)kap.ulke=u;if(s)kap.sehir=s;if(n)kap.ihtiyac=n;
+  var r=await va('is_ac',{ajan:kod,tip:el('yi_tip').value,kapsam:kap,oncelik:Number(el('yi_onc').value||3)});if(r&&r.hata){alert(r.hata);return;}ajanAc(kod);}
+
+// ---------- bekleme alanı ----------
+var adayAjan=null;
+async function adayYukle(){
+  var X=await va('adaylar',{durum:ADAY_F,ajan:adayAjan});if(!X||X.hata){el('adayListe').innerHTML='<div class="empty">'+esc((X&&X.hata)||'hata')+'</div>';return;}
+  ADAYLAR=X.adaylar||[];var s=X.sayac||{};
+  var chips=[['aday','Bekliyor',s.aday],['dogrulandi','Doğrulandı',s.dogrulandi],['kataloga_alindi','Kataloğa alındı',s.kataloga_alindi],['reddedildi','Reddedildi',s.reddedildi],['mukerrer','Mükerrer',s.mukerrer],['hepsi','Hepsi',null]];
+  el('adayBar').innerHTML=chips.map(function(c){return '<span class="chip '+(ADAY_F===c[0]?'on':'')+'" onclick="ADAY_F=\''+c[0]+'\';adayYukle()">'+c[1]+(c[2]!=null?'<b>'+c[2]+'</b>':'')+'</span>'}).join('')+(adayAjan?'<span class="chip on" onclick="adayAjan=null;adayYukle()">'+esc(adayAjan)+' ✕</span>':'')+'<span class="small" style="margin-left:auto">Adaylar kataloğa ancak doğrulanınca girer; satışa giden bilgi yalnız resmî (A) kaynaktan (K-131).</span>';
+  el('adayListe').innerHTML=ADAYLAR.length?ADAYLAR.map(function(a){var d=ADURUM[a.durum]||[a.durum,''];return '<div class="item '+(ADAY_SEL===a.id?'sel':'')+'" onclick="adayAc('+a.id+')"><div class="k"><span>'+esc(a.ad)+'</span><span class="pill '+d[1]+'">'+d[0]+'</span></div><div class="s"><span class="pill acc">'+esc(TIP[a.tip]||a.tip)+'</span> '+esc([a.sehir,a.ulke].filter(Boolean).join(', '))+' · '+esc(a.ajan_kod)+' · A olgu: '+(a.a_sinifi_olgu||0)+(a.veri_sinifi!=='gercek'?' · <b>'+esc(a.veri_sinifi)+'</b>':'')+'</div></div>'}).join(''):'<div class="empty">Bu süzgeçte aday yok.'+(ADAY_F==='aday'?' Ajanlar çalışmaya başlayınca bulduklarını buraya yazar; siz onaylamadan hiçbir şey kataloğa girmez.':'')+'</div>';
+  if(ADAY_SEL&&!ADAYLAR.some(function(a){return a.id===ADAY_SEL})){ADAY_SEL=null;el('adayDetay').innerHTML='<div class="empty">Soldan bir aday seçin.</div>';}
+}
+function adayAc(id){ADAY_SEL=id;var a=ADAYLAR.filter(function(x){return x.id===id})[0];if(!a)return;var d=ADURUM[a.durum]||[a.durum,''];
+  adayYukle();
+  var h='<h3>'+esc(a.ad)+' <span class="pill '+d[1]+'">'+d[0]+'</span></h3><div class="small">'+esc(TIP[a.tip]||a.tip)+' · '+esc([a.sehir,a.bolge,a.ulke].filter(Boolean).join(', '))+' · yazan '+esc(a.ajan_kod)+' · '+tarih(a.olusturuldu)+(a.resmi_site?' · <a href="'+esc(a.resmi_site)+'" target="_blank" rel="noopener">resmî site</a>':'')+'</div>';
+  if(a.veri)h+='<details open><summary>Veri</summary><pre>'+esc(JSON.stringify(a.veri,null,1))+'</pre></details>';
+  var ol=a.olgular||[];h+='<details open><summary>Olgular ('+ol.length+', A sınıfı: '+(a.a_sinifi_olgu||0)+')</summary>'+(ol.length?ol.map(function(o){return '<div class="olgu"><b>'+esc(o.alan)+'</b>: '+esc(o.deger)+' <span class="pill '+(o.kaynak_sinifi==='A'?'ok':'warn')+'">'+esc(o.kaynak_sinifi||'?')+'</span> <span class="small">'+esc(o.kontrol_tarihi||'')+'</span>'+(o.kaynak_url?' <a class="small" href="'+esc(o.kaynak_url)+'" target="_blank" rel="noopener">kaynak</a>':'')+(o.alinti?'<div class="q">“'+esc(o.alinti)+'”</div>':'')+'</div>'}).join(''):'<div class="small">Olgu yok.</div>')+'</details>';
+  if(a.red_gerekcesi)h+='<div class="note bad">Red gerekçesi: '+esc(a.red_gerekcesi)+' ('+esc(a.denetleyen||'')+', '+tarih(a.denetim_zamani)+')</div>';
+  else if(a.denetleyen)h+='<div class="note ok">Karar: '+esc(a.denetleyen)+' · '+tarih(a.denetim_zamani)+'</div>';
+  if(a.durum==='aday'&&YETKI.duzenleme)h+='<div class="row" style="margin-top:10px"><div><label>Red gerekçesi (reddedecekseniz zorunlu)</label><input id="ad_ger"></div><div style="flex:0"><button onclick="adayKarar('+a.id+',\'dogrulandi\')">Doğrula</button> <button class="bad" onclick="adayKarar('+a.id+',\'reddedildi\')">Reddet</button></div></div>';
+  el('adayDetay').innerHTML=h;
+}
+async function adayKarar(id,karar){var g=el('ad_ger')?el('ad_ger').value.trim():'';if(karar==='reddedildi'&&!g){alert('Red gerekçesi zorunlu');return;}
+  var r=await va('aday_karar',{aday_id:id,karar:karar,gerekce:g});if(r&&r.hata){alert(r.hata+(r.ayrinti?'\n'+JSON.stringify(r.ayrinti):''));return;}ADAY_SEL=null;el('adayDetay').innerHTML='<div class="note ok">Karar kaydedildi.</div>';adayYukle();ozet();}
+
+// ---------- işler ----------
+var IS_F='bekliyor';
+async function isYukle(){
+  var X=await va('isler',{durum:IS_F==='hepsi'?null:IS_F});if(!X||X.hata){el('isIc').innerHTML='<div class="empty">'+esc((X&&X.hata)||'hata')+'</div>';return;}
+  var I=X.isler||[];
+  var chips=[['bekliyor','Bekliyor'],['kilitli','Çalışılıyor'],['hata','Hata'],['bitti','Bitti'],['iptal','İptal'],['hepsi','Hepsi']];
+  var h='<div class="bar">'+chips.map(function(c){return '<span class="chip '+(IS_F===c[0]?'on':'')+'" onclick="IS_F=\''+c[0]+'\';isYukle()">'+c[1]+'</span>'}).join('')+'</div>';
+  h+='<div class="card">'+(I.length?'<table><tr><th>#</th><th>Ajan</th><th>Tip</th><th>Kapsam</th><th>Öncelik</th><th>Durum</th><th>Açan</th><th></th></tr>'+I.map(function(i){var dd=IDURUM[i.durum]||[i.durum,''];return '<tr><td>'+i.id+'</td><td><a href="#" onclick="ajanAc(\''+esc(i.ajan_kod)+'\');return false">'+esc(i.ajan_kod)+'</a></td><td>'+esc(i.tip)+'</td><td>'+js(i.kapsam)+(i.sonuc?'<div class="small">'+js(i.sonuc)+'</div>':'')+'</td><td>'+i.oncelik+'</td><td><span class="pill '+dd[1]+'">'+dd[0]+'</span></td><td class="small">'+esc(i.olusturan||'')+'<br>'+tarih(i.olusturuldu)+'</td><td>'+(YETKI.duzenleme&&(i.durum==='bekliyor'||i.durum==='hata')?'<button class="sec" onclick="isIptal('+i.id+',null)">İptal</button>':'')+'</td></tr>'}).join('')+'</table>':'<div class="empty">Bu süzgeçte iş yok.</div>')+'</div>';
+  el('isIc').innerHTML=h;
+}
+
+// ---------- alarmlar ----------
+var ALARM_HEPSI=false;
+function alarmSatir(a){return '<div class="olgu"><span class="pill '+(a.seviye==='kritik'?'bad':(a.seviye==='uyari'?'warn':''))+'">'+esc(a.seviye||'')+'</span> <b>'+esc(a.ajan_kod||'')+'</b> · '+esc(a.tur||'')+(a.otomatik_fren?' <span class="pill bad">otomatik fren</span>':'')+(a.cozuldu?' <span class="pill ok">çözüldü</span>':'')+'<div>'+esc(a.mesaj||'')+'</div><div class="small">'+tarih(a.zaman)+(a.cozum_zamani?' → '+tarih(a.cozum_zamani):'')+(!a.cozuldu&&YETKI.tam?' · <a href="#" onclick="alarmCoz('+a.id+');return false">çözüldü olarak işaretle</a>':'')+'</div></div>';}
+async function alarmYukle(){var X=await va('alarmlar',{hepsi:ALARM_HEPSI?'true':'false'});if(!X||X.hata){el('alarmIc').innerHTML='<div class="empty">'+esc((X&&X.hata)||'hata')+'</div>';return;}
+  var A=X.alarmlar||[];el('alarmIc').innerHTML='<div class="bar"><span class="chip '+(!ALARM_HEPSI?'on':'')+'" onclick="ALARM_HEPSI=false;alarmYukle()">Açık</span><span class="chip '+(ALARM_HEPSI?'on':'')+'" onclick="ALARM_HEPSI=true;alarmYukle()">Hepsi</span></div><div class="card">'+(A.length?A.map(alarmSatir).join(''):'<div class="empty">Açık alarm yok.</div>')+'</div>';}
+async function alarmCoz(id){var r=await va('alarm_coz',{id:id});if(r&&r.hata){alert(r.hata);return;}alarmYukle();ozet();}
+
+var q=new URLSearchParams(location.search);
+if(q.get('embed'))document.body.classList.add('embed');
+PV.hazir.then(function(){ozet().then(function(){var s=q.get('s');var a=q.get('ajan');if(a){ajanAc(a);}else if(s&&s!=='kart'){sekme(s);}});});
+</script>
+</body>
+</html>

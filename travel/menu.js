@@ -113,6 +113,10 @@ var MENU=[
  {grp:'YZ kadrosu yönetimi',items:[
   {id:'kadroyz',ad:'Kadro kartları',d:'Satış, Rezervasyon, Operasyon, Tedarik, Muhasebe, Pazarlama, İletişim, Misafir ilişkileri, İK, Hukuk, Denetleyici, AR-GE, Raporlama, Güvenlik, Yapıcı: görev listesi, yetki, onay sınırı.'},
   {id:'gorevkuyrugu',ad:'Görev kuyruğu & onaylar',src:'../panel/islem/?embed=1&v=onay'},
+  {id:'veriajan',ad:'Veri ajanları (kartlar & motor)',src:'../panel/veri/?embed=1',d:'Pilot İspanya kadrosu: kart durumu, motor açık/kapalı, harcama, ritim; ajan sayfası (talimat, iş kuyruğu, çalışmalar, oturumlar); durdur düğmesi.'},
+  {id:'veribekleme',ad:'Veri bekleme alanı (adaylar)',src:'../panel/veri/?embed=1&s=aday',d:'Ajanların bulduğu otel, restoran, müze, araç, uçuş, rehber, DMC adayları; olgular ve resmî kaynak bağları; doğrula / reddet. Onaysız hiçbir şey kataloğa girmez (K-131).'},
+  {id:'veriisler',ad:'Veri iş kuyruğu',src:'../panel/veri/?embed=1&s=is',d:'Ajanlara açılan keşif, bakım, doğrulama ve uçuş kontrol işleri; iptal ve yeni iş.'},
+  {id:'verialarm',ad:'Ajan alarmları',src:'../panel/veri/?embed=1&s=alarm',d:'Otomatik fren, bütçe, hata ve sessizlik alarmları; çözüldü işareti.'},
   {id:'yetenekler',ad:'Yetenekler × sektör',src:'../panel/islem/?embed=1&v=kurulum'},
   {id:'tetik',ad:'Tetikleyiciler & onay kuralları',d:'Olay → görev kuralları, eşikler.'},
   {id:'yzgunluk',ad:'Yapay zekâ günlüğü',d:'Yapılan işler, API maliyeti, hatalar.'},
