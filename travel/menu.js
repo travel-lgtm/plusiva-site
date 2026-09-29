@@ -57,11 +57,12 @@ var MENU=[
  {grp:'Tedarik & kontratlar',items:[
   {id:'tedarikci',ad:'Tedarikçi kartları & bölge ağacı',src:'../panel/katalog/?embed=1&v=tedarik',d:'Ülke → bölge → şehir → hizmet tipi; kart, durum (aday → yazışıldı → teklif → kontratlı), toplu araştırma görevi.'},
   {id:'kontratlar',ad:'Kontratlar & fiyat kartları',src:'../panel/kontrat/?embed=1'},
-  {id:'yazisma',ad:'Tedarikçi yazışmaları',d:'Şablonlar (TR/EN/AR): sezon fiyat talebi, spot, rezervasyon, teyit, değişiklik, iptal; gönderim onayı.'},
+  {id:'yazisma',ad:'Tedarikçi yazışmaları',src:'../panel/iletisim/?embed=1&s=ted',d:'Şablonlar (TR/EN/AR): sezon fiyat talebi, spot, rezervasyon, teyit, değişiklik, iptal; gönderim onayı.'},
   {id:'tedpuan',ad:'Tedarikçi puanları',d:'Tur sonrası değerlendirme, sorun kayıtları, teyit süresi, fiyat tutarlılığı.'}]},
  {grp:'Muhasebe & finans',items:[
   {id:'tahsilat',ad:'Tahsilatlar',d:'Ödeme planı, sanal POS, havale eşleştirme, ödeme linki, hatırlatma, makbuz; para birimi bazlı.'},
   {id:'odeme',ad:'Ödemeler (tedarikçi & ekip)',d:'Kontrat koşulundan plan, vadeler, ödeme onayı, havale kaydı, rehber avans/harcırah.'},
+  {id:'dekontfatura',ad:'Dekont & gelen fatura onayı',src:'../panel/iletisim/?embed=1&s=fin',d:'Mailden gelen dekontlar (otomatik ya da elle eşleme), ödeme onayı (makbuz), tedarikçi faturası onayı, finans uyarıları.'},
   {id:'fatura',ad:'Faturalar',d:'Satış faturası (e-fatura/e-arşiv; hizmet bitince taslak → onay), gelen fatura okuma ve eşleme, B2B komisyon faturası.'},
   {id:'cari',ad:'Cari hesaplar',src:'../panel/islem/?embed=1&v=cari'},
   {id:'kasa',ad:'Kasa & banka',d:'Hesaplar (TRY/EUR/USD/SAR), ekstre aktarımı ve eşleştirme, nakit kasa.'},
@@ -81,6 +82,8 @@ var MENU=[
   {id:'yayin',ad:'Yayın & alan adları',d:'Yayın kuyruğu, alan adı yönlendirmeleri, DNS/SSL, robots, sürüm geri alma.'}]},
  {grp:'İletişim',items:[
   {id:'gelenkutusu',ad:'Gelen kutusu (tek akış)',src:'../panel/iletisim/?embed=1',d:'Mail konuşmaları: otomatik eşleme, eşleşmeyenler, tek tıkla bağlama, yanıt taslağı ve onay. WhatsApp/DM/telefon kurulunca aynı akışa girer.'},
+  {id:'onaykuyrugu',ad:'Onay kuyruğu & otomatik gönderim',src:'../panel/iletisim/?embed=1&s=onay',d:'Onay bekleyen giden mailler (Türkçe karşılığı ve gerekçesiyle), metin düzeltme, otomatik gönderim durumu ve geri alma.'},
+  {id:'bildirimkutusu',ad:'Bildirimler',src:'../panel/iletisim/?embed=1&s=bil',d:'Sistem bildirimleri ve açık önemli uyarılar.'},
   {id:'olayakisi',ad:'Ham olay akışı',src:'../panel/islem/?embed=1&v=olay',d:'Tüm kanalların ham kaydı (mail, site, sistem).'},
   {id:'sablonlar',ad:'Şablonlar',d:'Misafir, tedarikçi, B2B, incoming şablonları; TR/EN/AR.'},
   {id:'bildirim',ad:'Otomatik bildirimler',d:'Tetikleyiciler (rezervasyon, ödeme, vade, T-3, uçuş, anket, doğum günü); WhatsApp/SMS/mail; günlük.'},

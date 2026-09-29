@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Gelen kutusu</title>
+<title>İletişim merkezi</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--ok:#1b5e3a;--ok2:#e8f5ec;--warn:#9a5a14;--warn2:#fff3e0;--bad:#8a1c1c;--bad2:#fbe9e9}
@@ -12,44 +12,79 @@
 header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:12px}header a{color:var(--acc);text-decoration:none;font-weight:700}
 body.embed header{display:none}body.embed{background:#fff}
 .wrap{max-width:1180px;margin:0 auto;padding:14px 16px}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:12px}
+.tab{padding:9px 12px;font-weight:700;cursor:pointer;border-bottom:3px solid transparent;color:var(--mut);font-size:13.5px}.tab.on{color:var(--acc);border-color:var(--acc)}
+.tab b{display:inline-block;min-width:18px;padding:0 6px;margin-left:4px;border-radius:999px;background:#eeeeea;color:var(--ink);font-size:11px;text-align:center}.tab b.hot{background:var(--warn2);color:var(--warn)}
 .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
 .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer;font-size:13px}.chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}
 .chip b{font-weight:800;margin-left:4px}
 .grid{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:14px}@media(max-width:820px){.grid{grid-template-columns:1fr}}
-.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:12px}
+.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
 .item{padding:10px 8px;border-bottom:1px solid #eef0ee;cursor:pointer;border-radius:8px}.item:hover{background:#f8f9f7}.item.sel{background:var(--acc2)}
 .item .k{font-weight:700;display:flex;justify-content:space-between;gap:8px}.item .s{font-size:12px;color:var(--mut);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut);white-space:nowrap}
 .pill.ok{background:var(--ok2);color:var(--ok)}.pill.warn{background:var(--warn2);color:var(--warn)}.pill.bad{background:var(--bad2);color:var(--bad)}.pill.acc{background:var(--acc2);color:var(--acc)}
 .msg{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;background:#fbfbf9}.msg.giden{background:var(--acc2);border-color:#cfe0de}
 .msg .h{font-size:12px;color:var(--mut);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.msg pre{white-space:pre-wrap;font-family:inherit;margin:8px 0 0;font-size:13.5px}
+.tr{background:#fff;border:1px dashed var(--line);border-radius:10px;padding:8px 10px;margin-top:8px}.tr pre{margin:4px 0 0}
+.gerekce{font-size:12.5px;color:var(--mut);margin-top:6px}
 label{font-size:12px;color:var(--mut);display:block;margin:8px 0 4px}
 select,input,textarea,button{font-family:inherit;font-size:13px}select,input,textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}textarea{min-height:120px}
-button{padding:8px 14px;border:0;border-radius:8px;background:var(--acc);color:#fff;font-weight:700;cursor:pointer}button.sec{background:#eeeeea;color:var(--ink)}button.bad{background:var(--bad)}
+button{padding:8px 14px;border:0;border-radius:8px;background:var(--acc);color:#fff;font-weight:700;cursor:pointer}button.sec{background:#eeeeea;color:var(--ink)}button.bad{background:var(--bad)}button:disabled{opacity:.5;cursor:default}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.row>div{flex:1;min-width:160px}
-.small{font-size:12px;color:var(--mut)}.empty{padding:30px;text-align:center;color:var(--mut)}
+.small{font-size:12px;color:var(--mut)}.empty{padding:24px;text-align:center;color:var(--mut)}
 h3{margin:0 0 8px;font-size:15px}details{margin-top:10px}summary{cursor:pointer;font-weight:700;color:var(--acc)}
+.note{background:var(--warn2);color:var(--warn);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:12px}
+.note.ok{background:var(--ok2);color:var(--ok)}
+.ek{display:flex;gap:8px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:6px 0;background:#fff}
+.ek a{color:var(--acc);font-weight:700;cursor:pointer}
+table{width:100%;border-collapse:collapse}td,th{padding:7px 6px;border-bottom:1px solid #eef0ee;text-align:left;font-size:13px;vertical-align:top}th{color:var(--mut);font-size:12px}
+.sec-blok{display:none}.sec-blok.on{display:block}
 </style>
 </head>
 <body>
-<header><a href="../">← Panel</a><b>Gelen kutusu</b><span class="small">Mail · tek akış · MAIL-05</span></header>
+<header><a href="../">← Panel</a><b>İletişim merkezi</b><span class="small">Gelen kutusu · onaylar · tedarikçi · finans · bildirimler</span></header>
 <div class="wrap">
-  <div class="bar" id="bar"></div>
-  <div class="grid">
-    <div class="card" id="list"><div class="empty">Yükleniyor…</div></div>
-    <div class="card" id="detay"><div class="empty">Soldan bir konuşma seçin.</div></div>
+  <div class="tabs" id="tabs"></div>
+
+  <div class="sec-blok" id="s_kutu">
+    <div class="bar" id="bar"></div>
+    <div class="grid">
+      <div class="card" id="list"><div class="empty">Yükleniyor…</div></div>
+      <div class="card" id="detay"><div class="empty">Soldan bir konuşma seçin.</div></div>
+    </div>
   </div>
-  <details id="onaylar"><summary>Onay bekleyen giden mailler (<span id="onaySayi">0</span>)</summary><div id="onayListe"></div></details>
+
+  <div class="sec-blok" id="s_onay"><div id="onayListe"><div class="empty">Yükleniyor…</div></div></div>
+  <div class="sec-blok" id="s_oto"><div id="otoIc"><div class="empty">Yükleniyor…</div></div></div>
+  <div class="sec-blok" id="s_ted"><div id="tedIc"><div class="empty">Yükleniyor…</div></div></div>
+  <div class="sec-blok" id="s_fin"><div id="finIc"><div class="empty">Yükleniyor…</div></div></div>
+  <div class="sec-blok" id="s_bil"><div id="bilIc"><div class="empty">Yükleniyor…</div></div></div>
 </div>
 <script src="../oturum.js"></script>
 <script>
 var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
-var D=null, SEL=null, FILT={eslesme:'eslesmedi'};
+var D=null, SEL=null, SEKME='kutu', AKTIF='eslesmedi', TED=null, ONIZ=null;
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
 function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleString('tr-TR',{dateStyle:'short',timeStyle:'short'})}catch(e){return d}}
+function gun(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('tr-TR')}catch(e){return d}}
+function para(n,p){if(n==null||n==='')return '—';return Number(n).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})+' '+(p||'');}
+function el(id){return document.getElementById(id);}
+function v(id){var e=el(id);return e&&e.value?e.value:null;}
 async function rpc(fn,body){var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body||{})});return r.json();}
+function ile(islem,veri){return rpc('panel_iletisim',{p_islem:islem,p_veri:veri||{}});}
 var DURUM={yeni:['Yeni','warn'],taslak:['Taslak','acc'],onayda:['Onayda','acc'],yanitlandi:['Yanıtlandı','ok'],yanit_gerekmez:['Yanıt gerekmez',''],karsi_taraf_bekleniyor:['Karşı taraf bekleniyor','ok'],kapandi:['Kapandı','']};
 var ROL={misafir:'Misafir',tedarikci:'Tedarikçi',havayolu:'Havayolu',otel:'Otel',acente:'Acente',kurum:'Kurum',rehber:'Rehber',banka:'Banka',sistem:'Sistem',bulten:'Bülten',platform:'Platform'};
+var SINIF={belge_istegi:'Belge isteği',odeme:'Ödeme',is_birligi:'İş birliği',tedarikci_teklif:'Tedarikçi teklifi',tanitim:'Tanıtım',bilgi_sorusu:'Bilgi sorusu',fiyat_teklifi:'Fiyat teklifi',sikayet:'Şikayet',hukuk:'Hukuk',fatura:'Fatura',tedarikci_sablon:'Tedarikçi şablonu',tedarikci_teyit:'Tedarikçi teyidi'};
+
+// ---------- sekmeler ----------
+var SEKMELER=[['kutu','Gelen kutusu'],['onay','Onay kuyruğu'],['oto','Otomatik gönderim'],['ted','Tedarikçiye yaz'],['fin','Finans'],['bil','Bildirimler']];
+function sekmeCiz(){var s=(D&&D.sayac)||{};var say={kutu:s.eslesmeyen,onay:s.onay_mail,oto:s.otomatik_kuyruk,fin:s.finans,bil:s.bildirim};
+  el('tabs').innerHTML=SEKMELER.map(function(t){var n=say[t[0]];return '<span class="tab '+(SEKME===t[0]?'on':'')+'" onclick="sekme(\''+t[0]+'\')">'+t[1]+(n?'<b class="hot">'+n+'</b>':'')+'</span>'}).join('');}
+function sekme(k){SEKME=k;SEKMELER.forEach(function(t){el('s_'+t[0]).classList.toggle('on',t[0]===k)});sekmeCiz();
+  if(k==='kutu')load();else if(k==='onay')onayCiz();else if(k==='oto')otoYukle();else if(k==='ted')tedYukle();else if(k==='fin')finYukle();else if(k==='bil')bilYukle();}
+
+// ---------- gelen kutusu ----------
 function filtre(k){
   if(k==='eslesmedi')return {eslesme:'eslesmedi'};
   if(k==='yeni')return {durum:'yeni'};
@@ -58,38 +93,121 @@ function filtre(k){
   if(k==='gerekmez')return {durum:'yanit_gerekmez',gizle_gerekmez:false};
   return {gizle_gerekmez:true};
 }
-var AKTIF='eslesmedi';
 async function load(){
-  D=await rpc('panel_iletisim',{p_islem:'liste',p_veri:filtre(AKTIF)});
-  if(!D||D.hata){document.getElementById('list').innerHTML='<div class="empty">'+esc((D&&D.hata)||'Yetki yok')+'</div>';return;}
+  D=await ile('liste',filtre(AKTIF));
+  if(!D||D.hata){el('list').innerHTML='<div class="empty">'+esc((D&&D.hata)||'Yetki yok')+'</div>';return;}
+  sekmeCiz();
   var s=D.sayac||{};
   var chips=[['eslesmedi','Eşleşmeyenler',s.eslesmeyen],['yeni','Yeni',s.yeni],['onayda','Onayda',s.onayda],['bekleniyor','Karşı taraf bekleniyor',s.bekleniyor],['hepsi','Hepsi',s.toplam-(s.gerekmez||0)],['gerekmez','Yanıt gerekmez',s.gerekmez]];
-  document.getElementById('bar').innerHTML=chips.map(function(c){return '<span class="chip '+(AKTIF===c[0]?'on':'')+'" onclick="sec(\''+c[0]+'\')">'+c[1]+'<b>'+(c[2]||0)+'</b></span>'}).join('')+'<span class="small" style="margin-left:auto">Yeni mailler 5 dakikada bir gelir ve kendiliğinden eşlenir.</span>';
+  el('bar').innerHTML=chips.map(function(c){return '<span class="chip '+(AKTIF===c[0]?'on':'')+'" onclick="sec(\''+c[0]+'\')">'+c[1]+'<b>'+(c[2]||0)+'</b></span>'}).join('')+'<span class="small" style="margin-left:auto">Yeni mailler 5 dakikada bir gelir ve kendiliğinden eşlenir.</span>';
   var L=D.konusmalar||[];
-  document.getElementById('list').innerHTML=L.length?L.map(function(k){var d=DURUM[k.durum]||[k.durum,''];return '<div class="item '+(SEL===k.id?'sel':'')+'" onclick="ac(\''+k.id+'\')"><div class="k"><span>'+esc(k.karsi_ad||k.karsi_adres||'—')+'</span><span class="pill '+d[1]+'">'+d[0]+'</span></div><div class="s">'+esc(k.konu||'(konusuz)')+'</div><div class="s">'+(k.rol?'<span class="pill acc">'+esc(ROL[k.rol]||k.rol)+'</span> ':'')+(k.eslesme==='eslesmedi'?'<span class="pill bad">eşleşmedi</span> ':'')+(k.dosya_no?'<span class="pill ok">'+esc(k.dosya_no)+'</span> ':'')+(k.tur?'<span class="pill">'+esc(k.tur)+'</span> ':'')+'<span>'+tarih(k.son_gelen||k.son_giden)+' · '+k.mesaj+' mesaj</span></div></div>'}).join(''):'<div class="empty">Bu süzgeçte konuşma yok.</div>';
-  var O=D.onay_bekleyen_mail||[];document.getElementById('onaySayi').textContent=O.length;
-  document.getElementById('onayListe').innerHTML=O.length?O.map(function(g){return '<div class="msg giden"><div class="h"><span><b>'+esc(g.gonderen||'travel@plusiva.com')+'</b> → '+esc(g.kime)+'</span><span>'+tarih(g.olusturuldu)+'</span></div><b>'+esc(g.konu)+'</b><pre>'+esc(g.metin)+'</pre><div class="row" style="margin-top:8px"><button onclick="onayla(\''+g.id+'\')">Onayla ve gönder</button><button class="bad" onclick="reddet(\''+g.id+'\')">Reddet</button></div></div>'}).join(''):'<div class="small" style="padding:8px">Onay bekleyen mail yok.</div>';
+  el('list').innerHTML=L.length?L.map(function(k){var d=DURUM[k.durum]||[k.durum,''];return '<div class="item '+(SEL===k.id?'sel':'')+'" onclick="ac(\''+k.id+'\')"><div class="k"><span>'+esc(k.karsi_ad||k.karsi_adres||'—')+'</span><span class="pill '+d[1]+'">'+d[0]+'</span></div><div class="s">'+esc(k.konu||'(konusuz)')+'</div><div class="s">'+(k.rol?'<span class="pill acc">'+esc(ROL[k.rol]||k.rol)+'</span> ':'')+(k.eslesme==='eslesmedi'?'<span class="pill bad">eşleşmedi</span> ':'')+(k.dosya_no?'<span class="pill ok">'+esc(k.dosya_no)+'</span> ':'')+(k.tur?'<span class="pill">'+esc(k.tur)+'</span> ':'')+'<span>'+tarih(k.son_gelen||k.son_giden)+' · '+k.mesaj+' mesaj</span></div></div>'}).join(''):'<div class="empty">Bu süzgeçte konuşma yok.</div>';
+  if(SEKME==='onay')onayCiz();
 }
 function sec(k){AKTIF=k;load();}
+function ekCiz(E,olayId){var L=(E||[]).filter(function(e){return !olayId||e.olay_id===olayId});if(!L.length)return '';
+  return L.map(function(e){if(e.gizli)return '<div class="ek"><span>🔒 Hassas belge <span class="pill bad">yalnız yönetici</span></span><span class="small">'+esc(e.sinif||'')+'</span></div>';
+    return '<div class="ek"><span>📎 <a onclick="ekIndir(\''+esc(e.depo_yolu)+'\',\''+esc(e.dosya_adi).replace(/'/g,'')+'\')">'+esc(e.dosya_adi)+'</a> '+(e.hassas?'<span class="pill bad">hassas</span> ':'')+(e.sinif?'<span class="pill">'+esc(e.sinif)+'</span>':'')+(e.ozet?'<div class="small">'+esc(e.ozet)+'</div>':'')+'</span><span class="small">'+(e.boyut?Math.round(e.boyut/1024)+' KB':'')+'</span></div>'}).join('');}
+async function ekIndir(yol,ad){if(!yol){alert('Dosya yolu yok');return;}
+  var p=yol.replace(/^belgeler\//,'');
+  try{var r=await PV.sb.storage.from('belgeler').download(p);if(r.error){alert('İndirilemedi: '+r.error.message);return;}
+    var u=URL.createObjectURL(r.data);var a=document.createElement('a');a.href=u;a.download=ad||'ek';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove()},2000);}
+  catch(e){alert('İndirilemedi');}}
 async function ac(id){
-  SEL=id;var X=await rpc('panel_iletisim',{p_islem:'konusma',p_veri:{id:id}});if(!X||X.hata){alert((X&&X.hata)||'hata');return;}
-  var k=X.konusma,O=X.olaylar||[];var d=DURUM[k.durum]||[k.durum,''];
+  SEL=id;var X=await ile('konusma',{id:id});if(!X||X.hata){alert((X&&X.hata)||'hata');return;}
+  var k=X.konusma,O=X.olaylar||[],E=X.ekler||[];var d=DURUM[k.durum]||[k.durum,''];
   var h='<h3>'+esc(k.konu||'(konusuz)')+'</h3><div class="small">'+esc(k.karsi_ad||'')+' &lt;'+esc(k.karsi_adres||'')+'&gt; · '+esc(k.hesap||'')+' · <span class="pill '+d[1]+'">'+d[0]+'</span> '+(k.taraf_rolu?'<span class="pill acc">'+esc(ROL[k.taraf_rolu]||k.taraf_rolu)+'</span>':'')+' '+(k.eslesme_durumu==='eslesmedi'?'<span class="pill bad">eşleşmedi</span>':'<span class="pill ok">'+esc(k.eslesme_yontemi||k.eslesme_durumu)+'</span>')+(k.yanit_gerekmez_nedeni?' · '+esc(k.yanit_gerekmez_nedeni):'')+'</div>';
-  h+='<div style="margin:10px 0">'+O.map(function(o){return '<div class="msg '+(o.yon==='giden'?'giden':'')+'"><div class="h"><span><b>'+esc(o.gonderen||'')+'</b>'+(o.kime?' → '+esc(Array.isArray(o.kime)?o.kime.join(', '):o.kime):'')+'</span><span>'+tarih(o.zaman)+(o.ek_sayisi&&o.ek_sayisi!=='0'?' · 📎 '+esc(o.ek_sayisi):'')+'</span></div><pre>'+esc(o.icerik||'')+'</pre></div>'}).join('')+'</div>';
+  h+='<div style="margin:10px 0">'+O.map(function(o){return '<div class="msg '+(o.yon==='giden'?'giden':'')+'"><div class="h"><span><b>'+esc(o.gonderen||'')+'</b>'+(o.kime?' → '+esc(Array.isArray(o.kime)?o.kime.join(', '):o.kime):'')+'</span><span>'+tarih(o.zaman)+'</span></div><pre>'+esc(o.icerik||'')+'</pre>'+ekCiz(E,o.id)+'</div>'}).join('')+'</div>';
   var T=D.taraflar||[],DS=D.dosyalar||[],TR=D.turlar||[];
   h+='<details open><summary>Eşle / bağla</summary><div class="row"><div><label>Taraf</label><select id="e_taraf"><option value="">—</option>'+T.map(function(t){return '<option value="'+t.id+'" '+(t.id===k.taraf_id?'selected':'')+'>'+esc(t.ad)+' ('+esc(t.tip)+')</option>'}).join('')+'</select></div><div><label>Rol</label><select id="e_rol"><option value="">—</option>'+Object.keys(ROL).map(function(r){return '<option value="'+r+'" '+(r===k.taraf_rolu?'selected':'')+'>'+ROL[r]+'</option>'}).join('')+'</select></div><div><label>Dosya</label><select id="e_dosya"><option value="">—</option>'+DS.map(function(x){return '<option value="'+x.id+'" '+(x.id===k.dosya_id?'selected':'')+'>'+esc(x.no)+' · '+esc(x.tur||'')+'</option>'}).join('')+'</select></div><div><label>Tur</label><select id="e_tur"><option value="">—</option>'+TR.map(function(x){return '<option value="'+x.id+'" '+(x.id===k.tur_id?'selected':'')+'>'+esc(x.kod)+'</option>'}).join('')+'</select></div></div>';
   h+='<div class="row" style="margin-top:8px"><div><label>Bu gönderenin alan adı hep şu sınıfa girsin</label><select id="e_alan"><option value="">— değişmesin —</option><option value="sistem_alanlari">Sistem bildirimi</option><option value="bulten_alanlari">Bülten / reklam</option><option value="banka_alanlari">Banka</option></select></div><div><button onclick="esle(\''+k.id+'\')">Kaydet</button> <button class="sec" onclick="gerekmez(\''+k.id+'\')">Yanıt gerekmez</button></div></div></details>';
   h+='<details><summary>Yanıt yaz</summary><label>Metin (imza ve dosya numarası otomatik eklenir; gönderim onayla gider)</label><textarea id="y_metin"></textarea><div class="row" style="margin-top:8px"><div style="max-width:140px"><label>Dil</label><select id="y_dil"><option value="tr" '+(k.dil==='tr'?'selected':'')+'>Türkçe</option><option value="en" '+(k.dil==='en'?'selected':'')+'>English</option></select></div><div><button onclick="yanit(\''+k.id+'\')">Onaya gönder</button></div></div></details>';
-  document.getElementById('detay').innerHTML=h;load();
+  el('detay').innerHTML=h;load();
 }
-function v(id){var e=document.getElementById(id);return e&&e.value?e.value:null;}
-async function esle(id){var x=await rpc('panel_iletisim',{p_islem:'esle',p_veri:{id:id,taraf_id:v('e_taraf'),dosya_id:v('e_dosya'),tur_id:v('e_tur'),rol:v('e_rol'),alan_sinifi:v('e_alan')}});if(x&&x.hata)alert(x.hata);ac(id);}
-async function gerekmez(id){var n=prompt('Neden yanıt gerekmiyor?','bilgi amaçlı');if(n===null)return;var x=await rpc('panel_iletisim',{p_islem:'esle',p_veri:{id:id,yanit_gerekmez:n,alan_sinifi:v('e_alan')}});if(x&&x.hata)alert(x.hata);SEL=null;load();document.getElementById('detay').innerHTML='<div class="empty">Kaydedildi.</div>';}
-async function yanit(id){var m=v('y_metin');if(!m){alert('Metin boş');return;}var x=await rpc('panel_iletisim',{p_islem:'yanit_yaz',p_veri:{id:id,metin:m,dil:v('y_dil')}});if(x&&x.hata){alert(x.hata);return;}alert('Taslak onay kuyruğuna alındı.');ac(id);}
-async function onayla(id){if(!confirm('Bu mail gönderilsin mi?'))return;var x=await rpc('panel_iletisim',{p_islem:'onayla',p_veri:{id:id}});if(x&&x.hata)alert(x.hata);load();}
-async function reddet(id){var n=prompt('Red nedeni');if(n===null)return;var x=await rpc('panel_iletisim',{p_islem:'reddet',p_veri:{id:id,neden:n}});if(x&&x.hata)alert(x.hata);load();}
+async function esle(id){var x=await ile('esle',{id:id,taraf_id:v('e_taraf'),dosya_id:v('e_dosya'),tur_id:v('e_tur'),rol:v('e_rol'),alan_sinifi:v('e_alan')});if(x&&x.hata)alert(x.hata);ac(id);}
+async function gerekmez(id){var n=prompt('Neden yanıt gerekmiyor?','bilgi amaçlı');if(n===null)return;var x=await ile('esle',{id:id,yanit_gerekmez:n,alan_sinifi:v('e_alan')});if(x&&x.hata)alert(x.hata);SEL=null;load();el('detay').innerHTML='<div class="empty">Kaydedildi.</div>';}
+async function yanit(id){var m=v('y_metin');if(!m){alert('Metin boş');return;}var x=await ile('yanit_yaz',{id:id,metin:m,dil:v('y_dil')});if(x&&x.hata){alert(x.hata);return;}alert('Taslak onay kuyruğuna alındı.');ac(id);}
+
+// ---------- onay kuyruğu ----------
+function onayCiz(){var O=(D&&D.onay_bekleyen_mail)||[];
+  el('onayListe').innerHTML=(O.length?'<div class="note">Bu mailler siz onaylamadan gitmez. Yabancı dildeki taslakların Türkçe karşılığı altta; gerekirse metni düzeltip sonra onaylayın.</div>':'')+
+  (O.length?O.map(function(g){var eksik=!g.kime;return '<div class="msg giden"><div class="h"><span><b>'+esc(g.gonderen||'travel@plusiva.com')+'</b> → '+(eksik?'<span class="pill bad">alıcı yok</span>':esc(g.kime))+'</span><span>'+tarih(g.olusturuldu)+'</span></div>'+
+    '<div style="margin-top:6px">'+(g.sinif?'<span class="pill acc">'+esc(SINIF[g.sinif]||g.sinif)+'</span> ':'')+(g.dil?'<span class="pill">'+esc(String(g.dil).toUpperCase())+'</span> ':'')+(g.geri_alindi?'<span class="pill warn">otomatikten geri alındı</span> ':'')+(g.olusturan?'<span class="small">hazırlayan: '+esc(g.olusturan)+'</span>':'')+'</div>'+
+    '<b style="display:block;margin-top:6px">'+esc(g.konu)+'</b><textarea id="m_'+g.id+'" style="margin-top:6px;min-height:140px">'+esc(g.metin)+'</textarea>'+
+    (g.tr_ceviri?'<div class="tr"><span class="small"><b>Türkçesi</b> (yalnız sizin için; gönderilmez)</span><pre>'+esc(g.tr_ceviri)+'</pre></div>':'')+
+    (g.gerekce?'<div class="gerekce"><b>Yapay zekânın gerekçesi:</b> '+esc(g.gerekce)+'</div>':'')+
+    '<div class="row" style="margin-top:8px"><button '+(eksik?'disabled':'')+' onclick="onayla(\''+g.id+'\')">Onayla ve gönder</button><button class="sec" onclick="duzelt(\''+g.id+'\')">Metni kaydet</button><button class="bad" onclick="reddet(\''+g.id+'\')">Reddet</button>'+(g.konusma_id?'<button class="sec" onclick="konusmayaGit(\''+g.konusma_id+'\')">Konuşmayı aç</button>':'')+'</div></div>'}).join(''):'<div class="empty">Onay bekleyen mail yok.</div>');}
+async function duzelt(id){var m=v('m_'+id);var x=await ile('metin_duzelt',{id:id,metin:m});if(x&&x.hata){alert(x.hata);return;}alert(x&&x.tamam?'Metin kaydedildi (hâlâ onayınızı bekliyor).':'Kaydedilemedi.');load();}
+async function onayla(id){var m=v('m_'+id);if(!confirm('Bu mail gönderilsin mi?'))return;
+  var g=((D&&D.onay_bekleyen_mail)||[]).filter(function(x){return x.id===id})[0];
+  if(g&&m&&m!==g.metin){var d=await ile('metin_duzelt',{id:id,metin:m});if(d&&d.hata){alert(d.hata);return;}}
+  var x=await ile('onayla',{id:id});if(x&&x.hata)alert(x.hata);else if(x&&!x.tamam)alert('Onaylanamadı (alıcı eksik ya da zaten işlenmiş).');load();}
+async function reddet(id){var n=prompt('Red nedeni');if(n===null)return;var x=await ile('reddet',{id:id,neden:n});if(x&&x.hata)alert(x.hata);load();}
+function konusmayaGit(id){AKTIF='hepsi';sekme('kutu');ac(id);}
+
+// ---------- otomatik gönderim ----------
+async function otoYukle(){var X=await ile('otomatik');if(!X||X.hata){el('otoIc').innerHTML='<div class="empty">'+esc((X&&X.hata)||'hata')+'</div>';return;}
+  var h=X.acik?'<div class="note ok"><b>Otomatik gönderim AÇIK.</b> Aşağıdaki sınıflardaki yanıtlar '+X.geri_alma_dk+' dakika bekleyip kendiliğinden gider; bu sürede geri alabilirsiniz. Sessiz saat '+(X.sessiz?X.sessiz.bas+':00–'+X.sessiz.bit+':00':'')+'. Bugün '+X.bugun+'/'+X.tavan+'.</div>'
+    :'<div class="note"><b>Otomatik gönderim KAPALI.</b> Dışarıya giden her mail sizin onayınızla gider (Onay kuyruğu). Açma kararı sizde; açmak istediğinizde Yapıcı\'ya "otomatik gönderimi aç" demeniz yeterli. Açıldığında: '+X.geri_alma_dk+' dk geri alma süresi, sessiz saat '+(X.sessiz?X.sessiz.bas+':00–'+X.sessiz.bit+':00':'')+', günlük en çok '+X.tavan+' mail.</div>';
+  h+='<div class="card"><h3>Kendiliğinden gidebilecek yanıtlar (açıkken)</h3><div>'+(X.otomatik_siniflar||[]).map(function(s){return '<span class="pill ok" style="margin:2px">'+esc(SINIF[s]||s.replace(/_/g,' '))+'</span>'}).join('')+'</div><h3 style="margin-top:12px">Her zaman onayınıza düşenler</h3><div>'+(X.onay_gereken_siniflar||[]).map(function(s){return '<span class="pill warn" style="margin:2px">'+esc(SINIF[s]||s.replace(/_/g,' '))+'</span>'}).join('')+'</div></div>';
+  var K=X.kuyruk||[];
+  h+='<div class="card"><h3>Gönderilmek üzere bekleyenler ('+K.length+')</h3>'+(K.length?K.map(function(g){return '<div class="msg giden"><div class="h"><span>→ <b>'+esc(g.kime)+'</b> '+(g.sinif?'<span class="pill acc">'+esc(SINIF[g.sinif]||g.sinif)+'</span>':'')+'</span><span>gönderim: '+tarih(g.planlanan)+'</span></div><b>'+esc(g.konu)+'</b><pre>'+esc(g.metin)+'</pre>'+(g.tr_ceviri?'<div class="tr"><span class="small"><b>Türkçesi</b></span><pre>'+esc(g.tr_ceviri)+'</pre></div>':'')+'<div class="row" style="margin-top:8px"><button class="bad" onclick="geriAl(\''+g.id+'\')">Geri al (onay kuyruğuna al)</button></div></div>'}).join(''):'<div class="small">Bekleyen yok.</div>')+'</div>';
+  var S=X.son_giden||[];
+  h+='<div class="card"><h3>Son gidenler</h3>'+(S.length?'<table><tr><th>Zaman</th><th>Alıcı</th><th>Konu</th><th>Onaylayan</th><th>Durum</th></tr>'+S.map(function(g){return '<tr><td>'+tarih(g.bitis)+'</td><td>'+esc(g.kime)+'</td><td>'+esc(g.konu)+'</td><td>'+esc(g.onaylayan||'')+'</td><td>'+(g.durum==='hata'?'<span class="pill bad">hata</span>':'<span class="pill ok">gitti</span>')+'</td></tr>'}).join('')+'</table>':'<div class="small">Henüz giden yok.</div>')+'</div>';
+  el('otoIc').innerHTML=h;}
+async function geriAl(id){if(!confirm('Bu mail gönderilmesin, onay kuyruğuna geri alınsın mı?'))return;var x=await ile('geri_al',{id:id});if(x&&x.hata){alert(x.hata);}otoYukle();load();}
+
+// ---------- tedarikçiye yaz ----------
+async function tedYukle(turId){TED=await ile('tedarikci_veri',{tur_id:turId||null});if(!TED||TED.hata){el('tedIc').innerHTML='<div class="empty">'+esc((TED&&TED.hata)||'hata')+'</div>';return;}
+  var T=TED.taraflar||[],TR=TED.turlar||[],P=TED.parcalar||[],S=TED.sablonlar||[];
+  var h='<div class="note">Mail sizin onayınız olmadan gitmez: "Hazırla" taslağı Onay kuyruğuna koyar. Rezervasyon/teyit talebi taahhüt sayıldığı için her zaman onaylıdır.</div><div class="card"><div class="row">'+
+    '<div><label>Tedarikçi</label><select id="t_taraf" onchange="tedAdres()"><option value="">—</option>'+T.map(function(t){return '<option value="'+t.id+'" data-e="'+esc(t.eposta||'')+'">'+esc(t.ad)+' ('+esc(t.tip)+(t.dil?' · '+esc(t.dil):'')+')'+(t.eposta?'':' — adres yok')+'</option>'}).join('')+'</select></div>'+
+    '<div><label>Şablon</label><select id="t_sablon">'+S.map(function(s){return '<option value="'+s.kod+'">'+esc(s.ad)+'</option>'}).join('')+'</select></div></div>'+
+    '<div class="row"><div><label>Tur</label><select id="t_tur" onchange="tedYukle(this.value)"><option value="">—</option>'+TR.map(function(x){return '<option value="'+x.id+'" '+(x.id===turId?'selected':'')+'>'+esc(x.kod)+' · '+esc(x.ad||'')+'</option>'}).join('')+'</select></div>'+
+    '<div><label>Hizmet satırı (isteğe bağlı)</label><select id="t_parca"><option value="">—</option>'+P.map(function(p){return '<option value="'+p.id+'">'+esc(p.ad)+(p.tarih?' · '+gun(p.tarih):'')+'</option>'}).join('')+'</select></div></div>'+
+    '<div class="row"><div><label>Alıcı e-posta (tedarikçide kayıtlı değilse girin; karta kaydedilir)</label><input id="t_kime" placeholder="ornek@tedarikci.com"></div><div><label>Dil (boşsa tedarikçinin dili)</label><select id="t_dil"><option value="">Otomatik</option><option value="tr">Türkçe</option><option value="en">English</option><option value="es">Español</option></select></div></div>'+
+    '<div class="row"><div><label>Şehir / yer</label><input id="t_sehir"></div><div><label>İstenen hizmet</label><input id="t_istenen" placeholder="ör. 3 gece, 23 oda"></div><div><label>Ek ayrıntı</label><input id="t_detay"></div></div>'+
+    '<div class="row"><div><label>Oda dağılımı (rooming)</label><input id="t_oda"></div><div><label>Tutar (ödeme bildirimi)</label><input id="t_tutar"></div><div><label>Ödeme tarihi</label><input id="t_odt" placeholder="GG.AA.YYYY"></div></div>'+
+    '<div class="row" style="margin-top:10px"><button class="sec" onclick="tedOnizle()">Önizle</button></div><div id="t_oniz"></div></div>';
+  el('tedIc').innerHTML=h;tedAdres();}
+function tedAdres(){var s=el('t_taraf');if(!s)return;var o=s.options[s.selectedIndex];var e=o&&o.getAttribute('data-e');var k=el('t_kime');if(k){k.value=e||'';k.disabled=!!e;}}
+function tedVeri(){var d={};[['sehir','t_sehir'],['istenen','t_istenen'],['detay','t_detay'],['oda_dagilimi','t_oda'],['tutar','t_tutar'],['odeme_tarihi','t_odt'],['dil','t_dil']].forEach(function(x){var y=v(x[1]);if(y)d[x[0]]=y});return d;}
+async function tedOnizle(){if(!v('t_taraf')){alert('Tedarikçi seçin');return;}
+  ONIZ=await ile('tedarikci_onizle',{taraf_id:v('t_taraf'),sablon:v('t_sablon'),tur_id:v('t_tur'),parca_id:v('t_parca'),veri:tedVeri()});
+  if(!ONIZ||ONIZ.hata){el('t_oniz').innerHTML='<div class="note">'+esc((ONIZ&&ONIZ.hata)||'hata')+'</div>';return;}
+  el('t_oniz').innerHTML='<div class="msg giden" style="margin-top:10px"><div class="h"><span>→ <b>'+esc(ONIZ.kime||v('t_kime')||'(adres yok)')+'</b> <span class="pill">'+esc(String(ONIZ.dil||'').toUpperCase())+'</span></span><span>'+esc(ONIZ.sablon)+'</span></div><b>'+esc(ONIZ.konu)+'</b><label>Metin (düzeltebilirsiniz; imza otomatik eklenir)</label><textarea id="t_metin" style="min-height:180px">'+esc(ONIZ.metin)+'</textarea><div class="row" style="margin-top:8px"><button onclick="tedYaz()">Hazırla → Onay kuyruğu</button></div></div>';}
+async function tedYaz(){var kime=ONIZ&&ONIZ.kime?null:v('t_kime');if(!(ONIZ&&ONIZ.kime)&&!kime){alert('Alıcı e-posta adresi girin.');return;}
+  var x=await ile('tedarikci_yaz',{taraf_id:v('t_taraf'),sablon:v('t_sablon'),tur_id:v('t_tur'),parca_id:v('t_parca'),veri:tedVeri(),metin:v('t_metin'),kime:kime});
+  if(!x||x.hata){alert((x&&x.hata)||'hata');return;}alert('Taslak onay kuyruğuna alındı.');load();tedYukle(v('t_tur'));}
+
+// ---------- finans ----------
+async function finYukle(){var F=await ile('finans');if(!F||F.hata){el('finIc').innerHTML='<div class="empty">'+esc((F&&F.hata)||'hata')+'</div>';return;}
+  var Y=F.yonetici,G=F.odeme_gorevleri||[],E=F.eslesmeyen_dekontlar||[],B=F.bekleyen_odemeler||[],FT=F.gelen_faturalar||[],DB=F.diger_bulgular||[];
+  var h='<div class="note">Para geçen her adım sizin onayınızla ilerler. Ödemeyi onaylamadan önce tutarın banka hesabına geçtiğini görün.'+(Y?'':' Onay düğmeleri yalnız yönetici hesabında çalışır.')+'</div>';
+  h+='<div class="card"><h3>Dekontu gelen ödemeler — onay bekliyor ('+G.length+')</h3>'+(G.length?'<table><tr><th>Dosya</th><th>Misafir</th><th>Dekont</th><th>Beklenen</th><th></th></tr>'+G.map(function(g){return '<tr><td>'+esc(g.dosya_no||'—')+'</td><td>'+esc(g.misafir||'—')+'</td><td>'+para(g.tutar,g.para)+(g.referans?'<div class="small">ref '+esc(g.referans)+'</div>':'')+(g.dekont?'<div><a class="small" style="cursor:pointer;color:var(--acc)" onclick="ekIndir(\''+esc(g.dekont)+'\',\'dekont\')">dekontu aç</a></div>':'')+'</td><td>'+para(g.odeme_tutar,g.odeme_para)+'</td><td><button '+(Y?'':'disabled')+' onclick="odemeOnay(\''+g.gorev+'\')">Bankada gördüm, onayla</button> <button class="sec" onclick="odemeRed(\''+g.gorev+'\')">Reddet</button></td></tr>'}).join('')+'</table>':'<div class="small">Yok.</div>')+'</div>';
+  h+='<div class="card"><h3>Eşleşmeyen dekontlar ('+E.length+')</h3>'+(E.length?E.map(function(e){return '<div class="msg"><div class="h"><span><b>'+esc(e.gonderen||'')+'</b> · '+esc(e.konu||'')+'</span><span>'+tarih(e.zaman)+'</span></div><div class="small">'+esc(e.aciklama||'')+'</div><div class="row" style="margin-top:8px"><div><label>Hangi bekleyen ödemeye ait?</label><select id="de_'+e.bulgu+'"><option value="">—</option>'+B.map(function(b){return '<option value="'+b.id+'">'+esc(b.dosya_no||'')+' · '+esc(b.misafir||'')+' · '+para(b.tutar,b.para)+' · '+gun(b.tarih)+'</option>'}).join('')+'</select></div><div><button onclick="dekontEsle(\''+e.bulgu+'\',\''+e.olay_id+'\')">Eşle</button> <button class="sec" onclick="bulguKapat(\''+e.bulgu+'\')">Dekont değil / kapat</button></div></div></div>'}).join(''):'<div class="small">Yok.</div>')+'</div>';
+  h+='<div class="card"><h3>Gelen faturalar — onay bekliyor ('+FT.length+')</h3>'+(FT.length?'<table><tr><th>Tedarikçi</th><th>No</th><th>Tarih / vade</th><th>Tutar</th><th>Tur</th><th></th></tr>'+FT.map(function(f){return '<tr><td>'+esc(f.taraf||'—')+'</td><td>'+esc(f.seri_no||'')+(f.ek?'<div><a class="small" style="cursor:pointer;color:var(--acc)" onclick="ekIndir(\''+esc(f.ek)+'\',\'fatura\')">faturayı aç</a></div>':'')+'</td><td>'+gun(f.tarih)+' / '+gun(f.vade)+'</td><td>'+para(f.tutar,f.para)+(f.kdv?'<div class="small">KDV '+para(f.kdv,f.para)+'</div>':'')+'</td><td>'+esc(f.tur||'')+'</td><td><button '+(Y?'':'disabled')+' onclick="faturaKarar(\''+f.id+'\',\'onaylandi\')">Onayla</button> <button class="bad" '+(Y?'':'disabled')+' onclick="faturaKarar(\''+f.id+'\',\'iptal\')">İptal</button>'+(f.notlar?'<div class="small">'+esc(f.notlar)+'</div>':'')+'</td></tr>'}).join('')+'</table>':'<div class="small">Yok.</div>')+'</div>';
+  h+='<div class="card"><h3>Diğer finans uyarıları ('+DB.length+')</h3>'+(DB.length?DB.map(function(b){return '<div class="msg"><div class="h"><span><span class="pill '+(b.onem==='yuksek'||b.onem==='kritik'?'bad':'warn')+'">'+esc(b.onem)+'</span> <b>'+esc(b.baslik)+'</b></span><span>'+tarih(b.olusturuldu)+'</span></div><div class="small">'+esc(b.aciklama||'')+'</div><div class="row" style="margin-top:6px"><button class="sec" onclick="bulguKapat(\''+b.bulgu+'\')">Çözüldü</button></div></div>'}).join(''):'<div class="small">Yok.</div>')+'</div>';
+  h+='<details><summary>Bekleyen tüm ödemeler ('+B.length+')</summary>'+(B.length?'<table><tr><th>Dosya</th><th>Misafir</th><th>Tutar</th><th>Tarih</th><th>Yöntem</th><th>Dekont</th></tr>'+B.map(function(b){return '<tr><td>'+esc(b.dosya_no||'')+'</td><td>'+esc(b.misafir||'')+'</td><td>'+para(b.tutar,b.para)+'</td><td>'+gun(b.tarih)+'</td><td>'+esc(b.yontem||'')+'</td><td>'+(b.dekont_var?'<span class="pill ok">var</span>':'—')+'</td></tr>'}).join('')+'</table>':'<div class="small">Yok.</div>')+'</details>';
+  el('finIc').innerHTML=h;}
+async function odemeOnay(g){if(!confirm('Bu tutarı banka hesabınızda gördünüz mü? Onaylanınca makbuz kesilir ve dosya güncellenir.'))return;var x=await ile('odeme_onayla',{gorev:g});if(x&&x.hata){alert(x.hata);}else alert('Ödeme onaylandı. Makbuz: '+(x.makbuz_no||'—'));finYukle();load();}
+async function odemeRed(g){var n=prompt('Neden reddediliyor?');if(n===null)return;var x=await ile('odeme_gorev_reddet',{gorev:g,neden:n});if(x&&x.hata)alert(x.hata);finYukle();load();}
+async function dekontEsle(b,olay){var o=v('de_'+b);if(!o){alert('Ödeme seçin');return;}var x=await ile('dekont_esle',{olay_id:olay,odeme_id:o});if(x&&x.hata){alert(x.hata);return;}alert('Eşlendi. Ödeme onayı listede.');finYukle();load();}
+async function bulguKapat(b){var n=prompt('Kısa not','');if(n===null)return;var x=await ile('bulgu_kapat',{id:b,not:n});if(x&&x.hata)alert(x.hata);finYukle();load();}
+async function faturaKarar(id,k){var n=prompt(k==='onaylandi'?'Onay notu (isteğe bağlı)':'İptal nedeni','');if(n===null)return;var x=await ile('fatura_karar',{id:id,karar:k,not:n});if(x&&x.hata)alert(x.hata);finYukle();load();}
+
+// ---------- bildirimler ----------
+async function bilYukle(){var X=await ile('bildirimler');if(!X||X.hata){el('bilIc').innerHTML='<div class="empty">'+esc((X&&X.hata)||'hata')+'</div>';return;}
+  var L=X.liste||[],U=X.bulgular||[];
+  var h='<div class="bar"><span class="small">Okunmamış: <b>'+(X.okunmamis||0)+'</b></span>'+(X.okunmamis?'<button class="sec" style="margin-left:auto" onclick="okundu()">Hepsini okundu yap</button>':'')+'</div>';
+  h+='<div class="card"><h3>Açık önemli uyarılar ('+U.length+')</h3>'+(U.length?U.map(function(b){return '<div class="item" style="cursor:default"><div class="k"><span>'+esc(b.baslik)+'</span><span class="pill '+(b.onem==='kritik'?'bad':'warn')+'">'+esc(b.onem)+'</span></div><div class="s">'+esc(b.tip)+' · '+tarih(b.olusturuldu)+'</div></div>'}).join(''):'<div class="small">Yok.</div>')+'</div>';
+  h+='<div class="card"><h3>Bildirimler</h3>'+(L.length?L.map(function(b){return '<div class="item" style="cursor:default;'+(b.durum!=='okundu'?'background:#fffdf6':'')+'"><div class="k"><span>'+esc(b.baslik||'')+'</span><span class="small">'+tarih(b.olusturuldu)+'</span></div><div class="small" style="white-space:pre-wrap">'+esc(b.icerik||'')+'</div>'+(b.durum!=='okundu'?'<a class="small" style="color:var(--acc);cursor:pointer" onclick="okundu(\''+b.id+'\')">okundu</a>':'')+'</div>'}).join(''):'<div class="small">Bildirim yok.</div>')+'</div>';
+  el('bilIc').innerHTML=h;}
+async function okundu(id){await ile('bildirim_okundu',{id:id||null});bilYukle();load();}
+
 if(new URLSearchParams(location.search).get('embed'))document.body.classList.add('embed');
-PV.hazir.then(load);
+(function(){var s=new URLSearchParams(location.search).get('s');if(s&&SEKMELER.some(function(t){return t[0]===s}))SEKME=s;})();
+PV.hazir.then(function(){load().then(function(){sekme(SEKME)});});
 </script>
 </body>
 </html>
