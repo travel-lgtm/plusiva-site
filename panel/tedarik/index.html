@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Tedarikçi kartları</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--warn:#9a5a14;--warn2:#fff3e0;--ok:#1b5e3a;--ok2:#e8f5ec;--bad:#8a2a2a;--bad2:#fbeaea;--info:#1e3a5f;--info2:#e8eef8}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+header a{color:var(--acc);text-decoration:none;font-weight:700}
+.wrap{max-width:1280px;margin:0 auto;padding:16px 20px;display:grid;grid-template-columns:270px minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:860px){.wrap{grid-template-columns:minmax(0,1fr);padding:12px 12px}}
+.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px}.card h2{margin:0 0 10px;font-size:15px;font-weight:800}.card h3{margin:14px 0 8px;font-size:13.5px;font-weight:800}
+.mut{color:var(--mut)}.small{font-size:12px}
+select,input,textarea{font-family:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%}
+textarea{width:100%;min-height:64px;resize:vertical}
+.btn{border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}.btn.acc{background:var(--acc);color:#fff;border-color:var(--acc)}.btn:disabled{opacity:.5;cursor:default}
+.tlist{display:flex;flex-direction:column;gap:2px}.tlist a{display:flex;justify-content:space-between;gap:6px;padding:7px 9px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:13px}.tlist a:hover{background:#f1f2ef}.tlist a.on{background:var(--acc2);color:var(--acc);font-weight:800}
+.tlist .k{font-size:11px;color:var(--mut);white-space:nowrap}
+#turSelMob{display:none;width:100%;margin-bottom:8px}
+@media (max-width:860px){#turListe{display:none}#turSelMob{display:block}}
+.taraf{display:block;padding:8px 9px;border:1px solid var(--line);border-radius:9px;margin-bottom:6px;color:var(--ink);text-decoration:none;background:#fff}.taraf.on{border-color:var(--acc);background:var(--acc2)}.taraf .small{display:block}
+.frm{display:grid;gap:6px}.frm input,.frm select{width:100%}
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}.seg button{border:1px solid var(--line);background:#fff;padding:7px 12px;border-radius:999px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--mut)}.seg button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.seg.alt button{font-size:12px;padding:5px 10px}.seg.alt button.on{background:var(--acc2);color:var(--acc);border-color:var(--acc)}
+.seg .n{font-weight:600;opacity:.8;margin-left:4px}
+.alan{border:1px solid var(--line);border-radius:11px;padding:10px 12px;margin-bottom:8px;background:#fff}
+.alan.cocuk{margin-left:16px;border-left:3px solid var(--acc2)}
+.alan .bas{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}.alan .bas b{font-size:13.5px}.alan .kod{font-size:11px;color:var(--mut);font-variant-numeric:tabular-nums}
+.roz{display:inline-block;font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:999px;background:#eeeeea;color:var(--mut);white-space:nowrap}
+.roz.eleme{background:var(--bad2);color:var(--bad)}.roz.satis_kilidi{background:var(--bad2);color:var(--bad)}.roz.uyari{background:var(--warn2);color:var(--warn)}.roz.bilgi{background:#eeeeea;color:var(--mut)}
+.roz.yasa{background:var(--info2);color:var(--info)}.roz.piyasa{background:var(--acc2);color:var(--acc)}.roz.tercih{background:#f1eef8;color:#4a3a78}
+.roz.lehine{background:var(--ok2);color:var(--ok)}.roz.notr{background:#eeeeea;color:var(--mut)}.roz.aleyhine{background:var(--bad2);color:var(--bad)}
+.roz.dg{background:#fff;border:1px dashed var(--warn);color:var(--warn)}.roz.onay{background:var(--warn2);color:var(--warn)}.roz.salt{background:#fff;border:1px solid var(--line)}
+.alan .acik{font-size:12px;color:var(--mut);margin-top:4px}
+.alan .mevcut{font-size:12.5px;margin-top:6px;word-break:break-word}.alan .mevcut code{background:#f5f5f2;border-radius:6px;padding:1px 5px;font-size:12px}
+.alan .oneri{font-size:12.5px;margin-top:6px;background:var(--warn2);border-radius:8px;padding:6px 8px;color:var(--warn);word-break:break-word}
+.alan .giris{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:flex-start}.alan .giris .ana{flex:1 1 260px}.alan .giris .ana input,.alan .giris .ana select,.alan .giris .ana textarea{width:100%}
+.alan .kaynak{flex:1 1 180px}.alan .kaynak input{width:100%}
+.alan .sonuc{font-size:12px;margin-top:6px}.sonuc.ok{color:var(--ok)}.sonuc.bad{color:var(--bad)}
+.aleyh{border:1px solid #e9c9c9;background:#fdf6f6;border-radius:12px;padding:10px 12px;margin-top:14px}.aleyh>h3{margin-top:0;color:var(--bad)}
+.aleyh .gerekce{font-size:12.5px;margin-top:6px;border-left:3px solid var(--bad);padding-left:8px}
+.aleyh .esnek{font-size:12.5px;margin-top:4px;border-left:3px solid var(--ok);padding-left:8px}
+.esnek2{font-size:12px;margin-top:4px;color:var(--ok)}
+.kut{background:var(--info2);color:var(--info);border-radius:9px;padding:8px 10px;font-size:12.5px;margin-bottom:10px}
+.kut.warn{background:var(--warn2);color:var(--warn)}.kut.bad{background:var(--bad2);color:var(--bad)}
+.ust{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}.ust input[type=search]{flex:1 1 200px}
+.empty{color:var(--mut);font-size:13px;padding:10px 0}
+label.sw{display:flex;gap:6px;align-items:center;font-size:12.5px;color:var(--mut);cursor:pointer;margin:6px 0}
+body.embed header{display:none}body.embed{background:#fff}
+</style>
+</head>
+<body>
+<header><a href="../">← Panel</a><b>Tedarikçi kartları</b><span class="small mut" id="ustBilgi">türe göre kart · Plusiva</span></header>
+<div class="wrap" id="app" style="display:none">
+  <aside>
+    <div class="card">
+      <h2>Tedarikçi türü</h2>
+      <select id="turSelMob" aria-label="Tedarikçi türü"></select>
+      <div class="tlist" id="turListe"></div>
+    </div>
+    <div class="card">
+      <h2 id="tarafBaslik">Tedarikçiler</h2>
+      <label class="sw"><input type="checkbox" id="testGoster"> Testleri göster</label>
+      <div id="tarafListe"></div>
+    </div>
+    <details class="card" id="adayKart">
+      <summary style="cursor:pointer;font-weight:800;font-size:15px">Aday aç · türe bağla</summary>
+      <h3>Yeni aday</h3>
+      <div class="frm">
+        <input id="aAd" placeholder="Ad (zorunlu)" maxlength="200">
+        <input id="aSehir" placeholder="Şehir" maxlength="120">
+        <input id="aUlke" placeholder="Ülke" maxlength="120">
+        <select id="aTip">
+          <option value="tedarikci">Tedarikçi</option><option value="otel">Otel</option><option value="acente">Acente</option>
+          <option value="rehber">Rehber</option><option value="kurum">Kurum</option><option value="havayolu">Havayolu</option><option value="diger">Diğer</option>
+        </select>
+        <label class="sw"><input type="checkbox" id="aTest"> Test kaydı (veri sınıfı: test)</label>
+        <button class="btn acc" id="aKaydet">Aday aç (seçili türe bağlanır)</button>
+        <div class="small" id="aSonuc"></div>
+      </div>
+      <h3>Var olan tarafı bu türe bağla</h3>
+      <div class="frm">
+        <select id="bTaraf"></select>
+        <button class="btn" id="bKaydet">Bağla</button>
+        <div class="small" id="bSonuc"></div>
+      </div>
+    </details>
+  </aside>
+  <main id="kart"></main>
+</div>
+<script src="../oturum.js"></script>
+<script>
+var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
+var L=null, F=null, Q=new URLSearchParams(location.search);
+var S={tur:Q.get('tur')||'', taraf:Q.get('taraf')||'', yer:Q.get('yer')||'', ana:'tedarik', alt:'tedarik', ara:''};
+var ANA=[
+  {k:'tedarik',ad:'Tedarik',alt:[{k:'tedarik',ad:'Kart alanları'},{k:'kontrat',ad:'Kontrat maddeleri',salt:1},{k:'fiyat',ad:'Fiyat kırılımı',salt:1},{k:'diger',ad:'Diğer hedefler',salt:1}]},
+  {k:'arge',ad:'AR-GE',alt:[{k:'arge',ad:'AR-GE alanları'}]},
+  {k:'operasyon',ad:'Operasyon',alt:[{k:'operasyon',ad:'Operasyon alanları'},{k:'uyari',ad:'Planlayıcı ve denetleyici uyarıları',salt:1}]},
+  {k:'satis',ad:'Satış',alt:[{k:'satis',ad:'Satış kilidi ve eleme',salt:1}]}
+];
+var SALT={kontrat:1,fiyat:1,diger:1,uyari:1,satis:1};
+var ETKI={eleme:'eleme',satis_kilidi:'satış kilidi',uyari:'uyarı',bilgi:'bilgi'};
+var KAYN={yasa:'yasa',piyasa:'piyasa',tercih:'tercih'};
+var YON={lehine:'Plusiva lehine',notr:'nötr',aleyhine:'aleyhine'};
+var DURUM={gecerli:'geçerli',onerildi:'önerildi',dogrulanmadi:'doğrulanmadı',uygulanamaz:'uygulanamaz',sorulacak:'sorulacak'};
+var TDURUM={aday:'aday',yazisildi:'yazışıldı',teklif_geldi:'teklif geldi',kontratli:'kontratlı',askida:'askıda',pasif:'pasif',kara_liste:'kara liste'};
+function $(i){return document.getElementById(i);}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function lsAl(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsYaz(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+async function rpc(fn,body){
+  var r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body)});
+  var j=null;try{j=await r.json();}catch(e){j={hata:'yanıt okunamadı ('+r.status+')'};}
+  if(!r.ok&&j&&!j.hata)j={hata:(j.message||('istek hatası '+r.status))};
+  return j;
+}
+function islem(ad,veri){return rpc('tedarik_kart_islem',{p_islem:ad,p_veri:veri||{}});}
+function adresGuncelle(){
+  var p=new URLSearchParams();if(S.tur)p.set('tur',S.tur);if(S.taraf)p.set('taraf',S.taraf);if(S.yer)p.set('yer',S.yer);if(Q.get('embed'))p.set('embed',Q.get('embed'));
+  try{history.replaceState(null,'',location.pathname+'?'+p.toString());}catch(e){}
+}
+function hataMetni(j){if(!j)return 'yanıt yok';var m=j.hata||'hata';if(m==='yetkisiz')m='yetkisiz: oturum, iki aşamalı doğrulama ya da panel rolü eksik';if(j.ayrinti)m+=' · '+j.ayrinti;if(j.beklenen)m+=' · beklenen veri tipi: '+j.beklenen;if(j.kolonlar)m+=' · kolonlar: '+[].concat(j.kolonlar).join(', ');return m;}
+
+async function basla(){
+  L=await islem('liste',{});
+  if(!L||L.hata){$('app').style.display='block';$('kart').innerHTML='<div class="card"><div class="kut bad">'+esc(hataMetni(L))+'</div></div>';return;}
+  if(!S.tur||!L.turler.some(function(t){return t.kod===S.tur;}))S.tur=(L.turler[0]||{}).kod||'';
+  $('testGoster').checked=lsAl('pv_tedarik_test')==='1';
+  $('app').style.display='grid';
+  if(!L.yazabilir){$('adayKart').style.display='none';}
+  turCiz();tarafCiz();await kartYukle();
+}
+function turCiz(){
+  $('turListe').innerHTML=L.turler.map(function(t){
+    var n=L.taraflar.filter(function(r){return (r.turler||[]).indexOf(t.kod)>=0&&(r.veri_sinifi!=='test'||$('testGoster').checked);}).length;
+    return '<a href="?tur='+encodeURIComponent(t.kod)+'" data-tur="'+esc(t.kod)+'" class="'+(t.kod===S.tur?'on':'')+'"><span>'+esc(t.ad)+'</span><span class="k">'+esc(t.kod)+' · '+n+'</span></a>';
+  }).join('');
+  $('turSelMob').innerHTML=L.turler.map(function(t){return '<option value="'+esc(t.kod)+'"'+(t.kod===S.tur?' selected':'')+'>'+esc(t.kod+' · '+t.ad)+'</option>';}).join('');
+  Array.prototype.forEach.call($('turListe').querySelectorAll('a'),function(a){a.onclick=function(e){e.preventDefault();turSec(a.getAttribute('data-tur'));};});
+}
+function turSec(k){S.tur=k;S.taraf='';S.ana='tedarik';S.alt='tedarik';turCiz();tarafCiz();kartYukle();}
+function tarafCiz(){
+  var test=$('testGoster').checked, tur=(L.turler.filter(function(t){return t.kod===S.tur;})[0]||{});
+  $('tarafBaslik').textContent='Tedarikçiler · '+(tur.kod||'');
+  var liste=L.taraflar.filter(function(r){return (r.turler||[]).indexOf(S.tur)>=0&&(test||r.veri_sinifi!=='test');});
+  var gizli=L.taraflar.filter(function(r){return (r.turler||[]).indexOf(S.tur)>=0&&r.veri_sinifi==='test';}).length;
+  $('tarafListe').innerHTML=(liste.length?liste.map(function(r){
+    return '<a href="#" class="taraf'+(r.id===S.taraf?' on':'')+'" data-id="'+esc(r.id)+'"><b>'+esc(r.ad)+'</b>'+(r.veri_sinifi==='test'?' <span class="roz dg">test</span>':'')
+      +'<span class="small mut">'+esc([r.sehir,r.ulke].filter(Boolean).join(', ')||'konum yok')+' · '+esc(TDURUM[r.tedarikci_durum]||r.tedarikci_durum||'durum yok')+'</span></a>';
+  }).join(''):'<div class="empty">Bu türde tedarikçi yok. Aday açabilir ya da var olan bir tarafı bağlayabilirsiniz.</div>')
+   +(!test&&gizli?'<div class="small mut">'+gizli+' test kaydı gizli.</div>':'');
+  Array.prototype.forEach.call($('tarafListe').querySelectorAll('a.taraf'),function(a){a.onclick=function(e){e.preventDefault();S.taraf=a.getAttribute('data-id');tarafCiz();kartYukle();};});
+  var bag=L.taraflar.filter(function(r){return (r.turler||[]).indexOf(S.tur)<0&&(test||r.veri_sinifi!=='test');});
+  $('bTaraf').innerHTML='<option value="">Taraf seçin…</option>'+bag.map(function(r){return '<option value="'+esc(r.id)+'">'+esc(r.ad+(r.sehir?' · '+r.sehir:'')+(r.veri_sinifi==='test'?' [test]':''))+'</option>';}).join('');
+}
+async function kartYukle(){
+  adresGuncelle();
+  $('kart').innerHTML='<div class="card"><div class="empty">Yükleniyor…</div></div>';
+  var v={tur:S.tur};if(S.taraf)v.taraf_id=S.taraf;if(S.yer)v.yer_id=S.yer;
+  F=await islem('form',v);
+  if(!F||F.hata){$('kart').innerHTML='<div class="card"><div class="kut bad">'+esc(hataMetni(F))+'</div></div>';return;}
+  kartCiz();
+}
+function sekmedeki(sk){return (F.alanlar||[]).filter(function(a){return (a.sekmeler||[]).indexOf(sk)>=0;});}
+function kartCiz(){
+  var t=F.tur||{}, r=F.taraf, h='';
+  h+='<div class="card"><h2>'+esc(t.kod+' · '+t.ad)+'</h2>';
+  h+='<div class="small mut">Ortak katmanlar: '+esc((t.ortak_katman||[]).join(', ')||'yok')+' · alan: '+(F.alanlar||[]).length+' · yazılabilir: '+(F.alanlar||[]).filter(function(a){return a.yazilir;}).length+'</div>';
+  if(r){
+    h+='<div style="margin-top:8px"><b>'+esc(r.ad)+'</b> '+(r.veri_sinifi==='test'?'<span class="roz dg">test</span> ':'')+'<span class="roz">'+esc(TDURUM[r.tedarikci_durum]||r.tedarikci_durum||'durum yok')+'</span> <span class="small mut">'+esc([r.sehir,r.ulke].filter(Boolean).join(', '))+'</span></div>';
+    if((F.baglar||[]).length)h+='<div class="small mut" style="margin-top:4px">Alt tedarikçi bağı: '+F.baglar.length+' kayıt</div>';
+  } else {
+    h+='<div class="kut" style="margin-top:8px">Tedarikçi seçilmedi: alanlar şablon olarak gösterilir, kayıt için soldan bir tedarikçi seçin.</div>';
+  }
+  h+='<div class="ust" style="margin-top:8px"><label class="small mut" for="yerId">Yer kimliği</label><input id="yerId" placeholder="ör. yer kodu (yer hedefli alanlar için)" value="'+esc(S.yer)+'" style="flex:1 1 180px"><button class="btn" id="yerUygula">Uygula</button></div>';
+  if(!F.yazabilir)h+='<div class="kut warn">Görüntüleme yetkiniz var, düzenleme yetkiniz yok: bütün alanlar salt okuma.</div>';
+  h+='</div>';
+  h+='<div class="card"><div class="seg" id="anaSeg">'+ANA.map(function(a){
+    var n=0;a.alt.forEach(function(x){n+=sekmedeki(x.k).length;});
+    return '<button data-k="'+a.k+'" class="'+(a.k===S.ana?'on':'')+'">'+esc(a.ad)+'<span class="n">'+n+'</span></button>';}).join('')+'</div>';
+  var ana=ANA.filter(function(a){return a.k===S.ana;})[0];
+  if(ana.alt.length>1)h+='<div class="seg alt" id="altSeg">'+ana.alt.map(function(x){return '<button data-k="'+x.k+'" class="'+(x.k===S.alt?'on':'')+'">'+esc(x.ad)+(x.salt?' · salt okuma':'')+'<span class="n">'+sekmedeki(x.k).length+'</span></button>';}).join('')+'</div>';
+  h+='<div class="ust"><input type="search" id="ara" placeholder="Alan adı ya da kodu ile süz" value="'+esc(S.ara)+'"></div>';
+  h+='<div id="alanlar"></div></div>';
+  $('kart').innerHTML=h;
+  Array.prototype.forEach.call($('anaSeg').querySelectorAll('button'),function(b){b.onclick=function(){S.ana=b.getAttribute('data-k');S.alt=ANA.filter(function(a){return a.k===S.ana;})[0].alt[0].k;kartCiz();};});
+  if($('altSeg'))Array.prototype.forEach.call($('altSeg').querySelectorAll('button'),function(b){b.onclick=function(){S.alt=b.getAttribute('data-k');kartCiz();};});
+  $('ara').oninput=function(){S.ara=this.value;alanlarCiz();};
+  $('yerUygula').onclick=function(){var v=$('yerId').value.trim();if(v&&!/^[A-Za-z0-9_.:-]{1,200}$/.test(v)){alert('Yer kimliği yalnız harf, rakam ve _ . : - içerebilir.');return;}S.yer=v;kartYukle();};
+  alanlarCiz();
+}
+function alanlarCiz(){
+  var sk=S.alt, salt=!!SALT[sk], q=(S.ara||'').toLocaleLowerCase('tr');
+  var hepsi=sekmedeki(sk).filter(function(a){return !q||(String(a.ad||'')+' '+a.alan_kodu+' '+a.tur_kodu).toLocaleLowerCase('tr').indexOf(q)>=0;});
+  var kodlar={};hepsi.forEach(function(a){kodlar[a.tur_kodu+'|'+a.alan_kodu]=1;});
+  var normal=hepsi.filter(function(a){return a.yon!=='aleyhine';}), aley=hepsi.filter(function(a){return a.yon==='aleyhine';});
+  function agac(liste){
+    var ust=liste.filter(function(a){return !a.ust_alan_kodu||!kodlar[a.tur_kodu+'|'+a.ust_alan_kodu];});
+    var cocuk={};liste.forEach(function(a){if(a.ust_alan_kodu&&kodlar[a.tur_kodu+'|'+a.ust_alan_kodu])(cocuk[a.tur_kodu+'|'+a.ust_alan_kodu]=cocuk[a.tur_kodu+'|'+a.ust_alan_kodu]||[]).push(a);});
+    var h='';var grup='';
+    ust.forEach(function(a){
+      if(a.tur_kodu!==grup){grup=a.tur_kodu;h+='<h3>'+esc(grup===S.tur?'Tür alanları ('+grup+')':'Ortak katman: '+grup)+'</h3>';}
+      h+=alanCiz(a,salt,false);
+      (cocuk[a.tur_kodu+'|'+a.alan_kodu]||[]).forEach(function(c){h+=alanCiz(c,salt,true);});
+    });
+    return h;
+  }
+  var h='';
+  if(salt)h+='<div class="kut">Bu alt sekme salt okumadır (kontrat motoru ve planlayıcı sonraki adımlarda yazar).</div>';
+  h+=normal.length?agac(normal):'<div class="empty">Bu sekmede alan yok.</div>';
+  if(aley.length){
+    h+='<div class="aleyh"><h3>Aleyhine maddeler · '+aley.length+'</h3><div class="small mut" style="margin-bottom:8px">Tedarikçinin şartı ya da piyasa kısıtı. Gerekçe ve yasal esneklik payı her satırda (K-178 §2).</div>'+agac(aley)+'</div>';
+  }
+  $('alanlar').innerHTML=h;
+  Array.prototype.forEach.call($('alanlar').querySelectorAll('button[data-kaydet]'),function(b){b.onclick=function(){kaydet(b.getAttribute('data-kaydet'));};});
+}
+function degerYaz(v){
+  if(v==null)return '—';
+  if(typeof v==='boolean')return v?'Evet':'Hayır';
+  if(typeof v==='string')return esc(v);
+  if(Array.isArray(v)&&v.every(function(x){return typeof x!=='object';}))return esc(v.join(', '));
+  return '<code>'+esc(JSON.stringify(v))+'</code>';
+}
+function girisCiz(a,id){
+  var v=a.deger, t=a.veri_tipi, sec=Array.isArray(a.secenekler)?a.secenekler:[];
+  if(t==='evet_hayir')return '<select id="g'+id+'"><option value="">Seçin…</option><option value="true"'+(v===true?' selected':'')+'>Evet</option><option value="false"'+(v===false?' selected':'')+'>Hayır</option></select>';
+  if(t==='sayi')return '<input id="g'+id+'" type="number" step="any" inputmode="decimal" value="'+(typeof v==='number'?v:'')+'">';
+  if(t==='tarih')return '<input id="g'+id+'" type="date" value="'+(typeof v==='string'?esc(v):'')+'">';
+  if(t==='liste'&&sec.length)return '<select id="g'+id+'"><option value="">Seçin…</option>'+sec.map(function(s){return '<option'+(s===v?' selected':'')+'>'+esc(s)+'</option>';}).join('')+'</select>';
+  if(t==='coklu_liste')return '<input id="g'+id+'" placeholder="virgülle ayırın" value="'+(Array.isArray(v)?esc(v.join(', ')):'')+'">';
+  if(t==='sure')return '<input id="g'+id+'" placeholder="ör. 48 (saat) ya da 2 gün" value="'+(v==null?'':esc(typeof v==='object'?JSON.stringify(v):v))+'">';
+  if(t==='belge')return '<input id="g'+id+'" type="url" placeholder="belge bağlantısı" value="'+(typeof v==='string'?esc(v):'')+'">';
+  if(t==='metin'||t==='liste')return '<input id="g'+id+'" value="'+(typeof v==='string'?esc(v):(v==null?'':esc(JSON.stringify(v))))+'" placeholder="'+(a.yazim_yolu==='kolon'?'metin ya da {…} JSON':'metin')+'">';
+  return '<textarea id="g'+id+'" placeholder="JSON ya da düz metin">'+(v==null?'':esc(typeof v==='string'?v:JSON.stringify(v,null,1)))+'</textarea>';
+}
+function alanCiz(a,saltSekme,cocuk){
+  var id=a.sozluk_id, yerli=a.hedef_nesne==='yer';
+  var yaz=!saltSekme&&a.yazilir&&F.yazabilir&&!!F.taraf&&(!yerli||!!S.yer);
+  var h='<div class="alan'+(cocuk?' cocuk':'')+'" id="al'+id+'"><div class="bas"><b>'+esc(a.ad)+'</b><span class="kod">'+esc(a.tur_kodu+' · '+a.alan_kodu)+'</span></div>';
+  h+='<div class="bas" style="margin-top:4px"><span class="roz '+esc(a.etki)+'">etki: '+esc(ETKI[a.etki]||a.etki||'—')+'</span><span class="roz '+esc(a.kaynak)+'">kaynak: '+esc(KAYN[a.kaynak]||a.kaynak||'—')+'</span><span class="roz '+esc(a.yon)+'">yön: '+esc(YON[a.yon]||a.yon||'—')+'</span>'
+    +(a.dogrulanmadi?'<span class="roz dg">[doğrulanmadı]</span>':'')
+    +(a.onay_gerekir?'<span class="roz onay">onayınıza düşer</span>':'')
+    +(!a.yazilir||saltSekme?'<span class="roz salt">salt okuma</span>':'')
+    +(yerli?'<span class="roz">yer hedefli</span>':'')
+    +(a.zorunlu?'<span class="roz uyari">zorunlu</span>':'')
+    +'<span class="roz">'+esc(a.veri_tipi)+'</span></div>';
+  if(a.aciklama)h+='<div class="acik">'+esc(a.aciklama)+'</div>';
+  if(a.yon==='aleyhine'){
+    h+='<div class="gerekce"><b>Gerekçe:</b> '+esc(a.aleyhine_gerekce||'yazılmamış [doğrulanmadı]')+'</div>';
+    h+='<div class="esnek"><b>Esneklik payı:</b> '+esc(a.esneklik||'yazılmamış')+'</div>';
+  } else if(a.esneklik){h+='<div class="esnek2"><b>Lehine esneklik:</b> '+esc(a.esneklik)+'</div>';}
+  if(F.taraf){
+    h+='<div class="mevcut">Geçerli değer: '+degerYaz(a.deger)+(a.durum?' <span class="roz">'+esc(DURUM[a.durum]||a.durum)+'</span>':'')+(a.deger_kaynagi?' <span class="small mut">kaynak: '+esc(a.deger_kaynagi)+'</span>':'')+(a.kontrol_tarihi?' <span class="small mut">· '+esc(a.kontrol_tarihi)+'</span>':'')+'</div>';
+    if(a.yazim_yolu==='kolon'&&a.hedef_tablo){
+      h+='<div class="mevcut">'+esc(a.hedef_tablo)+' tablosundaki değer: '+(a.deger_kolon_gizli?'<span class="roz">gizli (yetkiniz yok)</span>':degerYaz(a.deger_kolon))+'</div>';
+      if(Array.isArray(a.deger_kolon)&&a.hedef_tablo!=='taraflar'&&a.deger_kolon.length)h+='<div class="small mut">Kayıt kimlikleri: '+esc(a.deger_kolon.map(function(x){return x&&x.id;}).filter(Boolean).join(', '))+'</div>';
+    }
+    if(a.durum==='onerildi'&&a.onerilen_deger!=null)h+='<div class="oneri"><b>Önerilen değer (onayınızı bekliyor):</b> '+degerYaz(a.onerilen_deger)+'</div>';
+  }
+  if(yaz){
+    var hedefGerek=a.yazim_yolu==='kolon'&&a.hedef_tablo&&a.hedef_tablo!=='taraflar';
+    h+='<div class="giris"><div class="ana">'+girisCiz(a,id)+'</div>'
+      +(hedefGerek?'<div class="kaynak"><input id="h'+id+'" placeholder="'+esc(a.hedef_tablo)+' kayıt kimliği'+(a.hedef_tablo==='alt_tedarikci_baglari'?' (boşsa yeni bağ)':'')+'"></div>':'')
+      +'<div class="kaynak"><input id="k'+id+'" placeholder="Kaynak (boşsa doğrulanmadı)"></div>'
+      +(a.veri_tipi!=='belge'?'<div class="kaynak"><input id="u'+id+'" type="url" placeholder="Belge bağlantısı (isteğe bağlı)"></div>':'')
+      +'<button class="btn acc" data-kaydet="'+id+'">'+(a.onay_gerekir?'Öneri olarak kaydet':'Kaydet')+'</button></div>'
+      +(a.onay_gerekir?'<div class="small mut">Bu alan doğrudan geçerli olmaz: "önerildi" olarak kaydedilir, onayınıza düşer.</div>':'');
+  } else if(!saltSekme&&a.yazilir&&F.yazabilir){
+    h+='<div class="small mut" style="margin-top:6px">'+(!F.taraf?'Kayıt için tedarikçi seçin.':'Yer hedefli alan: yukarıya yer kimliği girin.')+'</div>';
+  }
+  h+='<div class="sonuc" id="s'+id+'"></div></div>';
+  return h;
+}
+function degerOku(a){
+  var el=$('g'+a.sozluk_id), raw=el?el.value:'', t=a.veri_tipi;
+  if(raw==='')throw new Error('Değer boş.');
+  if(t==='evet_hayir')return raw==='true';
+  if(t==='sayi'){var n=Number(String(raw).replace(',','.'));if(!isFinite(n))throw new Error('Sayı geçersiz.');return n;}
+  if(t==='tarih'){if(!/^\d{4}-\d{2}-\d{2}$/.test(raw))throw new Error('Tarih YYYY-AA-GG olmalı.');return raw;}
+  if(t==='coklu_liste')return raw.split(',').map(function(s){return s.trim();}).filter(Boolean);
+  if(t==='sure'){var s=raw.trim();if(/^-?\d+([.,]\d+)?$/.test(s))return Number(s.replace(',','.'));if(/^[\[{]/.test(s)){try{return JSON.parse(s);}catch(e){throw new Error('JSON geçersiz.');}}return s;}
+  if(t==='metin'||t==='liste'||t==='belge'){var m=raw.trim();if(a.yazim_yolu==='kolon'&&/^\{/.test(m)){try{return JSON.parse(m);}catch(e){throw new Error('JSON geçersiz.');}}return m;}
+  var x=raw.trim();if(/^[\[{"]/.test(x)||/^(true|false|null|-?\d+(\.\d+)?)$/.test(x)){try{return JSON.parse(x);}catch(e){throw new Error('JSON geçersiz.');}}
+  return x;
+}
+async function kaydet(id){
+  var a=(F.alanlar||[]).filter(function(x){return String(x.sozluk_id)===String(id);})[0], out=$('s'+id);
+  if(!a||!F.taraf)return;
+  var v;try{v=degerOku(a);}catch(e){out.className='sonuc bad';out.textContent=e.message;return;}
+  var veri={sozluk_id:a.sozluk_id,nesne_id:a.hedef_nesne==='yer'?S.yer:F.taraf.id,deger:v};
+  var k=$('k'+id),u=$('u'+id),hd=$('h'+id);
+  if(k&&k.value.trim())veri.kaynak=k.value.trim();
+  if(u&&u.value.trim())veri.belge_url=u.value.trim();
+  if(a.veri_tipi==='belge'&&typeof v==='string'&&/^https?:\/\//.test(v))veri.belge_url=veri.belge_url||v;
+  if(hd&&hd.value.trim())veri.hedef_id=hd.value.trim();
+  out.className='sonuc';out.textContent='Kaydediliyor…';
+  var b=document.querySelector('button[data-kaydet="'+id+'"]');if(b)b.disabled=true;
+  var j=await islem('deger_kaydet',veri);
+  if(b)b.disabled=false;
+  if(!j||j.hata){out.className='sonuc bad';out.textContent='Kaydedilmedi: '+hataMetni(j);return;}
+  out.className='sonuc ok';
+  out.textContent=j.durum==='onerildi'?('Öneri kaydedildi, onayınıza düştü.'+(j.not?' '+j.not:'')):(j.durum==='dogrulanmadi'?'Kaydedildi (kaynak yok: doğrulanmadı).':(j.hedef_tablo?'Kaydedildi: '+j.hedef_tablo+' tablosu.':'Kaydedildi.'));
+  var y=await islem('form',{tur:S.tur,taraf_id:S.taraf,yer_id:S.yer||undefined});
+  if(y&&!y.hata){F=y;var mesaj=out.textContent,cls=out.className;alanlarCiz();var o2=$('s'+id);if(o2){o2.className=cls;o2.textContent=mesaj;}}
+}
+$('testGoster').onchange=function(){lsYaz('pv_tedarik_test',this.checked?'1':'0');turCiz();tarafCiz();};
+$('turSelMob').onchange=function(){turSec(this.value);};
+$('aKaydet').onclick=async function(){
+  var ad=$('aAd').value.trim();if(!ad){$('aSonuc').textContent='Ad zorunlu.';return;}
+  this.disabled=true;
+  var j=await islem('aday_ac',{ad:ad,sehir:$('aSehir').value.trim(),ulke:$('aUlke').value.trim(),tip:$('aTip').value,tur:S.tur,kaynak:'panel',veri_sinifi:$('aTest').checked?'test':'gercek'});
+  this.disabled=false;
+  if(!j||j.hata){$('aSonuc').style.color='var(--bad)';$('aSonuc').textContent='Açılmadı: '+hataMetni(j);return;}
+  $('aSonuc').style.color='var(--ok)';$('aSonuc').textContent='Aday açıldı ve '+S.tur+' türüne bağlandı.';
+  $('aAd').value='';$('aSehir').value='';$('aUlke').value='';
+  L=await islem('liste',{});S.taraf=j.id;if($('aTest').checked&&!$('testGoster').checked){$('testGoster').checked=true;lsYaz('pv_tedarik_test','1');}
+  turCiz();tarafCiz();kartYukle();
+};
+$('bKaydet').onclick=async function(){
+  var id=$('bTaraf').value;if(!id){$('bSonuc').textContent='Taraf seçin.';return;}
+  this.disabled=true;var j=await islem('tur_bagla',{taraf_id:id,tur:S.tur,kaynak:'panel'});this.disabled=false;
+  if(!j||j.hata){$('bSonuc').style.color='var(--bad)';$('bSonuc').textContent='Bağlanmadı: '+hataMetni(j);return;}
+  $('bSonuc').style.color='var(--ok)';$('bSonuc').textContent='Bağlandı.';
+  L=await islem('liste',{});S.taraf=id;turCiz();tarafCiz();kartYukle();
+};
+if(Q.get('embed'))document.body.classList.add('embed');
+PV.hazir.then(basla);
+</script>
+</body>
+</html>

@@ -57,6 +57,7 @@ var MENU=[
  {grp:'Tedarik & kontratlar',items:[
   {id:'tedarikci',ad:'Tedarikçi kartları & bölge ağacı',src:'../panel/katalog/?embed=1&v=tedarik',d:'Ülke → bölge → şehir → hizmet tipi; kart, durum (aday → yazışıldı → teklif → kontratlı), toplu araştırma görevi.'},
   {id:'kontratlar',ad:'Kontratlar & fiyat kartları',src:'../panel/kontrat/?embed=1'},
+  {id:'tedarikkart',ad:'Tedarikçi kartları (türe göre)',src:'../panel/tedarik/?embed=1',d:'16 tedarikçi türü, tek şablon: Tedarik · AR-GE · Operasyon · Satış sekmeleri, üç etiket, aleyhine maddeler ayrı, aday aç.'},
   {id:'yazisma',ad:'Tedarikçi yazışmaları',src:'../panel/iletisim/?embed=1&s=ted',d:'Şablonlar (TR/EN/AR): sezon fiyat talebi, spot, rezervasyon, teyit, değişiklik, iptal; gönderim onayı.'},
   {id:'tedpuan',ad:'Tedarikçi puanları',d:'Tur sonrası değerlendirme, sorun kayıtları, teyit süresi, fiyat tutarlılığı.'}]},
  {grp:'Muhasebe & finans',items:[
