@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Motor onayları</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--warn:#9a5a14;--warn2:#fff3e0;--ok:#1b5e3a;--ok2:#e8f5ec;--bad:#8a2a2a;--bad2:#fbeaea}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:50}header a{color:var(--acc);text-decoration:none;font-weight:700}
+body.embed header{display:none}body.embed{background:#fff}
+.wrap{max-width:980px;margin:0 auto;padding:14px 16px 120px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:12px}
+.kpi{background:var(--sur);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}.kpi .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}.kpi .v{font-size:22px;font-weight:800;margin-top:2px}.kpi.w .v{color:var(--warn)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff;margin-bottom:12px}.seg button{border:0;background:#fff;padding:8px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--mut)}.seg button.on{background:var(--acc);color:#fff}
+.ipucu{font-size:12.5px;color:var(--mut);background:#fbfbf9;border:1px dashed var(--line);border-radius:10px;padding:10px 12px;margin-bottom:12px;line-height:1.5}
+.it{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;border-left:4px solid var(--warn)}
+.it.onaylandi{border-left-color:var(--ok);opacity:.85}.it.reddedildi{border-left-color:var(--bad);opacity:.85}.it.iptal,.it.hata{border-left-color:var(--mut);opacity:.7}
+.it .b{display:flex;gap:10px;align-items:flex-start}.it .b input[type=checkbox]{width:26px;height:26px;margin-top:0;flex:none;accent-color:var(--acc)}
+.it .baslik{font-size:14.5px;font-weight:800}.it .m{font-size:12px;color:var(--mut);margin-top:3px}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut);margin-right:4px}.pill.para{background:var(--warn2);color:var(--warn)}.pill.ayar{background:var(--acc2);color:var(--acc)}.pill.ok{background:var(--ok2);color:var(--ok)}.pill.bad{background:var(--bad2);color:var(--bad)}
+.ozet{margin-top:8px;font-size:13px;line-height:1.5}.ozet b{color:var(--acc)}
+.kv{display:grid;grid-template-columns:minmax(110px,max-content) 1fr;gap:3px 10px;font-size:12.5px;margin-top:6px}.kv .k{color:var(--mut)}.kv .v{white-space:pre-wrap;word-break:break-word}
+details{margin-top:8px}details .tbl{overflow-x:auto}summary{cursor:pointer;font-size:12.5px;font-weight:700;color:var(--acc)}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}th{text-align:left;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:6px 4px;border-bottom:1px solid var(--line)}td{padding:6px 4px;border-bottom:1px solid #eef0ee;vertical-align:top}.num{text-align:right;white-space:nowrap}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.btn{border:1px solid var(--line);background:#fff;padding:11px 15px;min-height:44px;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}.btn.acc{background:var(--acc);color:#fff;border-color:var(--acc)}.btn.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.btn.b{color:var(--bad)}.btn.sm{padding:8px 11px;min-height:38px;font-size:12px}.btn:disabled{opacity:.5;cursor:default}
+textarea.cv,input.cv{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13.5px;margin-top:8px}textarea.cv{min-height:60px}
+.aleyh{margin-top:6px;font-size:12.5px;background:var(--bad2);color:var(--bad);border-radius:8px;padding:7px 10px;white-space:pre-wrap}
+.k178{font-size:11.5px;color:var(--mut);margin-top:4px}
+#toplu{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px;display:none;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:60;box-shadow:0 -4px 16px rgba(0,0,0,.06)}
+#msg{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#1a1f1d;color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;display:none;z-index:950;max-width:90vw}
+.login{max-width:400px;margin:14vh auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}
+.small{font-size:12px}.mut{color:var(--mut)}
+.ay{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}.ay .ad{font-weight:800;font-size:14px}.ay .d{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:#fbfbf9;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-top:6px;white-space:pre-wrap;word-break:break-word}
+.ay .f{display:grid;grid-template-columns:1fr;gap:6px;margin-top:8px}.ay .f label{font-size:12px;color:var(--mut)}.ay .f input{padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:14px;width:100%}
+</style>
+</head>
+<body>
+<header><a href="../../travel/">← Panel</a><b>Motor onayları</b><span class="small mut">kontrat para alanları · ayarlar · uyarılar</span></header>
+<div class="wrap">
+<div id="app" style="display:none">
+  <div class="kpis" id="kpis"></div>
+  <div class="seg" id="seg">
+    <button data-m="kuyruk" class="on">Bekleyen kartlar</button>
+    <button data-m="ayarlar">Ayarlar</button>
+    <button data-m="gecmis">Son kararlar</button>
+  </div>
+  <div id="icerik"></div>
+</div>
+</div>
+<div id="toplu"><span id="topluSay" class="small"></span><button class="btn ok" onclick="topluAc('onay')">Seçilenleri onayla</button><button class="btn b" onclick="topluAc('red')">Seçilenleri reddet</button><button class="btn sm" onclick="secimTemizle()">Vazgeç</button><div id="topluKutu" style="width:100%;display:none"></div></div>
+<div id="msg"></div>
+<script src="../oturum.js"></script>
+<script>
+var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
+var O=null, K=[], A=[], G=[], mod='kuyruk', sec={};
+var TIP={motor_para_onayi:['para','Kontrat para alanları'],motor_ayar_degisikligi:['ayar','Ayar değeri'],motor_ayar_yapi_degisikligi:['ayar','Ayar yapısı'],motor_yas_farki_onayi:['para','Çocuk yaşı farkı'],motor_basabas_onayi:['para','Başabaş / ek alım']};
+var DURUM={onay_bekliyor:'onay bekliyor',onaylandi:'onaylandı',reddedildi:'reddedildi',iptal:'iptal',hata:'hata'};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]});}
+function tarih(d){if(!d)return '—';try{return new Date(d).toLocaleString('tr-TR',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}catch(e){return d}}
+function msg(t,sure){var m=document.getElementById('msg');m.textContent=t;m.style.display='block';clearTimeout(m._t);m._t=setTimeout(function(){m.style.display='none'},sure||2800);}
+async function rpc(fn,body){var r;try{r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+((window.PV&&PV.token)||KEY)},body:JSON.stringify(body||{})});}catch(e){return {hata:'bağlantı yok'};}var j=null;try{j=await r.json();}catch(e){}if(!r.ok){return {hata:(j&&(j.message||j.hint||j.hata))||('sunucu '+r.status)+(r.status===401?' · oturum süresi dolmuş olabilir, sayfayı yenile':'')};}return j;}
+function dizi(v){return Array.isArray(v)?v:[];}
+async function mi(islem,veri){var r=await rpc('motor_panel_islem',{p_islem:islem,p_veri:veri||{}});if(r&&r.hata)msg('Hata: '+r.hata,4500);return r;}
+function j(v){if(v==null)return '—';if(typeof v==='object')return JSON.stringify(v,null,1).replace(/[\{\}\[\]"]/g,'').replace(/\n\s*/g,' · ').replace(/^ · |, · /g,'').trim();return String(v);}
+function sayi(v,pb){if(v==null)return '—';var n=Number(v);return (isNaN(n)?v:n.toLocaleString('tr-TR'))+(pb?' '+pb:'');}
+
+async function load(){
+  O=await mi('ozet');
+  if(!O||O.hata){document.getElementById('app').innerHTML='<div class="login"><b>Giriş gerekli</b><p class="small mut">Bu hesap bu sayfaya yetkili değil ya da oturum yok.</p></div>';document.getElementById('app').style.display='block';return;}
+  document.getElementById('app').style.display='block';
+  document.querySelectorAll('#seg button').forEach(function(b){b.onclick=function(){mod=b.dataset.m;document.querySelectorAll('#seg button').forEach(function(x){x.classList.toggle('on',x===b)});secimTemizle();ciz();}});
+  kpi();await ciz();
+}
+async function yenile(){O=await mi('ozet');kpi();secimTemizle();await ciz();}
+function kpi(){
+  document.getElementById('kpis').innerHTML=
+   '<div class="kpi w" onclick="git(\'kuyruk\')"><div class="k">Bekleyen kart</div><div class="v">'+O.bekleyen+'</div></div>'
+  +'<div class="kpi" onclick="git(\'kuyruk\')"><div class="k">Para</div><div class="v">'+O.para+'</div></div>'
+  +'<div class="kpi" onclick="git(\'kuyruk\')"><div class="k">Ayar kartı</div><div class="v">'+O.ayar+'</div></div>'
+  +'<div class="kpi'+(O.ayar_degersiz>0?' w':'')+'" onclick="git(\'ayarlar\')"><div class="k">Değersiz ayar</div><div class="v">'+O.ayar_degersiz+' / '+O.ayar_sayisi+'</div></div>';
+}
+function git(m){mod=m;document.querySelectorAll('#seg button').forEach(function(x){x.classList.toggle('on',x.dataset.m===m)});secimTemizle();ciz();}
+async function ciz(){
+  var el=document.getElementById('icerik');el.innerHTML='<div class="mut small">Yükleniyor…</div>';
+  if(mod==='kuyruk'){K=dizi(await mi('kuyruk'));cizKuyruk(false);}
+  else if(mod==='gecmis'){K=dizi(await mi('kuyruk',{gecmis:'1'}));cizKuyruk(true);}
+  else{A=dizi(await mi('ayarlar'));G=dizi(await mi('gunluk'));cizAyarlar();}
+}
+/* ---------- kartlar ---------- */
+function kartOzet(k){
+  var g=k.girdi||{}, t=k.gorev_tipi, h='';
+  if(t==='motor_para_onayi'){
+    h+='<div class="ozet"><b>'+esc(g.satir_sayisi||((g.satirlar||[]).length))+' satır</b> · tedarikçi para birimi <b>'+esc(g.para_birimi||'—')+'</b> · kaynak '+esc(g.kaynak_turu||'—')+' · geçerlilik '+esc(g.gecerli_bitis||'—')+'</div>';
+    if(g.not) h+='<div class="k178">'+esc(g.not)+'</div>';
+    if(g.satirlar_gizli){h+='<div class="k178">Tutarlar yalnız yönetici oturumunda görünür.</div>';return h;}
+    var s=g.satirlar||[];
+    h+='<details'+(s.length<=12?' open':'')+'><summary>Satırlar ('+s.length+')</summary><table><thead><tr><th>Tablo</th><th>Özet</th><th class="num">Tutar</th></tr></thead><tbody>';
+    s.forEach(function(x){h+='<tr><td class="small mut">'+esc((x.tablo||'').replace('motor_',''))+'</td><td>'+esc(x.ozet||'')+'</td><td class="num">'+(x.tutar!=null?esc(sayi(x.tutar,x.para_birimi)):(x.oran!=null?esc(x.oran)+' oran':(x.deger!=null?esc(x.deger):'—')))+(x.birim?' <span class="mut small">/'+esc(x.birim)+'</span>':'')+'</td></tr>';});
+    h+='</tbody></table></details>';
+    var e=g.eksik_satirlar||[]; if(e.length) h+='<details><summary>Değeri boş satırlar ('+e.length+') — karta girmedi</summary><div class="kv">'+e.map(function(x){return '<div class="k">'+esc((x.tablo||'').replace('motor_',''))+'</div><div class="v">'+esc(x.ozet||'')+' · eksik: '+esc(x.eksik||'')+'</div>'}).join('')+'</div></details>';
+  } else if(t==='motor_ayar_degisikligi'){
+    h+='<div class="ozet"><b>'+esc(g.anahtar)+'</b>'+(g.aciklama?' — '+esc(g.aciklama):'')+'</div>';
+    h+='<div class="kv"><div class="k">Eski değer</div><div class="v">'+esc(j(g.eski))+'</div><div class="k">Yeni değer</div><div class="v"><b>'+esc(j(g.yeni))+'</b>'+(g.birim?' <span class="mut">('+esc(g.birim)+')</span>':'')+'</div><div class="k">Gerekçe</div><div class="v">'+esc(g.gerekce||'—')+'</div>'+(g.karar?'<div class="k">Karar</div><div class="v">'+esc(g.karar)+'</div>':'')+'</div>';
+  } else if(t==='motor_ayar_yapi_degisikligi'){
+    h+='<div class="ozet"><b>'+esc(g.anahtar)+'</b> — yalnız yapı değişir, değer değişmez.'+(g.sonraki_deger?' Onaydan sonra değer kartı ayrıca gelir.':'')+'</div>';
+    h+='<div class="kv"><div class="k">Eski alanlar</div><div class="v">'+esc(((g.eski_sema||{}).alanlar||[]).join(', ')||'—')+'</div><div class="k">Yeni alanlar</div><div class="v"><b>'+esc(((g.yeni_sema||{}).alanlar||[]).join(', ')||'—')+'</b></div>'
+      +(g.yeni_aciklama?'<div class="k">Yeni açıklama</div><div class="v">'+esc(g.yeni_aciklama)+'</div>':'')+(g.sonraki_deger?'<div class="k">Sonraki değer</div><div class="v">'+esc(j(g.sonraki_deger))+'</div>':'')+'<div class="k">Gerekçe</div><div class="v">'+esc(g.gerekce||'—')+'</div></div>';
+    if(g.yeni_ek&&g.yeni_ek.anlam) h+='<details><summary>Anlamı</summary><div class="small" style="margin-top:4px;white-space:pre-wrap">'+esc(g.yeni_ek.anlam)+'</div></details>';
+  } else {
+    h+='<div class="kv">'+Object.keys(g).filter(function(x){return x!=='k178'&&x!=='eski_md5'&&x!=='satirlar'}).map(function(x){return '<div class="k">'+esc(x)+'</div><div class="v">'+esc(j(g[x]))+'</div>'}).join('')+'</div>';
+  }
+  var k178=g.k178||(g.yeni_ek&&g.yeni_ek.k178);
+  if(k178){h+='<div class="k178">K-178: '+esc(k178.etki||'')+' · '+esc(k178.kaynak||'')+' · '+esc(k178.yon||'')+(k178.not?' — '+esc(k178.not):'')+'</div>';}
+  if(g.aleyhine) h+='<div class="aleyh">Aleyhine: '+esc(j(g.aleyhine))+'</div>';
+  return h;
+}
+function cizKuyruk(gecmis){
+  var h='';
+  if(!gecmis) h+='<div class="ipucu">Para ve ayar kartları yalnız burada, yönetici oturumuyla kararlanır (K-09). <b>Onayla</b> → satırlar aktif olur; <b>Reddet</b> → neden yazılır, satırlar taslağa döner. Birden çok kartı işaretleyip alttan toplu onaylayabilirsin. Motor kur çevirmez; tutarlar tedarikçinin para birimindedir.</div>';
+  var say=0;
+  K.forEach(function(k){
+    if(!gecmis&&k.durum!=='onay_bekliyor')return; if(gecmis&&k.durum==='onay_bekliyor')return; say++;
+    var tp=TIP[k.gorev_tipi]||['','' ];
+    h+='<div class="it '+esc(k.durum)+'" id="k_'+esc(k.id)+'"><div class="b">'+(O.yazabilir&&!gecmis?'<input type="checkbox" data-sec="'+esc(k.id)+'"'+(sec[k.id]?' checked':'')+'>':'')
+      +'<div style="flex:1"><span class="pill '+esc(tp[0])+'">'+esc(tp[1]||k.gorev_tipi)+'</span><span class="pill '+(k.durum==='onaylandi'?'ok':k.durum==='reddedildi'?'bad':'')+'">'+esc(DURUM[k.durum]||k.durum)+'</span>'
+      +'<div class="baslik">'+esc(k.baslik)+'</div><div class="m">'+(k.tedarikci?esc(k.tedarikci)+' · ':'')+tarih(k.olusturuldu)+(k.onay_tarihi?' · karar '+tarih(k.onay_tarihi)+' ('+esc(k.onaylayan||'')+')':'')+'</div></div></div>';
+    h+=kartOzet(k);
+    if(k.red_nedeni) h+='<div class="aleyh">Red nedeni: '+esc(k.red_nedeni)+'</div>';
+    if(gecmis&&k.cikti&&k.cikti.uygulanan!=null) h+='<div class="k178">Uygulanan satır: '+esc(k.cikti.uygulanan)+(k.cikti.atlanan_degismis?' · değişmiş diye atlanan: '+esc(k.cikti.atlanan_degismis):'')+'</div>';
+    if(O.yazabilir&&!gecmis){h+='<div class="acts" id="a_'+esc(k.id)+'"><button class="btn ok" data-act="onayAc" data-id="'+esc(k.id)+'">Onayla</button><button class="btn b" data-act="redAc" data-id="'+esc(k.id)+'">Reddet…</button></div>';}
+    h+='</div>';
+  });
+  if(!say) h+='<div class="mut small" style="padding:20px 0">'+(gecmis?'Son 30 günde kararlanmış kart yok.':'Bekleyen kart yok.')+'</div>';
+  document.getElementById('icerik').innerHTML=h;
+}
+function redAc(id){var a=document.getElementById('a_'+id);a.innerHTML='<div style="width:100%"><input class="cv" id="rn_'+esc(id)+'" placeholder="Red nedeni (kısa)"><div class="acts"><button class="btn b" data-act="red" data-id="'+esc(id)+'">Reddet</button><button class="btn sm" data-act="vazgec">Vazgeç</button></div></div>';document.getElementById('rn_'+id).focus();}
+function onayAc(id){var k=null;K.forEach(function(x){if(x.id===id)k=x;});var a=document.getElementById('a_'+id);var ne=k&&k.gorev_tipi==='motor_para_onayi'?'Satırlar aktif olur, kontrat fiyatları maliyet sorgusuna girer.':(k&&k.gorev_tipi.indexOf('motor_ayar')===0?'Ayar değişir ve günlüğe yazılır.':'Karar kaydedilir.');
+  a.innerHTML='<div style="width:100%"><div class="small" style="margin-top:4px"><b>Onaylıyorsun.</b> '+esc(ne)+'</div><div class="acts"><button class="btn ok" data-act="onay" data-id="'+esc(id)+'">Evet, onayla</button><button class="btn sm" data-act="vazgec">Vazgeç</button></div></div>';}
+document.getElementById('icerik').addEventListener('click',function(e){var b=e.target.closest('[data-act]');if(!b)return;var act=b.dataset.act,id=b.dataset.id;
+  if(act==='onayAc')onayAc(id);else if(act==='redAc')redAc(id);else if(act==='onay')karar(id,'onay');else if(act==='red')karar(id,'red');else if(act==='vazgec')cizKuyruk(false);else if(act==='ayarIste')ayarIste(b.dataset.anahtar,b.dataset.tip);});
+document.getElementById('icerik').addEventListener('change',function(e){var c=e.target;if(c.dataset&&c.dataset.sec)secim(c.dataset.sec,c.checked);});
+async function karar(id,ne){
+  var veri={id:id,karar:ne}; if(ne==='red'){var t=(document.getElementById('rn_'+id)||{}).value||'';veri.not=t.trim();if(!veri.not){msg('Red nedeni yaz');return;}}
+  var r=await mi('karar',veri);
+  if(r&&r.tamam){msg(ne==='onay'?'Onaylandı, satırlar aktif':'Reddedildi');await yenile();}
+  else if(r&&r.hatalar&&r.hatalar.length){msg(r.hatalar.join(' · '),5000);}
+}
+function secim(id,on){if(on)sec[id]=true;else delete sec[id];var n=Object.keys(sec).length;var t=document.getElementById('toplu');t.style.display=n?'flex':'none';document.getElementById('topluSay').textContent=n+' kart seçili';}
+function secimTemizle(){sec={};document.getElementById('toplu').style.display='none';}
+function topluAc(ne){var ids=Object.keys(sec);if(!ids.length)return;var k=document.getElementById('topluKutu');k.style.display='block';
+  k.innerHTML=(ne==='red'?'<input class="cv" id="topluNot" placeholder="Red nedeni (hepsi için aynı)">':'<div class="small" style="margin-top:6px"><b>'+ids.length+' kartı onaylıyorsun.</b> Satırlar aktif olur.</div>')+'<div class="acts"><button class="btn '+(ne==='red'?'b':'ok')+'" onclick="topluKarar(\''+ne+'\')">'+(ne==='red'?'Hepsini reddet':'Evet, hepsini onayla')+'</button><button class="btn sm" onclick="document.getElementById(\'topluKutu\').style.display=\'none\'">Vazgeç</button></div>';}
+async function topluKarar(ne){
+  var ids=Object.keys(sec);if(!ids.length)return;var veri={ids:ids,karar:ne};
+  if(ne==='red'){var t=(document.getElementById('topluNot')||{}).value||'';if(!t.trim()){msg('Red nedeni yaz');return;}veri.not=t.trim();}
+  var r=await mi('toplu_karar',veri);
+  if(r){msg('Uygulanan: '+(r.uygulanan||0)+(r.hatalar&&r.hatalar.length?' · hata: '+r.hatalar.join(' · '):''),5000);await yenile();}
+}
+/* ---------- ayarlar ---------- */
+function cizAyarlar(){
+  var h='<div class="ipucu">Motor ayarları doğrudan değişmez: burada yeni değeri yazıp <b>Değişiklik iste</b> dersin, bir onay kartı açılır, kartı <b>Bekleyen kartlar</b>dan onaylarsın; değişiklik günlüğe yazılır. Değeri boş ayarlar için ilgili kural çalışmaz (M-54).</div>';
+  A.forEach(function(a){
+    var alanlar=(a.sema&&a.sema.alanlar)||null, tip=(a.sema&&a.sema.tip)||'';
+    h+='<div class="ay"><div class="ad">'+esc(a.anahtar)+(a.bekleyen_kart?' <span class="pill ayar">kart bekliyor</span>':'')+(a.deger==null?' <span class="pill bad">değersiz</span>':'')+'</div><div class="small mut" style="margin-top:3px">'+esc(a.aciklama||'')+'</div>'
+      +'<div class="d">'+esc(a.deger==null?'(değer yok)':JSON.stringify(a.deger,null,1).replace(/\n\s*/g,' '))+(a.birim?'   ·   birim: '+esc(a.birim):'')+'</div>';
+    if(a.k178) h+='<div class="k178">K-178: '+esc(a.k178.etki||'')+' · '+esc(a.k178.kaynak||'')+' · '+esc(a.k178.yon||'')+'</div>';
+    if(O.yazabilir&&!a.bekleyen_kart){
+      h+='<details><summary>Değişiklik iste</summary><div class="f" id="f_'+esc(a.anahtar)+'">';
+      if(alanlar){alanlar.forEach(function(al){var cur=a.deger&&a.deger[al];h+='<label>'+esc(al)+'</label><input data-alan="'+esc(al)+'" value="'+esc(cur==null?'':(typeof cur==='object'?JSON.stringify(cur):cur))+'" placeholder="'+(tip==='nesne'?'sayı (ondalık için virgül ya da nokta, binlik ayırıcı yok)':'')+'">';});}
+      else{h+='<label>Yeni değer'+(tip?' ('+esc(tip)+')':'')+'</label><input data-alan="" value="'+esc(a.deger==null?'':(typeof a.deger==='object'?JSON.stringify(a.deger):a.deger))+'">';}
+      h+='<label>Gerekçe (günlüğe yazılır)</label><input data-gerekce="1" placeholder="neden"><div class="acts"><button class="btn acc" data-act="ayarIste" data-anahtar="'+esc(a.anahtar)+'" data-tip="'+esc(tip)+'">Değişiklik iste</button></div></div></details>';
+    }
+    h+='</div>';
+  });
+  if(!A.length) h+='<div class="mut small">Onaylı değişiklik yoluna bağlı ayar yok.</div>';
+  if(G.length){h+='<details style="margin-top:14px"><summary>Değişiklik günlüğü (son '+G.length+')</summary><div class="tbl"><table><thead><tr><th>Zaman</th><th>Ayar</th><th>Eski → Yeni</th><th>Yapan</th></tr></thead><tbody>';
+    G.forEach(function(g){h+='<tr><td class="small">'+tarih(g.zaman)+'</td><td>'+esc(g.kayit)+'</td><td class="small">'+esc(j(g.eski))+' → <b>'+esc(j(g.yeni))+'</b></td><td class="small mut">'+esc(g.yapan||'')+'</td></tr>';});
+    h+='</tbody></table></div></details>';}
+  document.getElementById('icerik').innerHTML=h;
+}
+function sayiMi(s){s=String(s).trim();return /^-?\d+([.,]\d+)?$/.test(s)&&!/^-?\d{1,3}\.\d{3}$/.test(s);}
+function cevir(v){if(sayiMi(v))return Number(v.replace(',','.'));if(v==='true'||v==='false')return v==='true';try{return JSON.parse(v);}catch(e){return v;}}
+async function ayarIste(anahtar,tip){
+  var f=document.getElementById('f_'+anahtar), yeni, gerekce=(f.querySelector('[data-gerekce]')||{}).value||'';
+  var ins=[].slice.call(f.querySelectorAll('input[data-alan]'));
+  var binlik=ins.some(function(i){return /^-?\d{1,3}\.\d{3}$/.test(i.value.trim())});if(binlik){msg('Binlik ayırıcı kullanma: 1.000 yerine 1000 yaz',4500);return;}
+  if(ins.length===1&&ins[0].dataset.alan===''){var v=ins[0].value.trim();if(!v){msg('Değer boş');return;}yeni=cevir(v);}
+  else{yeni={};var eksik=false;ins.forEach(function(i){var v=i.value.trim();if(!v){eksik=true;return;}yeni[i.dataset.alan]=cevir(v);});if(eksik){msg('Bütün alanları doldur');return;}}
+  if(!gerekce.trim()){msg('Gerekçe yaz');return;}
+  var on=f.querySelector('.onizle');if(!on){on=document.createElement('div');on.className='small';on.innerHTML='<div class="onizle" style="margin-top:6px"><b>Gönderilecek değer:</b> <code>'+esc(JSON.stringify(yeni))+'</code> — doğruysa butona bir kez daha dokun.</div>';f.appendChild(on);return;}
+  if(on.textContent.indexOf(JSON.stringify(yeni))<0){on.innerHTML='<div class="onizle" style="margin-top:6px"><b>Gönderilecek değer:</b> <code>'+esc(JSON.stringify(yeni))+'</code> — doğruysa butona bir kez daha dokun.</div>';return;}
+  var r=await mi('ayar_iste',{anahtar:anahtar,yeni:yeni,gerekce:gerekce.trim()});
+  if(r&&r.tamam){msg('Onay kartı açıldı; Bekleyen kartlar sekmesinden onayla');await yenile();git('kuyruk');}
+}
+if(new URLSearchParams(location.search).get('embed'))document.body.classList.add('embed');
+PV.hazir.then(load);
+</script>
+</body>
+</html>
