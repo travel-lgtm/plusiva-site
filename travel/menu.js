@@ -149,5 +149,6 @@ var MENU=[
   {id:'ayarlar',ad:'Ayarlar & boyutlar',tip:'ayarlar'},
   {id:'kurulum',ad:'Kurulum durumu',src:'../panel/islem/?embed=1&v=kurulum'},
   {id:'kararlar',ad:'Kararlarım & fikirler',src:'../panel/kararlar/?embed=1',d:'Bekleyen kararlar (A–E), çelişkiler, fikir havuzu (@Dxx etiketli), dokümanların tek kaynağı. Yapıcı buradan okur ve uygular.'},
-  {id:'motor',ad:'Motor onayları',src:'../panel/motor/?embed=1',d:'Kontrat para alanları, ayar değişiklikleri, çocuk yaşı farkı ve başabaş kartları. Yönetici oturumuyla onay/red, toplu onay, ayar değişikliği isteği.'}]}
+  {id:'motor',ad:'Motor onayları',src:'../panel/motor/?embed=1',d:'Kontrat para alanları, ayar değişiklikleri, çocuk yaşı farkı ve başabaş kartları. Yönetici oturumuyla onay/red, toplu onay, ayar değişikliği isteği.'},
+  {id:'motor-kontrat',ad:'Kontrat fiyat & müsaitlik',src:'../panel/motor-kontrat/?embed=1',d:'Kontrat sürümleri, fiyat kayıtları, müsaitlik ızgarası, kampanya/şart/katman, maliyet önizleme (tedarikçi para biriminde), çocuk yaşı uyarıları, geçerlilik takvimi.'}]}
 ];
