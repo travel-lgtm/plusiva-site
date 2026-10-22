@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Otel Pazar Yeri</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f6f3;--sur:#fff;--ink:#1a1f1d;--mut:#6f7975;--line:#e3e6e2;--acc:#0f5c5a;--acc2:#e6efee;--ok:#1b5e3a;--ok2:#e8f5ec;--warn:#9a5a14;--warn2:#fff3e0;--bad:#8a2a2a;--bad2:#fbeaea}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{background:var(--sur);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:12px}header a{color:var(--acc);text-decoration:none;font-weight:700}
+body.embed header{display:none}
+.duzen{display:grid;grid-template-columns:280px 1fr;gap:16px;padding:16px 20px;max-width:1400px;margin:0 auto}
+@media(max-width:860px){.duzen{grid-template-columns:1fr}}
+.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:14px;min-width:0}
+.liste .o{padding:9px 10px;border-radius:9px;cursor:pointer;border:1px solid transparent}.liste .o:hover{background:var(--acc2)}.liste .o.sec{border-color:var(--acc);background:var(--acc2)}
+.liste .o b{display:block}.small{font-size:12px;color:var(--mut)}
+input,select,textarea{padding:7px 9px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13px;background:#fff;color:var(--ink);max-width:100%}
+textarea{width:100%;min-height:54px}
+button{border:1px solid var(--line);background:#fff;padding:7px 12px;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}
+button.acc{background:var(--acc);color:#fff;border-color:var(--acc)}button:disabled{opacity:.5;cursor:default}
+.sekme{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:-2px 0 12px}
+.sekme button{border:none;border-bottom:2px solid transparent;border-radius:0;background:none;color:var(--mut);padding:9px 12px}.sekme button.on{color:var(--acc);border-bottom-color:var(--acc)}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#eeeeea;color:var(--mut);white-space:nowrap}
+.pill.dogrulandi,.pill.eslesti,.pill.gecerli,.pill.on{background:var(--ok2);color:var(--ok)}
+.pill.celisiyor,.pill.reddedildi,.pill.zarar{background:var(--bad2);color:var(--bad)}
+.pill.aranmadi,.pill.aday,.pill.ulasilamadi{background:var(--warn2);color:var(--warn)}
+table{width:100%;border-collapse:collapse}th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:7px 6px;border-bottom:1px solid var(--line)}td{padding:7px 6px;border-bottom:1px solid #eef0ee;vertical-align:top}
+.tablo{overflow-x:auto}
+.agac{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:14px}@media(max-width:760px){.agac{grid-template-columns:1fr}}
+.dug{padding:5px 8px;border-radius:7px;cursor:pointer;display:flex;justify-content:space-between;gap:6px}.dug:hover{background:var(--acc2)}.dug.sec{background:var(--acc2);font-weight:700}
+.dug .t{font-size:11px;color:var(--mut)}
+.form{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;align-items:end;margin:8px 0 12px}
+.form label{display:flex;flex-direction:column;gap:3px;font-size:11px;color:var(--mut);font-weight:700}
+.form label input,.form label select{width:100%}
+.kilit{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.not{background:var(--warn2);color:var(--warn);border-radius:9px;padding:9px 11px;font-size:13px;margin:8px 0}
+.hata{background:var(--bad2);color:var(--bad)}
+h3{margin:4px 0 8px;font-size:15px}
+.ust{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.ust h2{margin:0;font-size:20px}
+.sayilar{display:flex;gap:16px;flex-wrap:wrap}.sayilar div{font-size:12px;color:var(--mut)}.sayilar b{display:block;font-size:18px;color:var(--ink)}
+.duz{cursor:pointer;border-bottom:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<header><a href="../">← Panel</a><b>Otel pazar yeri</b><span class="small">kart · eşleştirme · satış fiyatı · maliyet</span></header>
+<div class="duzen">
+  <div class="card">
+    <input id="ara" placeholder="Otel ara…" style="width:100%;margin-bottom:8px">
+    <button id="yeniOtel" style="width:100%;margin-bottom:8px">+ Yeni otel</button>
+    <div id="liste" class="liste small">Yükleniyor…</div>
+  </div>
+  <div class="card" id="sag"><p class="small">Soldan bir otel seçin.</p></div>
+</div>
+<script src="../oturum.js"></script>
+<script>
+var SB='https://wlfabfpjvqfyvhsvldll.supabase.co', KEY='sb_publishable_eUv7jsfqkFFbn7k7l-KfAw_WhLiK3PB';
+var LISTE=[], O=null, SEKME=new URLSearchParams(location.search).get('v')||'kart', DUGUM=null;
+var DURUM={dogrulandi:'Doğrulandı',celisiyor:'Çelişiyor',aranmadi:'Aranmadı',ulasilamadi:'Ulaşılamadı',uygulanamaz:'Uygulanamaz'};
+var KAYNAKLAR=['google','booking','hotels','expedia','otel_sitesi','toptanci','tripadvisor','diger'];
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]});}
+function tarih(d,saat){if(!d)return '—';try{return new Date(d).toLocaleString('tr-TR',saat?{dateStyle:'short',timeStyle:'short'}:{dateStyle:'short'})}catch(e){return d}}
+function para(n,b){if(n==null||n==='')return '—';return Number(n).toLocaleString('tr-TR',{maximumFractionDigits:2})+' '+(b||'');}
+function tok(){return (window.PV&&PV.token)||KEY;}
+async function rpc(islem,veri){var r=await fetch(SB+'/rest/v1/rpc/panel_otel',{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+tok()},body:JSON.stringify({p_islem:islem,p_veri:veri||{}})});var j=await r.json();if(j&&j.message&&!j.hata)j={hata:j.message};return j;}
+async function google(veri){var r=await fetch(SB+'/functions/v1/google-yer',{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+tok()},body:JSON.stringify(veri)});return r.json();}
+function formVeri(id){var v={};document.querySelectorAll('#'+id+' [name]').forEach(function(e){if(e.type==='checkbox')v[e.name]=e.checked;else if(e.value!=='')v[e.name]=e.value;});return v;}
+function uyar(j){if(j&&j.hata){alert(j.hata);return true;}return false;}
+function odaAdi(id){var d=(O.dugumler||[]).find(function(x){return x.id===id});return d?d.ad:'—';}
+function odalar(){return (O.dugumler||[]).filter(function(d){return d.tur==='oda_tipi'});}
+function odaSecici(ad,bos){return '<select name="'+ad+'">'+(bos?'<option value="">— oda —</option>':'')+odalar().map(function(d){return '<option value="'+d.id+'">'+esc(d.ad)+'</option>'}).join('')+'</select>';}
+
+async function listeYukle(){
+  var L=await rpc('liste');
+  if(!Array.isArray(L)){document.getElementById('liste').innerHTML='<div class="not hata">'+esc((L&&L.hata)||'Yetki yok')+'</div>';return;}
+  LISTE=L;listeCiz();
+}
+function listeCiz(){
+  var q=document.getElementById('ara').value.toLocaleLowerCase('tr');
+  document.getElementById('liste').innerHTML=LISTE.filter(function(o){return !q||(o.ad+' '+(o.bolge||'')+' '+(o.sehir||'')).toLocaleLowerCase('tr').indexOf(q)>=0}).map(function(o){
+    return '<div class="o'+(O&&O.otel.id===o.id?' sec':'')+'" onclick="otelAc(\''+o.id+'\')"><b>'+esc(o.ad)+'</b>'+esc([o.bolge,o.sehir].filter(Boolean).join(', '))+
+      '<div style="margin-top:4px;display:flex;gap:4px;flex-wrap:wrap"><span class="pill '+(o.katalog_durumu==='katalogda'?'on':'')+'">'+esc(o.katalog_durumu||'aday')+'</span>'+(o.google?'<span class="pill on">Google</span>':'<span class="pill aday">Google yok</span>')+
+      (o.satis_fiyati?'<span class="pill on">'+o.satis_fiyati+' fiyat</span>':'')+(o.celisiyor?'<span class="pill celisiyor">'+o.celisiyor+' çelişki</span>':'')+'</div></div>';
+  }).join('')||'<div class="small">Otel yok.</div>';
+}
+async function otelAc(id){var j=await rpc('getir',{otel_id:id});if(uyar(j))return;O=j;if(!DUGUM||!(O.dugumler||[]).some(function(d){return d.id===DUGUM}))DUGUM=null;listeCiz();ciz();}
+async function yenile(){if(O)await otelAc(O.otel.id);listeYukle();}
+
+function ciz(){
+  var o=O.otel, oz=O.ozellikler||[];
+  var s={dog:oz.filter(function(x){return x.durum==='dogrulandi'}).length,cel:oz.filter(function(x){return x.durum==='celisiyor'}).length,ara:oz.filter(function(x){return x.durum==='aranmadi'}).length};
+  var h='<div class="ust"><div><h2>'+esc(o.ad)+'</h2><div class="small">'+esc([o.adres,o.bolge,o.sehir].filter(Boolean).join(' · '))+'</div>'+
+    '<div class="small">Google: '+(o.google_place_id?'<span class="pill on">bağlı</span> '+(o.enlem?esc(o.enlem+', '+o.boylam):''):'<span class="pill aday">bağlı değil</span>')+'</div></div>'+
+    '<div class="sayilar"><div><b>'+odalar().length+'</b>oda tipi</div><div><b>'+s.dog+'</b>doğrulanmış</div><div><b>'+s.cel+'</b>çelişen</div><div><b>'+s.ara+'</b>aranmadı</div><div><b>'+(O.satis||[]).filter(function(x){return x.durum==='gecerli'}).length+'</b>satış fiyatı</div><div><b>'+(O.maliyet||[]).filter(function(x){return x.durum==='gecerli'}).length+'</b>maliyet</div></div></div>';
+  var S=[['kart','Otel kartı'],['genel','Genel bilgi'],['eslesme','Otel eşleştirme'],['oda','Oda eşleştirme'],['satis','Satış fiyatı'],['maliyet','Maliyet'],['karsilastirma','Satış ↔ maliyet'],['kilit','Satış kilidi']];
+  h+='<div class="sekme">'+S.map(function(x){return '<button class="'+(SEKME===x[0]?'on':'')+'" onclick="SEKME=\''+x[0]+'\';ciz()">'+x[1]+'</button>'}).join('')+'</div><div id="govde"></div>';
+  document.getElementById('sag').innerHTML=h;
+  ({kart:kartCiz,genel:genelCiz,eslesme:eslesmeCiz,oda:odaCiz,satis:satisCiz,maliyet:maliyetCiz,karsilastirma:karsCiz,kilit:kilitCiz})[SEKME]();
+}
+
+/* ---- Otel kartı: ağaç + özellikler ---- */
+function kartCiz(){
+  var D=O.dugumler||[];
+  function dal(ust,der){return D.filter(function(d){return (d.ust_id||null)===ust}).map(function(d){
+    var n=(O.ozellikler||[]).filter(function(z){return z.dugum_id===d.id});var c=n.filter(function(z){return z.durum==='celisiyor'}).length;
+    return '<div class="dug'+(DUGUM===d.id?' sec':'')+'" style="margin-left:'+(der*14)+'px" onclick="DUGUM=\''+d.id+'\';kartCiz()"><span>'+esc(d.ad)+' <span class="t">'+esc(d.tur)+'</span></span><span class="t">'+(c?'<span class="pill celisiyor">'+c+'</span> ':'')+n.length+'</span></div>'+dal(d.id,der+1);}).join('');}
+  var secili=DUGUM?D.find(function(d){return d.id===DUGUM}):null;
+  var oz=(O.ozellikler||[]).filter(function(z){return (z.dugum_id||null)===(DUGUM||null)});
+  var h='<div class="agac"><div><div class="dug'+(DUGUM?'':' sec')+'" onclick="DUGUM=null;kartCiz()"><b>Otel geneli</b></div>'+dal(null,0)+
+    (O.duzenleme?'<div id="fDug" class="form" style="grid-template-columns:1fr"><label>Yeni '+(secili?'alt ':'')+'bölüm / mekân<input name="ad" placeholder="ad"></label><label>Tür<select name="tur">'+['bolum','grup','oda_tipi','restoran','bar','salon','havuz','alan','spor_alani','alt_alan','pavyon','loca','hizmet','hesaplanir'].map(function(t){return '<option>'+t+'</option>'}).join('')+'</select></label><button onclick="dugumEkle()">+ Ekle'+(secili?' ('+esc(secili.ad)+' altına)':'')+'</button></div>':'')+
+    '</div><div><h3>'+esc(secili?secili.ad:'Otel geneli')+'</h3>'+(secili&&secili.aciklama?'<p class="small">'+esc(secili.aciklama)+'</p>':'')+
+    '<div class="tablo"><table><tr><th>Grup</th><th>Özellik</th><th>Değer</th><th>Ücret</th><th>Durum</th><th>Kaynak</th></tr>'+
+    oz.map(function(z){var k=(z.kaynaklar||[]).map(function(x){return x.url?'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.ad||'kaynak')+'</a>':esc(x.ad||'')}).join('<br>');
+      return '<tr><td class="small">'+esc(z.grup)+'</td><td>'+esc(z.ozellik)+'</td><td><span class="duz" onclick="degerDuzenle(\''+z.id+'\')">'+esc(z.deger||'—')+'</span></td><td class="small">'+esc(z.ucret||'')+'</td>'+
+      '<td>'+(O.duzenleme?'<select onchange="ozDurum(\''+z.id+'\',this.value)">'+Object.keys(DURUM).map(function(k){return '<option value="'+k+'" '+(k===z.durum?'selected':'')+'>'+DURUM[k]+'</option>'}).join('')+'</select>':'<span class="pill '+z.durum+'">'+DURUM[z.durum]+'</span>')+'</td><td class="small">'+k+'<br>'+tarih(z.kontrol_tarihi)+'</td></tr>';}).join('')+
+    '</table></div>'+(O.duzenleme?'<div id="fOz" class="form"><label>Grup<input name="grup"></label><label>Özellik<input name="ozellik"></label><label>Değer<input name="deger" placeholder="A › B"></label><label>Ücret<select name="ucret"><option value="">—</option><option>ucretsiz</option><option>ucretli</option><option>konsepte_dahil</option><option>kosullu</option><option>bilinmiyor</option></select></label><label>Durum<select name="durum">'+Object.keys(DURUM).map(function(k){return '<option value="'+k+'">'+DURUM[k]+'</option>'}).join('')+'</select></label><label>Kaynak adı<input name="kaynak_ad"></label><label>Kaynak bağlantısı<input name="kaynak_url"></label><button class="acc" onclick="ozEkle()">+ Özellik</button></div>':'')+
+    (DUGUM===null||(secili&&/ayr/i.test(secili.ad))?ayricalikTablo():'')+'</div></div>';
+  document.getElementById('govde').innerHTML=h;
+}
+function ayricalikTablo(){var A=O.ayricaliklar||[];if(!A.length)return '';return '<h3 style="margin-top:14px">Koşullu ayrıcalıklar</h3><div class="tablo"><table><tr><th>Koşul</th><th>Kazanç</th><th>Süre</th><th>Yer</th><th>Durum</th></tr>'+A.map(function(a){return '<tr><td>'+esc(a.kosul)+'</td><td>'+esc(a.kazanc)+'</td><td>'+esc(a.sure)+'</td><td>'+esc(a.yer)+'</td><td><span class="pill '+a.durum+'">'+DURUM[a.durum]+'</span></td></tr>'}).join('')+'</table></div>';}
+async function dugumEkle(){var v=formVeri('fDug');if(!v.ad)return;v.otel_id=O.otel.id;if(DUGUM)v.ust_id=DUGUM;if(!uyar(await rpc('dugum_kaydet',v)))otelAc(O.otel.id);}
+async function ozEkle(){var v=formVeri('fOz');if(!v.grup||!v.ozellik)return alert('Grup ve özellik gerekli');v.otel_id=O.otel.id;if(DUGUM)v.dugum_id=DUGUM;if(v.kaynak_ad||v.kaynak_url)v.kaynaklar=[{ad:v.kaynak_ad||'',url:v.kaynak_url||'',tarih:new Date().toISOString().slice(0,10)}];v.kontrol_tarihi=new Date().toISOString().slice(0,10);delete v.kaynak_ad;delete v.kaynak_url;if(!uyar(await rpc('ozellik_kaydet',v)))otelAc(O.otel.id);}
+async function ozDurum(id,d){if(!uyar(await rpc('ozellik_kaydet',{id:id,durum:d,kontrol_tarihi:new Date().toISOString().slice(0,10)})))otelAc(O.otel.id);}
+async function degerDuzenle(id){if(!O.duzenleme)return;var z=O.ozellikler.find(function(x){return x.id===id});var y=prompt(z.ozellik+' — yeni değer:',z.deger||'');if(y===null)return;if(!uyar(await rpc('ozellik_kaydet',{id:id,deger:y})))otelAc(O.otel.id);}
+
+/* ---- Genel bilgi ---- */
+function genelCiz(){var o=O.otel;var A=[['ad','Ad'],['kisa_kod','Kısa kod'],['zincir','Zincir'],['ulke','Ülke'],['sehir','Şehir'],['bolge','Bölge'],['adres','Adres'],['enlem','Enlem'],['boylam','Boylam'],['yildiz','Yıldız'],['resmi_alan_adi','Resmî site'],['turizm_belge_no','Turizm belgesi'],['acilis_yili','Açılış yılı'],['giris_saati','Giriş saati'],['cikis_saati','Çıkış saati'],['one_cikarma','Vitrin önceliği']];
+  document.getElementById('govde').innerHTML='<div id="fGenel" class="form">'+A.map(function(a){return '<label>'+a[1]+'<input name="'+a[0]+'" value="'+esc(o[a[0]]==null?'':o[a[0]])+'"></label>'}).join('')+
+  '<label>Katalog durumu<select name="katalog_durumu">'+['aday','katalogda','kapali'].map(function(k){return '<option '+(o.katalog_durumu===k?'selected':'')+'>'+k+'</option>'}).join('')+'</select></label>'+
+  '<label>Satışa açılma<select name="satisa_acilma_yontemi">'+['once_satis','once_maliyet','yalniz_talep','kapali'].map(function(k){return '<option '+(o.satisa_acilma_yontemi===k?'selected':'')+'>'+k+'</option>'}).join('')+'</select></label>'+
+  '</div><label class="small">Açıklama</label><textarea id="gAciklama">'+esc(o.aciklama||'')+'</textarea><label class="small">Notlar</label><textarea id="gNot">'+esc(o.notlar||'')+'</textarea>'+
+  '<div class="form"><label>Seçim puanı · Google (5 üzerinden)<input id="pGoogle" value="'+esc((o.secim_puanlari||{}).google||'')+'"></label><label>Booking (10 üzerinden)<input id="pBooking" value="'+esc((o.secim_puanlari||{}).booking||'')+'"></label><label>Hotels (10 üzerinden)<input id="pHotels" value="'+esc((o.secim_puanlari||{}).hotels||'')+'"></label></div>'+
+  (O.duzenleme?'<button class="acc" onclick="genelKaydet()">Kaydet</button>':'')+'<p class="small">Seçim eşiği ayardan gelir: herhangi bir sitede 10 üzerinden '+esc(((O.ayar||{}).secim_esikleri||{})['10']||8)+' ya da 5 üzerinden '+esc(((O.ayar||{}).secim_esikleri||{})['5']||4)+'.</p>';}
+async function genelKaydet(){var v=formVeri('fGenel');v.id=O.otel.id;v.aciklama=document.getElementById('gAciklama').value;v.notlar=document.getElementById('gNot').value;
+  var p={};[['google','pGoogle'],['booking','pBooking'],['hotels','pHotels']].forEach(function(x){var d=document.getElementById(x[1]).value;if(d)p[x[0]]=Number(String(d).replace(',','.'));});v.secim_puanlari=p;
+  if(!uyar(await rpc('otel_kaydet',v)))yenile();}
+document.getElementById('yeniOtel').onclick=async function(){var ad=prompt('Otel adı:');if(!ad)return;var bolge=prompt('Bölge / şehir (örn. Belek, Antalya):')||'';var p=bolge.split(',');var j=await rpc('otel_kaydet',{ad:ad,bolge:(p[0]||'').trim(),sehir:(p[1]||'').trim(),ulke:'Türkiye'});if(uyar(j))return;await listeYukle();SEKME='eslesme';otelAc(j.id);};
+
+/* ---- Otel eşleştirme ---- */
+function eslesmeCiz(){
+  var E=(O.eslesmeler||[]).filter(function(e){return e.varlik_turu==='otel'});
+  var h='<h3>Google ile bağla</h3><p class="small">Google\'daki yer kimliği otelin sabit noktasıdır; diğer bütün kaynaklar buna göre eşlenir. Kabul edilince otelin konumu ve adresi boşsa Google\'dan dolar.</p>'+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap"><input id="gMetin" style="flex:1;min-width:220px" value="'+esc([O.otel.ad,O.otel.bolge,O.otel.sehir].filter(Boolean).join(' '))+'"><button class="acc" onclick="gAra()">Google\'da ara</button></div><div id="gSonuc"></div>'+
+    '<h3 style="margin-top:16px">Kaynak eşleşmeleri</h3><div class="tablo"><table><tr><th>Kaynak</th><th>Dış kod</th><th>Dış ad / adres</th><th>Yöntem</th><th>Durum</th><th></th></tr>'+
+    E.map(function(e){return '<tr><td><b>'+esc(e.kaynak)+'</b></td><td class="small">'+esc(e.dis_kod||'—')+'</td><td>'+esc(e.dis_ad||'')+'<div class="small">'+esc(e.dis_adres||'')+'</div></td><td class="small">'+esc(e.yontem)+(e.guven!=null?' · '+e.guven:'')+'</td><td><span class="pill '+e.durum+'">'+esc(e.durum)+'</span>'+(e.kabul_eden?'<div class="small">'+esc(e.kabul_eden)+' · '+tarih(e.kabul_zamani)+'</div>':'')+'</td><td>'+(O.duzenleme?esDugme(e):'')+'</td></tr>'}).join('')+'</table></div>'+
+    (O.duzenleme?'<h3 style="margin-top:14px">Elle eşleşme ekle</h3><div id="fEs" class="form"><label>Kaynak<select name="kaynak">'+KAYNAKLAR.map(function(k){return '<option>'+k+'</option>'}).join('')+'</select></label><label>Dış kod / kimlik<input name="dis_kod"></label><label>Dış ad<input name="dis_ad"></label><label>Dış adres<input name="dis_adres"></label><label>Bağlantı<input name="url"></label><label>Durum<select name="durum"><option>aday</option><option>eslesti</option></select></label><button class="acc" onclick="esEkle()">+ Ekle</button></div>':'');
+  document.getElementById('govde').innerHTML=h;
+}
+function esDugme(e){return (e.durum!=='eslesti'?'<button onclick="esDurum(\''+e.id+'\',\'eslesti\')">Kabul</button> ':'')+(e.durum!=='reddedildi'?'<button onclick="esDurum(\''+e.id+'\',\'reddedildi\')">Reddet</button> ':'')+'<button onclick="esDurum(\''+e.id+'\',\'kapatildi\')">Kapat</button>';}
+async function esDurum(id,d){if(!uyar(await rpc('eslesme_kaydet',{id:id,durum:d})))yenile();}
+async function esEkle(){var v=formVeri('fEs');v.varlik_turu='otel';v.otel_id=O.otel.id;v.yontem='elle';if(v.url){v.dis_ozellikler={url:v.url};delete v.url;}if(!uyar(await rpc('eslesme_kaydet',v)))otelAc(O.otel.id);}
+var GADAY=[];
+async function gAra(){var k=document.getElementById('gSonuc');k.innerHTML='<p class="small">Aranıyor…</p>';
+  var j=await google({islem:'ara',metin:document.getElementById('gMetin').value,enlem:O.otel.enlem,boylam:O.otel.boylam});
+  if(j.hata==='anahtar_yok'){k.innerHTML='<div class="not">Google anahtarı henüz girilmemiş. Supabase → Edge Functions → Secrets bölümüne <b>GOOGLE_PLACES_KEY</b> adıyla eklenince bu düğme çalışır.</div>';return;}
+  if(j.hata){k.innerHTML='<div class="not hata">'+esc(j.hata+(j.ayrinti?': '+j.ayrinti:''))+'</div>';return;}
+  GADAY=j.adaylar||[];
+  k.innerHTML='<div class="tablo"><table><tr><th>Ad</th><th>Adres</th><th>Puan</th><th>Uzaklık</th><th></th></tr>'+GADAY.map(function(a,i){return '<tr><td><b>'+esc(a.ad)+'</b>'+(a.otel_mi?'':' <span class="pill aday">otel değil?</span>')+'<div class="small">'+(a.harita?'<a href="'+esc(a.harita)+'" target="_blank" rel="noopener">haritada aç</a>':'')+(a.site?' · <a href="'+esc(a.site)+'" target="_blank" rel="noopener">site</a>':'')+'</div></td><td class="small">'+esc(a.adres)+'</td><td>'+(a.puan!=null?a.puan+' <span class="small">('+a.yorum+')</span>':'—')+'</td><td class="small">'+(a.mesafe_m!=null?(a.mesafe_m/1000).toFixed(1)+' km':'—')+'</td><td>'+(O.duzenleme?'<button class="acc" onclick="gSec('+i+')">Bu otel</button>':'')+'</td></tr>'}).join('')+'</table></div>'+(GADAY.length?'':'<p class="small">Sonuç yok.</p>');}
+async function gSec(i){var a=GADAY[i];var guven=a.otel_mi?(a.mesafe_m!=null&&a.mesafe_m<500?0.95:0.8):0.5;
+  var j=await rpc('eslesme_kaydet',{varlik_turu:'otel',otel_id:O.otel.id,kaynak:'google',dis_kod:a.place_id,dis_ad:a.ad,dis_adres:a.adres,dis_enlem:a.enlem,dis_boylam:a.boylam,dis_ozellikler:{site:a.site,harita:a.harita,tur:a.tur},durum:'eslesti',guven:guven,yontem:'google'});
+  if(uyar(j))return;if(a.puan!=null&&confirm('Google puanı ('+a.puan+') seçim puanlarına yazılsın mı?')){var p=Object.assign({},O.otel.secim_puanlari||{});p.google=a.puan;await rpc('otel_kaydet',{id:O.otel.id,secim_puanlari:p});}
+  yenile();}
+
+/* ---- Oda eşleştirme ---- */
+function odaCiz(){
+  var E=(O.eslesmeler||[]).filter(function(e){return e.varlik_turu==='oda'});
+  var h='<p class="small">Her kaynağın oda adı bizim oda tipimize bağlanır. Eşleşmeyen oda vitrinde satılmaz, yalnız talep üzerine teklif verilir.</p><div class="tablo"><table><tr><th>Bizim oda tipimiz</th><th>Eşleşen kaynaklar</th></tr>'+
+    odalar().map(function(d){var x=E.filter(function(e){return e.oda_dugum_id===d.id&&e.durum!=='reddedildi'});return '<tr><td><b>'+esc(d.ad)+'</b></td><td>'+(x.map(function(e){return '<div><span class="pill '+e.durum+'">'+esc(e.durum)+'</span> <b>'+esc(e.kaynak)+'</b>: '+esc(e.dis_ad)+(e.dis_kod?' <span class="small">('+esc(e.dis_kod)+')</span>':'')+' '+(O.duzenleme?esDugme(e):'')+'</div>'}).join('')||'<span class="pill aranmadi">eşleşme yok</span>')+'</td></tr>'}).join('')+'</table></div>';
+  var bos=E.filter(function(e){return !e.oda_dugum_id&&e.durum!=='reddedildi'});
+  if(bos.length)h+='<h3 style="margin-top:14px">Bağlanmamış kaynak odaları</h3>'+bos.map(function(e){return '<div style="margin:4px 0"><b>'+esc(e.kaynak)+'</b>: '+esc(e.dis_ad)+' → <select onchange="odaBagla(\''+e.id+'\',this.value)"><option value="">bizim oda…</option>'+odalar().map(function(d){return '<option value="'+d.id+'">'+esc(d.ad)+'</option>'}).join('')+'</select></div>'}).join('');
+  if(O.duzenleme)h+='<h3 style="margin-top:14px">Oda eşleşmesi ekle</h3><div id="fOda" class="form"><label>Bizim oda'+odaSecici('oda_dugum_id',true)+'</label><label>Kaynak<select name="kaynak">'+KAYNAKLAR.filter(function(k){return k!=='google'}).map(function(k){return '<option>'+k+'</option>'}).join('')+'</select></label><label>Kaynaktaki oda adı<input name="dis_ad"></label><label>Kaynaktaki oda kodu<input name="dis_kod"></label><label>Durum<select name="durum"><option>eslesti</option><option>aday</option></select></label><button class="acc" onclick="odaEkle()">+ Ekle</button></div>'+
+    '<p class="small">Toplu giriş: her satıra <i>kaynak ; kaynaktaki oda adı</i> yazın, sonra her birini bizim odaya bağlayın.</p><textarea id="topluOda" placeholder="booking ; Deluxe Room Sea View"></textarea><button onclick="topluOda()">Toplu ekle (aday)</button>';
+  document.getElementById('govde').innerHTML=h;
+}
+async function odaEkle(){var v=formVeri('fOda');if(!v.dis_ad)return alert('Oda adı gerekli');v.varlik_turu='oda';v.otel_id=O.otel.id;v.yontem='elle';if(!uyar(await rpc('eslesme_kaydet',v)))otelAc(O.otel.id);}
+async function odaBagla(id,oda){if(!oda)return;if(!uyar(await rpc('eslesme_kaydet',{id:id,oda_dugum_id:oda,durum:'eslesti'})))otelAc(O.otel.id);}
+async function topluOda(){var s=document.getElementById('topluOda').value.split('\n').map(function(x){return x.split(';').map(function(y){return y.trim()})}).filter(function(x){return x[0]&&x[1]});
+  for(var i=0;i<s.length;i++){var j=await rpc('eslesme_kaydet',{varlik_turu:'oda',otel_id:O.otel.id,kaynak:s[i][0],dis_ad:s[i][1],durum:'aday',yontem:'elle'});if(uyar(j))break;}otelAc(O.otel.id);}
+
+/* ---- Satış fiyatı ---- */
+function ortakAlanlar(){return '<label>Oda'+odaSecici('oda_dugum_id',true)+'</label><label>Konsept<input name="konsept" placeholder="Ultra her şey dahil"></label><label>Başlangıç<input type="date" name="baslangic"></label><label>Bitiş<input type="date" name="bitis"></label><label>Kişi düzeni<input name="kisi_duzeni" value="2 yetişkin"></label><label>Birim<select name="birim"><option value="oda_gece">oda / gece</option><option value="kisi_gece">kişi / gece</option><option value="toplam">toplam</option></select></label><label>Para birimi<select name="para_birimi"><option>EUR</option><option>TRY</option><option>USD</option><option>GBP</option></select></label>';}
+function satisCiz(){
+  var A=O.ayar||{};var S=O.satis||[];var odaE=(O.eslesmeler||[]).filter(function(e){return e.varlik_turu==='oda'&&e.durum==='eslesti'});
+  var h=(O.duzenleme?'<h3>Satış fiyatı gir</h3><p class="small">İnternette görülen fiyat girilir; satış fiyatı = gösterge fiyat × (1 + kâr payı). Kâr payı boş kalırsa ayardaki değer ('+esc(A.varsayilan_kar_payi_yuzde)+'%) kullanılır. Satış tutarını elle yazarsanız o geçer. Fiyat '+esc(A.fiyat_gecerlilik_saat||24)+' saat geçerlidir, sonra yeniden sorulur.</p>'+
+    '<div id="fSat" class="form">'+ortakAlanlar()+'<label>Gösterge fiyat (internet)<input name="gosterge_tutar" inputmode="decimal"></label><label>Kâr payı %<input name="kar_payi_yuzde" placeholder="'+esc(A.varsayilan_kar_payi_yuzde)+'"></label><label>Satış tutarı (elle)<input name="satis_tutari" inputmode="decimal"></label>'+
+    '<label>Kaynak<select name="kaynak">'+KAYNAKLAR.filter(function(k){return k!=='google'}).concat(['elle','otel_maili']).map(function(k){return '<option>'+k+'</option>'}).join('')+'</select></label><label>Kaynak bağlantısı<input name="kaynak_url"></label><label>Kaynaktaki oda adı<input name="kaynak_oda_adi" list="odaE"></label>'+
+    '<label>Oda eşleşmesi<select name="eslesme_id"><option value="">—</option>'+odaE.map(function(e){return '<option value="'+e.id+'">'+esc(e.kaynak+': '+e.dis_ad+' → '+odaAdi(e.oda_dugum_id))+'</option>'}).join('')+'</select></label>'+
+    '<label>Müsaitlik<select name="musaitlik"><option>var</option><option>sor</option><option>yok</option><option>bilinmiyor</option></select></label><label>Onay<select name="onay_turu"><option value="talep">talep üzerine</option><option value="aninda">anında</option></select></label>'+
+    '<label>İptal şartı<input name="iptal_sarti" placeholder="girişten 7 gün öncesine kadar ücretsiz"></label><label>İade edilmez<input type="checkbox" name="iade_edilmez"></label><label>Vergi dahil<select name="vergi_dahil"><option value="true">evet</option><option value="false">hayır</option></select></label><label>Şehir vergisi<input name="sehir_vergisi" inputmode="decimal"></label><label>Deneme kaydı<input type="checkbox" name="deneme"></label><label>Not<input name="notlar"></label>'+
+    '<button class="acc" onclick="satisEkle()">+ Satış fiyatı</button></div>':'')+
+    '<h3>Satış fiyatları</h3><div class="tablo"><table><tr><th>Oda / konsept</th><th>Tarih</th><th>Kişi · birim</th><th>Gösterge</th><th>Satış</th><th>Müsaitlik · iptal</th><th>Kaynak</th><th>Durum</th><th></th></tr>'+
+    S.map(function(s){var gecti=s.gecerlilik_sonu&&new Date(s.gecerlilik_sonu)<new Date();return '<tr><td><b>'+esc(odaAdi(s.oda_dugum_id))+'</b><div class="small">'+esc(s.konsept||'konsept yok')+'</div></td><td class="small">'+tarih(s.baslangic)+' – '+tarih(s.bitis)+'</td><td class="small">'+esc(s.kisi_duzeni)+' · '+esc(s.birim)+'</td><td>'+para(s.gosterge_tutar,s.para_birimi)+(s.kar_payi_yuzde!=null?'<div class="small">+%'+s.kar_payi_yuzde+'</div>':'')+'</td><td><b>'+para(s.satis_tutari,s.para_birimi)+'</b>'+(s.elle_degisti?'<div class="small">elle</div>':'')+'</td><td class="small">'+esc(s.musaitlik)+' · '+esc(s.onay_turu)+'<br>'+(s.iade_edilmez?'iade edilmez':esc(s.iptal_sarti||'iptal şartı yok'))+'</td><td class="small">'+(s.kaynak_url?'<a href="'+esc(s.kaynak_url)+'" target="_blank" rel="noopener">'+esc(s.kaynak)+'</a>':esc(s.kaynak))+'<br>'+tarih(s.sorgu_zamani,1)+(s.deneme?' · deneme':'')+'</td><td><span class="pill '+(gecti?'aranmadi':s.durum)+'">'+(gecti?'süresi geçti':esc(s.durum))+'</span></td><td>'+(O.duzenleme&&s.durum==='gecerli'?'<button onclick="fiyatDurum(\'satis\',\''+s.id+'\',\'iptal\')">İptal</button>':'')+'</td></tr>'}).join('')+'</table></div>';
+  document.getElementById('govde').innerHTML=h;
+}
+async function satisEkle(){var v=formVeri('fSat');if(!v.baslangic||!v.bitis)return alert('Tarih gerekli');if(!v.gosterge_tutar&&!v.satis_tutari)return alert('Gösterge fiyat ya da satış tutarı gerekli');v.otel_id=O.otel.id;if(!uyar(await rpc('satis_fiyati_ekle',v)))otelAc(O.otel.id);}
+async function fiyatDurum(t,id,d){if(!confirm('Kayıt silinmez, durumu "'+d+'" olur. Devam?'))return;if(!uyar(await rpc('fiyat_durum',{tablo:t,id:id,durum:d})))otelAc(O.otel.id);}
+
+/* ---- Maliyet ---- */
+function maliyetCiz(){
+  var M=O.maliyet||[];
+  var h=(O.duzenleme?'<h3>Maliyet gir</h3><p class="small">Satıştan sonra ya da kontrat gelince girilir. Aynı oda, konsept, kişi düzeni ve birimdeki satış fiyatıyla otomatik karşılaştırılır.</p><div id="fMal" class="form">'+ortakAlanlar()+
+    '<label>Maliyet tutarı<input name="tutar" inputmode="decimal"></label><label>Tedarikçi<input name="tedarikci_adi"></label><label>Kaynak türü<select name="kaynak_turu"><option>kontrat</option><option>teklif</option><option>toptanci</option><option>otel_maili</option><option>elle</option></select></label><label>Belge bağlantısı<input name="belge_url"></label><label>Tedarikçi iptal şartı<input name="tedarikci_iptal_sarti"></label><label>Ödeme şartı<input name="odeme_sarti"></label><label>Geçerlilik sonu<input type="date" name="gecerlilik_sonu"></label><label>Vergi dahil<select name="vergi_dahil"><option value="true">evet</option><option value="false">hayır</option></select></label><label>Deneme kaydı<input type="checkbox" name="deneme"></label><label>Not<input name="notlar"></label><button class="acc" onclick="maliyetEkle()">+ Maliyet</button></div>':'')+
+    '<h3>Maliyetler</h3><div class="tablo"><table><tr><th>Oda / konsept</th><th>Tarih</th><th>Kişi · birim</th><th>Tutar</th><th>Tedarikçi</th><th>Şartlar</th><th>Durum</th><th></th></tr>'+
+    M.map(function(m){return '<tr><td><b>'+esc(odaAdi(m.oda_dugum_id))+'</b><div class="small">'+esc(m.konsept||'')+'</div></td><td class="small">'+tarih(m.baslangic)+' – '+tarih(m.bitis)+'</td><td class="small">'+esc(m.kisi_duzeni)+' · '+esc(m.birim)+'</td><td><b>'+para(m.tutar,m.para_birimi)+'</b></td><td class="small">'+esc(m.tedarikci_adi||'—')+'<br>'+esc(m.kaynak_turu)+(m.belge_url?' · <a href="'+esc(m.belge_url)+'" target="_blank" rel="noopener">belge</a>':'')+'</td><td class="small">'+esc(m.tedarikci_iptal_sarti||'')+'<br>'+esc(m.odeme_sarti||'')+'</td><td><span class="pill '+m.durum+'">'+esc(m.durum)+'</span>'+(m.deneme?' <span class="small">deneme</span>':'')+'</td><td>'+(O.duzenleme&&m.durum==='gecerli'?'<button onclick="fiyatDurum(\'maliyet\',\''+m.id+'\',\'iptal\')">İptal</button>':'')+'</td></tr>'}).join('')+'</table></div>';
+  document.getElementById('govde').innerHTML=h;
+}
+async function maliyetEkle(){var v=formVeri('fMal');if(!v.baslangic||!v.bitis||!v.tutar)return alert('Tarih ve tutar gerekli');v.otel_id=O.otel.id;if(!uyar(await rpc('maliyet_ekle',v)))otelAc(O.otel.id);}
+
+/* ---- Karşılaştırma ---- */
+function karsCiz(){
+  var K=O.karsilastirma||[];var esik=(O.ayar||{}).asgari_kazanc_yuzde;
+  var sat=(O.satis||[]).filter(function(s){return s.durum==='gecerli'});var mal=(O.maliyet||[]).filter(function(m){return m.durum==='gecerli'});
+  var eslesmeyen=sat.filter(function(s){return !K.some(function(k){return k.satis_id===s.id})});
+  var h='<p class="small">Satış ile maliyetin kesiştiği her dönem. Kazanç yüzdesi '+esc(esik)+'% altında olan satır uyarıyla, zarar eden satır kırmızı görünür. Maliyeti olmayan satış "maliyet bekliyor" listesinde durur.</p>'+
+    '<div class="tablo"><table><tr><th>Oda / konsept</th><th>Dönem</th><th>Satış</th><th>Maliyet</th><th>Kazanç</th><th></th></tr>'+
+    K.map(function(k){var z=k.kazanc!=null&&k.kazanc<0, d=k.kazanc_yuzde!=null&&k.kazanc_yuzde<esik;return '<tr><td><b>'+esc(odaAdi(k.oda_dugum_id))+'</b><div class="small">'+esc(k.konsept||'')+' · '+esc(k.kisi_duzeni)+' · '+esc(k.birim)+'</div></td><td class="small">'+tarih(k.baslangic)+' – '+tarih(k.bitis)+'</td><td>'+para(k.satis_tutari,k.satis_para)+'<div class="small">'+esc(k.satis_kaynak)+'</div></td><td>'+para(k.maliyet,k.maliyet_para)+'<div class="small">'+esc(k.maliyet_kaynak)+'</div></td><td><b>'+(k.kazanc==null?'para birimi farklı':para(k.kazanc,k.satis_para)+' · '+(k.kazanc_yuzde<0?'-%':'%')+Math.abs(k.kazanc_yuzde).toLocaleString('tr-TR'))+'</b></td><td>'+(z?'<span class="pill zarar">zarar</span>':d?'<span class="pill aday">düşük</span>':k.kazanc!=null?'<span class="pill on">uygun</span>':'')+'</td></tr>'}).join('')+'</table></div>'+(K.length?'':'<p class="small">Henüz kesişen satış ve maliyet yok.</p>')+
+    '<h3 style="margin-top:14px">Maliyet bekleyen satışlar ('+eslesmeyen.length+')</h3>'+eslesmeyen.map(function(s){return '<div class="small">'+esc(odaAdi(s.oda_dugum_id))+' · '+esc(s.konsept||'')+' · '+tarih(s.baslangic)+'–'+tarih(s.bitis)+' · '+para(s.satis_tutari,s.para_birimi)+'</div>'}).join('')+
+    '<p class="small" style="margin-top:10px">Toplam: '+sat.length+' geçerli satış fiyatı, '+mal.length+' geçerli maliyet.</p>';
+  document.getElementById('govde').innerHTML=h;
+}
+
+/* ---- Satış kilidi ---- */
+function kilitCiz(){
+  document.getElementById('govde').innerHTML='<p class="small">Anında satış için beş kilit açık olmalı: konum, oda-konsept eşleşmesi, güncel fiyat, müsaitlik, iptal şartı. İçerik ya da görsel eksiği satışı durdurmaz, yalnız vitrin sırasını düşürür. Kilitler kapalıyken katalogdaki otel talep üzerine satılabilir.</p>'+
+    '<div class="form" id="fKil"><label>Oda'+odaSecici('oda_dugum_id',true)+'</label><label>Tarih<input type="date" name="tarih" value="'+new Date().toISOString().slice(0,10)+'"></label><button class="acc" onclick="kilitSor()">Kontrol et</button></div><div id="kSonuc"></div>';
+}
+async function kilitSor(){var v=formVeri('fKil');v.otel_id=O.otel.id;var j=await rpc('kilit',v);if(uyar(j))return;
+  var A=[['konum','Konum'],['oda_konsept','Oda-konsept eşleşmesi'],['guncel_fiyat','Güncel fiyat'],['musaitlik','Müsaitlik'],['iptal_sarti','İptal şartı'],['katalogda','Katalogda']];
+  document.getElementById('kSonuc').innerHTML='<div class="kilit">'+A.map(function(a){return '<span class="pill '+(j[a[0]]?'on':'celisiyor')+'">'+(j[a[0]]?'✓ ':'✗ ')+a[1]+'</span>'}).join('')+'</div>'+
+  '<div class="not'+(j.aninda_satilabilir?'" style="background:var(--ok2);color:var(--ok)':'')+'">'+(j.aninda_satilabilir?'Anında satılabilir.':j.talep_alinabilir?'Anında satılamaz; talep üzerine satılabilir.':'Satışa kapalı (katalogda değil ya da konum yok).')+'</div>';}
+
+document.getElementById('ara').oninput=listeCiz;
+if(new URLSearchParams(location.search).get('embed'))document.body.classList.add('embed');
+PV.hazir.then(async function(){await listeYukle();var q=new URLSearchParams(location.search).get('otel');if(q)otelAc(q);else if(LISTE.length===1)otelAc(LISTE[0].id);});
+</script>
+</body>
+</html>

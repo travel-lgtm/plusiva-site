@@ -17,7 +17,7 @@ var MENU=[
   {id:'urunkarti',ad:'Ürün kartı (bileşenler & maddeler)',src:'../panel/katalog/?embed=1&v=urun',d:'Ürün → sefer → hizmet satırları, dahil/hariç maddeleri, kanal ve kural bağları, tutarlılık denetimi.'},
   {id:'turlar',ad:'Turlar (katalog & seferler)',src:'../panel/islem/?embed=1&v=paket',d:'Ürün kartı, program (TR/EN/AR), ön paket, seferler, varyantlar (bireysel/grup/okul/kurum/private, muhafazakâr, seviye), kategoriler, yayın.'},
   {id:'umre',ad:'Umre & helal turlar',d:'Ayrı marka ve site (umre.plusiva.com, geçici). Umre programları, helal tatil, Nusuk/vize, din görevlisi, marka kararı.'},
-  {id:'oteller',ad:'Oteller',d:'Otel kartları, tekil otel satış sayfaları, fiyat listeleri (sezon/oda/pansiyon/çocuk).'},
+  {id:'oteller',ad:'Oteller',src:'../panel/otel/?embed=1',d:'Otel kartları, tekil otel satış sayfaları, fiyat listeleri (sezon/oda/pansiyon/çocuk).'},
   {id:'transfer',ad:'Transferler',d:'Araç tipleri, güzergâh fiyatları, havalimanı karşılama, tek başına satış.'},
   {id:'ucak',ad:'Uçak & biletleme',d:'Grup bilet talebi, PNR, bilet kesme, iade/değişiklik; bireysel bilet kanalı.'},
   {id:'vize',ad:'Vize hizmetleri',d:'Ülke bazlı evrak listeleri, randevu takibi, dosya durumu, ücretler, evrak hatırlatma.'},
